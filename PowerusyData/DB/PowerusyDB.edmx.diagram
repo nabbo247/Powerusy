@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e3e69a32bef34e6db3185253f50b550a" Name="Diagram1">
+        <EntityTypeShape EntityType="powerusyDBCoreModel.C__EFMigrationsHistory" Width="1.5" PointX="3.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_AuditLog" Width="1.5" PointX="5.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_Clearing" Width="1.5" PointX="5.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_GoodsType" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_Importation" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_ImportationDocument" Width="1.5" PointX="8.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_KYC" Width="1.5" PointX="6" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_Registered" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_role" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_serviceType" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_Shipper" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_status" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_SubGoodsType" Width="1.5" PointX="0.75" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_user" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_Importation_tbl_GoodsType_tbl_GoodsTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_SubGoodsType_tbl_GoodsType_tbl_GoodsTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_Importation_tbl_serviceType_tbl_serviceTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_Importation_tbl_Shipper_tbl_ShipperId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_Importation_tbl_status_tbl_statusId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_Importation_tbl_SubGoodsType_tbl_SubGoodsTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_ImportationDocument_tbl_Importation_tbl_ImportationId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_ImportationDocument_tbl_status_tbl_statusId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_ImportationDocument_tbl_user_tbl_userId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_KYC_tbl_Registered_tbl_RegisteredId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_KYC_tbl_status_tbl_statusId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_KYC_tbl_user_tbl_userId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_Registered_tbl_serviceType_tbl_serviceTypeId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_Registered_tbl_status_tbl_statusId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_Registered_tbl_user_tbl_userId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_user_tbl_role_tbl_roleId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_Shipper_tbl_status_tbl_statusId" ManuallyRouted="false" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_Shipper_tbl_user_tbl_userId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

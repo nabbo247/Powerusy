@@ -1,0 +1,224 @@
+﻿@model PowerusyData.RegistrationViewModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Breadcroumbs start -->
+<div class="wshipping-content-block wshipping-breadcroumb inner-bg-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-7">
+                <h1>Customer Registration</h1>
+                <a href="index.html" title="Home">Home</a> / Customer Registration
+            </div>
+            <div class="col-12 col-lg-5 text-right">
+                <h4>
+                    We freight to all over the world
+                    The best logistic company, <span>FAST</span> and <span>SAFELY!</span>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcroumbs end -->
+<!-- Customer Registration Start -->
+@using (Html.BeginForm("Index", "Registration", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <!-- BEGIN HIDDEN FIELDS AREA -->
+    <input type="hidden" asp-for="EventCommand" />
+
+    @Html.HiddenFor(m => m.Mode)
+    @Html.HiddenFor(m => m.EventArgument)
+    <!-- END HIDDEN FIELDS AREA -->
+    <!--start Loading panel-->
+
+    <div class="wshipping-content-block">
+        <div id="loading" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class=" modal-title">Loading... </h4>
+                    </div>
+                    <div class=" modal-body">
+                        <div class=" progress progress-striped active">
+                            <div class="progress-bar" style="width:100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="customer-login">
+
+
+                <!-- add new comment to index file -->
+                @if (Model.IsSearchAreaVisible)
+                {
+
+                    <!-- ** BEGIN SEARCH AREA ** -->
+                    <br />
+
+                    <!-- ** END SEARCH AREA ** -->
+                }
+
+                @if (Model.IsDetailAreaVisible)
+                {
+
+
+                }
+
+                @if (Model.IsListAreaVisible)
+                {
+                    <!-- BEGIN GRID AREA -->
+
+                    <!-- END GRID AREA -->
+                }
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="customer-login-left">
+                            <div class="login-icon"><i class="fa fa-unlock-alt"></i></div>
+                            <h4>Welcome To new account</h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <a href="#">If you have account already, please login in</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <div class="customer-login-block">
+                            <div class="row">
+                                <div class="col-12 col-md-12 col-lg-12">
+                                    @if (!Model.IsValid)
+                                    {
+                                        <div class="alert alert-danger
+                    alert-dismissable"
+                                             role="alert">
+                                            <button type="button" class="close"
+                                                    data-dismiss="alert">
+                                                <span aria-hidden="true">
+                                                    &times;
+                                                </span>
+                                                <span class="sr-only">Close</span>
+                                            </button>
+                                            @Html.ValidationSummary(false)
+                                        </div>
+                                    }
+                                    @if (TempData["Msg"] != null)
+                                    {
+                                        <div class="alert alert-dismissable alert-success">
+                                            <button type="button" class="close" data-dismiss="alert">
+                                                x
+                                            </button>
+                                            @TempData["Msg"].ToString()
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <h2>Registration</h2>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label>First Name:</label>
+                                        @Html.TextBoxFor(m => m.Entity.FirstName, new { @class = "form-control" })
+
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label>Last Name:</label>
+                                        @Html.TextBoxFor(m => m.Entity.LastName, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label>MiddleName:</label>
+                                        @Html.PasswordFor(m => m.Entity.MiddleName, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label>Customer Type:</label>
+                                        @Html.DropDownListFor(m => m.Entity.RoleID, new SelectList(Model.List, "Text", "Value"), new { @class = "form-control", id = "RoleID" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label>Email:</label>
+                                        @Html.TextBoxFor(m => m.Entity.Email, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label>Phone:</label>
+                                        @Html.TextBoxFor(m => m.Entity.PhoneNumber, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label>Password:</label>
+                                        @Html.PasswordFor(m => m.Entity.Password, new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <label>Confirm Password:</label>
+                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            @*<button id="btnSave"
+                                    class="btn btn-sm btn-primary pull-right"
+                                    data-pdsa-action="Validate">
+                                <i class="glyphicon glyphicon-floppy-disk"></i>
+                                &nbsp;Validate
+                            </button>*@
+                            <button id="submit" class="btn btn-submit" pdsa-action="cancel">
+                                Registration
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script type="text/javascript"
+            src="~/scripts/pdsa-action.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).ajaxStart(function () {
+                $("#loading").show();
+            });
+            $(document).ajaxStop(function () {
+                $("#loading").hide();
+            });
+
+            $("[data-pdsa-action]").on("click", function (e) {
+                $("#loading").show();
+                e.preventDefault();
+                $("#EventCommand").val($(this).data("pdsa-action"));
+                $("#EventArgument").val($(this).attr("data-pdsa-val"));
+                $("form").submit();
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        console.log('Submission was successful.');
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log('An error occurred.');
+                        console.log(data);
+                    },
+                });
+                $("#loading").hide();
+            });
+
+
+        });
+    </script>
+}
