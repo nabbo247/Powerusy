@@ -15,4 +15,3 @@ D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\bin\Debug\PagedList.xml
 D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\bin\Debug\PagedList.Mvc.xml
 D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\bin\Debug\ClassLibrary1.dll
 D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\bin\Debug\ExcelLibrary.dll
-D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\obj\Debug\PowerusyData.csprojAssemblyReference.cache

@@ -1,545 +1,200 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="powerusyDBCoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="C__EFMigrationsHistory">
+  <EntityContainer Name="powerusyDBCoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_auditlog" EntityType="powerusyDBCoreModel.tbl_auditlog" />
+    <EntitySet Name="tbl_clearing" EntityType="powerusyDBCoreModel.tbl_clearing" />
+    <EntitySet Name="tbl_goodstype" EntityType="powerusyDBCoreModel.tbl_goodstype" />
+    <EntitySet Name="tbl_importation" EntityType="powerusyDBCoreModel.tbl_importation" />
+    <EntitySet Name="tbl_importation_document" EntityType="powerusyDBCoreModel.tbl_importation_document" />
+    <EntitySet Name="tbl_kyc" EntityType="powerusyDBCoreModel.tbl_kyc" />
+    <EntitySet Name="tbl_registered" EntityType="powerusyDBCoreModel.tbl_registered" />
+    <EntitySet Name="tbl_role" EntityType="powerusyDBCoreModel.tbl_role" />
+    <EntitySet Name="tbl_servicetype" EntityType="powerusyDBCoreModel.tbl_servicetype" />
+    <EntitySet Name="tbl_status" EntityType="powerusyDBCoreModel.tbl_status" />
+    <EntitySet Name="tbl_subgoodstype" EntityType="powerusyDBCoreModel.tbl_subgoodstype" />
+    <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
+    <EntitySet Name="tbl_shipper" EntityType="powerusyDBCoreModel.tbl_shipper" />
+  </EntityContainer>
+  <EntityType Name="tbl_auditlog">
     <Key>
-      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="operationperformed" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ipaddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="pagevisited" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateaccessed" Type="DateTimeOffset" Precision="7" />
   </EntityType>
-  <EntityType Name="tbl_AuditLog">
+  <EntityType Name="tbl_clearing">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="OperationsPerformed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="PageVisited" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DateAccessed" Type="DateTime" Precision="3" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="goodsid" Type="Int32" />
+    <Property Name="finalinvoice" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="billoflanding" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="packinglist" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="combinedcertificate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="soncap" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="approvedbyid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateapproved" Type="DateTimeOffset" Precision="7" />
+    <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="tbl_Clearing">
+  <EntityType Name="tbl_goodstype">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="GoodsId" Type="Int32" Nullable="false" />
-    <Property Name="FinalInvoice" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="BillOfLading" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="PackingList" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="CombinedCertificate" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="SONCAP" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="ApprovedById" Type="Int32" />
-    <Property Name="DateApproved" Type="DateTime" Precision="7" />
-    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+    <Property Name="status" Type="Boolean" />
   </EntityType>
-  <EntityType Name="tbl_GoodsType">
+  <EntityType Name="tbl_importation">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DateAdded" Type="DateTime" Precision="7" />
-    <Property Name="Status" Type="Boolean" />
-    <NavigationProperty Name="tbl_Importation" Relationship="Self.FK_tbl_Importation_tbl_GoodsType_tbl_GoodsTypeId" FromRole="tbl_GoodsType" ToRole="tbl_Importation" />
-    <NavigationProperty Name="tbl_SubGoodsType" Relationship="Self.FK_tbl_SubGoodsType_tbl_GoodsType_tbl_GoodsTypeId" FromRole="tbl_GoodsType" ToRole="tbl_SubGoodsType" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="shipperid" Type="Int32" />
+    <Property Name="goodstypeid" Type="Int32" />
+    <Property Name="subgoodtypeid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="servicetypeid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
   </EntityType>
-  <EntityType Name="tbl_Importation">
+  <EntityType Name="tbl_importation_document">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ShippersId" Type="Int32" Nullable="false" />
-    <Property Name="GoodsTypeId" Type="Int32" Nullable="false" />
-    <Property Name="SubGoodTypeId" Type="Int32" Nullable="false" />
-    <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="ServiceTypeId" Type="Int32" Nullable="false" />
-    <Property Name="Status" Type="Int32" Nullable="false" />
-    <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="tbl_GoodsTypeId" Type="Int32" />
-    <Property Name="tbl_serviceTypeId" Type="Int32" />
-    <Property Name="tbl_ShipperId" Type="Int32" />
-    <Property Name="tbl_statusId" Type="Int32" />
-    <Property Name="tbl_SubGoodsTypeId" Type="Int32" />
-    <NavigationProperty Name="tbl_GoodsType" Relationship="Self.FK_tbl_Importation_tbl_GoodsType_tbl_GoodsTypeId" FromRole="tbl_Importation" ToRole="tbl_GoodsType" />
-    <NavigationProperty Name="tbl_serviceType" Relationship="Self.FK_tbl_Importation_tbl_serviceType_tbl_serviceTypeId" FromRole="tbl_Importation" ToRole="tbl_serviceType" />
-    <NavigationProperty Name="tbl_Shipper" Relationship="Self.FK_tbl_Importation_tbl_Shipper_tbl_ShipperId" FromRole="tbl_Importation" ToRole="tbl_Shipper" />
-    <NavigationProperty Name="tbl_status" Relationship="Self.FK_tbl_Importation_tbl_status_tbl_statusId" FromRole="tbl_Importation" ToRole="tbl_status" />
-    <NavigationProperty Name="tbl_SubGoodsType" Relationship="Self.FK_tbl_Importation_tbl_SubGoodsType_tbl_SubGoodsTypeId" FromRole="tbl_Importation" ToRole="tbl_SubGoodsType" />
-    <NavigationProperty Name="tbl_ImportationDocument" Relationship="Self.FK_tbl_ImportationDocument_tbl_Importation_tbl_ImportationId" FromRole="tbl_Importation" ToRole="tbl_ImportationDocument" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="importationid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="documentname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="documentpath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+    <Property Name="statusid" Type="Int32" />
+    <Property Name="approvedby" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateapproved" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="approvalcomment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="tbl_ImportationDocument">
+  <EntityType Name="tbl_kyc">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ImportationId" Type="Int32" Nullable="false" />
-    <Property Name="DocumentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="DcoumentPath" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="StatusId" Type="Int32" Nullable="false" />
-    <Property Name="Approvedby" Type="Int32" />
-    <Property Name="DateApproved" Type="DateTime" Precision="7" />
-    <Property Name="ApprovalComment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="tbl_ImportationId" Type="Int32" />
-    <Property Name="tbl_statusId" Type="Int32" />
-    <Property Name="tbl_userId" Type="Int32" />
-    <NavigationProperty Name="tbl_Importation" Relationship="Self.FK_tbl_ImportationDocument_tbl_Importation_tbl_ImportationId" FromRole="tbl_ImportationDocument" ToRole="tbl_Importation" />
-    <NavigationProperty Name="tbl_status" Relationship="Self.FK_tbl_ImportationDocument_tbl_status_tbl_statusId" FromRole="tbl_ImportationDocument" ToRole="tbl_status" />
-    <NavigationProperty Name="tbl_user" Relationship="Self.FK_tbl_ImportationDocument_tbl_user_tbl_userId" FromRole="tbl_ImportationDocument" ToRole="tbl_user" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="registeredid" Type="Int32" />
+    <Property Name="certificateofincorporation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="memorandomofassociation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="articlesofassociation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="powerofattorneygranted" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="validbusinesslicense" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="auditedfinancialstatement" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="taxclearancecertificate" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+    <Property Name="statusid" Type="Int32" />
+    <Property Name="approvedby" Type="Int32" />
+    <Property Name="approvalcomment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateapproved" Type="DateTimeOffset" Precision="7" />
   </EntityType>
-  <EntityType Name="tbl_KYC">
+  <EntityType Name="tbl_registered">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RegisteredId" Type="Int32" Nullable="false" />
-    <Property Name="CertificateOfIncorporation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="MemorandomOfAssociation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="ArticlesOfAssociation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="PowerOfAttorneyGranted" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="ValidBusinessLicense" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="AuditedFinancialStatement" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="TaxClearanceCertificate" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="StatusId" Type="Int32" Nullable="false" />
-    <Property Name="Approvedby" Type="Int32" />
-    <Property Name="ApprovalComment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="DateApproved" Type="DateTime" Precision="7" />
-    <Property Name="tbl_RegisteredId" Type="Int32" />
-    <Property Name="tbl_statusId" Type="Int32" />
-    <Property Name="tbl_userId" Type="Int32" />
-    <NavigationProperty Name="tbl_Registered" Relationship="Self.FK_tbl_KYC_tbl_Registered_tbl_RegisteredId" FromRole="tbl_KYC" ToRole="tbl_Registered" />
-    <NavigationProperty Name="tbl_status" Relationship="Self.FK_tbl_KYC_tbl_status_tbl_statusId" FromRole="tbl_KYC" ToRole="tbl_status" />
-    <NavigationProperty Name="tbl_user" Relationship="Self.FK_tbl_KYC_tbl_user_tbl_userId" FromRole="tbl_KYC" ToRole="tbl_user" />
-  </EntityType>
-  <EntityType Name="tbl_Registered">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ServiceId" Type="Int32" />
-    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="CompanyLocation" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="CompanyAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="CompanyLogo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="PostAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="WorkingDays" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="WorkingHours" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="AccountNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-    <Property Name="DateAdded" Type="DateTime" Precision="7" />
-    <Property Name="StatusId" Type="Int32" />
-    <Property Name="ApprovedBy" Type="Int32" />
-    <Property Name="DateApproved" Type="DateTime" Precision="7" />
-    <Property Name="ApprovalComment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="tbl_serviceTypeId" Type="Int32" />
-    <Property Name="tbl_statusId" Type="Int32" />
-    <Property Name="tbl_userId" Type="Int32" />
-    <NavigationProperty Name="tbl_KYC" Relationship="Self.FK_tbl_KYC_tbl_Registered_tbl_RegisteredId" FromRole="tbl_Registered" ToRole="tbl_KYC" />
-    <NavigationProperty Name="tbl_serviceType" Relationship="Self.FK_tbl_Registered_tbl_serviceType_tbl_serviceTypeId" FromRole="tbl_Registered" ToRole="tbl_serviceType" />
-    <NavigationProperty Name="tbl_status" Relationship="Self.FK_tbl_Registered_tbl_status_tbl_statusId" FromRole="tbl_Registered" ToRole="tbl_status" />
-    <NavigationProperty Name="tbl_user" Relationship="Self.FK_tbl_Registered_tbl_user_tbl_userId" FromRole="tbl_Registered" ToRole="tbl_user" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="companyname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="serviceid" Type="Int32" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="companylocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="companyaddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="companylogo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="postaddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="workingdays" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="workinghours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="bankname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="accountnumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+    <Property Name="statusid" Type="Int32" />
+    <Property Name="approvedby" Type="Int32" />
+    <Property Name="dateapproved" Type="DateTimeOffset" Precision="7" />
+    <Property Name="approvalcomment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="tbl_role">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DateCreated" Type="DateTime" Precision="7" />
-    <Property Name="Status" Type="Boolean" />
-    <NavigationProperty Name="tbl_user" Relationship="Self.FK_tbl_user_tbl_role_tbl_roleId" FromRole="tbl_role" ToRole="tbl_user" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="datecreated" Type="DateTimeOffset" Precision="7" />
+    <Property Name="status" Type="Boolean" />
   </EntityType>
-  <EntityType Name="tbl_serviceType">
+  <EntityType Name="tbl_servicetype">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DateAdded" Type="DateTime" Precision="7" />
-    <Property Name="isDeleted" Type="Boolean" />
-    <NavigationProperty Name="tbl_Importation" Relationship="Self.FK_tbl_Importation_tbl_serviceType_tbl_serviceTypeId" FromRole="tbl_serviceType" ToRole="tbl_Importation" />
-    <NavigationProperty Name="tbl_Registered" Relationship="Self.FK_tbl_Registered_tbl_serviceType_tbl_serviceTypeId" FromRole="tbl_serviceType" ToRole="tbl_Registered" />
-  </EntityType>
-  <EntityType Name="tbl_Shipper">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="CompanyName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="TIN" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="TINPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Location" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="StatusId" Type="Int32" Nullable="false" />
-    <Property Name="ApprovedBy" Type="Int32" />
-    <Property Name="DateApproved" Type="DateTime" Precision="7" />
-    <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="tbl_statusId" Type="Int32" />
-    <Property Name="tbl_userId" Type="Int32" />
-    <NavigationProperty Name="tbl_Importation" Relationship="Self.FK_tbl_Importation_tbl_Shipper_tbl_ShipperId" FromRole="tbl_Shipper" ToRole="tbl_Importation" />
-    <NavigationProperty Name="tbl_status" Relationship="Self.FK_tbl_Shipper_tbl_status_tbl_statusId" FromRole="tbl_Shipper" ToRole="tbl_status" />
-    <NavigationProperty Name="tbl_user" Relationship="Self.FK_tbl_Shipper_tbl_user_tbl_userId" FromRole="tbl_Shipper" ToRole="tbl_user" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="service" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="isdeleted" Type="Boolean" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
   </EntityType>
   <EntityType Name="tbl_status">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IsDeleted" Type="Boolean" />
-    <Property Name="DateAdded" Type="DateTime" Precision="7" />
-    <NavigationProperty Name="tbl_Importation" Relationship="Self.FK_tbl_Importation_tbl_status_tbl_statusId" FromRole="tbl_status" ToRole="tbl_Importation" />
-    <NavigationProperty Name="tbl_ImportationDocument" Relationship="Self.FK_tbl_ImportationDocument_tbl_status_tbl_statusId" FromRole="tbl_status" ToRole="tbl_ImportationDocument" />
-    <NavigationProperty Name="tbl_KYC" Relationship="Self.FK_tbl_KYC_tbl_status_tbl_statusId" FromRole="tbl_status" ToRole="tbl_KYC" />
-    <NavigationProperty Name="tbl_Registered" Relationship="Self.FK_tbl_Registered_tbl_status_tbl_statusId" FromRole="tbl_status" ToRole="tbl_Registered" />
-    <NavigationProperty Name="tbl_Shipper" Relationship="Self.FK_tbl_Shipper_tbl_status_tbl_statusId" FromRole="tbl_status" ToRole="tbl_Shipper" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="is_deleted" Type="Boolean" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
   </EntityType>
-  <EntityType Name="tbl_SubGoodsType">
+  <EntityType Name="tbl_subgoodstype">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="GoodsTypeId" Type="Int32" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="DateAdded" Type="DateTime" Precision="7" />
-    <Property Name="Status" Type="Boolean" />
-    <Property Name="tbl_GoodsTypeId" Type="Int32" />
-    <NavigationProperty Name="tbl_GoodsType" Relationship="Self.FK_tbl_SubGoodsType_tbl_GoodsType_tbl_GoodsTypeId" FromRole="tbl_SubGoodsType" ToRole="tbl_GoodsType" />
-    <NavigationProperty Name="tbl_Importation" Relationship="Self.FK_tbl_Importation_tbl_SubGoodsType_tbl_SubGoodsTypeId" FromRole="tbl_SubGoodsType" ToRole="tbl_Importation" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="goodstypeid" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+    <Property Name="statusid" Type="Int32" />
   </EntityType>
-  <EntityType Name="tbl_user">
+  <EntityType Name="tbl_users">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="7" />
-    <Property Name="RoleID" Type="Int32" />
-    <Property Name="Status" Type="Boolean" Nullable="false" />
-    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="tbl_roleId" Type="Int32" />
-    <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="AuthCode" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="tbl_ImportationDocument" Relationship="Self.FK_tbl_ImportationDocument_tbl_user_tbl_userId" FromRole="tbl_user" ToRole="tbl_ImportationDocument" />
-    <NavigationProperty Name="tbl_KYC" Relationship="Self.FK_tbl_KYC_tbl_user_tbl_userId" FromRole="tbl_user" ToRole="tbl_KYC" />
-    <NavigationProperty Name="tbl_Registered" Relationship="Self.FK_tbl_Registered_tbl_user_tbl_userId" FromRole="tbl_user" ToRole="tbl_Registered" />
-    <NavigationProperty Name="tbl_role" Relationship="Self.FK_tbl_user_tbl_role_tbl_roleId" FromRole="tbl_user" ToRole="tbl_role" />
-    <NavigationProperty Name="tbl_Shipper" Relationship="Self.FK_tbl_Shipper_tbl_user_tbl_userId" FromRole="tbl_user" ToRole="tbl_Shipper" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="middlename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+    <Property Name="roleid" Type="Int32" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
-  <Association Name="FK_tbl_Importation_tbl_GoodsType_tbl_GoodsTypeId">
-    <End Role="tbl_GoodsType" Type="Self.tbl_GoodsType" Multiplicity="0..1" />
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_GoodsType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Importation">
-        <PropertyRef Name="tbl_GoodsTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_SubGoodsType_tbl_GoodsType_tbl_GoodsTypeId">
-    <End Role="tbl_GoodsType" Type="Self.tbl_GoodsType" Multiplicity="0..1" />
-    <End Role="tbl_SubGoodsType" Type="Self.tbl_SubGoodsType" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_GoodsType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_SubGoodsType">
-        <PropertyRef Name="tbl_GoodsTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Importation_tbl_serviceType_tbl_serviceTypeId">
-    <End Role="tbl_serviceType" Type="Self.tbl_serviceType" Multiplicity="0..1" />
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_serviceType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Importation">
-        <PropertyRef Name="tbl_serviceTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Importation_tbl_Shipper_tbl_ShipperId">
-    <End Role="tbl_Shipper" Type="Self.tbl_Shipper" Multiplicity="0..1" />
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_Shipper">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Importation">
-        <PropertyRef Name="tbl_ShipperId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Importation_tbl_status_tbl_statusId">
-    <End Role="tbl_status" Type="Self.tbl_status" Multiplicity="0..1" />
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_status">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Importation">
-        <PropertyRef Name="tbl_statusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Importation_tbl_SubGoodsType_tbl_SubGoodsTypeId">
-    <End Role="tbl_SubGoodsType" Type="Self.tbl_SubGoodsType" Multiplicity="0..1" />
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_SubGoodsType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Importation">
-        <PropertyRef Name="tbl_SubGoodsTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_ImportationDocument_tbl_Importation_tbl_ImportationId">
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="0..1" />
-    <End Role="tbl_ImportationDocument" Type="Self.tbl_ImportationDocument" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_Importation">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_ImportationDocument">
-        <PropertyRef Name="tbl_ImportationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_ImportationDocument_tbl_status_tbl_statusId">
-    <End Role="tbl_status" Type="Self.tbl_status" Multiplicity="0..1" />
-    <End Role="tbl_ImportationDocument" Type="Self.tbl_ImportationDocument" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_status">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_ImportationDocument">
-        <PropertyRef Name="tbl_statusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_ImportationDocument_tbl_user_tbl_userId">
-    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
-    <End Role="tbl_ImportationDocument" Type="Self.tbl_ImportationDocument" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_user">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_ImportationDocument">
-        <PropertyRef Name="tbl_userId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_KYC_tbl_Registered_tbl_RegisteredId">
-    <End Role="tbl_Registered" Type="Self.tbl_Registered" Multiplicity="0..1" />
-    <End Role="tbl_KYC" Type="Self.tbl_KYC" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_Registered">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_KYC">
-        <PropertyRef Name="tbl_RegisteredId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_KYC_tbl_status_tbl_statusId">
-    <End Role="tbl_status" Type="Self.tbl_status" Multiplicity="0..1" />
-    <End Role="tbl_KYC" Type="Self.tbl_KYC" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_status">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_KYC">
-        <PropertyRef Name="tbl_statusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_KYC_tbl_user_tbl_userId">
-    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
-    <End Role="tbl_KYC" Type="Self.tbl_KYC" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_user">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_KYC">
-        <PropertyRef Name="tbl_userId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Registered_tbl_serviceType_tbl_serviceTypeId">
-    <End Role="tbl_serviceType" Type="Self.tbl_serviceType" Multiplicity="0..1" />
-    <End Role="tbl_Registered" Type="Self.tbl_Registered" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_serviceType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Registered">
-        <PropertyRef Name="tbl_serviceTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Registered_tbl_status_tbl_statusId">
-    <End Role="tbl_status" Type="Self.tbl_status" Multiplicity="0..1" />
-    <End Role="tbl_Registered" Type="Self.tbl_Registered" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_status">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Registered">
-        <PropertyRef Name="tbl_statusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Registered_tbl_user_tbl_userId">
-    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
-    <End Role="tbl_Registered" Type="Self.tbl_Registered" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_user">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Registered">
-        <PropertyRef Name="tbl_userId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_user_tbl_role_tbl_roleId">
-    <End Role="tbl_role" Type="Self.tbl_role" Multiplicity="0..1" />
-    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_role">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_user">
-        <PropertyRef Name="tbl_roleId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Shipper_tbl_status_tbl_statusId">
-    <End Role="tbl_status" Type="Self.tbl_status" Multiplicity="0..1" />
-    <End Role="tbl_Shipper" Type="Self.tbl_Shipper" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_status">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Shipper">
-        <PropertyRef Name="tbl_statusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Shipper_tbl_user_tbl_userId">
-    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
-    <End Role="tbl_Shipper" Type="Self.tbl_Shipper" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_user">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Shipper">
-        <PropertyRef Name="tbl_userId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityContainer Name="powerusyDBCoreEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="C__EFMigrationsHistory" EntityType="Self.C__EFMigrationsHistory" />
-    <EntitySet Name="tbl_AuditLog" EntityType="Self.tbl_AuditLog" />
-    <EntitySet Name="tbl_Clearing" EntityType="Self.tbl_Clearing" />
-    <EntitySet Name="tbl_GoodsType" EntityType="Self.tbl_GoodsType" />
-    <EntitySet Name="tbl_Importation" EntityType="Self.tbl_Importation" />
-    <EntitySet Name="tbl_ImportationDocument" EntityType="Self.tbl_ImportationDocument" />
-    <EntitySet Name="tbl_KYC" EntityType="Self.tbl_KYC" />
-    <EntitySet Name="tbl_Registered" EntityType="Self.tbl_Registered" />
-    <EntitySet Name="tbl_role" EntityType="Self.tbl_role" />
-    <EntitySet Name="tbl_serviceType" EntityType="Self.tbl_serviceType" />
-    <EntitySet Name="tbl_Shipper" EntityType="Self.tbl_Shipper" />
-    <EntitySet Name="tbl_status" EntityType="Self.tbl_status" />
-    <EntitySet Name="tbl_SubGoodsType" EntityType="Self.tbl_SubGoodsType" />
-    <EntitySet Name="tbl_user" EntityType="Self.tbl_user" />
-    <AssociationSet Name="FK_tbl_Importation_tbl_GoodsType_tbl_GoodsTypeId" Association="Self.FK_tbl_Importation_tbl_GoodsType_tbl_GoodsTypeId">
-      <End Role="tbl_GoodsType" EntitySet="tbl_GoodsType" />
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_SubGoodsType_tbl_GoodsType_tbl_GoodsTypeId" Association="Self.FK_tbl_SubGoodsType_tbl_GoodsType_tbl_GoodsTypeId">
-      <End Role="tbl_GoodsType" EntitySet="tbl_GoodsType" />
-      <End Role="tbl_SubGoodsType" EntitySet="tbl_SubGoodsType" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Importation_tbl_serviceType_tbl_serviceTypeId" Association="Self.FK_tbl_Importation_tbl_serviceType_tbl_serviceTypeId">
-      <End Role="tbl_serviceType" EntitySet="tbl_serviceType" />
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Importation_tbl_Shipper_tbl_ShipperId" Association="Self.FK_tbl_Importation_tbl_Shipper_tbl_ShipperId">
-      <End Role="tbl_Shipper" EntitySet="tbl_Shipper" />
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Importation_tbl_status_tbl_statusId" Association="Self.FK_tbl_Importation_tbl_status_tbl_statusId">
-      <End Role="tbl_status" EntitySet="tbl_status" />
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Importation_tbl_SubGoodsType_tbl_SubGoodsTypeId" Association="Self.FK_tbl_Importation_tbl_SubGoodsType_tbl_SubGoodsTypeId">
-      <End Role="tbl_SubGoodsType" EntitySet="tbl_SubGoodsType" />
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_ImportationDocument_tbl_Importation_tbl_ImportationId" Association="Self.FK_tbl_ImportationDocument_tbl_Importation_tbl_ImportationId">
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-      <End Role="tbl_ImportationDocument" EntitySet="tbl_ImportationDocument" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_ImportationDocument_tbl_status_tbl_statusId" Association="Self.FK_tbl_ImportationDocument_tbl_status_tbl_statusId">
-      <End Role="tbl_status" EntitySet="tbl_status" />
-      <End Role="tbl_ImportationDocument" EntitySet="tbl_ImportationDocument" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_ImportationDocument_tbl_user_tbl_userId" Association="Self.FK_tbl_ImportationDocument_tbl_user_tbl_userId">
-      <End Role="tbl_user" EntitySet="tbl_user" />
-      <End Role="tbl_ImportationDocument" EntitySet="tbl_ImportationDocument" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_KYC_tbl_Registered_tbl_RegisteredId" Association="Self.FK_tbl_KYC_tbl_Registered_tbl_RegisteredId">
-      <End Role="tbl_Registered" EntitySet="tbl_Registered" />
-      <End Role="tbl_KYC" EntitySet="tbl_KYC" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_KYC_tbl_status_tbl_statusId" Association="Self.FK_tbl_KYC_tbl_status_tbl_statusId">
-      <End Role="tbl_status" EntitySet="tbl_status" />
-      <End Role="tbl_KYC" EntitySet="tbl_KYC" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_KYC_tbl_user_tbl_userId" Association="Self.FK_tbl_KYC_tbl_user_tbl_userId">
-      <End Role="tbl_user" EntitySet="tbl_user" />
-      <End Role="tbl_KYC" EntitySet="tbl_KYC" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Registered_tbl_serviceType_tbl_serviceTypeId" Association="Self.FK_tbl_Registered_tbl_serviceType_tbl_serviceTypeId">
-      <End Role="tbl_serviceType" EntitySet="tbl_serviceType" />
-      <End Role="tbl_Registered" EntitySet="tbl_Registered" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Registered_tbl_status_tbl_statusId" Association="Self.FK_tbl_Registered_tbl_status_tbl_statusId">
-      <End Role="tbl_status" EntitySet="tbl_status" />
-      <End Role="tbl_Registered" EntitySet="tbl_Registered" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Registered_tbl_user_tbl_userId" Association="Self.FK_tbl_Registered_tbl_user_tbl_userId">
-      <End Role="tbl_user" EntitySet="tbl_user" />
-      <End Role="tbl_Registered" EntitySet="tbl_Registered" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_user_tbl_role_tbl_roleId" Association="Self.FK_tbl_user_tbl_role_tbl_roleId">
-      <End Role="tbl_role" EntitySet="tbl_role" />
-      <End Role="tbl_user" EntitySet="tbl_user" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Shipper_tbl_status_tbl_statusId" Association="Self.FK_tbl_Shipper_tbl_status_tbl_statusId">
-      <End Role="tbl_status" EntitySet="tbl_status" />
-      <End Role="tbl_Shipper" EntitySet="tbl_Shipper" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Shipper_tbl_user_tbl_userId" Association="Self.FK_tbl_Shipper_tbl_user_tbl_userId">
-      <End Role="tbl_user" EntitySet="tbl_user" />
-      <End Role="tbl_Shipper" EntitySet="tbl_Shipper" />
-    </AssociationSet>
-  </EntityContainer>
+  <EntityType Name="tbl_shipper">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="companyname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tinpassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="statusid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="approvedby" Type="Int32" />
+    <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="workingdays" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="workinghours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="bankname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="accountnumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateadded" Type="DateTime" Precision="3" />
+    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

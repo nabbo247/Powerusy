@@ -12,15 +12,19 @@ namespace PowerusyData.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_importation
+    public partial class tbl_users
     {
         public int id { get; set; }
-        public Nullable<int> shipperid { get; set; }
-        public Nullable<int> goodstypeid { get; set; }
-        public string subgoodtypeid { get; set; }
-        public string comment { get; set; }
-        public string servicetypeid { get; set; }
-        public Nullable<int> status { get; set; }
+        public string firstname { get; set; }
+        public string username { get; set; }
+        public string lastname { get; set; }
+        public string middlename { get; set; }
+        public string phonenumber { get; set; }
         public Nullable<System.DateTimeOffset> dateadded { get; set; }
+        public Nullable<int> roleid { get; set; }
+        public Nullable<bool> status { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
+        public string authcode { get; set; }
     }
 }

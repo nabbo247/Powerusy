@@ -12,32 +12,24 @@ namespace PowerusyData.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_Shipper
+    public partial class tbl_shipper
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_Shipper()
-        {
-            this.tbl_Importation = new HashSet<tbl_Importation>();
-        }
-    
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public string CompanyName { get; set; }
-        public string TIN { get; set; }
-        public string TINPassword { get; set; }
-        public string Location { get; set; }
-        public string PhoneNumber { get; set; }
-        public string EmailAddress { get; set; }
-        public int StatusId { get; set; }
-        public Nullable<int> ApprovedBy { get; set; }
-        public Nullable<System.DateTime> DateApproved { get; set; }
-        public string Comment { get; set; }
-        public Nullable<int> tbl_statusId { get; set; }
-        public Nullable<int> tbl_userId { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Importation> tbl_Importation { get; set; }
-        public virtual tbl_status tbl_status { get; set; }
-        public virtual tbl_user tbl_user { get; set; }
+        public int id { get; set; }
+        public Nullable<int> userid { get; set; }
+        public string companyname { get; set; }
+        public string tin { get; set; }
+        public string tinpassword { get; set; }
+        public string location { get; set; }
+        public string phonenumber { get; set; }
+        public string statusid { get; set; }
+        public Nullable<int> approvedby { get; set; }
+        public string comment { get; set; }
+        public string description { get; set; }
+        public string workingdays { get; set; }
+        public string workinghours { get; set; }
+        public string bankname { get; set; }
+        public string accountnumber { get; set; }
+        public Nullable<System.DateTime> dateadded { get; set; }
+        public string address { get; set; }
     }
 }

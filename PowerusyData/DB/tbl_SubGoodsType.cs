@@ -12,23 +12,12 @@ namespace PowerusyData.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_SubGoodsType
+    public partial class tbl_subgoodstype
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_SubGoodsType()
-        {
-            this.tbl_Importation = new HashSet<tbl_Importation>();
-        }
-    
-        public int Id { get; set; }
-        public Nullable<int> GoodsTypeId { get; set; }
-        public string Name { get; set; }
-        public Nullable<System.DateTime> DateAdded { get; set; }
-        public Nullable<bool> Status { get; set; }
-        public Nullable<int> tbl_GoodsTypeId { get; set; }
-    
-        public virtual tbl_GoodsType tbl_GoodsType { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Importation> tbl_Importation { get; set; }
+        public int id { get; set; }
+        public Nullable<int> goodstypeid { get; set; }
+        public string name { get; set; }
+        public Nullable<System.DateTimeOffset> dateadded { get; set; }
+        public Nullable<int> statusid { get; set; }
     }
 }

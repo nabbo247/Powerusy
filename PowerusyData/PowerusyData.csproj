@@ -65,9 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompleteRegViewModel.cs" />
-    <Compile Include="DB\C__EFMigrationsHistory.cs">
-      <DependentUpon>PowerusyDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="DB\PowerusyDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,43 +80,43 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PowerusyDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_AuditLog.cs">
+    <Compile Include="DB\tbl_auditlog.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_Clearing.cs">
+    <Compile Include="DB\tbl_clearing.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_GoodsType.cs">
+    <Compile Include="DB\tbl_goodstype.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_Importation.cs">
+    <Compile Include="DB\tbl_importation.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_ImportationDocument.cs">
+    <Compile Include="DB\tbl_importation_document.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_KYC.cs">
+    <Compile Include="DB\tbl_kyc.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_Registered.cs">
+    <Compile Include="DB\tbl_registered.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_role.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_serviceType.cs">
+    <Compile Include="DB\tbl_servicetype.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_Shipper.cs">
+    <Compile Include="DB\tbl_shipper.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_status.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_SubGoodsType.cs">
+    <Compile Include="DB\tbl_subgoodstype.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_user.cs">
+    <Compile Include="DB\tbl_users.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="IndexViewModel.cs" />

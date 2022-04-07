@@ -15,12 +15,7 @@ namespace Powerusy.Controllers
         public ActionResult CompleteReg(int? page)
         {
             CompleteRegViewModel vm = new CompleteRegViewModel();
-            //vm.UserId = Session["userid"].ToString();
-            //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
-            //vm.IsDetailAreaVisible = true;
-            //vm.IsSearchAreaVisible = false;
-            //vm.IsListAreaVisible = false;
+            vm.Mode = "Add";
             vm.HandleRequest();
             return View(vm);
         }
@@ -32,8 +27,8 @@ namespace Powerusy.Controllers
             vm.IsDetailAreaVisible = true;
             vm.IsSearchAreaVisible = false;
             vm.IsListAreaVisible = false;
-            vm.EventCommand = "save";
-            vm.Mode = "Add";
+            var sss = vm.EventCommand ;
+            //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
             //vm.UserId = Session["userid"].ToString();
             //vm.UserId = "eunicee";
@@ -62,5 +57,7 @@ namespace Powerusy.Controllers
             }
             return View(vm);
         }
+
+     
     }
 }

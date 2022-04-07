@@ -12,28 +12,21 @@ namespace PowerusyData.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_KYC
+    public partial class tbl_kyc
     {
-        public int Id { get; set; }
-        public int RegisteredId { get; set; }
-        public string CertificateOfIncorporation { get; set; }
-        public string MemorandomOfAssociation { get; set; }
-        public string ArticlesOfAssociation { get; set; }
-        public string PowerOfAttorneyGranted { get; set; }
-        public string ValidBusinessLicense { get; set; }
-        public string AuditedFinancialStatement { get; set; }
-        public string TaxClearanceCertificate { get; set; }
-        public System.DateTime DateAdded { get; set; }
-        public int StatusId { get; set; }
-        public Nullable<int> Approvedby { get; set; }
-        public string ApprovalComment { get; set; }
-        public Nullable<System.DateTime> DateApproved { get; set; }
-        public Nullable<int> tbl_RegisteredId { get; set; }
-        public Nullable<int> tbl_statusId { get; set; }
-        public Nullable<int> tbl_userId { get; set; }
-    
-        public virtual tbl_Registered tbl_Registered { get; set; }
-        public virtual tbl_status tbl_status { get; set; }
-        public virtual tbl_user tbl_user { get; set; }
+        public int id { get; set; }
+        public Nullable<int> registeredid { get; set; }
+        public string certificateofincorporation { get; set; }
+        public string memorandomofassociation { get; set; }
+        public string articlesofassociation { get; set; }
+        public string powerofattorneygranted { get; set; }
+        public string validbusinesslicense { get; set; }
+        public string auditedfinancialstatement { get; set; }
+        public string taxclearancecertificate { get; set; }
+        public Nullable<System.DateTimeOffset> dateadded { get; set; }
+        public Nullable<int> statusid { get; set; }
+        public Nullable<int> approvedby { get; set; }
+        public string approvalcomment { get; set; }
+        public Nullable<System.DateTimeOffset> dateapproved { get; set; }
     }
 }

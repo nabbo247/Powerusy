@@ -12,18 +12,18 @@ namespace PowerusyData.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_Clearing
+    public partial class tbl_clearing
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public int GoodsId { get; set; }
-        public string FinalInvoice { get; set; }
-        public string BillOfLading { get; set; }
-        public string PackingList { get; set; }
-        public string CombinedCertificate { get; set; }
-        public string SONCAP { get; set; }
-        public Nullable<int> ApprovedById { get; set; }
-        public Nullable<System.DateTime> DateApproved { get; set; }
-        public string Comment { get; set; }
+        public int id { get; set; }
+        public Nullable<int> userid { get; set; }
+        public Nullable<int> goodsid { get; set; }
+        public string finalinvoice { get; set; }
+        public string billoflanding { get; set; }
+        public string packinglist { get; set; }
+        public string combinedcertificate { get; set; }
+        public string soncap { get; set; }
+        public string approvedbyid { get; set; }
+        public Nullable<System.DateTimeOffset> dateapproved { get; set; }
+        public string comment { get; set; }
     }
 }

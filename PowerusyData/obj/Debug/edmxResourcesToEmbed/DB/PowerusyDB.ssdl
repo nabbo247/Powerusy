@@ -1,509 +1,200 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="powerusyDBCoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="__EFMigrationsHistory">
+  <EntityType Name="tbl_auditlog">
     <Key>
-      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="operationperformed" Type="nvarchar" MaxLength="255" />
+    <Property Name="ipaddress" Type="nvarchar" MaxLength="255" />
+    <Property Name="pagevisited" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateaccessed" Type="datetimeoffset" Precision="7" />
   </EntityType>
-  <EntityType Name="tbl_AuditLog">
+  <EntityType Name="tbl_clearing">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="nvarchar" MaxLength="50" />
-    <Property Name="OperationsPerformed" Type="nvarchar" MaxLength="50" />
-    <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
-    <Property Name="PageVisited" Type="nvarchar" MaxLength="50" />
-    <Property Name="DateAccessed" Type="datetime" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userid" Type="int" />
+    <Property Name="goodsid" Type="int" />
+    <Property Name="finalinvoice" Type="nvarchar" MaxLength="255" />
+    <Property Name="billoflanding" Type="nvarchar" MaxLength="255" />
+    <Property Name="packinglist" Type="nvarchar" MaxLength="255" />
+    <Property Name="combinedcertificate" Type="nvarchar" MaxLength="255" />
+    <Property Name="soncap" Type="nvarchar" MaxLength="255" />
+    <Property Name="approvedbyid" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateapproved" Type="datetimeoffset" Precision="7" />
+    <Property Name="comment" Type="nvarchar" MaxLength="255" />
   </EntityType>
-  <EntityType Name="tbl_Clearing">
+  <EntityType Name="tbl_goodstype">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="GoodsId" Type="int" Nullable="false" />
-    <Property Name="FinalInvoice" Type="nvarchar" MaxLength="500" />
-    <Property Name="BillOfLading" Type="nvarchar" MaxLength="500" />
-    <Property Name="PackingList" Type="nvarchar" MaxLength="500" />
-    <Property Name="CombinedCertificate" Type="nvarchar" MaxLength="500" />
-    <Property Name="SONCAP" Type="nvarchar" MaxLength="500" />
-    <Property Name="ApprovedById" Type="int" />
-    <Property Name="DateApproved" Type="datetime2" Precision="7" />
-    <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
+    <Property Name="status" Type="bit" />
   </EntityType>
-  <EntityType Name="tbl_GoodsType">
+  <EntityType Name="tbl_importation">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="DateAdded" Type="datetime2" Precision="7" />
-    <Property Name="Status" Type="bit" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="shipperid" Type="int" />
+    <Property Name="goodstypeid" Type="int" />
+    <Property Name="subgoodtypeid" Type="nvarchar" MaxLength="255" />
+    <Property Name="comment" Type="nvarchar" MaxLength="255" />
+    <Property Name="servicetypeid" Type="nvarchar" MaxLength="255" />
+    <Property Name="status" Type="int" />
+    <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
   </EntityType>
-  <EntityType Name="tbl_Importation">
+  <EntityType Name="tbl_importation_document">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ShippersId" Type="int" Nullable="false" />
-    <Property Name="GoodsTypeId" Type="int" Nullable="false" />
-    <Property Name="SubGoodTypeId" Type="int" Nullable="false" />
-    <Property Name="Comment" Type="nvarchar" MaxLength="250" />
-    <Property Name="ServiceTypeId" Type="int" Nullable="false" />
-    <Property Name="Status" Type="int" Nullable="false" />
-    <Property Name="DateAdded" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="tbl_GoodsTypeId" Type="int" />
-    <Property Name="tbl_serviceTypeId" Type="int" />
-    <Property Name="tbl_ShipperId" Type="int" />
-    <Property Name="tbl_statusId" Type="int" />
-    <Property Name="tbl_SubGoodsTypeId" Type="int" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="importationid" Type="nvarchar" MaxLength="255" />
+    <Property Name="documentname" Type="nvarchar" MaxLength="255" />
+    <Property Name="documentpath" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
+    <Property Name="statusid" Type="int" />
+    <Property Name="approvedby" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateapproved" Type="nvarchar" MaxLength="255" />
+    <Property Name="approvalcomment" Type="nvarchar" MaxLength="255" />
   </EntityType>
-  <EntityType Name="tbl_ImportationDocument">
+  <EntityType Name="tbl_kyc">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ImportationId" Type="int" Nullable="false" />
-    <Property Name="DocumentName" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="DcoumentPath" Type="nvarchar" MaxLength="500" Nullable="false" />
-    <Property Name="DateAdded" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="StatusId" Type="int" Nullable="false" />
-    <Property Name="Approvedby" Type="int" />
-    <Property Name="DateApproved" Type="datetime2" Precision="7" />
-    <Property Name="ApprovalComment" Type="nvarchar" MaxLength="250" />
-    <Property Name="tbl_ImportationId" Type="int" />
-    <Property Name="tbl_statusId" Type="int" />
-    <Property Name="tbl_userId" Type="int" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="registeredid" Type="int" />
+    <Property Name="certificateofincorporation" Type="nvarchar" MaxLength="255" />
+    <Property Name="memorandomofassociation" Type="nvarchar" MaxLength="255" />
+    <Property Name="articlesofassociation" Type="nvarchar" MaxLength="255" />
+    <Property Name="powerofattorneygranted" Type="nvarchar" MaxLength="255" />
+    <Property Name="validbusinesslicense" Type="nvarchar" MaxLength="255" />
+    <Property Name="auditedfinancialstatement" Type="nvarchar" MaxLength="255" />
+    <Property Name="taxclearancecertificate" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
+    <Property Name="statusid" Type="int" />
+    <Property Name="approvedby" Type="int" />
+    <Property Name="approvalcomment" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateapproved" Type="datetimeoffset" Precision="7" />
   </EntityType>
-  <EntityType Name="tbl_KYC">
+  <EntityType Name="tbl_registered">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RegisteredId" Type="int" Nullable="false" />
-    <Property Name="CertificateOfIncorporation" Type="nvarchar" MaxLength="500" />
-    <Property Name="MemorandomOfAssociation" Type="nvarchar" MaxLength="500" />
-    <Property Name="ArticlesOfAssociation" Type="nvarchar" MaxLength="500" />
-    <Property Name="PowerOfAttorneyGranted" Type="nvarchar" MaxLength="500" />
-    <Property Name="ValidBusinessLicense" Type="nvarchar" MaxLength="500" />
-    <Property Name="AuditedFinancialStatement" Type="nvarchar" MaxLength="500" />
-    <Property Name="TaxClearanceCertificate" Type="nvarchar" MaxLength="500" />
-    <Property Name="DateAdded" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="StatusId" Type="int" Nullable="false" />
-    <Property Name="Approvedby" Type="int" />
-    <Property Name="ApprovalComment" Type="nvarchar" MaxLength="250" />
-    <Property Name="DateApproved" Type="datetime2" Precision="7" />
-    <Property Name="tbl_RegisteredId" Type="int" />
-    <Property Name="tbl_statusId" Type="int" />
-    <Property Name="tbl_userId" Type="int" />
-  </EntityType>
-  <EntityType Name="tbl_Registered">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="CompanyName" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="ServiceId" Type="int" />
-    <Property Name="Description" Type="nvarchar" MaxLength="250" />
-    <Property Name="CompanyLocation" Type="nvarchar" MaxLength="250" />
-    <Property Name="CompanyAddress" Type="nvarchar" MaxLength="250" />
-    <Property Name="CompanyLogo" Type="nvarchar" MaxLength="500" />
-    <Property Name="PostAddress" Type="nvarchar" MaxLength="50" />
-    <Property Name="WorkingDays" Type="nvarchar" MaxLength="250" />
-    <Property Name="WorkingHours" Type="nvarchar" MaxLength="50" />
-    <Property Name="BankName" Type="nvarchar" MaxLength="50" />
-    <Property Name="AccountNumber" Type="nvarchar" MaxLength="16" />
-    <Property Name="DateAdded" Type="datetime2" Precision="7" />
-    <Property Name="StatusId" Type="int" />
-    <Property Name="ApprovedBy" Type="int" />
-    <Property Name="DateApproved" Type="datetime2" Precision="7" />
-    <Property Name="ApprovalComment" Type="nvarchar" MaxLength="250" />
-    <Property Name="tbl_serviceTypeId" Type="int" />
-    <Property Name="tbl_statusId" Type="int" />
-    <Property Name="tbl_userId" Type="int" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userid" Type="int" />
+    <Property Name="companyname" Type="nvarchar" MaxLength="255" />
+    <Property Name="serviceid" Type="int" />
+    <Property Name="description" Type="nvarchar" MaxLength="255" />
+    <Property Name="companylocation" Type="nvarchar" MaxLength="255" />
+    <Property Name="companyaddress" Type="nvarchar" MaxLength="255" />
+    <Property Name="companylogo" Type="nvarchar" MaxLength="255" />
+    <Property Name="postaddress" Type="nvarchar" MaxLength="255" />
+    <Property Name="workingdays" Type="nvarchar" MaxLength="255" />
+    <Property Name="workinghours" Type="nvarchar" MaxLength="255" />
+    <Property Name="bankname" Type="nvarchar" MaxLength="255" />
+    <Property Name="accountnumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
+    <Property Name="statusid" Type="int" />
+    <Property Name="approvedby" Type="int" />
+    <Property Name="dateapproved" Type="datetimeoffset" Precision="7" />
+    <Property Name="approvalcomment" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="tbl_role">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Code" Type="nvarchar" MaxLength="50" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="DateCreated" Type="datetime2" Precision="7" />
-    <Property Name="Status" Type="bit" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="nvarchar" MaxLength="255" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" />
+    <Property Name="datecreated" Type="datetimeoffset" Precision="7" />
+    <Property Name="status" Type="bit" />
   </EntityType>
-  <EntityType Name="tbl_serviceType">
+  <EntityType Name="tbl_servicetype">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Service" Type="nvarchar" MaxLength="50" />
-    <Property Name="DateAdded" Type="datetime2" Precision="7" />
-    <Property Name="isDeleted" Type="bit" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="service" Type="nvarchar" MaxLength="255" />
+    <Property Name="isdeleted" Type="bit" />
+    <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
   </EntityType>
-  <EntityType Name="tbl_Shipper">
+  <EntityType Name="tbl_shipper">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="CompanyName" Type="nvarchar" MaxLength="250" Nullable="false" />
-    <Property Name="TIN" Type="nvarchar" MaxLength="500" />
-    <Property Name="TINPassword" Type="nvarchar" MaxLength="50" />
-    <Property Name="Location" Type="nvarchar" MaxLength="250" />
-    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
-    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
-    <Property Name="StatusId" Type="int" Nullable="false" />
-    <Property Name="ApprovedBy" Type="int" />
-    <Property Name="DateApproved" Type="datetime2" Precision="7" />
-    <Property Name="Comment" Type="nvarchar" MaxLength="250" />
-    <Property Name="tbl_statusId" Type="int" />
-    <Property Name="tbl_userId" Type="int" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userid" Type="int" />
+    <Property Name="companyname" Type="nvarchar" MaxLength="255" />
+    <Property Name="tin" Type="nvarchar" MaxLength="255" />
+    <Property Name="tinpassword" Type="nvarchar" MaxLength="255" />
+    <Property Name="location" Type="nvarchar" MaxLength="255" />
+    <Property Name="phonenumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="statusid" Type="nvarchar" MaxLength="255" />
+    <Property Name="approvedby" Type="int" />
+    <Property Name="comment" Type="nvarchar" MaxLength="255" />
+    <Property Name="description" Type="nvarchar" MaxLength="255" />
+    <Property Name="workingdays" Type="nvarchar" MaxLength="255" />
+    <Property Name="workinghours" Type="nvarchar" MaxLength="255" />
+    <Property Name="bankname" Type="nvarchar" MaxLength="255" />
+    <Property Name="accountnumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateadded" Type="datetime" />
+    <Property Name="address" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="tbl_status">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="IsDeleted" Type="bit" />
-    <Property Name="DateAdded" Type="datetime2" Precision="7" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" />
+    <Property Name="is_deleted" Type="bit" />
+    <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
   </EntityType>
-  <EntityType Name="tbl_SubGoodsType">
+  <EntityType Name="tbl_subgoodstype">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GoodsTypeId" Type="int" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="DateAdded" Type="datetime2" Precision="7" />
-    <Property Name="Status" Type="bit" />
-    <Property Name="tbl_GoodsTypeId" Type="int" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="goodstypeid" Type="int" />
+    <Property Name="name" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
+    <Property Name="statusid" Type="int" />
   </EntityType>
-  <EntityType Name="tbl_user">
+  <EntityType Name="tbl_users">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="username" Type="nvarchar" MaxLength="50" />
-    <Property Name="FirstName" Type="nvarchar(max)" />
-    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="MiddleName" Type="nvarchar(max)" />
-    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
-    <Property Name="DateAdded" Type="datetime2" Precision="7" Nullable="false" />
-    <Property Name="RoleID" Type="int" />
-    <Property Name="Status" Type="bit" Nullable="false" />
-    <Property Name="Email" Type="nvarchar" MaxLength="100" />
-    <Property Name="tbl_roleId" Type="int" />
-    <Property Name="Password" Type="nvarchar" MaxLength="500" />
-    <Property Name="AuthCode" Type="nvarchar" MaxLength="500" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="firstname" Type="nvarchar" MaxLength="255" />
+    <Property Name="username" Type="nvarchar" MaxLength="255" />
+    <Property Name="lastname" Type="nvarchar" MaxLength="255" />
+    <Property Name="middlename" Type="nvarchar" MaxLength="255" />
+    <Property Name="phonenumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
+    <Property Name="roleid" Type="int" />
+    <Property Name="status" Type="bit" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" />
+    <Property Name="password" Type="nvarchar" MaxLength="255" />
+    <Property Name="authcode" Type="nvarchar" MaxLength="255" />
   </EntityType>
-  <Association Name="FK_tbl_Importation_tbl_GoodsType_tbl_GoodsTypeId">
-    <End Role="tbl_GoodsType" Type="Self.tbl_GoodsType" Multiplicity="0..1" />
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_GoodsType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Importation">
-        <PropertyRef Name="tbl_GoodsTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Importation_tbl_serviceType_tbl_serviceTypeId">
-    <End Role="tbl_serviceType" Type="Self.tbl_serviceType" Multiplicity="0..1" />
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_serviceType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Importation">
-        <PropertyRef Name="tbl_serviceTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Importation_tbl_Shipper_tbl_ShipperId">
-    <End Role="tbl_Shipper" Type="Self.tbl_Shipper" Multiplicity="0..1" />
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_Shipper">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Importation">
-        <PropertyRef Name="tbl_ShipperId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Importation_tbl_status_tbl_statusId">
-    <End Role="tbl_status" Type="Self.tbl_status" Multiplicity="0..1" />
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_status">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Importation">
-        <PropertyRef Name="tbl_statusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Importation_tbl_SubGoodsType_tbl_SubGoodsTypeId">
-    <End Role="tbl_SubGoodsType" Type="Self.tbl_SubGoodsType" Multiplicity="0..1" />
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_SubGoodsType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Importation">
-        <PropertyRef Name="tbl_SubGoodsTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_ImportationDocument_tbl_Importation_tbl_ImportationId">
-    <End Role="tbl_Importation" Type="Self.tbl_Importation" Multiplicity="0..1" />
-    <End Role="tbl_ImportationDocument" Type="Self.tbl_ImportationDocument" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_Importation">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_ImportationDocument">
-        <PropertyRef Name="tbl_ImportationId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_ImportationDocument_tbl_status_tbl_statusId">
-    <End Role="tbl_status" Type="Self.tbl_status" Multiplicity="0..1" />
-    <End Role="tbl_ImportationDocument" Type="Self.tbl_ImportationDocument" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_status">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_ImportationDocument">
-        <PropertyRef Name="tbl_statusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_ImportationDocument_tbl_user_tbl_userId">
-    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
-    <End Role="tbl_ImportationDocument" Type="Self.tbl_ImportationDocument" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_user">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_ImportationDocument">
-        <PropertyRef Name="tbl_userId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_KYC_tbl_Registered_tbl_RegisteredId">
-    <End Role="tbl_Registered" Type="Self.tbl_Registered" Multiplicity="0..1" />
-    <End Role="tbl_KYC" Type="Self.tbl_KYC" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_Registered">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_KYC">
-        <PropertyRef Name="tbl_RegisteredId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_KYC_tbl_status_tbl_statusId">
-    <End Role="tbl_status" Type="Self.tbl_status" Multiplicity="0..1" />
-    <End Role="tbl_KYC" Type="Self.tbl_KYC" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_status">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_KYC">
-        <PropertyRef Name="tbl_statusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_KYC_tbl_user_tbl_userId">
-    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
-    <End Role="tbl_KYC" Type="Self.tbl_KYC" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_user">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_KYC">
-        <PropertyRef Name="tbl_userId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Registered_tbl_serviceType_tbl_serviceTypeId">
-    <End Role="tbl_serviceType" Type="Self.tbl_serviceType" Multiplicity="0..1" />
-    <End Role="tbl_Registered" Type="Self.tbl_Registered" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_serviceType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Registered">
-        <PropertyRef Name="tbl_serviceTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Registered_tbl_status_tbl_statusId">
-    <End Role="tbl_status" Type="Self.tbl_status" Multiplicity="0..1" />
-    <End Role="tbl_Registered" Type="Self.tbl_Registered" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_status">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Registered">
-        <PropertyRef Name="tbl_statusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Registered_tbl_user_tbl_userId">
-    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
-    <End Role="tbl_Registered" Type="Self.tbl_Registered" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_user">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Registered">
-        <PropertyRef Name="tbl_userId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Shipper_tbl_status_tbl_statusId">
-    <End Role="tbl_status" Type="Self.tbl_status" Multiplicity="0..1" />
-    <End Role="tbl_Shipper" Type="Self.tbl_Shipper" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_status">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Shipper">
-        <PropertyRef Name="tbl_statusId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_Shipper_tbl_user_tbl_userId">
-    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="0..1" />
-    <End Role="tbl_Shipper" Type="Self.tbl_Shipper" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_user">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_Shipper">
-        <PropertyRef Name="tbl_userId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_SubGoodsType_tbl_GoodsType_tbl_GoodsTypeId">
-    <End Role="tbl_GoodsType" Type="Self.tbl_GoodsType" Multiplicity="0..1" />
-    <End Role="tbl_SubGoodsType" Type="Self.tbl_SubGoodsType" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_GoodsType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_SubGoodsType">
-        <PropertyRef Name="tbl_GoodsTypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tbl_user_tbl_role_tbl_roleId">
-    <End Role="tbl_role" Type="Self.tbl_role" Multiplicity="0..1" />
-    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tbl_role">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tbl_user">
-        <PropertyRef Name="tbl_roleId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="powerusyDBCoreModelStoreContainer">
-    <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_AuditLog" EntityType="Self.tbl_AuditLog" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_Clearing" EntityType="Self.tbl_Clearing" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_GoodsType" EntityType="Self.tbl_GoodsType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_Importation" EntityType="Self.tbl_Importation" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_ImportationDocument" EntityType="Self.tbl_ImportationDocument" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_KYC" EntityType="Self.tbl_KYC" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_Registered" EntityType="Self.tbl_Registered" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_serviceType" EntityType="Self.tbl_serviceType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_Shipper" EntityType="Self.tbl_Shipper" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_status" EntityType="Self.tbl_status" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_SubGoodsType" EntityType="Self.tbl_SubGoodsType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tbl_user" EntityType="Self.tbl_user" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_tbl_Importation_tbl_GoodsType_tbl_GoodsTypeId" Association="Self.FK_tbl_Importation_tbl_GoodsType_tbl_GoodsTypeId">
-      <End Role="tbl_GoodsType" EntitySet="tbl_GoodsType" />
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Importation_tbl_serviceType_tbl_serviceTypeId" Association="Self.FK_tbl_Importation_tbl_serviceType_tbl_serviceTypeId">
-      <End Role="tbl_serviceType" EntitySet="tbl_serviceType" />
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Importation_tbl_Shipper_tbl_ShipperId" Association="Self.FK_tbl_Importation_tbl_Shipper_tbl_ShipperId">
-      <End Role="tbl_Shipper" EntitySet="tbl_Shipper" />
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Importation_tbl_status_tbl_statusId" Association="Self.FK_tbl_Importation_tbl_status_tbl_statusId">
-      <End Role="tbl_status" EntitySet="tbl_status" />
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Importation_tbl_SubGoodsType_tbl_SubGoodsTypeId" Association="Self.FK_tbl_Importation_tbl_SubGoodsType_tbl_SubGoodsTypeId">
-      <End Role="tbl_SubGoodsType" EntitySet="tbl_SubGoodsType" />
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_ImportationDocument_tbl_Importation_tbl_ImportationId" Association="Self.FK_tbl_ImportationDocument_tbl_Importation_tbl_ImportationId">
-      <End Role="tbl_Importation" EntitySet="tbl_Importation" />
-      <End Role="tbl_ImportationDocument" EntitySet="tbl_ImportationDocument" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_ImportationDocument_tbl_status_tbl_statusId" Association="Self.FK_tbl_ImportationDocument_tbl_status_tbl_statusId">
-      <End Role="tbl_status" EntitySet="tbl_status" />
-      <End Role="tbl_ImportationDocument" EntitySet="tbl_ImportationDocument" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_ImportationDocument_tbl_user_tbl_userId" Association="Self.FK_tbl_ImportationDocument_tbl_user_tbl_userId">
-      <End Role="tbl_user" EntitySet="tbl_user" />
-      <End Role="tbl_ImportationDocument" EntitySet="tbl_ImportationDocument" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_KYC_tbl_Registered_tbl_RegisteredId" Association="Self.FK_tbl_KYC_tbl_Registered_tbl_RegisteredId">
-      <End Role="tbl_Registered" EntitySet="tbl_Registered" />
-      <End Role="tbl_KYC" EntitySet="tbl_KYC" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_KYC_tbl_status_tbl_statusId" Association="Self.FK_tbl_KYC_tbl_status_tbl_statusId">
-      <End Role="tbl_status" EntitySet="tbl_status" />
-      <End Role="tbl_KYC" EntitySet="tbl_KYC" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_KYC_tbl_user_tbl_userId" Association="Self.FK_tbl_KYC_tbl_user_tbl_userId">
-      <End Role="tbl_user" EntitySet="tbl_user" />
-      <End Role="tbl_KYC" EntitySet="tbl_KYC" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Registered_tbl_serviceType_tbl_serviceTypeId" Association="Self.FK_tbl_Registered_tbl_serviceType_tbl_serviceTypeId">
-      <End Role="tbl_serviceType" EntitySet="tbl_serviceType" />
-      <End Role="tbl_Registered" EntitySet="tbl_Registered" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Registered_tbl_status_tbl_statusId" Association="Self.FK_tbl_Registered_tbl_status_tbl_statusId">
-      <End Role="tbl_status" EntitySet="tbl_status" />
-      <End Role="tbl_Registered" EntitySet="tbl_Registered" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Registered_tbl_user_tbl_userId" Association="Self.FK_tbl_Registered_tbl_user_tbl_userId">
-      <End Role="tbl_user" EntitySet="tbl_user" />
-      <End Role="tbl_Registered" EntitySet="tbl_Registered" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Shipper_tbl_status_tbl_statusId" Association="Self.FK_tbl_Shipper_tbl_status_tbl_statusId">
-      <End Role="tbl_status" EntitySet="tbl_status" />
-      <End Role="tbl_Shipper" EntitySet="tbl_Shipper" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_Shipper_tbl_user_tbl_userId" Association="Self.FK_tbl_Shipper_tbl_user_tbl_userId">
-      <End Role="tbl_user" EntitySet="tbl_user" />
-      <End Role="tbl_Shipper" EntitySet="tbl_Shipper" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_SubGoodsType_tbl_GoodsType_tbl_GoodsTypeId" Association="Self.FK_tbl_SubGoodsType_tbl_GoodsType_tbl_GoodsTypeId">
-      <End Role="tbl_GoodsType" EntitySet="tbl_GoodsType" />
-      <End Role="tbl_SubGoodsType" EntitySet="tbl_SubGoodsType" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tbl_user_tbl_role_tbl_roleId" Association="Self.FK_tbl_user_tbl_role_tbl_roleId">
-      <End Role="tbl_role" EntitySet="tbl_role" />
-      <End Role="tbl_user" EntitySet="tbl_user" />
-    </AssociationSet>
+    <EntitySet Name="tbl_auditlog" EntityType="Self.tbl_auditlog" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_importation_document" EntityType="Self.tbl_importation_document" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_kyc" EntityType="Self.tbl_kyc" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_registered" EntityType="Self.tbl_registered" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_servicetype" EntityType="Self.tbl_servicetype" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_shipper" EntityType="Self.tbl_shipper" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_status" EntityType="Self.tbl_status" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_subgoodstype" EntityType="Self.tbl_subgoodstype" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="posweusr" store:Type="Tables" />
   </EntityContainer>
 </Schema>

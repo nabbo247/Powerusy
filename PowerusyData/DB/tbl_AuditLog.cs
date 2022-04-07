@@ -12,13 +12,13 @@ namespace PowerusyData.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_AuditLog
+    public partial class tbl_auditlog
     {
-        public long ID { get; set; }
-        public string UserId { get; set; }
-        public string OperationsPerformed { get; set; }
-        public string IpAddress { get; set; }
-        public string PageVisited { get; set; }
-        public Nullable<System.DateTime> DateAccessed { get; set; }
+        public int id { get; set; }
+        public Nullable<int> user_id { get; set; }
+        public string operationperformed { get; set; }
+        public string ipaddress { get; set; }
+        public string pagevisited { get; set; }
+        public Nullable<System.DateTimeOffset> dateaccessed { get; set; }
     }
 }

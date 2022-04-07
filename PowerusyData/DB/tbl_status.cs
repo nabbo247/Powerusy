@@ -14,30 +14,9 @@ namespace PowerusyData.DB
     
     public partial class tbl_status
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_status()
-        {
-            this.tbl_Importation = new HashSet<tbl_Importation>();
-            this.tbl_ImportationDocument = new HashSet<tbl_ImportationDocument>();
-            this.tbl_KYC = new HashSet<tbl_KYC>();
-            this.tbl_Registered = new HashSet<tbl_Registered>();
-            this.tbl_Shipper = new HashSet<tbl_Shipper>();
-        }
-    
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
-        public Nullable<System.DateTime> DateAdded { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Importation> tbl_Importation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_ImportationDocument> tbl_ImportationDocument { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_KYC> tbl_KYC { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Registered> tbl_Registered { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Shipper> tbl_Shipper { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public Nullable<bool> is_deleted { get; set; }
+        public Nullable<System.DateTimeOffset> dateadded { get; set; }
     }
 }

@@ -172,16 +172,23 @@ namespace PowerusyData
 
         public void writelog(string userid, string op, string ip)
         {
-            using (var db = new powerusyDBCoreEntities())
+            try
             {
-                tbl_AuditLog dsl = new tbl_AuditLog();
-                dsl.UserId = userid;
-                dsl.OperationsPerformed = op;
-                dsl.IpAddress = ip;
-                dsl.PageVisited = getcurrentpage();
-                dsl.DateAccessed = DateTime.Now;
-                db.tbl_AuditLog.Add(dsl);
-                db.SaveChanges();
+                using (var db = new powerusyDBCoreEntities())
+                {
+                    tbl_auditlog dsl = new tbl_auditlog();
+                    dsl.user_id = Convert.ToInt32(userid);
+                    dsl.operationperformed = op;
+                    dsl.ipaddress = ip;
+                    dsl.pagevisited = getcurrentpage();
+                    dsl.dateaccessed = DateTime.Now;
+                    db.tbl_auditlog.Add(dsl);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
         public string getcurrentpage()  //This method returns Current Page Name

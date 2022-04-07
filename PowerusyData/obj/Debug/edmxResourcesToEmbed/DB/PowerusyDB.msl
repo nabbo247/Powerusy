@@ -1,219 +1,198 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="powerusyDBCoreModelStoreContainer" CdmEntityContainer="powerusyDBCoreEntities">
-    <EntitySetMapping Name="C__EFMigrationsHistory">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.C__EFMigrationsHistory">
-        <MappingFragment StoreEntitySet="__EFMigrationsHistory">
-          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+    <EntitySetMapping Name="tbl_auditlog">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_auditlog">
+        <MappingFragment StoreEntitySet="tbl_auditlog">
+          <ScalarProperty Name="dateaccessed" ColumnName="dateaccessed" />
+          <ScalarProperty Name="pagevisited" ColumnName="pagevisited" />
+          <ScalarProperty Name="ipaddress" ColumnName="ipaddress" />
+          <ScalarProperty Name="operationperformed" ColumnName="operationperformed" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_AuditLog">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_AuditLog">
-        <MappingFragment StoreEntitySet="tbl_AuditLog">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="OperationsPerformed" ColumnName="OperationsPerformed" />
-          <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
-          <ScalarProperty Name="PageVisited" ColumnName="PageVisited" />
-          <ScalarProperty Name="DateAccessed" ColumnName="DateAccessed" />
+    <EntitySetMapping Name="tbl_clearing">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_clearing">
+        <MappingFragment StoreEntitySet="tbl_clearing">
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="dateapproved" ColumnName="dateapproved" />
+          <ScalarProperty Name="approvedbyid" ColumnName="approvedbyid" />
+          <ScalarProperty Name="soncap" ColumnName="soncap" />
+          <ScalarProperty Name="combinedcertificate" ColumnName="combinedcertificate" />
+          <ScalarProperty Name="packinglist" ColumnName="packinglist" />
+          <ScalarProperty Name="billoflanding" ColumnName="billoflanding" />
+          <ScalarProperty Name="finalinvoice" ColumnName="finalinvoice" />
+          <ScalarProperty Name="goodsid" ColumnName="goodsid" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_Clearing">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_Clearing">
-        <MappingFragment StoreEntitySet="tbl_Clearing">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="GoodsId" ColumnName="GoodsId" />
-          <ScalarProperty Name="FinalInvoice" ColumnName="FinalInvoice" />
-          <ScalarProperty Name="BillOfLading" ColumnName="BillOfLading" />
-          <ScalarProperty Name="PackingList" ColumnName="PackingList" />
-          <ScalarProperty Name="CombinedCertificate" ColumnName="CombinedCertificate" />
-          <ScalarProperty Name="SONCAP" ColumnName="SONCAP" />
-          <ScalarProperty Name="ApprovedById" ColumnName="ApprovedById" />
-          <ScalarProperty Name="DateApproved" ColumnName="DateApproved" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
+    <EntitySetMapping Name="tbl_goodstype">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_goodstype">
+        <MappingFragment StoreEntitySet="tbl_goodstype">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_GoodsType">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_GoodsType">
-        <MappingFragment StoreEntitySet="tbl_GoodsType">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
+    <EntitySetMapping Name="tbl_importation">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_importation">
+        <MappingFragment StoreEntitySet="tbl_importation">
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="servicetypeid" ColumnName="servicetypeid" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="subgoodtypeid" ColumnName="subgoodtypeid" />
+          <ScalarProperty Name="goodstypeid" ColumnName="goodstypeid" />
+          <ScalarProperty Name="shipperid" ColumnName="shipperid" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_Importation">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_Importation">
-        <MappingFragment StoreEntitySet="tbl_Importation">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ShippersId" ColumnName="ShippersId" />
-          <ScalarProperty Name="GoodsTypeId" ColumnName="GoodsTypeId" />
-          <ScalarProperty Name="SubGoodTypeId" ColumnName="SubGoodTypeId" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="ServiceTypeId" ColumnName="ServiceTypeId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-          <ScalarProperty Name="tbl_GoodsTypeId" ColumnName="tbl_GoodsTypeId" />
-          <ScalarProperty Name="tbl_serviceTypeId" ColumnName="tbl_serviceTypeId" />
-          <ScalarProperty Name="tbl_ShipperId" ColumnName="tbl_ShipperId" />
-          <ScalarProperty Name="tbl_statusId" ColumnName="tbl_statusId" />
-          <ScalarProperty Name="tbl_SubGoodsTypeId" ColumnName="tbl_SubGoodsTypeId" />
+    <EntitySetMapping Name="tbl_importation_document">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_importation_document">
+        <MappingFragment StoreEntitySet="tbl_importation_document">
+          <ScalarProperty Name="approvalcomment" ColumnName="approvalcomment" />
+          <ScalarProperty Name="dateapproved" ColumnName="dateapproved" />
+          <ScalarProperty Name="approvedby" ColumnName="approvedby" />
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="documentpath" ColumnName="documentpath" />
+          <ScalarProperty Name="documentname" ColumnName="documentname" />
+          <ScalarProperty Name="importationid" ColumnName="importationid" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_ImportationDocument">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_ImportationDocument">
-        <MappingFragment StoreEntitySet="tbl_ImportationDocument">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ImportationId" ColumnName="ImportationId" />
-          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
-          <ScalarProperty Name="DcoumentPath" ColumnName="DcoumentPath" />
-          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-          <ScalarProperty Name="Approvedby" ColumnName="Approvedby" />
-          <ScalarProperty Name="DateApproved" ColumnName="DateApproved" />
-          <ScalarProperty Name="ApprovalComment" ColumnName="ApprovalComment" />
-          <ScalarProperty Name="tbl_ImportationId" ColumnName="tbl_ImportationId" />
-          <ScalarProperty Name="tbl_statusId" ColumnName="tbl_statusId" />
-          <ScalarProperty Name="tbl_userId" ColumnName="tbl_userId" />
+    <EntitySetMapping Name="tbl_kyc">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_kyc">
+        <MappingFragment StoreEntitySet="tbl_kyc">
+          <ScalarProperty Name="dateapproved" ColumnName="dateapproved" />
+          <ScalarProperty Name="approvalcomment" ColumnName="approvalcomment" />
+          <ScalarProperty Name="approvedby" ColumnName="approvedby" />
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="taxclearancecertificate" ColumnName="taxclearancecertificate" />
+          <ScalarProperty Name="auditedfinancialstatement" ColumnName="auditedfinancialstatement" />
+          <ScalarProperty Name="validbusinesslicense" ColumnName="validbusinesslicense" />
+          <ScalarProperty Name="powerofattorneygranted" ColumnName="powerofattorneygranted" />
+          <ScalarProperty Name="articlesofassociation" ColumnName="articlesofassociation" />
+          <ScalarProperty Name="memorandomofassociation" ColumnName="memorandomofassociation" />
+          <ScalarProperty Name="certificateofincorporation" ColumnName="certificateofincorporation" />
+          <ScalarProperty Name="registeredid" ColumnName="registeredid" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_KYC">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_KYC">
-        <MappingFragment StoreEntitySet="tbl_KYC">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="RegisteredId" ColumnName="RegisteredId" />
-          <ScalarProperty Name="CertificateOfIncorporation" ColumnName="CertificateOfIncorporation" />
-          <ScalarProperty Name="MemorandomOfAssociation" ColumnName="MemorandomOfAssociation" />
-          <ScalarProperty Name="ArticlesOfAssociation" ColumnName="ArticlesOfAssociation" />
-          <ScalarProperty Name="PowerOfAttorneyGranted" ColumnName="PowerOfAttorneyGranted" />
-          <ScalarProperty Name="ValidBusinessLicense" ColumnName="ValidBusinessLicense" />
-          <ScalarProperty Name="AuditedFinancialStatement" ColumnName="AuditedFinancialStatement" />
-          <ScalarProperty Name="TaxClearanceCertificate" ColumnName="TaxClearanceCertificate" />
-          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-          <ScalarProperty Name="Approvedby" ColumnName="Approvedby" />
-          <ScalarProperty Name="ApprovalComment" ColumnName="ApprovalComment" />
-          <ScalarProperty Name="DateApproved" ColumnName="DateApproved" />
-          <ScalarProperty Name="tbl_RegisteredId" ColumnName="tbl_RegisteredId" />
-          <ScalarProperty Name="tbl_statusId" ColumnName="tbl_statusId" />
-          <ScalarProperty Name="tbl_userId" ColumnName="tbl_userId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tbl_Registered">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_Registered">
-        <MappingFragment StoreEntitySet="tbl_Registered">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="CompanyLocation" ColumnName="CompanyLocation" />
-          <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
-          <ScalarProperty Name="CompanyLogo" ColumnName="CompanyLogo" />
-          <ScalarProperty Name="PostAddress" ColumnName="PostAddress" />
-          <ScalarProperty Name="WorkingDays" ColumnName="WorkingDays" />
-          <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
-          <ScalarProperty Name="BankName" ColumnName="BankName" />
-          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
-          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
-          <ScalarProperty Name="DateApproved" ColumnName="DateApproved" />
-          <ScalarProperty Name="ApprovalComment" ColumnName="ApprovalComment" />
-          <ScalarProperty Name="tbl_serviceTypeId" ColumnName="tbl_serviceTypeId" />
-          <ScalarProperty Name="tbl_statusId" ColumnName="tbl_statusId" />
-          <ScalarProperty Name="tbl_userId" ColumnName="tbl_userId" />
+    <EntitySetMapping Name="tbl_registered">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_registered">
+        <MappingFragment StoreEntitySet="tbl_registered">
+          <ScalarProperty Name="approvalcomment" ColumnName="approvalcomment" />
+          <ScalarProperty Name="dateapproved" ColumnName="dateapproved" />
+          <ScalarProperty Name="approvedby" ColumnName="approvedby" />
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="accountnumber" ColumnName="accountnumber" />
+          <ScalarProperty Name="bankname" ColumnName="bankname" />
+          <ScalarProperty Name="workinghours" ColumnName="workinghours" />
+          <ScalarProperty Name="workingdays" ColumnName="workingdays" />
+          <ScalarProperty Name="postaddress" ColumnName="postaddress" />
+          <ScalarProperty Name="companylogo" ColumnName="companylogo" />
+          <ScalarProperty Name="companyaddress" ColumnName="companyaddress" />
+          <ScalarProperty Name="companylocation" ColumnName="companylocation" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="serviceid" ColumnName="serviceid" />
+          <ScalarProperty Name="companyname" ColumnName="companyname" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbl_role">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_role">
         <MappingFragment StoreEntitySet="tbl_role">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="datecreated" ColumnName="datecreated" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_serviceType">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_serviceType">
-        <MappingFragment StoreEntitySet="tbl_serviceType">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Service" ColumnName="Service" />
-          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-          <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tbl_Shipper">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_Shipper">
-        <MappingFragment StoreEntitySet="tbl_Shipper">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="TIN" ColumnName="TIN" />
-          <ScalarProperty Name="TINPassword" ColumnName="TINPassword" />
-          <ScalarProperty Name="Location" ColumnName="Location" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
-          <ScalarProperty Name="DateApproved" ColumnName="DateApproved" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="tbl_statusId" ColumnName="tbl_statusId" />
-          <ScalarProperty Name="tbl_userId" ColumnName="tbl_userId" />
+    <EntitySetMapping Name="tbl_servicetype">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_servicetype">
+        <MappingFragment StoreEntitySet="tbl_servicetype">
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="isdeleted" ColumnName="isdeleted" />
+          <ScalarProperty Name="service" ColumnName="service" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tbl_status">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_status">
         <MappingFragment StoreEntitySet="tbl_status">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="is_deleted" ColumnName="is_deleted" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_SubGoodsType">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_SubGoodsType">
-        <MappingFragment StoreEntitySet="tbl_SubGoodsType">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="GoodsTypeId" ColumnName="GoodsTypeId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="tbl_GoodsTypeId" ColumnName="tbl_GoodsTypeId" />
+    <EntitySetMapping Name="tbl_subgoodstype">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_subgoodstype">
+        <MappingFragment StoreEntitySet="tbl_subgoodstype">
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="goodstypeid" ColumnName="goodstypeid" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_user">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_user">
-        <MappingFragment StoreEntitySet="tbl_user">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+    <EntitySetMapping Name="tbl_users">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_users">
+        <MappingFragment StoreEntitySet="tbl_users">
+          <ScalarProperty Name="authcode" ColumnName="authcode" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="roleid" ColumnName="roleid" />
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+          <ScalarProperty Name="middlename" ColumnName="middlename" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
           <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="tbl_roleId" ColumnName="tbl_roleId" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="AuthCode" ColumnName="AuthCode" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_shipper">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_shipper">
+        <MappingFragment StoreEntitySet="tbl_shipper">
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="accountnumber" ColumnName="accountnumber" />
+          <ScalarProperty Name="bankname" ColumnName="bankname" />
+          <ScalarProperty Name="workinghours" ColumnName="workinghours" />
+          <ScalarProperty Name="workingdays" ColumnName="workingdays" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="approvedby" ColumnName="approvedby" />
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="tinpassword" ColumnName="tinpassword" />
+          <ScalarProperty Name="tin" ColumnName="tin" />
+          <ScalarProperty Name="companyname" ColumnName="companyname" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

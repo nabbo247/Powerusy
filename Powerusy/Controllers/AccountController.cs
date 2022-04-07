@@ -42,9 +42,9 @@ namespace Powerusy.Controllers
                 return View(vm);
             }
             Session["userid"] = vm.Entity.username;// vm.UserId;
-            Session["fname"] = vm.Entity.FirstName;
-            Session["Email"] = vm.Entity.Email;
-            Session["Role"] = vm.Entity.RoleID;
+            Session["fname"] = vm.Entity.firstname;
+            Session["Email"] = vm.Entity.email;
+            Session["Role"] = vm.Entity.roleid;
             if (vm.IsValid)
             {
                 TempData["Msg"] = vm.Msg;

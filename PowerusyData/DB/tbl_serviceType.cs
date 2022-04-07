@@ -12,23 +12,11 @@ namespace PowerusyData.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_serviceType
+    public partial class tbl_servicetype
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_serviceType()
-        {
-            this.tbl_Importation = new HashSet<tbl_Importation>();
-            this.tbl_Registered = new HashSet<tbl_Registered>();
-        }
-    
-        public int Id { get; set; }
-        public string Service { get; set; }
-        public Nullable<System.DateTime> DateAdded { get; set; }
-        public Nullable<bool> isDeleted { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Importation> tbl_Importation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_Registered> tbl_Registered { get; set; }
+        public int id { get; set; }
+        public string service { get; set; }
+        public Nullable<bool> isdeleted { get; set; }
+        public Nullable<System.DateTimeOffset> dateadded { get; set; }
     }
 }

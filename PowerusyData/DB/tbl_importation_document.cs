@@ -12,9 +12,16 @@ namespace PowerusyData.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class C__EFMigrationsHistory
+    public partial class tbl_importation_document
     {
-        public string MigrationId { get; set; }
-        public string ProductVersion { get; set; }
+        public int id { get; set; }
+        public string importationid { get; set; }
+        public string documentname { get; set; }
+        public string documentpath { get; set; }
+        public Nullable<System.DateTimeOffset> dateadded { get; set; }
+        public Nullable<int> statusid { get; set; }
+        public string approvedby { get; set; }
+        public string dateapproved { get; set; }
+        public string approvalcomment { get; set; }
     }
 }

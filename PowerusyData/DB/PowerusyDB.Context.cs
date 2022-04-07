@@ -25,19 +25,18 @@ namespace PowerusyData.DB
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__EFMigrationsHistory> C__EFMigrationsHistory { get; set; }
-        public virtual DbSet<tbl_AuditLog> tbl_AuditLog { get; set; }
-        public virtual DbSet<tbl_Clearing> tbl_Clearing { get; set; }
-        public virtual DbSet<tbl_GoodsType> tbl_GoodsType { get; set; }
-        public virtual DbSet<tbl_Importation> tbl_Importation { get; set; }
-        public virtual DbSet<tbl_ImportationDocument> tbl_ImportationDocument { get; set; }
-        public virtual DbSet<tbl_KYC> tbl_KYC { get; set; }
-        public virtual DbSet<tbl_Registered> tbl_Registered { get; set; }
+        public virtual DbSet<tbl_auditlog> tbl_auditlog { get; set; }
+        public virtual DbSet<tbl_clearing> tbl_clearing { get; set; }
+        public virtual DbSet<tbl_goodstype> tbl_goodstype { get; set; }
+        public virtual DbSet<tbl_importation> tbl_importation { get; set; }
+        public virtual DbSet<tbl_importation_document> tbl_importation_document { get; set; }
+        public virtual DbSet<tbl_kyc> tbl_kyc { get; set; }
+        public virtual DbSet<tbl_registered> tbl_registered { get; set; }
         public virtual DbSet<tbl_role> tbl_role { get; set; }
-        public virtual DbSet<tbl_serviceType> tbl_serviceType { get; set; }
-        public virtual DbSet<tbl_Shipper> tbl_Shipper { get; set; }
+        public virtual DbSet<tbl_servicetype> tbl_servicetype { get; set; }
         public virtual DbSet<tbl_status> tbl_status { get; set; }
-        public virtual DbSet<tbl_SubGoodsType> tbl_SubGoodsType { get; set; }
-        public virtual DbSet<tbl_user> tbl_user { get; set; }
+        public virtual DbSet<tbl_subgoodstype> tbl_subgoodstype { get; set; }
+        public virtual DbSet<tbl_users> tbl_users { get; set; }
+        public virtual DbSet<tbl_shipper> tbl_shipper { get; set; }
     }
 }

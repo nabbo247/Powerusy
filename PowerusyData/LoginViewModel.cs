@@ -17,30 +17,30 @@ namespace PowerusyData
           : base()
         {
             // Initialize other variables
-            UsrReq = new tbl_user();
-            UsrLst = new List<tbl_user>();
+            UsrReq = new tbl_users();
+            UsrLst = new List<tbl_users>();
             List = new List<SelectList>();
-            SearchEntity = new tbl_user();
-            Entity = new tbl_user();
+            SearchEntity = new tbl_users();
+            Entity = new tbl_users();
             ValidationErrors = new List<KeyValuePair<string, string>>();
         }
         public string ActionTypeId { get; set; }
         public IPagedList PageList { get; set; }
         public int pageSize { get; set; }
         public int pageNumber { get; set; }
-        public tbl_user UsrReq { get; set; }
+        public tbl_users UsrReq { get; set; }
         public string ConfirmPassword { get; set; }
         public List<SelectList> List { set; get; }
-        public List<tbl_user> UsrLst { get; set; }
-        public tbl_user SearchEntity { get; set; }
-        public tbl_user Entity { get; set; }
+        public List<tbl_users> UsrLst { get; set; }
+        public tbl_users SearchEntity { get; set; }
+        public tbl_users Entity { get; set; }
         public HttpPostedFileBase uploadedImage { get; set; }
         public bool EbizApproval { get; set; }
         protected override void Init()
         {
-            UsrLst = new List<tbl_user>();
-            SearchEntity = new tbl_user();
-            Entity = new tbl_user();
+            UsrLst = new List<tbl_users>();
+            SearchEntity = new tbl_users();
+            Entity = new tbl_users();
             List = new List<SelectList>();
             GetDropDown();
             base.Init();
@@ -65,14 +65,14 @@ namespace PowerusyData
                         {
                             Gadget ency = new Gadget();
                             //string ssss = ency.dekrypt("3H0h8gr44jrBbJ3SXaQdSQ==");
-                            string passwd = ency.enkrypt(Entity.Password);
+                            string passwd = ency.enkrypt(Entity.password);
 
                             using (var db = new powerusyDBCoreEntities())
                             {
-                                var rs = (from info in db.tbl_user
+                                var rs = (from info in db.tbl_users
                                           where info.username == Entity.username 
                                           select info).FirstOrDefault();
-                                if (rs != null && rs.Password == passwd)
+                                if (rs != null && rs.password == passwd)
                                 {
                                     IsValid = true;
                                     Entity = rs;
@@ -102,9 +102,9 @@ namespace PowerusyData
         {
             IsValid = true;
             // Initialize Entity Object
-            Entity = new tbl_user();
-            Entity.Email = string.Empty;
-            Entity.FirstName = string.Empty;
+            Entity = new tbl_users();
+            Entity.email = string.Empty;
+            Entity.firstname = string.Empty;
             //Entity.Price = 0;
             base.Add();
         }
@@ -139,9 +139,9 @@ namespace PowerusyData
         protected override void Delete()
         {
             // Create new entity
-            Entity = new tbl_user();
+            Entity = new tbl_users();
             // Get primary key from EventArgument
-            Entity.Id = Convert.ToInt32(EventArgument);
+            Entity.id = Convert.ToInt32(EventArgument);
             //EventArgument.Trim();
             // Convert.ToInt32(EventArgument);
             // Call data layer to delete record
@@ -153,7 +153,7 @@ namespace PowerusyData
 
         protected override void ResetSearch()
         {
-            SearchEntity = new tbl_user();
+            SearchEntity = new tbl_users();
             base.ResetSearch();
         }
 
@@ -163,13 +163,13 @@ namespace PowerusyData
             base.Get();
         }
 
-        public List<tbl_user> Get(tbl_user entity)
+        public List<tbl_users> Get(tbl_users entity)
         {
-            List<tbl_user> ret = new List<tbl_user>();
+            List<tbl_users> ret = new List<tbl_users>();
             // TODO: Add your own data access method here
             ret = CreateData();
             // Do any searching
-            if (!string.IsNullOrEmpty(entity.FirstName))
+            if (!string.IsNullOrEmpty(entity.firstname))
             {
                 //using (var db = new powerusyDBCoreEntities())
                 //{
@@ -177,26 +177,26 @@ namespace PowerusyData
 
                 //}
                 ret = ret.FindAll(
-                  p => p.FirstName.ToLower().
-                        StartsWith(entity.FirstName.ToLower().Trim(),
+                  p => p.firstname.ToLower().
+                        StartsWith(entity.firstname.ToLower().Trim(),
                                   StringComparison.CurrentCultureIgnoreCase));
             }
             return ret;
         }
 
-        public tbl_user Get(int ReqID)
+        public tbl_users Get(int ReqID)
         {
-            List<tbl_user> ret =
-              new List<tbl_user>();
-            tbl_user entity = null;
+            List<tbl_users> ret =
+              new List<tbl_users>();
+            tbl_users entity = null;
             // TODO: Add data access method here
 
             ret = CreateData();
 
-            UsrReq.Id = ReqID;
+            UsrReq.id = ReqID;
             UsrReq = GetPOSData();
             if (ReqID > 0)
-                ret = ret.Where(x => x.Id == ReqID).ToList();
+                ret = ret.Where(x => x.id == ReqID).ToList();
 
             GetDropDown();
             // Find the specific product
@@ -205,7 +205,7 @@ namespace PowerusyData
             return ret[0] == null ? null : ret[0];
         }
 
-        public bool Update(tbl_user entity)
+        public bool Update(tbl_users entity)
         {
             bool ret = false;
             ret = Validate(entity);
@@ -217,7 +217,7 @@ namespace PowerusyData
 
                 using (var db = new powerusyDBCoreEntities())
                 {
-                    var rs = (from info in db.tbl_user where info.Id == UsrReq.Id select info).FirstOrDefault();
+                    var rs = (from info in db.tbl_users where info.id == UsrReq.id select info).FirstOrDefault();
                     //rs.TermOwnerCode = TextBox6.Text;
 
                     db.Entry(rs).State = EntityState.Modified;
@@ -228,7 +228,7 @@ namespace PowerusyData
             return ret;
         }
 
-        public bool Delete(tbl_user entity)
+        public bool Delete(tbl_users entity)
         {
             using (var db = new powerusyDBCoreEntities())
             {
@@ -238,45 +238,45 @@ namespace PowerusyData
             return true;
         }
 
-        public bool Validate(tbl_user entity)
+        public bool Validate(tbl_users entity)
         {
             ValidationErrors.Clear();
-            if (string.IsNullOrEmpty(entity.FirstName))
+            if (string.IsNullOrEmpty(entity.firstname))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your FirstName."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.LastName))
+            if (string.IsNullOrEmpty(entity.lastname))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your LastName."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.Email))
+            if (string.IsNullOrEmpty(entity.email))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your Email."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.PhoneNumber))
+            if (string.IsNullOrEmpty(entity.phonenumber))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your PhoneNumber."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.Password))
+            if (string.IsNullOrEmpty(entity.password))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your Password."));
                 IsValid = false;
             }
-            if (!string.IsNullOrEmpty(entity.Password) && ConfirmPassword.Trim() != entity.Password)
+            if (!string.IsNullOrEmpty(entity.password) && ConfirmPassword.Trim() != entity.password)
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
@@ -286,11 +286,11 @@ namespace PowerusyData
             //TODO
             return (ValidationErrors.Count == 0);
         }
-        public bool ValidateUsr(tbl_user entity)
+        public bool ValidateUsr(tbl_users entity)
         {
             ValidationErrors.Clear();
             
-            if (string.IsNullOrEmpty(entity.username) || string.IsNullOrEmpty(entity.Password))
+            if (string.IsNullOrEmpty(entity.username) || string.IsNullOrEmpty(entity.password))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
@@ -301,7 +301,7 @@ namespace PowerusyData
             //TODO
             return (ValidationErrors.Count == 0);
         }
-        public bool Insert(tbl_user entity)
+        public bool Insert(tbl_users entity)
         {
             bool ret = false;
             ret = Validate(entity);
@@ -311,12 +311,12 @@ namespace PowerusyData
                 {
                     Gadget ency = new Gadget();
                     //string ssss = ency.dekrypt("3H0h8gr44jrBbJ3SXaQdSQ==");
-                    string passwd = ency.enkrypt(entity.Password);
-                    entity.Password = passwd;
-                    entity.username = entity.Email;
-                    entity.RoleID = 1;
+                    string passwd = ency.enkrypt(entity.password);
+                    entity.password = passwd;
+                    entity.username = entity.email;
+                    entity.roleid = 1;
                     //TODO: Create Insert Code here
-                    db.tbl_user.Add(entity);
+                    db.tbl_users.Add(entity);
                     db.SaveChanges();
                     IsValid = true;
                     string op = "New profile created Successfully";
@@ -336,7 +336,7 @@ namespace PowerusyData
             //Entity.BusOcpCode
             using (var db = new powerusyDBCoreEntities())
             {
-                var sta = (from s in db.tbl_role where s.Id > 1 orderby s.Status ascending select s.Name).Distinct();
+                var sta = (from s in db.tbl_role where s.id > 1 orderby s.status ascending select s.name).Distinct();
                 foreach (var bn in sta)
                 {
                     SelectList item = new SelectList();
@@ -346,14 +346,14 @@ namespace PowerusyData
                 }
             }
         }
-        protected tbl_user GetPOSData()
+        protected tbl_users GetPOSData()
         {
-            tbl_user ret = new tbl_user();
+            tbl_users ret = new tbl_users();
             try
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
-                    ret = db.tbl_user.Where(x => x.Id == UsrReq.Id).SingleOrDefault();
+                    ret = db.tbl_users.Where(x => x.id == UsrReq.id).SingleOrDefault();
                 }
             }
             catch (Exception ex)
@@ -368,15 +368,15 @@ namespace PowerusyData
             }
             return ret;
         }
-        protected List<tbl_user> CreateData()
+        protected List<tbl_users> CreateData()
         {
-            List<tbl_user> ret = new List<tbl_user>();
+            List<tbl_users> ret = new List<tbl_users>();
             try
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
                     //PosReq_vws
-                    ret = db.tbl_user.ToList();
+                    ret = db.tbl_users.ToList();
                     if (pageNumber > 0 && pageSize > 0)
                     {
                         PageList = ret.ToPagedList(pageNumber, pageSize);

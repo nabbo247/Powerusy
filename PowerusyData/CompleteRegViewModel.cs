@@ -18,30 +18,30 @@ namespace PowerusyData
           : base()
         {
             // Initialize other variables
-            UsrReq = new tbl_Registered();
-            UsrLst = new List<tbl_Registered>();
+            UsrReq = new tbl_shipper();
+            UsrLst = new List<tbl_shipper>();
             List = new List<SelectList>();
-            SearchEntity = new tbl_Registered();
-            Entity = new tbl_Registered();
+            SearchEntity = new tbl_shipper();
+            Entity = new tbl_shipper();
             ValidationErrors = new List<KeyValuePair<string, string>>();
         }
         public string ActionTypeId { get; set; }
         public IPagedList PageList { get; set; }
         public int pageSize { get; set; }
         public int pageNumber { get; set; }
-        public tbl_Registered UsrReq { get; set; }
+        public tbl_shipper UsrReq { get; set; }
         public string ConfirmPassword { get; set; }
         public List<SelectList> List { set; get; }
-        public List<tbl_Registered> UsrLst { get; set; }
-        public tbl_Registered SearchEntity { get; set; }
-        public tbl_Registered Entity { get; set; }
+        public List<tbl_shipper> UsrLst { get; set; }
+        public tbl_shipper SearchEntity { get; set; }
+        public tbl_shipper Entity { get; set; }
         public HttpPostedFileBase uploadedImage { get; set; }
         public bool EbizApproval { get; set; }
         protected override void Init()
         {
-            UsrLst = new List<tbl_Registered>();
-            SearchEntity = new tbl_Registered();
-            Entity = new tbl_Registered();
+            UsrLst = new List<tbl_shipper>();
+            SearchEntity = new tbl_shipper();
+            Entity = new tbl_shipper();
             List = new List<SelectList>();
             GetDropDown();
             base.Init();
@@ -63,8 +63,8 @@ namespace PowerusyData
         {
             IsValid = true;
             // Initialize Entity Object
-            Entity = new tbl_Registered();
-            Entity.CompanyName = string.Empty;
+            Entity = new tbl_shipper();
+            Entity.companyname = string.Empty;
             //Entity. = string.Empty;
             //Entity.Price = 0;
             base.Add();
@@ -100,9 +100,9 @@ namespace PowerusyData
         protected override void Delete()
         {
             // Create new entity
-            Entity = new tbl_Registered();
+            Entity = new tbl_shipper();
             // Get primary key from EventArgument
-            Entity.Id = Convert.ToInt32(EventArgument);
+            Entity.id = Convert.ToInt32(EventArgument);
             //EventArgument.Trim();
             // Convert.ToInt32(EventArgument);
             // Call data layer to delete record
@@ -114,7 +114,7 @@ namespace PowerusyData
 
         protected override void ResetSearch()
         {
-            SearchEntity = new tbl_Registered();
+            SearchEntity = new tbl_shipper();
             base.ResetSearch();
         }
 
@@ -124,40 +124,40 @@ namespace PowerusyData
             base.Get();
         }
 
-        public List<tbl_Registered> Get(tbl_Registered entity)
+        public List<tbl_shipper> Get(tbl_shipper entity)
         {
-            List<tbl_Registered> ret = new List<tbl_Registered>();
+            List<tbl_shipper> ret = new List<tbl_shipper>();
             // TODO: Add your own data access method here
             ret = CreateData();
             // Do any searching
-            if (!string.IsNullOrEmpty(entity.CompanyName))
+            if (!string.IsNullOrEmpty(entity.companyname))
             {
                 //using (var db = new powerusyDBCoreEntities())
                 //{
-                //    ret = db.tbl_Registered.Where(x => x.AcctName.Contains(entity.AcctName)).OrderBy(x => x.ReqDate).ToList();
+                //    ret = db.tbl_shipper.Where(x => x.AcctName.Contains(entity.AcctName)).OrderBy(x => x.ReqDate).ToList();
 
                 //}
                 ret = ret.FindAll(
-                  p => p.CompanyName.ToLower().
-                        StartsWith(entity.CompanyName.ToLower().Trim(),
+                  p => p.companyname.ToLower().
+                        StartsWith(entity.companyname.ToLower().Trim(),
                                   StringComparison.CurrentCultureIgnoreCase));
             }
             return ret;
         }
 
-        public tbl_Registered Get(int ReqID)
+        public tbl_shipper Get(int ReqID)
         {
-            List<tbl_Registered> ret =
-              new List<tbl_Registered>();
-            tbl_Registered entity = null;
+            List<tbl_shipper> ret =
+              new List<tbl_shipper>();
+            tbl_shipper entity = null;
             // TODO: Add data access method here
 
             ret = CreateData();
 
-            UsrReq.Id = ReqID;
+            UsrReq.id = ReqID;
             UsrReq = GetPOSData();
             if (ReqID > 0)
-                ret = ret.Where(x => x.Id == ReqID).ToList();
+                ret = ret.Where(x => x.id == ReqID).ToList();
 
             GetDropDown();
             // Find the specific product
@@ -166,7 +166,7 @@ namespace PowerusyData
             return ret[0] == null ? null : ret[0];
         }
 
-        public bool Update(tbl_Registered entity)
+        public bool Update(tbl_shipper entity)
         {
             bool ret = false;
             ret = Validate(entity);
@@ -178,7 +178,7 @@ namespace PowerusyData
 
                 using (var db = new powerusyDBCoreEntities())
                 {
-                    var rs = (from info in db.tbl_Registered where info.Id == UsrReq.Id select info).FirstOrDefault();
+                    var rs = (from info in db.tbl_shipper where info.id == UsrReq.id select info).FirstOrDefault();
                     //rs.TermOwnerCode = TextBox6.Text;
 
                     db.Entry(rs).State = EntityState.Modified;
@@ -189,7 +189,7 @@ namespace PowerusyData
             return ret;
         }
 
-        public bool Delete(tbl_Registered entity)
+        public bool Delete(tbl_shipper entity)
         {
             using (var db = new powerusyDBCoreEntities())
             {
@@ -199,66 +199,60 @@ namespace PowerusyData
             return true;
         }
 
-        public bool Validate(tbl_Registered entity)
+        public bool Validate(tbl_shipper entity)
         {
             ValidationErrors.Clear();
-            if (string.IsNullOrEmpty(entity.AccountNumber))
+            if (string.IsNullOrEmpty(entity.location))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your AccountNumber."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.BankName))
+            if (string.IsNullOrEmpty(entity.bankname))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your BankName."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.CompanyAddress))
+            if (string.IsNullOrEmpty(entity.address))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your CompanyAddress."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.CompanyLocation))
-            {
-                ValidationErrors.Add(new
-                  KeyValuePair<string, string>("Comment",
-                  "Please Supply your CompanyLocation."));
-                IsValid = false;
-            }
-            if (string.IsNullOrEmpty(entity.CompanyName))
+            
+            if (string.IsNullOrEmpty(entity.companyname))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your CompanyName."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.Description))
-            {
-                ValidationErrors.Add(new
-                  KeyValuePair<string, string>("Comment",
-                  "Please Supply your Description."));
-                IsValid = false;
-            }
-            if (string.IsNullOrEmpty(entity.PostAddress))
-            {
-                ValidationErrors.Add(new
-                  KeyValuePair<string, string>("Comment",
-                  "Please Supply your PostAddress."));
-                IsValid = false;
-            }
-            if (string.IsNullOrEmpty(entity.WorkingDays))
+            //if (string.IsNullOrEmpty(entity.description))
+            //{
+            //    ValidationErrors.Add(new
+            //      KeyValuePair<string, string>("Comment",
+            //      "Please Supply your Description."));
+            //    IsValid = false;
+            //}
+            //if (string.IsNullOrEmpty(entity.PostAddress))
+            //{
+            //    ValidationErrors.Add(new
+            //      KeyValuePair<string, string>("Comment",
+            //      "Please Supply your PostAddress."));
+            //    IsValid = false;
+            //}
+            if (string.IsNullOrEmpty(entity.workingdays))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your WorkingDays."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.WorkingHours))
+            if (string.IsNullOrEmpty(entity.workinghours))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
@@ -269,7 +263,7 @@ namespace PowerusyData
             return (ValidationErrors.Count == 0);
         }
 
-        public bool Insert(tbl_Registered entity)
+        public bool Insert(tbl_shipper entity)
         {
             bool ret = false;
             ret = Validate(entity);
@@ -284,7 +278,7 @@ namespace PowerusyData
                     //entity.username = entity.Email;
                     //entity.RoleID = 1;
                     //TODO: Create Insert Code here
-                    db.tbl_Registered.Add(entity);
+                    db.tbl_shipper.Add(entity);
                     db.SaveChanges();
                     IsValid = true;
                     string op = "New profile created Successfully";
@@ -304,7 +298,7 @@ namespace PowerusyData
             //Entity.BusOcpCode
             using (var db = new powerusyDBCoreEntities())
             {
-                var sta = (from s in db.tbl_role where s.Id > 1 orderby s.Status ascending select s.Name).Distinct();
+                var sta = (from s in db.tbl_servicetype where s.isdeleted ==false orderby s.id ascending select s.service).Distinct();
                 foreach (var bn in sta)
                 {
                     SelectList item = new SelectList();
@@ -314,14 +308,14 @@ namespace PowerusyData
                 }
             }
         }
-        protected tbl_Registered GetPOSData()
+        protected tbl_shipper GetPOSData()
         {
-            tbl_Registered ret = new tbl_Registered();
+            tbl_shipper ret = new tbl_shipper();
             try
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
-                    ret = db.tbl_Registered.Where(x => x.Id == UsrReq.Id).SingleOrDefault();
+                    ret = db.tbl_shipper.Where(x => x.id == UsrReq.id).SingleOrDefault();
                 }
             }
             catch (Exception ex)
@@ -336,15 +330,15 @@ namespace PowerusyData
             }
             return ret;
         }
-        protected List<tbl_Registered> CreateData()
+        protected List<tbl_shipper> CreateData()
         {
-            List<tbl_Registered> ret = new List<tbl_Registered>();
+            List<tbl_shipper> ret = new List<tbl_shipper>();
             try
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
                     //PosReq_vws
-                    ret = db.tbl_Registered.ToList();
+                    ret = db.tbl_shipper.ToList();
                     if (pageNumber > 0 && pageSize > 0)
                     {
                         PageList = ret.ToPagedList(pageNumber, pageSize);

@@ -12,40 +12,25 @@ namespace PowerusyData.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_Registered
+    public partial class tbl_registered
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_Registered()
-        {
-            this.tbl_KYC = new HashSet<tbl_KYC>();
-        }
-    
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public string CompanyName { get; set; }
-        public Nullable<int> ServiceId { get; set; }
-        public string Description { get; set; }
-        public string CompanyLocation { get; set; }
-        public string CompanyAddress { get; set; }
-        public string CompanyLogo { get; set; }
-        public string PostAddress { get; set; }
-        public string WorkingDays { get; set; }
-        public string WorkingHours { get; set; }
-        public string BankName { get; set; }
-        public string AccountNumber { get; set; }
-        public Nullable<System.DateTime> DateAdded { get; set; }
-        public Nullable<int> StatusId { get; set; }
-        public Nullable<int> ApprovedBy { get; set; }
-        public Nullable<System.DateTime> DateApproved { get; set; }
-        public string ApprovalComment { get; set; }
-        public Nullable<int> tbl_serviceTypeId { get; set; }
-        public Nullable<int> tbl_statusId { get; set; }
-        public Nullable<int> tbl_userId { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_KYC> tbl_KYC { get; set; }
-        public virtual tbl_serviceType tbl_serviceType { get; set; }
-        public virtual tbl_status tbl_status { get; set; }
-        public virtual tbl_user tbl_user { get; set; }
+        public int id { get; set; }
+        public Nullable<int> userid { get; set; }
+        public string companyname { get; set; }
+        public Nullable<int> serviceid { get; set; }
+        public string description { get; set; }
+        public string companylocation { get; set; }
+        public string companyaddress { get; set; }
+        public string companylogo { get; set; }
+        public string postaddress { get; set; }
+        public string workingdays { get; set; }
+        public string workinghours { get; set; }
+        public string bankname { get; set; }
+        public string accountnumber { get; set; }
+        public Nullable<System.DateTimeOffset> dateadded { get; set; }
+        public Nullable<int> statusid { get; set; }
+        public Nullable<int> approvedby { get; set; }
+        public Nullable<System.DateTimeOffset> dateapproved { get; set; }
+        public string approvalcomment { get; set; }
     }
 }

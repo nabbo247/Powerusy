@@ -14,19 +14,10 @@ namespace PowerusyData.DB
     
     public partial class tbl_role
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbl_role()
-        {
-            this.tbl_user = new HashSet<tbl_user>();
-        }
-    
-        public int Id { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
-        public Nullable<System.DateTime> DateCreated { get; set; }
-        public Nullable<bool> Status { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_user> tbl_user { get; set; }
+        public int id { get; set; }
+        public string code { get; set; }
+        public string name { get; set; }
+        public Nullable<System.DateTimeOffset> datecreated { get; set; }
+        public Nullable<bool> status { get; set; }
     }
 }
