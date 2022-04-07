@@ -32,7 +32,8 @@ namespace Powerusy.Controllers
             vm.IsDetailAreaVisible = true;
             vm.IsSearchAreaVisible = false;
             vm.IsListAreaVisible = false;
-            vm.EventCommand = "save";
+            //vm.EventArgument = "";
+            //vm.EventCommand = "save";
             vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
             //vm.UserId = Session["userid"].ToString();

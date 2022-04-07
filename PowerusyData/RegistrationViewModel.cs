@@ -55,7 +55,7 @@ namespace PowerusyData
             //    case "newcommand":
             //        break;
             //}
-             GetDropDown();
+            GetDropDown();
             base.HandleRequest();
         }
 
