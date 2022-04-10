@@ -21,21 +21,44 @@ namespace PowerusyData
             UsrReq = new tbl_shipper();
             UsrLst = new List<tbl_shipper>();
             List = new List<SelectList>();
+            CountryList = new List<SelectList>();
             SearchEntity = new tbl_shipper();
             Entity = new tbl_shipper();
             ValidationErrors = new List<KeyValuePair<string, string>>();
         }
         public string ActionTypeId { get; set; }
+        public string SeletedCountry { get; set; }
         public IPagedList PageList { get; set; }
         public int pageSize { get; set; }
         public int pageNumber { get; set; }
         public tbl_shipper UsrReq { get; set; }
         public string ConfirmPassword { get; set; }
         public List<SelectList> List { set; get; }
+        public List<SelectList> CountryList { set; get; }
+        public bool IsStep1 { get; set; }
+        public bool IsStep2 { get; set; }
+        public bool IsStep3 { get; set; }
         public List<tbl_shipper> UsrLst { get; set; }
         public tbl_shipper SearchEntity { get; set; }
         public tbl_shipper Entity { get; set; }
         public HttpPostedFileBase uploadedImage { get; set; }
+        public HttpPostedFileBase CertificateOfIncorporation { get; set; }
+        public HttpPostedFileBase MemorandumofAssociation { get; set; }
+        public HttpPostedFileBase ArticlesofAssociation { get; set; }
+        public HttpPostedFileBase PowerofAttorney { get; set; }
+        public HttpPostedFileBase Validbusinesslicense { get; set; }
+        public HttpPostedFileBase Auditedfinancial { get; set; }
+        public HttpPostedFileBase Taxclearance { get; set; }
+        public HttpPostedFileBase Others { get; set; }
+        public string uploadedImageName { get; set; }
+        public string CertificateOfIncorporationName { get; set; }
+        public string MemorandumofAssociationName { get; set; }
+        public string ArticlesofAssociationName { get; set; }
+        public string PowerofAttorneyName { get; set; }
+        public string ValidbusinesslicenseName { get; set; }
+        public string AuditedfinancialName { get; set; }
+        public string TaxclearanceName { get; set; }
+        public string OthersName { get; set; }
         public bool EbizApproval { get; set; }
         protected override void Init()
         {
@@ -43,6 +66,7 @@ namespace PowerusyData
             SearchEntity = new tbl_shipper();
             Entity = new tbl_shipper();
             List = new List<SelectList>();
+            CountryList = new List<SelectList>();
             GetDropDown();
             base.Init();
         }
@@ -50,11 +74,26 @@ namespace PowerusyData
         public override void HandleRequest()
         {
             //// This is an example of adding on a new command
-            //switch (EventCommand.ToLower())
-            //{
-            //    case "newcommand":
-            //        break;
-            //}
+            switch (EventCommand.ToLower())
+            {
+                case "continue":
+                    if (Validate(Entity))
+                    {
+                        IsStep2 = true;
+                        IsStep1 = false;
+                    }
+                    else
+                    {
+                        IsStep2 = false;
+                        IsStep1 = true;
+                    }
+                    break;
+                case "previous":
+                        IsStep2 = false;
+                        IsStep1 = true;
+                    break;
+                    
+            }
             GetDropDown();
             base.HandleRequest();
         }
@@ -175,7 +214,6 @@ namespace PowerusyData
 
             if (ret)
             {
-
                 using (var db = new powerusyDBCoreEntities())
                 {
                     var rs = (from info in db.tbl_shipper where info.id == UsrReq.id select info).FirstOrDefault();
@@ -202,11 +240,11 @@ namespace PowerusyData
         public bool Validate(tbl_shipper entity)
         {
             ValidationErrors.Clear();
-            if (string.IsNullOrEmpty(entity.location))
+            if (string.IsNullOrEmpty(SeletedCountry))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
-                  "Please Supply your AccountNumber."));
+                  "Please Supply country."));
                 IsValid = false;
             }
             if (string.IsNullOrEmpty(entity.bankname))
@@ -231,20 +269,14 @@ namespace PowerusyData
                   "Please Supply your CompanyName."));
                 IsValid = false;
             }
-            //if (string.IsNullOrEmpty(entity.description))
-            //{
-            //    ValidationErrors.Add(new
-            //      KeyValuePair<string, string>("Comment",
-            //      "Please Supply your Description."));
-            //    IsValid = false;
-            //}
-            //if (string.IsNullOrEmpty(entity.PostAddress))
-            //{
-            //    ValidationErrors.Add(new
-            //      KeyValuePair<string, string>("Comment",
-            //      "Please Supply your PostAddress."));
-            //    IsValid = false;
-            //}
+            if (string.IsNullOrEmpty(entity.description))
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply Description of the commercial activity."));
+                IsValid = false;
+            }
+
             if (string.IsNullOrEmpty(entity.workingdays))
             {
                 ValidationErrors.Add(new
@@ -271,18 +303,93 @@ namespace PowerusyData
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
-                    //Gadget ency = new Gadget();
-                    ////string ssss = ency.dekrypt("3H0h8gr44jrBbJ3SXaQdSQ==");
-                    //string passwd = ency.enkrypt(entity.Password);
-                    //entity.Password = passwd;
-                    //entity.username = entity.Email;
-                    //entity.RoleID = 1;
-                    //TODO: Create Insert Code here
+                    var UserIDI = db.tbl_users.Where(x => x.username == UserId).FirstOrDefault();
+                    //UserIDI.id = 1;
+                    int userID = UserIDI.id;
+                    tbl_attachment at = new tbl_attachment();
+                    at.date = DateTime.Now;
+                    at.fileName = "Certificate Of Incorporation";
+                    string path = CertificateOfIncorporationName;
+                    at.path = path;
+                    at.status = 1;
+                    at.userid = userID;
+                    db.tbl_attachment.Add(at);
+
+                    at = new tbl_attachment();
+                    at.date = DateTime.Now;
+                    at.status = 1;
+                    at.userid = userID;
+                    at.fileName = "Memorandum of Association";
+                    path =  MemorandumofAssociationName;
+                    at.path = path;
+                    db.tbl_attachment.Add(at);
+
+                    at = new tbl_attachment();
+                    at.date = DateTime.Now;
+                    at.status = 1;
+                    at.userid = userID;
+                    at.fileName = "Articles of Association";
+                    path = ArticlesofAssociationName;
+                    at.path = path;
+                    db.tbl_attachment.Add(at);
+
+                    at = new tbl_attachment();
+                    at.date = DateTime.Now;
+                    at.status = 1;
+                    at.userid = userID;
+                    at.fileName = "Power of Attorney";
+                    path = PowerofAttorneyName;
+                    at.path = path;
+                    db.tbl_attachment.Add(at);
+
+                    at = new tbl_attachment();
+                    at.date = DateTime.Now;
+                    at.status = 1;
+                    at.userid = userID;
+                    at.fileName = "Valid business license";
+                    path = ValidbusinesslicenseName;
+                    at.path = path;
+                    db.tbl_attachment.Add(at);
+
+                    at = new tbl_attachment();
+                    at.date = DateTime.Now;
+                    at.status = 1;
+                    at.userid = userID;
+                    at.fileName = "Audited financial";
+                    path =  AuditedfinancialName;
+                    at.path = path;
+                    db.tbl_attachment.Add(at);
+
+                    at = new tbl_attachment();
+                    at.date = DateTime.Now;
+                    at.status = 1;
+                    at.userid = userID;
+                    at.fileName = "Tax clearance";
+                    path = TaxclearanceName;
+                    at.path = path;
+                    db.tbl_attachment.Add(at);
+                    if (Others!=null && !string.IsNullOrEmpty(Others.FileName))
+                    {
+                        at = new tbl_attachment();
+                        at.date = DateTime.Now;
+                        at.status = 1;
+                        at.userid = userID;
+                        at.fileName = "Others";
+                        path =  OthersName;
+                        at.path = path;
+                        db.tbl_attachment.Add(at);
+                    }
+                    
+                    entity.userid = userID;
+                    entity.location = SeletedCountry;
+                    entity.statusid = 1;
+                    entity.dateadded = DateTime.Now;
                     db.tbl_shipper.Add(entity);
                     db.SaveChanges();
                     IsValid = true;
-                    string op = "New profile created Successfully";
+                    string op = "Registration completed, request is pending verification";
                     Msg = op;
+                    IsStep3 = true;
                 }
             }
             return ret;
@@ -305,6 +412,15 @@ namespace PowerusyData
                     item.Text = bn;
                     item.Value = bn;
                     List.Add(item);
+                }
+
+                var Countrysta = (from s in db.tbl_counntries  select s.CountryName).Distinct();
+                foreach (var bn in Countrysta)
+                {
+                    SelectList item = new SelectList();
+                    item.Text = bn;
+                    item.Value = bn;
+                    CountryList.Add(item);
                 }
             }
         }

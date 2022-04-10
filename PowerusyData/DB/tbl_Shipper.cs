@@ -21,7 +21,7 @@ namespace PowerusyData.DB
         public string tinpassword { get; set; }
         public string location { get; set; }
         public string phonenumber { get; set; }
-        public string statusid { get; set; }
+        public Nullable<int> statusid { get; set; }
         public Nullable<int> approvedby { get; set; }
         public string comment { get; set; }
         public string description { get; set; }
@@ -31,5 +31,7 @@ namespace PowerusyData.DB
         public string accountnumber { get; set; }
         public Nullable<System.DateTime> dateadded { get; set; }
         public string address { get; set; }
+        public string state { get; set; }
+        public string city { get; set; }
     }
 }

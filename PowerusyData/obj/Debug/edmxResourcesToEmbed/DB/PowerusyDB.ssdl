@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="powerusyDBCoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_attachment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fileName" Type="nvarchar" MaxLength="200" />
+    <Property Name="path" Type="nvarchar" MaxLength="500" />
+    <Property Name="status" Type="int" />
+    <Property Name="commnet" Type="nvarchar" MaxLength="50" />
+    <Property Name="date" Type="datetime" />
+    <Property Name="userid" Type="int" />
+  </EntityType>
   <EntityType Name="tbl_auditlog">
     <Key>
       <PropertyRef Name="id" />
@@ -26,6 +38,16 @@
     <Property Name="approvedbyid" Type="nvarchar" MaxLength="255" />
     <Property Name="dateapproved" Type="datetimeoffset" Precision="7" />
     <Property Name="comment" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Powerusydb.dbo.tbl_counntries' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_counntries">
+    <Key>
+      <PropertyRef Name="Country_Code" />
+    </Key>
+    <Property Name="Country_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Brief_desc" Type="nvarchar" MaxLength="50" />
+    <Property Name="CountryName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tbl_goodstype">
     <Key>
@@ -135,7 +157,7 @@
     <Property Name="tinpassword" Type="nvarchar" MaxLength="255" />
     <Property Name="location" Type="nvarchar" MaxLength="255" />
     <Property Name="phonenumber" Type="nvarchar" MaxLength="255" />
-    <Property Name="statusid" Type="nvarchar" MaxLength="255" />
+    <Property Name="statusid" Type="int" />
     <Property Name="approvedby" Type="int" />
     <Property Name="comment" Type="nvarchar" MaxLength="255" />
     <Property Name="description" Type="nvarchar" MaxLength="255" />
@@ -145,6 +167,8 @@
     <Property Name="accountnumber" Type="nvarchar" MaxLength="255" />
     <Property Name="dateadded" Type="datetime" />
     <Property Name="address" Type="nvarchar" MaxLength="500" />
+    <Property Name="state" Type="nvarchar" MaxLength="50" />
+    <Property Name="city" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tbl_status">
     <Key>
@@ -165,6 +189,14 @@
     <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
     <Property Name="statusid" Type="int" />
   </EntityType>
+  <EntityType Name="tbl_uploadDocType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Docname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="tbl_users">
     <Key>
       <PropertyRef Name="id" />
@@ -182,19 +214,101 @@
     <Property Name="password" Type="nvarchar" MaxLength="255" />
     <Property Name="authcode" Type="nvarchar" MaxLength="255" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Shipper">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="firstname" Type="nvarchar" MaxLength="255" />
+    <Property Name="username" Type="nvarchar" MaxLength="255" />
+    <Property Name="lastname" Type="nvarchar" MaxLength="255" />
+    <Property Name="middlename" Type="nvarchar" MaxLength="255" />
+    <Property Name="phonenumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
+    <Property Name="roleid" Type="int" />
+    <Property Name="status" Type="bit" />
+    <Property Name="email" Type="nvarchar" MaxLength="255" />
+    <Property Name="password" Type="nvarchar" MaxLength="255" />
+    <Property Name="authcode" Type="nvarchar" MaxLength="255" />
+    <Property Name="ShipID" Type="int" />
+    <Property Name="userid" Type="int" />
+    <Property Name="companyname" Type="nvarchar" MaxLength="255" />
+    <Property Name="tin" Type="nvarchar" MaxLength="255" />
+    <Property Name="tinpassword" Type="nvarchar" MaxLength="255" />
+    <Property Name="location" Type="nvarchar" MaxLength="255" />
+    <Property Name="ShipPhon" Type="nvarchar" MaxLength="255" />
+    <Property Name="statusid" Type="int" />
+    <Property Name="approvedby" Type="int" />
+    <Property Name="comment" Type="nvarchar" MaxLength="255" />
+    <Property Name="description" Type="nvarchar" MaxLength="255" />
+    <Property Name="workingdays" Type="nvarchar" MaxLength="255" />
+    <Property Name="workinghours" Type="nvarchar" MaxLength="255" />
+    <Property Name="bankname" Type="nvarchar" MaxLength="255" />
+    <Property Name="accountnumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="ShipDate" Type="datetime" />
+    <Property Name="address" Type="nvarchar" MaxLength="500" />
+    <Property Name="state" Type="nvarchar" MaxLength="50" />
+    <Property Name="city" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityContainer Name="powerusyDBCoreModelStoreContainer">
-    <EntitySet Name="tbl_auditlog" EntityType="Self.tbl_auditlog" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_importation_document" EntityType="Self.tbl_importation_document" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_kyc" EntityType="Self.tbl_kyc" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_registered" EntityType="Self.tbl_registered" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_servicetype" EntityType="Self.tbl_servicetype" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_shipper" EntityType="Self.tbl_shipper" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_status" EntityType="Self.tbl_status" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_subgoodstype" EntityType="Self.tbl_subgoodstype" Schema="posweusr" store:Type="Tables" />
-    <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="posweusr" store:Type="Tables" />
+    <EntitySet Name="tbl_attachment" EntityType="Self.tbl_attachment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_auditlog" EntityType="Self.tbl_auditlog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_importation_document" EntityType="Self.tbl_importation_document" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_kyc" EntityType="Self.tbl_kyc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_registered" EntityType="Self.tbl_registered" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_servicetype" EntityType="Self.tbl_servicetype" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_shipper" EntityType="Self.tbl_shipper" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_status" EntityType="Self.tbl_status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_subgoodstype" EntityType="Self.tbl_subgoodstype" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_uploadDocType" EntityType="Self.tbl_uploadDocType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_counntries" EntityType="Self.tbl_counntries" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_counntries].[Country_Code] AS [Country_Code], 
+    [tbl_counntries].[Brief_desc] AS [Brief_desc], 
+    [tbl_counntries].[CountryName] AS [CountryName]
+    FROM [dbo].[tbl_counntries] AS [tbl_counntries]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Shipper" EntityType="Self.View_Shipper" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Shipper].[id] AS [id], 
+    [View_Shipper].[firstname] AS [firstname], 
+    [View_Shipper].[username] AS [username], 
+    [View_Shipper].[lastname] AS [lastname], 
+    [View_Shipper].[middlename] AS [middlename], 
+    [View_Shipper].[phonenumber] AS [phonenumber], 
+    [View_Shipper].[dateadded] AS [dateadded], 
+    [View_Shipper].[roleid] AS [roleid], 
+    [View_Shipper].[status] AS [status], 
+    [View_Shipper].[email] AS [email], 
+    [View_Shipper].[password] AS [password], 
+    [View_Shipper].[authcode] AS [authcode], 
+    [View_Shipper].[ShipID] AS [ShipID], 
+    [View_Shipper].[userid] AS [userid], 
+    [View_Shipper].[companyname] AS [companyname], 
+    [View_Shipper].[tin] AS [tin], 
+    [View_Shipper].[tinpassword] AS [tinpassword], 
+    [View_Shipper].[location] AS [location], 
+    [View_Shipper].[ShipPhon] AS [ShipPhon], 
+    [View_Shipper].[statusid] AS [statusid], 
+    [View_Shipper].[approvedby] AS [approvedby], 
+    [View_Shipper].[comment] AS [comment], 
+    [View_Shipper].[description] AS [description], 
+    [View_Shipper].[workingdays] AS [workingdays], 
+    [View_Shipper].[workinghours] AS [workinghours], 
+    [View_Shipper].[bankname] AS [bankname], 
+    [View_Shipper].[accountnumber] AS [accountnumber], 
+    [View_Shipper].[ShipDate] AS [ShipDate], 
+    [View_Shipper].[address] AS [address], 
+    [View_Shipper].[state] AS [state], 
+    [View_Shipper].[city] AS [city]
+    FROM [dbo].[View_Shipper] AS [View_Shipper]</DefiningQuery>
+    </EntitySet>
   </EntityContainer>
 </Schema>

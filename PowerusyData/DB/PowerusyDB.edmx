@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="powerusyDBCoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_attachment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fileName" Type="nvarchar" MaxLength="200" />
+          <Property Name="path" Type="nvarchar" MaxLength="500" />
+          <Property Name="status" Type="int" />
+          <Property Name="commnet" Type="nvarchar" MaxLength="50" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="userid" Type="int" />
+        </EntityType>
         <EntityType Name="tbl_auditlog">
           <Key>
             <PropertyRef Name="id" />
@@ -31,6 +43,16 @@
           <Property Name="approvedbyid" Type="nvarchar" MaxLength="255" />
           <Property Name="dateapproved" Type="datetimeoffset" Precision="7" />
           <Property Name="comment" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Powerusydb.dbo.tbl_counntries' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_counntries">
+          <Key>
+            <PropertyRef Name="Country_Code" />
+          </Key>
+          <Property Name="Country_Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brief_desc" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbl_goodstype">
           <Key>
@@ -140,7 +162,7 @@
           <Property Name="tinpassword" Type="nvarchar" MaxLength="255" />
           <Property Name="location" Type="nvarchar" MaxLength="255" />
           <Property Name="phonenumber" Type="nvarchar" MaxLength="255" />
-          <Property Name="statusid" Type="nvarchar" MaxLength="255" />
+          <Property Name="statusid" Type="int" />
           <Property Name="approvedby" Type="int" />
           <Property Name="comment" Type="nvarchar" MaxLength="255" />
           <Property Name="description" Type="nvarchar" MaxLength="255" />
@@ -150,6 +172,8 @@
           <Property Name="accountnumber" Type="nvarchar" MaxLength="255" />
           <Property Name="dateadded" Type="datetime" />
           <Property Name="address" Type="nvarchar" MaxLength="500" />
+          <Property Name="state" Type="nvarchar" MaxLength="50" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbl_status">
           <Key>
@@ -170,6 +194,14 @@
           <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
           <Property Name="statusid" Type="int" />
         </EntityType>
+        <EntityType Name="tbl_uploadDocType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Docname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tbl_users">
           <Key>
             <PropertyRef Name="id" />
@@ -187,20 +219,102 @@
           <Property Name="password" Type="nvarchar" MaxLength="255" />
           <Property Name="authcode" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Shipper">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="255" />
+          <Property Name="username" Type="nvarchar" MaxLength="255" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="255" />
+          <Property Name="middlename" Type="nvarchar" MaxLength="255" />
+          <Property Name="phonenumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="dateadded" Type="datetimeoffset" Precision="7" />
+          <Property Name="roleid" Type="int" />
+          <Property Name="status" Type="bit" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" />
+          <Property Name="authcode" Type="nvarchar" MaxLength="255" />
+          <Property Name="ShipID" Type="int" />
+          <Property Name="userid" Type="int" />
+          <Property Name="companyname" Type="nvarchar" MaxLength="255" />
+          <Property Name="tin" Type="nvarchar" MaxLength="255" />
+          <Property Name="tinpassword" Type="nvarchar" MaxLength="255" />
+          <Property Name="location" Type="nvarchar" MaxLength="255" />
+          <Property Name="ShipPhon" Type="nvarchar" MaxLength="255" />
+          <Property Name="statusid" Type="int" />
+          <Property Name="approvedby" Type="int" />
+          <Property Name="comment" Type="nvarchar" MaxLength="255" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+          <Property Name="workingdays" Type="nvarchar" MaxLength="255" />
+          <Property Name="workinghours" Type="nvarchar" MaxLength="255" />
+          <Property Name="bankname" Type="nvarchar" MaxLength="255" />
+          <Property Name="accountnumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="ShipDate" Type="datetime" />
+          <Property Name="address" Type="nvarchar" MaxLength="500" />
+          <Property Name="state" Type="nvarchar" MaxLength="50" />
+          <Property Name="city" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="powerusyDBCoreModelStoreContainer">
-          <EntitySet Name="tbl_auditlog" EntityType="Self.tbl_auditlog" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_importation_document" EntityType="Self.tbl_importation_document" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_kyc" EntityType="Self.tbl_kyc" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_registered" EntityType="Self.tbl_registered" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_servicetype" EntityType="Self.tbl_servicetype" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_shipper" EntityType="Self.tbl_shipper" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_status" EntityType="Self.tbl_status" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_subgoodstype" EntityType="Self.tbl_subgoodstype" Schema="posweusr" store:Type="Tables" />
-          <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="posweusr" store:Type="Tables" />
+          <EntitySet Name="tbl_attachment" EntityType="Self.tbl_attachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_auditlog" EntityType="Self.tbl_auditlog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_importation_document" EntityType="Self.tbl_importation_document" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_kyc" EntityType="Self.tbl_kyc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_registered" EntityType="Self.tbl_registered" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_servicetype" EntityType="Self.tbl_servicetype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_shipper" EntityType="Self.tbl_shipper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_status" EntityType="Self.tbl_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_subgoodstype" EntityType="Self.tbl_subgoodstype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_uploadDocType" EntityType="Self.tbl_uploadDocType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_users" EntityType="Self.tbl_users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_counntries" EntityType="Self.tbl_counntries" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_counntries].[Country_Code] AS [Country_Code], 
+    [tbl_counntries].[Brief_desc] AS [Brief_desc], 
+    [tbl_counntries].[CountryName] AS [CountryName]
+    FROM [dbo].[tbl_counntries] AS [tbl_counntries]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_Shipper" EntityType="Self.View_Shipper" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Shipper].[id] AS [id], 
+    [View_Shipper].[firstname] AS [firstname], 
+    [View_Shipper].[username] AS [username], 
+    [View_Shipper].[lastname] AS [lastname], 
+    [View_Shipper].[middlename] AS [middlename], 
+    [View_Shipper].[phonenumber] AS [phonenumber], 
+    [View_Shipper].[dateadded] AS [dateadded], 
+    [View_Shipper].[roleid] AS [roleid], 
+    [View_Shipper].[status] AS [status], 
+    [View_Shipper].[email] AS [email], 
+    [View_Shipper].[password] AS [password], 
+    [View_Shipper].[authcode] AS [authcode], 
+    [View_Shipper].[ShipID] AS [ShipID], 
+    [View_Shipper].[userid] AS [userid], 
+    [View_Shipper].[companyname] AS [companyname], 
+    [View_Shipper].[tin] AS [tin], 
+    [View_Shipper].[tinpassword] AS [tinpassword], 
+    [View_Shipper].[location] AS [location], 
+    [View_Shipper].[ShipPhon] AS [ShipPhon], 
+    [View_Shipper].[statusid] AS [statusid], 
+    [View_Shipper].[approvedby] AS [approvedby], 
+    [View_Shipper].[comment] AS [comment], 
+    [View_Shipper].[description] AS [description], 
+    [View_Shipper].[workingdays] AS [workingdays], 
+    [View_Shipper].[workinghours] AS [workinghours], 
+    [View_Shipper].[bankname] AS [bankname], 
+    [View_Shipper].[accountnumber] AS [accountnumber], 
+    [View_Shipper].[ShipDate] AS [ShipDate], 
+    [View_Shipper].[address] AS [address], 
+    [View_Shipper].[state] AS [state], 
+    [View_Shipper].[city] AS [city]
+    FROM [dbo].[View_Shipper] AS [View_Shipper]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -219,7 +333,11 @@
           <EntitySet Name="tbl_status" EntityType="powerusyDBCoreModel.tbl_status" />
           <EntitySet Name="tbl_subgoodstype" EntityType="powerusyDBCoreModel.tbl_subgoodstype" />
           <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
+          <EntitySet Name="tbl_counntries" EntityType="powerusyDBCoreModel.tbl_counntries" />
           <EntitySet Name="tbl_shipper" EntityType="powerusyDBCoreModel.tbl_shipper" />
+          <EntitySet Name="View_Shipper" EntityType="powerusyDBCoreModel.View_Shipper" />
+          <EntitySet Name="tbl_attachment" EntityType="powerusyDBCoreModel.tbl_attachment" />
+          <EntitySet Name="tbl_uploadDocType" EntityType="powerusyDBCoreModel.tbl_uploadDocType" />
         </EntityContainer>
         <EntityType Name="tbl_auditlog">
           <Key>
@@ -381,6 +499,14 @@
           <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="tbl_counntries">
+          <Key>
+            <PropertyRef Name="Country_Code" />
+          </Key>
+          <Property Name="Country_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brief_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="tbl_shipper">
           <Key>
             <PropertyRef Name="id" />
@@ -392,7 +518,7 @@
           <Property Name="tinpassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="statusid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="statusid" Type="Int32" />
           <Property Name="approvedby" Type="Int32" />
           <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -402,6 +528,64 @@
           <Property Name="accountnumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="dateadded" Type="DateTime" Precision="3" />
           <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="View_Shipper">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="middlename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+          <Property Name="roleid" Type="Int32" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ShipID" Type="Int32" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="companyname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tinpassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ShipPhon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="statusid" Type="Int32" />
+          <Property Name="approvedby" Type="Int32" />
+          <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="workingdays" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="workinghours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="bankname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="accountnumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ShipDate" Type="DateTime" Precision="3" />
+          <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_attachment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="path" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="commnet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="userid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_uploadDocType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Docname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -581,9 +765,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbl_counntries">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_counntries">
+              <MappingFragment StoreEntitySet="tbl_counntries">
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="Brief_desc" ColumnName="Brief_desc" />
+                <ScalarProperty Name="Country_Code" ColumnName="Country_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbl_shipper">
             <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_shipper">
               <MappingFragment StoreEntitySet="tbl_shipper">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="dateadded" ColumnName="dateadded" />
                 <ScalarProperty Name="accountnumber" ColumnName="accountnumber" />
@@ -600,6 +795,65 @@
                 <ScalarProperty Name="tin" ColumnName="tin" />
                 <ScalarProperty Name="companyname" ColumnName="companyname" />
                 <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Shipper">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.View_Shipper">
+              <MappingFragment StoreEntitySet="View_Shipper">
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+                <ScalarProperty Name="accountnumber" ColumnName="accountnumber" />
+                <ScalarProperty Name="bankname" ColumnName="bankname" />
+                <ScalarProperty Name="workinghours" ColumnName="workinghours" />
+                <ScalarProperty Name="workingdays" ColumnName="workingdays" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="approvedby" ColumnName="approvedby" />
+                <ScalarProperty Name="statusid" ColumnName="statusid" />
+                <ScalarProperty Name="ShipPhon" ColumnName="ShipPhon" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="tinpassword" ColumnName="tinpassword" />
+                <ScalarProperty Name="tin" ColumnName="tin" />
+                <ScalarProperty Name="companyname" ColumnName="companyname" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="ShipID" ColumnName="ShipID" />
+                <ScalarProperty Name="authcode" ColumnName="authcode" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+                <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_attachment">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_attachment">
+              <MappingFragment StoreEntitySet="tbl_attachment">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="commnet" ColumnName="commnet" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="path" ColumnName="path" />
+                <ScalarProperty Name="fileName" ColumnName="fileName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_uploadDocType">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_uploadDocType">
+              <MappingFragment StoreEntitySet="tbl_uploadDocType">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Docname" ColumnName="Docname" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

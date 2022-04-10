@@ -53,9 +53,11 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompanyRegViewModel.cs" />
     <Compile Include="CompleteRegViewModel.cs" />
     <Compile Include="DB\PowerusyDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -80,10 +83,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PowerusyDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DB\tbl_attachment.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\tbl_auditlog.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_clearing.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tbl_counntries.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_goodstype.cs">
@@ -116,7 +125,13 @@
     <Compile Include="DB\tbl_subgoodstype.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\tbl_uploadDocType.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\tbl_users.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\View_Shipper.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="IndexViewModel.cs" />
@@ -124,8 +139,19 @@
     <Compile Include="ModelCommon\MenuModels.cs" />
     <Compile Include="ModelCommon\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="RegistrationViewModel.cs" />
     <Compile Include="Utility.cs" />
+    <Compile Include="VerificationShipperViewModel.cs" />
+    <Compile Include="Web References\webmail\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -137,6 +163,15 @@
       <DependentUpon>PowerusyDB.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\webmail\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\webmail\WebService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -153,6 +188,25 @@
       <DependentUpon>PowerusyDB.edmx</DependentUpon>
       <LastGenOutput>PowerusyDB.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://webapi.powerusy.com/Controllers/WebService.asmx%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\webmail\</RelPath>
+      <UpdateFromURL>http://webapi.powerusy.com/Controllers/WebService.asmx%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>PowerusyData_webmail_WebService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

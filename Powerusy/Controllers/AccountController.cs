@@ -51,7 +51,24 @@ namespace Powerusy.Controllers
                 // NOTE: Must clear the model state in order to bind
                 //       the @Html helpers to the new model values
                 ModelState.Clear();
-                return RedirectToAction("CompleteReg", "Shipper");
+                if(vm.Entity.roleid==1)
+                    return RedirectToAction("VerificationShipper", "Shipper");
+                if (vm.Entity.roleid == 2)
+                    return RedirectToAction("CompleteReg", "Shipper");
+                //switch (vm.Entity.StatusId)
+                //{
+                //    case 2:
+                //        RedirectToAction("Index", "Company");
+                //        break;
+                //    case 3:
+                //        return RedirectToAction("IndexShipper", "Company"); //Shipper/Importer FreightForwarder
+                //        break;
+                //    case 4:
+                //        return RedirectToAction("FreightForwarder", "Company"); //Shipper/Importer 
+                //        break;
+                //    default:
+                //        return RedirectToAction("IndexForwarder", "Company");
+                //}
             }
             else
             {

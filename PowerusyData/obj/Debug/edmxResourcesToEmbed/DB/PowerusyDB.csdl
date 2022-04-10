@@ -13,7 +13,11 @@
     <EntitySet Name="tbl_status" EntityType="powerusyDBCoreModel.tbl_status" />
     <EntitySet Name="tbl_subgoodstype" EntityType="powerusyDBCoreModel.tbl_subgoodstype" />
     <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
+    <EntitySet Name="tbl_counntries" EntityType="powerusyDBCoreModel.tbl_counntries" />
     <EntitySet Name="tbl_shipper" EntityType="powerusyDBCoreModel.tbl_shipper" />
+    <EntitySet Name="View_Shipper" EntityType="powerusyDBCoreModel.View_Shipper" />
+    <EntitySet Name="tbl_attachment" EntityType="powerusyDBCoreModel.tbl_attachment" />
+    <EntitySet Name="tbl_uploadDocType" EntityType="powerusyDBCoreModel.tbl_uploadDocType" />
   </EntityContainer>
   <EntityType Name="tbl_auditlog">
     <Key>
@@ -175,6 +179,14 @@
     <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="tbl_counntries">
+    <Key>
+      <PropertyRef Name="Country_Code" />
+    </Key>
+    <Property Name="Country_Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Brief_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="tbl_shipper">
     <Key>
       <PropertyRef Name="id" />
@@ -186,7 +198,7 @@
     <Property Name="tinpassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="statusid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="statusid" Type="Int32" />
     <Property Name="approvedby" Type="Int32" />
     <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -196,5 +208,63 @@
     <Property Name="accountnumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="dateadded" Type="DateTime" Precision="3" />
     <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="View_Shipper">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="middlename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+    <Property Name="roleid" Type="Int32" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ShipID" Type="Int32" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="companyname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tinpassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ShipPhon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="statusid" Type="Int32" />
+    <Property Name="approvedby" Type="Int32" />
+    <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="workingdays" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="workinghours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="bankname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="accountnumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ShipDate" Type="DateTime" Precision="3" />
+    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_attachment">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="path" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="commnet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="3" />
+    <Property Name="userid" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_uploadDocType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Docname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

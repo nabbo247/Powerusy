@@ -173,9 +173,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tbl_counntries">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_counntries">
+        <MappingFragment StoreEntitySet="tbl_counntries">
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="Brief_desc" ColumnName="Brief_desc" />
+          <ScalarProperty Name="Country_Code" ColumnName="Country_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tbl_shipper">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_shipper">
         <MappingFragment StoreEntitySet="tbl_shipper">
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state" ColumnName="state" />
           <ScalarProperty Name="address" ColumnName="address" />
           <ScalarProperty Name="dateadded" ColumnName="dateadded" />
           <ScalarProperty Name="accountnumber" ColumnName="accountnumber" />
@@ -192,6 +203,65 @@
           <ScalarProperty Name="tin" ColumnName="tin" />
           <ScalarProperty Name="companyname" ColumnName="companyname" />
           <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_Shipper">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.View_Shipper">
+        <MappingFragment StoreEntitySet="View_Shipper">
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+          <ScalarProperty Name="accountnumber" ColumnName="accountnumber" />
+          <ScalarProperty Name="bankname" ColumnName="bankname" />
+          <ScalarProperty Name="workinghours" ColumnName="workinghours" />
+          <ScalarProperty Name="workingdays" ColumnName="workingdays" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="approvedby" ColumnName="approvedby" />
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="ShipPhon" ColumnName="ShipPhon" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="tinpassword" ColumnName="tinpassword" />
+          <ScalarProperty Name="tin" ColumnName="tin" />
+          <ScalarProperty Name="companyname" ColumnName="companyname" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="ShipID" ColumnName="ShipID" />
+          <ScalarProperty Name="authcode" ColumnName="authcode" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="roleid" ColumnName="roleid" />
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+          <ScalarProperty Name="middlename" ColumnName="middlename" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_attachment">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_attachment">
+        <MappingFragment StoreEntitySet="tbl_attachment">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="commnet" ColumnName="commnet" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="path" ColumnName="path" />
+          <ScalarProperty Name="fileName" ColumnName="fileName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_uploadDocType">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_uploadDocType">
+        <MappingFragment StoreEntitySet="tbl_uploadDocType">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Docname" ColumnName="Docname" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -12,6 +12,8 @@ using Tj.Cryptography;
 using ExcelLibrary.Office.Excel;
 using System.Data;
 using System.IO;
+using System.Threading.Tasks;
+
 namespace PowerusyData
 {
     public class Utility
@@ -476,6 +478,45 @@ namespace PowerusyData
     }
     public class Gadget
     {
+        public async Task<bool> sendMail(string destinationEmail, string sourceEmail, string ccEmailAddress, string body, string subject, string filename)
+        {
+           
+            bool status = false;
+            try
+            {
+                //MailMessage msgMail = new MailMessage();
+                webmail.WebService ser = new webmail.WebService();
+                status = ser.sendMail(destinationEmail, sourceEmail, ccEmailAddress, body, subject, filename);
+                
+                //int sf = Convert.ToInt16(status);
+                //_PensionDB.tbl_smsEmail.Add(new tbl_smsEmail
+                //{
+                //    Date = DateTime.Now,
+                //    Message = "email",
+                //    Response = status.ToString(),
+                //    SF = sf,
+                //    Request = destinationEmail + "+" + body
+                //});
+                //var id = _PensionDB.SaveChanges();
+            }
+            catch (Exception smtpExc)
+            {
+                //int sf = Convert.ToInt16(status);
+                //_PensionDB.tbl_smsEmail.Add(new tbl_smsEmail
+                //{
+                //    Date = DateTime.Now,
+                //    Message = "email",
+                //    Response = smtpExc.ToString(),
+                //    SF = sf,
+                //    Request = destinationEmail + "+" + body
+                //});
+                //var id = _PensionDB.SaveChanges();
+                ErrorLog log = new ErrorLog("<smtpExc Error>: " + smtpExc);
+            }
+
+            return status;
+        }
+
         public byte[] convertDataSetToExcel(DataSet ds, string sheetname, string pth)
         {
             Workbook wb = new Workbook();

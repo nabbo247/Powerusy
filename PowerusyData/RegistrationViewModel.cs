@@ -261,16 +261,38 @@ namespace PowerusyData
                     string passwd = ency.enkrypt(entity.password);
                     entity.password = passwd;
                     entity.username = entity.email;
-                    entity.roleid = 1;
+                    entity.roleid = Convert.ToInt32( ActionTypeId);
                     //TODO: Create Insert Code here
                     db.tbl_users.Add(entity);
                     db.SaveChanges();
                     IsValid = true;
                     string op = "New profile created Successfully";
                     Msg = op;
+                    SendMail(entity);
                 }
             }
             return ret;
+        }
+        public async Task<bool> SendMail(tbl_users entity)
+        {
+            string ourmail = System.Configuration.ConfigurationManager.AppSettings["mailsender"];
+            Gadget ency = new Gadget();
+            StringBuilder sb = new StringBuilder();
+            StreamReader sr = new StreamReader(System.Web.HttpContext.Current.Server.MapPath("~/Images/NewUser.htm"));
+            string line = sr.ReadToEnd();
+            sb.Append(line);
+            sb.Replace("{UserName}", entity.username);
+            sb.Replace("{FullName}", entity.firstname);
+            sb.Replace("{email}", entity.email);
+            sb.Replace("{Telephone}", entity.phonenumber);
+            sb.Replace("{date}", DateTime.Now.ToString());
+            string body = sb.ToString();
+            webmail.WebService ser = new webmail.WebService();
+            var status = ser.sendMail(entity.email, ourmail, "", body, "Account Details", "");
+
+            //Task.Run(async () => await ency.sendMail(entity.email, ourmail, "", body, "Account Details", ""));
+            string s = "sd";
+            return true;
         }
         protected void GetDropDown()
         {
@@ -283,12 +305,12 @@ namespace PowerusyData
             //Entity.BusOcpCode
             using (var db = new powerusyDBCoreEntities())
             {
-                var sta = (from s in db.tbl_role where s.id >1 orderby s.status ascending select s.name).Distinct();
+                var sta = (from s in db.tbl_role where s.id >1 orderby s.status ascending select s).Distinct();
                 foreach (var bn in sta)
                 {
                     SelectList item = new SelectList();
-                    item.Text = bn;
-                    item.Value = bn;
+                    item.Text = bn.name;
+                    item.Value = bn.id.ToString();
                     List.Add(item);
                 }
             }
