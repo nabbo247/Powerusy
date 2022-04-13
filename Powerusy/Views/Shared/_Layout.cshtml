@@ -124,13 +124,9 @@
                     <nav class="mainmenu">
                         <ul id="navigation">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>
-                                <a href="#">Product Features</a>
-                                <ul>
-                                    <li>@Html.ActionLink("Import/Export Service", "Import", "Products")</li>
-                                    @*<li>@Html.ActionLink("Export Service", "Export", "Products")</li>*@
-                                </ul>
-                            </li>
+                            <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                            <li>@Html.ActionLink("Product Features", "Import", "Products")</li>
+
                             @if (Session["userid"] != null)
                             {
                                 <li>
@@ -149,18 +145,18 @@
                                 </li>
 
                                 @*
-                                        <li>
-                                        <a href="#">Admin management</a>
-                                        <ul>
-                                            <li>@Html.ActionLink("View", "CompleteReg", "Shipper")</li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">Report and analytics</a>
-                                        <ul>
-                                            <li>@Html.ActionLink("View", "CompleteReg", "Shipper")</li>
-                                        </ul>
-                                    </li>*@
+                <li>
+                <a href="#">Admin management</a>
+                <ul>
+                    <li>@Html.ActionLink("View", "CompleteReg", "Shipper")</li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Report and analytics</a>
+                <ul>
+                    <li>@Html.ActionLink("View", "CompleteReg", "Shipper")</li>
+                </ul>
+            </li>*@
                             }
                             else
                             {
@@ -172,18 +168,16 @@
                                     </ul>
                                 </li>
                             }
-
+                            <li>@Html.ActionLink("Market Info", "MarketInfo", "Account") </li>
+                            <li>@Html.ActionLink("Media", "Media", "Account") </li>
+                            @*<li><a href="#">Media & Publications</a></li>
                             <li><a href="contact.html">Watch Demo</a></li>
-                            <li>
-                                <a href="#">Terms & Conditions</a>
-                                <ul>
-                                    <li>@Html.ActionLink("About Us", "About", "Home")</li>
-                                    @*about.html*@
-                                    <li><a href="#">Media & Publications</a></li>
-                                    @*media.html*@
-                                </ul>
-                            </li>
-                            <li><a href="#">Privacy Policy</a></li>
+        <li>
+            <a href="#">Terms & Conditions</a>
+            <ul>
+            </ul>
+        </li>
+        <li><a href="#">Privacy Policy</a></li>*@
                             <li>@Html.ActionLink("Contuct Us", "Contact", "Home")</li>
                         </ul>
                     </nav>

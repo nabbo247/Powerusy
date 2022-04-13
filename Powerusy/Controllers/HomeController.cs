@@ -19,7 +19,18 @@ namespace Powerusy.Controllers
 
             return View();
         }
+        public ActionResult Media()
+        {
+            ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+        public ActionResult MarketInfo()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
