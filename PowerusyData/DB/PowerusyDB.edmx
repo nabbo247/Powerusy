@@ -28,6 +28,28 @@
           <Property Name="pagevisited" Type="nvarchar" MaxLength="255" />
           <Property Name="dateaccessed" Type="datetimeoffset" Precision="7" />
         </EntityType>
+        <EntityType Name="tbl_bidding">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="category" Type="nvarchar" MaxLength="50" />
+          <Property Name="subcategory" Type="nvarchar" MaxLength="50" />
+          <Property Name="service" Type="nvarchar" MaxLength="50" />
+          <Property Name="Consignee" Type="nvarchar" MaxLength="50" />
+          <Property Name="BookingNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="BLNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="VesselName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PortLoading" Type="nvarchar" MaxLength="50" />
+          <Property Name="PortDischarge" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShippingLines" Type="nvarchar" MaxLength="50" />
+          <Property Name="GoodDescription" Type="nvarchar(max)" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="statusid" Type="int" />
+        </EntityType>
         <EntityType Name="tbl_clearing">
           <Key>
             <PropertyRef Name="id" />
@@ -141,6 +163,13 @@ warning 6002: The table/view 'Powerusydb.dbo.tbl_counntries' does not have a pri
           <Property Name="name" Type="nvarchar" MaxLength="255" />
           <Property Name="datecreated" Type="datetimeoffset" Precision="7" />
           <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_services">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbl_servicetype">
           <Key>
@@ -260,6 +289,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
         <EntityContainer Name="powerusyDBCoreModelStoreContainer">
           <EntitySet Name="tbl_attachment" EntityType="Self.tbl_attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_auditlog" EntityType="Self.tbl_auditlog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_bidding" EntityType="Self.tbl_bidding" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="dbo" store:Type="Tables" />
@@ -267,6 +297,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySet Name="tbl_kyc" EntityType="Self.tbl_kyc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_registered" EntityType="Self.tbl_registered" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_services" EntityType="Self.tbl_services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_servicetype" EntityType="Self.tbl_servicetype" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_shipper" EntityType="Self.tbl_shipper" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_status" EntityType="Self.tbl_status" Schema="dbo" store:Type="Tables" />
@@ -338,6 +369,8 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySet Name="View_Shipper" EntityType="powerusyDBCoreModel.View_Shipper" />
           <EntitySet Name="tbl_attachment" EntityType="powerusyDBCoreModel.tbl_attachment" />
           <EntitySet Name="tbl_uploadDocType" EntityType="powerusyDBCoreModel.tbl_uploadDocType" />
+          <EntitySet Name="tbl_bidding" EntityType="powerusyDBCoreModel.tbl_bidding" />
+          <EntitySet Name="tbl_services" EntityType="powerusyDBCoreModel.tbl_services" />
         </EntityContainer>
         <EntityType Name="tbl_auditlog">
           <Key>
@@ -586,6 +619,35 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Docname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_bidding">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoodsType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="subcategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Consignee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookingNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BLNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VesselName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PortLoading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PortDischarge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShippingLines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GoodDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="statusid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_services">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -854,6 +916,37 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
               <MappingFragment StoreEntitySet="tbl_uploadDocType">
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Docname" ColumnName="Docname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_bidding">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding">
+              <MappingFragment StoreEntitySet="tbl_bidding">
+                <ScalarProperty Name="statusid" ColumnName="statusid" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
+                <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
+                <ScalarProperty Name="PortDischarge" ColumnName="PortDischarge" />
+                <ScalarProperty Name="PortLoading" ColumnName="PortLoading" />
+                <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+                <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
+                <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+                <ScalarProperty Name="Consignee" ColumnName="Consignee" />
+                <ScalarProperty Name="service" ColumnName="service" />
+                <ScalarProperty Name="subcategory" ColumnName="subcategory" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_services">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_services">
+              <MappingFragment StoreEntitySet="tbl_services">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

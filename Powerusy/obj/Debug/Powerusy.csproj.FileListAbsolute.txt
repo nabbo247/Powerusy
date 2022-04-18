@@ -40,17 +40,12 @@ D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Debug\Powerusy.dll
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Debug\Powerusy.pdb
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\PagedList.dll
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\PagedList.Mvc.dll
-D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\PowerusyData.dll
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\EntityFramework.dll
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\PagedList.xml
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\PagedList.Mvc.xml
-D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\PowerusyData.pdb
-D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\PowerusyData.dll.config
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\EntityFramework.xml
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\EntityFramework.SqlServer.dll
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\EntityFramework.SqlServer.xml
-D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\ExcelLibrary.dll
-D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\ClassLibrary1.dll
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\roslyn\csc.exe
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\roslyn\csc.exe.config
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\roslyn\csc.rsp
@@ -90,4 +85,9 @@ D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\roslyn\vbc.exe
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\roslyn\vbc.exe.config
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\roslyn\vbc.rsp
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\roslyn\VBCSCompiler.exe.config
+D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\PowerusyData.dll
+D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\ExcelLibrary.dll
+D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\ClassLibrary1.dll
+D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\PowerusyData.pdb
+D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\PowerusyData.dll.config
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Debug\Powerusy.csproj.AssemblyReference.cache

@@ -42,5 +42,7 @@ namespace PowerusyData.DB
         public virtual DbSet<View_Shipper> View_Shipper { get; set; }
         public virtual DbSet<tbl_attachment> tbl_attachment { get; set; }
         public virtual DbSet<tbl_uploadDocType> tbl_uploadDocType { get; set; }
+        public virtual DbSet<tbl_bidding> tbl_bidding { get; set; }
+        public virtual DbSet<tbl_services> tbl_services { get; set; }
     }
 }

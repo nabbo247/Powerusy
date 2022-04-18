@@ -18,6 +18,8 @@
     <EntitySet Name="View_Shipper" EntityType="powerusyDBCoreModel.View_Shipper" />
     <EntitySet Name="tbl_attachment" EntityType="powerusyDBCoreModel.tbl_attachment" />
     <EntitySet Name="tbl_uploadDocType" EntityType="powerusyDBCoreModel.tbl_uploadDocType" />
+    <EntitySet Name="tbl_bidding" EntityType="powerusyDBCoreModel.tbl_bidding" />
+    <EntitySet Name="tbl_services" EntityType="powerusyDBCoreModel.tbl_services" />
   </EntityContainer>
   <EntityType Name="tbl_auditlog">
     <Key>
@@ -266,5 +268,34 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Docname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_bidding">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GoodsType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="subcategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Consignee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BookingNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BLNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VesselName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PortLoading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PortDischarge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShippingLines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GoodDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="statusid" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_services">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

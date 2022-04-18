@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BiddingViewModel.cs" />
     <Compile Include="CompanyRegViewModel.cs" />
     <Compile Include="CompleteRegViewModel.cs" />
     <Compile Include="DB\PowerusyDB.Context.cs">
@@ -87,6 +88,9 @@
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_auditlog.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tbl_bidding.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_clearing.cs">
@@ -111,6 +115,9 @@
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_role.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tbl_services.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_servicetype.cs">
