@@ -7844,6 +7844,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Bidding\Index.cshtml" />
+    <Content Include="Views\Home\Media.cshtml" />
     <None Include="Web References\webmail\WebService.wsdl" />
   </ItemGroup>
   <ItemGroup>

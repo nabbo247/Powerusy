@@ -69,11 +69,9 @@
             <div class="header-top-area">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 col-lg-8">
-                            <div class="top-contact"> <a href="#"><i class="fa fa-envelope"></i> info@powerusy.com</a> <a href="#"><i class="fa fa-phone"></i> +234 01911 837404</a> <a href="#"><i class="far fa-clock"></i> 9:00AM to 8:00PM</a> </div>
-                        </div>
+                        
                         <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-end">
-                            <div class="top-menu">
+                            @*<div class="top-menu">
                                 @if (Session["userid"] != null)
                                 {
                                     <ul>
@@ -85,21 +83,11 @@
                                 {
                                     <ul>
                                         <li>@Html.ActionLink("Login", "Login", "Account") </li>
-                                        @*<a href="customer-login.html"><i class="fas fa-sign-in-alt"></i> Login</a>*@
                                         <li>@Html.ActionLink("Registration", "Index", "Registration")</li>
                                     </ul>
                                 }
-                            </div>
-                            <div class="language">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="~/assets/images/flag-1.png" alt="" /> EN</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="" title=""><img src="~/assets/images/flag-1.png" alt="" /> EN</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                            </div>*@
+                            
                         </div>
                     </div>
                 </div>
@@ -125,7 +113,7 @@
                         <ul id="navigation">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("About Us", "About", "Home")</li>
-                            <li>@Html.ActionLink("Product Features", "Import", "Products")</li>
+                            <li>@Html.ActionLink("Services", "Import", "Products")</li>
 
                             @if (Session["userid"] != null)
                             {
@@ -143,7 +131,6 @@
                                         <li>@Html.ActionLink("Deactivate", "Status", "Registration")</li>
                                     </ul>
                                 </li>
-
                                 @*
                 <li>
                 <a href="#">Admin management</a>
@@ -160,16 +147,16 @@
                             }
                             else
                             {
-                                <li>
-                                    <a href="#">Login</a>
-                                    <ul>
-                                        <li>@Html.ActionLink("Customer Login", "Login", "Account") </li>
-                                        <li>@Html.ActionLink("Customer Register", "Index", "Registration")</li>
-                                    </ul>
-                                </li>
+                                @*<li>
+                <a href="#">Login</a>
+                <ul>
+                    <li>@Html.ActionLink("Customer Login", "Login", "Account") </li>
+                    <li>@Html.ActionLink("Customer Register", "Index", "Registration")</li>
+                </ul>
+            </li>*@
                             }
                             <li>@Html.ActionLink("Market Info", "MarketInfo", "Account") </li>
-                            <li>@Html.ActionLink("Media", "Media", "Account") </li>
+                            <li>@Html.ActionLink("Media", "Media", "Home")</li>
                             @*<li><a href="#">Media & Publications</a></li>
                             <li><a href="contact.html">Watch Demo</a></li>
         <li>
@@ -178,7 +165,7 @@
             </ul>
         </li>
         <li><a href="#">Privacy Policy</a></li>*@
-                            <li>@Html.ActionLink("Contuct Us", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
                         </ul>
                     </nav>
                     <!-- Main menu end -->
@@ -196,7 +183,7 @@
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="footer-wiz">
                                 <h3 class="footer-logo"><img src="~/assets/images/footer-logo.png" alt="footer logo" /></h3>
-                                <p>It was popularised in the 1960s with the release of Letraset sheets containing.</p>
+                                <p>TPOWERUSY, as a logistics and supply chain solutions provider, "is committed to providing fast, reliable and secure services that constantly exceed our customers' expectations"</p>
                                 <ul class="footer-contact">
                                     <li><i class="fa fa-phone"></i> +234 3600 0000</li>
                                     <li><i class="fa fa-envelope"></i>info@powerusy.com</li>
@@ -209,18 +196,18 @@
                             <div class="footer-wiz footer-menu">
                                 <h3 class="footer-wiz-title">Quick Links</h3>
                                 <ul>
-                                    <li><a href="about.html">Company Overview</a></li>
-                                    <li><a href="services.html">Our Services</a></li>
-                                    <li><a href="media.html">Media &amp; Publications</a></li>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="freight-gallery.html">Freight Gallery</a></li>
-                                    <li><a href="image-gallery.html">Image Gallery</a></li>
+                                    <li><a href="#">Company Overview</a></li>
+                                    <li><a href="#">Our Services</a></li>
+                                    <li><a href="#">Media &amp; Publications</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">Freight Gallery</a></li>
+                                    <li><a href="#">Image Gallery</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
-                            <div class="footer-wiz footer-menu">
+                            @*<div class="footer-wiz footer-menu">
                                 <h3 class="footer-wiz-title">Usefull Links</h3>
                                 <ul>
                                     <li><a href="create-shipping.html">Create Shipping</a></li>
@@ -230,7 +217,7 @@
                                     <li><a href="button-accordion.html">Button Accordion</a></li>
                                     <li><a href="tracking-result.html">Tracking Result</a></li>
                                 </ul>
-                            </div>
+                            </div>*@
                         </div>
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="footer-wiz">
