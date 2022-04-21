@@ -37,7 +37,11 @@ namespace Powerusy.Controllers
 
             return View();
         }
-        
-        
+        public ActionResult Careers()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
 }
