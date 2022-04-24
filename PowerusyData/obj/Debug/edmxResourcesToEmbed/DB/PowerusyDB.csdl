@@ -12,14 +12,14 @@
     <EntitySet Name="tbl_servicetype" EntityType="powerusyDBCoreModel.tbl_servicetype" />
     <EntitySet Name="tbl_status" EntityType="powerusyDBCoreModel.tbl_status" />
     <EntitySet Name="tbl_subgoodstype" EntityType="powerusyDBCoreModel.tbl_subgoodstype" />
-    <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
     <EntitySet Name="tbl_counntries" EntityType="powerusyDBCoreModel.tbl_counntries" />
     <EntitySet Name="tbl_shipper" EntityType="powerusyDBCoreModel.tbl_shipper" />
     <EntitySet Name="View_Shipper" EntityType="powerusyDBCoreModel.View_Shipper" />
     <EntitySet Name="tbl_attachment" EntityType="powerusyDBCoreModel.tbl_attachment" />
     <EntitySet Name="tbl_uploadDocType" EntityType="powerusyDBCoreModel.tbl_uploadDocType" />
-    <EntitySet Name="tbl_bidding" EntityType="powerusyDBCoreModel.tbl_bidding" />
     <EntitySet Name="tbl_services" EntityType="powerusyDBCoreModel.tbl_services" />
+    <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
+    <EntitySet Name="tbl_bidding" EntityType="powerusyDBCoreModel.tbl_bidding" />
   </EntityContainer>
   <EntityType Name="tbl_auditlog">
     <Key>
@@ -164,23 +164,6 @@
     <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
     <Property Name="statusid" Type="Int32" />
   </EntityType>
-  <EntityType Name="tbl_users">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="middlename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
-    <Property Name="roleid" Type="Int32" />
-    <Property Name="status" Type="Boolean" />
-    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="tbl_counntries">
     <Key>
       <PropertyRef Name="Country_Code" />
@@ -269,6 +252,31 @@
     <Property Name="Docname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="tbl_services">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="middlename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+    <Property Name="roleid" Type="Int32" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Logo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="tbl_bidding">
     <Key>
       <PropertyRef Name="id" />
@@ -286,16 +294,10 @@
     <Property Name="PortLoading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PortDischarge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ShippingLines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EstBudget" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="GoodDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UserID" Type="Int32" />
     <Property Name="Date" Type="DateTime" Precision="3" />
     <Property Name="statusid" Type="Int32" />
-  </EntityType>
-  <EntityType Name="tbl_services">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

@@ -27,6 +27,7 @@ namespace PowerusyData.DB
         public string PortLoading { get; set; }
         public string PortDischarge { get; set; }
         public string ShippingLines { get; set; }
+        public Nullable<decimal> EstBudget { get; set; }
         public string GoodDescription { get; set; }
         public Nullable<int> UserID { get; set; }
         public Nullable<System.DateTime> Date { get; set; }

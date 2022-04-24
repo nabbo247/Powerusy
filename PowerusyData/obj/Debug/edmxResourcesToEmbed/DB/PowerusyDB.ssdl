@@ -40,6 +40,7 @@
     <Property Name="PortLoading" Type="nvarchar" MaxLength="50" />
     <Property Name="PortDischarge" Type="nvarchar" MaxLength="50" />
     <Property Name="ShippingLines" Type="nvarchar" MaxLength="50" />
+    <Property Name="EstBudget" Type="decimal" Precision="18" Scale="2" />
     <Property Name="GoodDescription" Type="nvarchar(max)" />
     <Property Name="UserID" Type="int" />
     <Property Name="Date" Type="datetime" />
@@ -242,6 +243,7 @@ warning 6002: The table/view 'Powerusydb.dbo.tbl_counntries' does not have a pri
     <Property Name="email" Type="nvarchar" MaxLength="255" />
     <Property Name="password" Type="nvarchar" MaxLength="255" />
     <Property Name="authcode" Type="nvarchar" MaxLength="255" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->

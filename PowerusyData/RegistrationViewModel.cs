@@ -256,6 +256,13 @@ namespace PowerusyData
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
+                    var rs = (from info in db.tbl_users where info.email == entity.email select info).FirstOrDefault();
+                    if(rs != null)
+                    {
+                        ValidationErrors.Add(new KeyValuePair<string, string>("Comment", "User already exist."));
+                        IsValid = false;
+                        return ret;
+                    }
                     Gadget ency = new Gadget();
                     //string ssss = ency.dekrypt("3H0h8gr44jrBbJ3SXaQdSQ==");
                     string passwd = ency.enkrypt(entity.password);
@@ -287,7 +294,8 @@ namespace PowerusyData
             sb.Replace("{Telephone}", entity.phonenumber);
             sb.Replace("{date}", DateTime.Now.ToString());
             string body = sb.ToString();
-            webmail.WebService ser = new webmail.WebService();
+            njcweb.WebService ser = new njcweb.WebService();
+            //webmail.WebService ser = new webmail.WebService();
             var status = ser.sendMail(entity.email, ourmail, "", body, "Account Details", "");
 
             //Task.Run(async () => await ency.sendMail(entity.email, ourmail, "", body, "Account Details", ""));

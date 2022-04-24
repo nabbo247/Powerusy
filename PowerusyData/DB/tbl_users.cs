@@ -26,5 +26,6 @@ namespace PowerusyData.DB
         public string email { get; set; }
         public string password { get; set; }
         public string authcode { get; set; }
+        public string Logo { get; set; }
     }
 }

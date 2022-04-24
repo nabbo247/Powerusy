@@ -86,8 +86,8 @@
                 <div class="panel-default panel-heading-custom">
                     <div class="col-12 col-lg-9">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.SearchEntity.Name, "Part of name")
-                            @Html.TextBoxFor(m => m.SearchEntity.Name, new { @class = "form-control" })
+                            @*@Html.LabelFor(m => m.SearchEntity.Name, "Part of name")*@
+                            @Html.TextBoxFor(m => m.SearchEntity.Name, new { @class = "form-control", placeholder = "Search " })
                             <button id="btnSearch"
                                     class="btn btn-sm btn-primary"
                                     data-pdsa-action="search">
@@ -104,7 +104,7 @@
                                     class="btn btn-sm btn-success"
                                     data-pdsa-action="add">
                                 <i class="glyphicon glyphicon-plus"></i>
-                                &nbsp;Post New Job
+                                &nbsp;Post New Jobl
                             </button>
                         </div>
                     </div>

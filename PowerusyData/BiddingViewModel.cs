@@ -24,6 +24,7 @@ namespace PowerusyData
             CountryList = new List<SelectList>();
             SearchEntity = new tbl_bidding();
             Entity = new tbl_bidding();
+            usrs = new tbl_users();
             ValidationErrors = new List<KeyValuePair<string, string>>();
         }
         public string ActionTypeId { get; set; }
@@ -41,15 +42,18 @@ namespace PowerusyData
         public List<tbl_bidding> UsrLst { get; set; }
         public tbl_bidding SearchEntity { get; set; }
         public tbl_bidding Entity { get; set; }
+        public tbl_users usrs { get; set; }
         public HttpPostedFileBase uploadedImage { get; set; }
         public HttpPostedFileBase BillofLading { get; set; }
         public HttpPostedFileBase Proformainvoice { get; set; }
         public HttpPostedFileBase PackagingLists { get; set; }
+        public HttpPostedFileBase ItemPix { get; set; }
         public HttpPostedFileBase Others { get; set; }
         public string uploadedImageName { get; set; }
         public string BillofLadingName { get; set; }
         public string ProformainvoiceName { get; set; }
         public string PackagingListsName { get; set; }
+        public string ItemPixName { get; set; }
         public string OthersName { get; set; }
         public bool EbizApproval { get; set; }
         protected override void Init()
@@ -57,6 +61,7 @@ namespace PowerusyData
             UsrLst = new List<tbl_bidding>();
             SearchEntity = new tbl_bidding();
             Entity = new tbl_bidding();
+            usrs = new tbl_users();
             List = new List<SelectList>();
             CountryList = new List<SelectList>();
             GetDropDown();
@@ -184,11 +189,13 @@ namespace PowerusyData
             // TODO: Add data access method here
 
             ret = CreateData();
-
+            
             UsrReq.id = ReqID;
             UsrReq = GetPOSData();
             if (ReqID > 0)
                 ret = ret.Where(x => x.id == ReqID).ToList();
+            if(ret.Count>0)
+             usrs = GetUsrData(ret[0].UserID);
 
             GetDropDown();
             // Find the specific product
@@ -239,50 +246,64 @@ namespace PowerusyData
             //      "Please Supply country."));
             //    IsValid = false;
             //}
-            //if (string.IsNullOrEmpty(entity.bankname))
-            //{
-            //    ValidationErrors.Add(new
-            //      KeyValuePair<string, string>("Comment",
-            //      "Please Supply your BankName."));
-            //    IsValid = false;
-            //}
-            //if (string.IsNullOrEmpty(entity.address))
-            //{
-            //    ValidationErrors.Add(new
-            //      KeyValuePair<string, string>("Comment",
-            //      "Please Supply your CompanyAddress."));
-            //    IsValid = false;
-            //}
+            if (string.IsNullOrEmpty(entity.VesselName))
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply your VesselName."));
+                IsValid = false;
+            }
+            if (string.IsNullOrEmpty(entity.BookingNo))
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply your BookingNo."));
+                IsValid = false;
+            }
 
-            //if (string.IsNullOrEmpty(entity.companyname))
-            //{
-            //    ValidationErrors.Add(new
-            //      KeyValuePair<string, string>("Comment",
-            //      "Please Supply your CompanyName."));
-            //    IsValid = false;
-            //}
-            //if (string.IsNullOrEmpty(entity.description))
-            //{
-            //    ValidationErrors.Add(new
-            //      KeyValuePair<string, string>("Comment",
-            //      "Please Supply Description of the commercial activity."));
-            //    IsValid = false;
-            //}
+            if (string.IsNullOrEmpty(entity.BLNumber))
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply your BLNumber."));
+                IsValid = false;
+            }
+            if ((entity.EstBudget<=0))
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply Est Budget."));
+                IsValid = false;
+            }
 
-            //if (string.IsNullOrEmpty(entity.workingdays))
-            //{
-            //    ValidationErrors.Add(new
-            //      KeyValuePair<string, string>("Comment",
-            //      "Please Supply your WorkingDays."));
-            //    IsValid = false;
-            //}
-            //if (string.IsNullOrEmpty(entity.workinghours))
-            //{
-            //    ValidationErrors.Add(new
-            //      KeyValuePair<string, string>("Comment",
-            //      "Please Supply your WorkingHours."));
-            //    IsValid = false;
-            //}
+            if (string.IsNullOrEmpty(entity.Consignee))
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply your Consignee."));
+                IsValid = false;
+            }
+            if (string.IsNullOrEmpty(entity.PortDischarge))
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply your Port of Discharge."));
+                IsValid = false;
+            }
+            if (string.IsNullOrEmpty(entity.PortLoading))
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply your Port of Loading."));
+                IsValid = false;
+            }
+            if (string.IsNullOrEmpty(entity.GoodDescription))
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply your Good Description."));
+                IsValid = false;
+            }
             //TODO
             return (ValidationErrors.Count == 0);
         }
@@ -298,11 +319,66 @@ namespace PowerusyData
                     var UserIDI = db.tbl_users.Where(x => x.username == UserId).FirstOrDefault();
                     //UserIDI.id = 1;
                     int userID = UserIDI.id;
+                    if(!string.IsNullOrEmpty(BillofLadingName))
+                    {
+                        tbl_importation_document at = new tbl_importation_document();
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Bill of Lading";
+                        string path = BillofLadingName;
+                        at.documentpath = path;
+                        at.statusid = 1;
+                        at.statusid = userID;
+                        db.tbl_importation_document.Add(at);
+                    }
+                    if (!string.IsNullOrEmpty(PackagingListsName))
+                    {
+                        tbl_importation_document at = new tbl_importation_document();
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Packaging Lists";
+                        string path = PackagingListsName;
+                        at.documentpath = path;
+                        at.statusid = 1;
+                        at.statusid = userID;
+                        db.tbl_importation_document.Add(at);
+                    }
+                    if (!string.IsNullOrEmpty(ProformainvoiceName))
+                    {
+                        tbl_importation_document at = new tbl_importation_document();
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Proforma invoice";
+                        string path = ProformainvoiceName;
+                        at.documentpath = path;
+                        at.statusid = 1;
+                        at.statusid = userID;
+                        db.tbl_importation_document.Add(at);
+                    }
+                    if (!string.IsNullOrEmpty(OthersName))
+                    {
+                        tbl_importation_document at = new tbl_importation_document();
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Others Name";
+                        string path = OthersName;
+                        at.documentpath = path;
+                        at.statusid = 1;
+                        at.statusid = userID;
+                        db.tbl_importation_document.Add(at);
+                    }
+                    if (!string.IsNullOrEmpty(ItemPixName))
+                    {
+                        tbl_importation_document at = new tbl_importation_document();
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Item Pix";
+                        string path = ItemPixName;
+                        at.documentpath = path;
+                        at.statusid = 1;
+                        at.statusid = userID;
+                        db.tbl_importation_document.Add(at);
+                    }
 
                     entity.UserID = userID;
-                    //entity.location = SeletedCountry;
-                    //entity.statusid = 1;
-                    //entity.dateadded = DateTime.Now;
+                    entity.GoodsType = ActionTypeId;
+                    entity.statusid = 1;
+                    entity.Date = DateTime.Now;
                     db.tbl_bidding.Add(entity);
                     db.SaveChanges();
                     IsValid = true;
@@ -351,6 +427,28 @@ namespace PowerusyData
                 using (var db = new powerusyDBCoreEntities())
                 {
                     ret = db.tbl_bidding.Where(x => x.id == UsrReq.id).SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                ValidationErrors.Add(new
+                      KeyValuePair<string, string>("POS",
+                      ex.Message));
+            }
+            finally
+            {
+                //db.Configuration.Close();
+            }
+            return ret;
+        }
+        protected tbl_users GetUsrData(int? Id)
+        {
+            tbl_users ret = new tbl_users();
+            try
+            {
+                using (var db = new powerusyDBCoreEntities())
+                {
+                    ret = db.tbl_users.Where(x => x.id == Id).SingleOrDefault();
                 }
             }
             catch (Exception ex)
