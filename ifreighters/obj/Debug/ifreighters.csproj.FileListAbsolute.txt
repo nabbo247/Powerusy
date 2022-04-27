@@ -89,4 +89,4 @@ D:\Users\nabbo247\source\repos\Powerusy\ifreighters\obj\Debug\ifreighters.csproj
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\obj\Debug\ifreighters.csproj.CopyComplete
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\obj\Debug\ifreighters.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\obj\Debug\ifreighters.pdb
-D:\Users\nabbo247\source\repos\Powerusy\ifreighters\obj\Debug\ifreighters.csprojAssemblyReference.cache
+D:\Users\nabbo247\source\repos\Powerusy\ifreighters\obj\Debug\ifreighters.csproj.AssemblyReference.cache

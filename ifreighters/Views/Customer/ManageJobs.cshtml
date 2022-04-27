@@ -171,7 +171,14 @@
                                                         }
                                                         <ul class="_action_grouping_list">
                                                             <li><a href="#" class="_aaplied_candidates">Applied<span>0</span></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Edit job" class="_edit_list_point"><i class="fa fa-edit"></i></a></li>
+                                                            <li>
+                                                                @*<a href="#" data-pdsa-action="edit"
+                                                                   data-pdsa-val="@item.id"
+                                                                   class="btn btn-default btn-sm">
+                                                                    <i class="glyphicon glyphicon-edit">Click to View</i>
+                                                                </a>*@
+                                                                <a href="#" data-toggle="tooltip" data-pdsa-action="edit" data-pdsa-val="@item.id" data-placement="top" title="Edit job" class="_edit_list_point"><i class="fa fa-edit"></i></a>
+                                                            </li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point"><i class="fa fa-trash"></i></a></li>
                                                         </ul>
                                                     </div>

@@ -10,7 +10,12 @@
 
         <div class="d-navigation">
             <ul id="metismenu">
-                <li class="active"><a href="dashboard.html"><i class="ti-dashboard"></i>Dashboard</a></li>
+                <li class="active">
+                    @Html.ActionLink("Dashboard", "Dashboard", "Customer")
+                    @*<a href="dashboard.html"><i class="ti-dashboard"></i>Dashboard
+                    </a>*@
+                </li>
+
                 <li>@Html.ActionLink("My Profile", "MyProfile", "Customer")</li>
                 <li><a href="messages.html"><i class="ti-email"></i>Messages</a></li>
                 <li>
@@ -30,7 +35,7 @@
                 <li>
                     <a href="javascript:void(0);" class="has-arrow" aria-expanded="false"><i class="ti-desktop"></i>Tasks</a>
                     <ul>
-                        <li><a href="manage-task.html">Manage Task</a></li>
+                        @*<li><a href="manage-task.html">Manage Task</a></li>*@
                         <li><a href="manage-bidders.html">Manage Bidders</a></li>
                         <li><a href="active-bids.html">My Active Bids</a></li>
                         @*<li><a href="post-task.html">Post A Task</a></li>*@

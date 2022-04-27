@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\BiddingController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -300,10 +301,14 @@
     <Content Include="Views\Customer\MyProfile.cshtml" />
     <Content Include="Views\Customer\Dashboard.cshtml" />
     <Content Include="Views\Customer\Jobdetail.cshtml" />
+    <Content Include="Views\Account\ForgetPassword.cshtml" />
+    <Content Include="Views\Customer\Activebids.cshtml" />
+    <Content Include="Views\Customer\Managebidders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Agent\" />
     <Folder Include="Views\Bidding\" />
     <Folder Include="Views\Company\" />
     <Folder Include="Views\Registration\" />

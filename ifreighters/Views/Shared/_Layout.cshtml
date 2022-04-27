@@ -48,7 +48,12 @@
                                         <ul class="nav-dropdown nav-submenu">
                                         </ul>
                                     </li>
-                                    <li>@Html.ActionLink("Registration", "Registration", "Account")</li>
+
+                                    @if (Session["userid"] != null)
+                                    {
+                                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Customer")</li>
+                                        <li>@Html.ActionLink("Find Jobs", "Dashboard", "Customer")</li>
+                                    }
                                 </ul>
                                 @if (Session["userid"] != null)
                                 {
@@ -62,6 +67,7 @@
                                 }
                                 else
                                 {
+                                    <li>@Html.ActionLink("Registration", "Registration", "Account")</li>
                                     <ul class="nav-menu nav-menu-social align-to-right">
                                         <li class="add-listing bg-whit">
                                             @Html.ActionLink("Login", "Login", "Account")
