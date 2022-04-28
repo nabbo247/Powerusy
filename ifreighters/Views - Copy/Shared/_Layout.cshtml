@@ -44,21 +44,15 @@
                             <div class="nav-menus-wrapper">
                                 <ul class="nav-menu">
                                     <li class="active">
-                                        @*<a href="#">Home<span class="submenu-indicator"></span></a>*@
-                                        @Html.ActionLink("Home", "index", "Home")
+                                        <a href="#">Home<span class="submenu-indicator"></span></a>
+                                        <ul class="nav-dropdown nav-submenu">
+                                        </ul>
                                     </li>
+
                                     @if (Session["userid"] != null)
                                     {
                                         <li>@Html.ActionLink("Dashboard", "Dashboard", "Customer")</li>
                                         <li>@Html.ActionLink("Find Jobs", "Dashboard", "Customer")</li>
-                                    }
-                                    @if (Session["userid"] != null)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        <li> @Html.ActionLink("Registration", "Registration", "Account") </li>
                                     }
                                 </ul>
                                 @if (Session["userid"] != null)
@@ -66,12 +60,14 @@
                                     <ul class="nav-menu nav-menu-social align-to-right">
                                         <li>Welcome @Session["fname"].ToString() </li>
                                         <li class="add-listing bg-whit">
-                                            @Html.ActionLink("LogOff", "LogOff", "Account") 
+                                            @Html.ActionLink("LogOff", "Account")
                                         </li>
+
                                     </ul>
                                 }
                                 else
                                 {
+                                    <li>@Html.ActionLink("Registration", "Registration", "Account")</li>
                                     <ul class="nav-menu nav-menu-social align-to-right">
                                         <li class="add-listing bg-whit">
                                             @Html.ActionLink("Login", "Login", "Account")

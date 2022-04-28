@@ -1,0 +1,268 @@
+﻿@model PowerusyData.JobdetailViewModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Jobdetail";
+}
+
+<!-- ============================ Page Title Start================================== -->
+<div class="page-title bg-cover" style="background:red url(../../assets/img/freelancer.jpg) no-repeat" data-overlay="2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12"></div>
+        </div>
+    </div>
+</div>
+<!-- ============================ Page Title End ================================== -->
+<!-- ============================ Main Section Start ================================== -->
+<section>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <div class="_job_detail_box">
+
+                    <div class="_jobs_details_single mb-4">
+                        <div class="_jb_details01">
+
+                            <div class="_jb_details01_flex">
+                                <div class="_jb_details01_authors">
+                                    <img src="~/assets/img/c-7.png" class="img-fluid" alt="" />
+                                </div>
+                                <div class="_jb_details01_authors_caption">
+                                    <h4 class="jbs_title">@Model.Entity.VesselName<img src="~/assets/img/verify.svg" class="ml-1" width="12" alt=""></h4>
+                                    <ul class="jbx_info_list">
+
+                                        <li><span><i class="ti-location-pin"></i>Port of loading : @Model.Entity.PortLoading</span></li>
+                                        <li><span><i class="ti-location-pin"></i>Port of discharge : @Model.Entity.PortDischarge</span></li>
+                                        <li><span><i class="ti-credit-card"></i>Est. Budget &#8358; @String.Format("{0:N0}", Model.Entity.EstBudget) </span></li>
+                                        <li><span><i class="ti-timer"></i>@Model.Entity.Date</span></li>
+                                    </ul>
+                                    <ul class="jbx_info_list">
+                                        @*<li><div class="jb_types fulltime">@Model.Entity.PortLoading</div></li>*@
+                                        <li><div class="jb_types urgent">B/L Number:@Model.Entity.BLNumber</div></li>
+                                        <li><div class="jb_types remote">BookingNo:@Model.Entity.BookingNo</div></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="_jb_details01_last">
+                                <ul class="_flex_btn">
+                                    <li><a href="#" class="_saveed_jb"><i class="fa fa-heart"></i></a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="_job_detail_single">
+                        <h4>Good Description</h4>
+                        <p>@Model.Entity.GoodDescription</p>
+                    </div>
+                    <div class="_job_detail_single">
+                        <h4>Consignee</h4>
+                        <p>@Model.Entity.Consignee</p>
+                    </div>
+                    <div class="_job_detail_single">
+                        <h4>Attachment files</h4>
+                        <ul>
+                            <li>Bill of Lading</li>
+                            <li>Proforma invoice</li>
+                            <li>Packaging Lists</li>
+                            <li>Others</li>
+                        </ul>
+                    </div>
+
+                    <br /><br /><br />
+                    @if (!Model.Owner)
+                    {
+                        <div class="_job_detail_single flexeo">
+                            <div class="_job_detail_single_flex">
+                                <ul class="shares_jobs">
+                                    <li>Share The Job</li>
+                                    <li><a href="#" class="share fb"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" class="share tw"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" class="share gp"><i class="fa fa-google"></i></a></li>
+                                    <li><a href="#" class="share ln"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+
+                            <div class="_exlio_buttons">
+                                <ul class="bottoms_applies">
+                                    <li><a href="#" class="_saveed_jb">Save Job</a></li>
+                                    <li><a href="#" class="_applied_jb">Apply Job</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+
+
+                    <div class="_job_detail_single">
+                        <h4>Maching Jobs</h4>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                <!-- Single Item -->
+                                <div class="_list_jobs_wraps shadow_0 border">
+                                    <div class="_list_jobs_f1ex first">
+                                        <div class="_list_110">
+                                            <div class="_list_110_thumb">
+                                                <a href="employer-detail.html"><img src="assets/img/c-1.png" class="img-fluid" alt=""></a>
+                                            </div>
+                                            <div class="_list_110_caption">
+                                                <h4 class="_jb_title"><a href="job-detail.html">Application Developer</a></h4>
+                                                <div class="_emp_jb">Drive Due</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="_list_jobs_f1ex">
+                                        <div class="_list_110_caption">
+                                            <h4 class="_jb_title">Liverpool, UK</h4>
+                                            <div class="_emp_jb">Location</div>
+                                        </div>
+                                    </div>
+                                    <div class="_list_jobs_f1ex">
+                                        <div class="_list_110_caption">
+                                            <h4 class="_jb_title">$120k - $155k</h4>
+                                            <div class="_emp_jb">Yearly</div>
+                                        </div>
+                                    </div>
+                                    <div class="_list_jobs_f1ex">
+                                        <a href="job-detail.html" class="_jb_apply">View Job</a>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            @if (!Model.Owner)
+            {
+                <div class="col-lg-4 col-md-12 col-sm-12">
+
+                    <div class="_jb_summary">
+                        <h4>Intrested in this job?</h4>
+                        <div class="_cnt_person">
+                            <div class="_cnt_person_thumb">
+                                <img src="assets/img/team-3.jpg" class="img-fluid circle" alt="" />
+                            </div>
+                            <div class="_cnt_person_caption">
+                                <span>Contact Person</span>
+                                <h4 class="_cnt_title">Harshit Gupta</h4>
+                                <p class="_cnt_post">CTO</p>
+                            </div>
+                        </div>
+
+                        <div class="_avg_res_time">
+                            <div class="_avg_res_icon">
+                                <i class="fa fa-bolt"></i>
+                            </div>
+                            <div class="_avg_res_caption">
+                                <h5>Fast Response Time</h5>
+                                <span>Avg. response time: 02 days</span>
+                            </div>
+                        </div>
+
+                        <div class="_apply_form_form">
+
+                            <div class="form-group">
+                                <label>Your E-mail:</label>
+                                <input type="email" class="form-control" placeholder="ecto@gmail.com" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Set a Password:</label>
+                                <input type="text" class="form-control" placeholder="Choose a Password" />
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>First Name:</label>
+                                        <input type="text" class="form-control" placeholder="Amit" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Last Name:</label>
+                                        <input type="text" class="form-control" placeholder="Singh" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Phone Number:</label>
+                                <input type="text" class="form-control" placeholder="+91 245 256 2548" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Documents:<font>pdf, doc, docx, txt</font></label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="terms_con">
+                                    <input id="aa3" class="checkbox-custom" name="Coffee" type="checkbox">
+                                    <label for="aa3" class="checkbox-custom-label">I agree to pirvacy policy</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="button" class="btn_applynow">Apply For This Job</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+
+        </div>
+    </div>
+</section>
+<!-- ============================ Main Section End ================================== -->
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+            $(document).ajaxStart(function () {
+                $("#loading").show();
+            });
+            $(document).ajaxStop(function () {
+                $("#loading").hide();
+            });
+
+            $("[data-pdsa-action]").on("click", function (e) {
+
+                $("#loading").show();
+                e.preventDefault();
+
+                $("#EventCommand").val($(this).data("pdsa-action"));
+
+                $("#EventArgument").val($(this).attr("data-pdsa-val"));
+
+                $("form").submit();
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        console.log('Submission was successful.');
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log('An error occurred.');
+                        console.log(data);
+                    },
+                });
+                $("#loading").hide();
+            });
+        });
+    </script>
+}

@@ -181,6 +181,15 @@ namespace PowerusyData
                         StartsWith(entity.companyname.ToLower().Trim(),
                                   StringComparison.CurrentCultureIgnoreCase));
             }
+            if (!string.IsNullOrEmpty(UserId))
+            {
+                //using (var db = new powerusyDBCoreEntities())
+                //{
+                //    ret = db.tbl_shipper.Where(x => x.AcctName.Contains(entity.AcctName)).OrderBy(x => x.ReqDate).ToList();
+                int uid = Convert.ToInt32(UserId);
+                //}
+                Entity = ret.Where(x=>x.userid==uid).FirstOrDefault();
+            }
             return ret;
         }
 
@@ -306,78 +315,78 @@ namespace PowerusyData
                     var UserIDI = db.tbl_users.Where(x => x.username == UserId).FirstOrDefault();
                     //UserIDI.id = 1;
                     int userID = UserIDI.id;
-                    tbl_attachment at = new tbl_attachment();
-                    at.date = DateTime.Now;
-                    at.fileName = "Certificate Of Incorporation";
-                    string path = CertificateOfIncorporationName;
-                    at.path = path;
-                    at.status = 1;
-                    at.userid = userID;
-                    db.tbl_attachment.Add(at);
-
-                    at = new tbl_attachment();
-                    at.date = DateTime.Now;
-                    at.status = 1;
-                    at.userid = userID;
-                    at.fileName = "Memorandum of Association";
-                    path =  MemorandumofAssociationName;
-                    at.path = path;
-                    db.tbl_attachment.Add(at);
-
-                    at = new tbl_attachment();
-                    at.date = DateTime.Now;
-                    at.status = 1;
-                    at.userid = userID;
-                    at.fileName = "Articles of Association";
-                    path = ArticlesofAssociationName;
-                    at.path = path;
-                    db.tbl_attachment.Add(at);
-
-                    at = new tbl_attachment();
-                    at.date = DateTime.Now;
-                    at.status = 1;
-                    at.userid = userID;
-                    at.fileName = "Power of Attorney";
-                    path = PowerofAttorneyName;
-                    at.path = path;
-                    db.tbl_attachment.Add(at);
-
-                    at = new tbl_attachment();
-                    at.date = DateTime.Now;
-                    at.status = 1;
-                    at.userid = userID;
-                    at.fileName = "Valid business license";
-                    path = ValidbusinesslicenseName;
-                    at.path = path;
-                    db.tbl_attachment.Add(at);
-
-                    at = new tbl_attachment();
-                    at.date = DateTime.Now;
-                    at.status = 1;
-                    at.userid = userID;
-                    at.fileName = "Audited financial";
-                    path =  AuditedfinancialName;
-                    at.path = path;
-                    db.tbl_attachment.Add(at);
-
-                    at = new tbl_attachment();
-                    at.date = DateTime.Now;
-                    at.status = 1;
-                    at.userid = userID;
-                    at.fileName = "Tax clearance";
-                    path = TaxclearanceName;
-                    at.path = path;
-                    db.tbl_attachment.Add(at);
-                    if (Others!=null && !string.IsNullOrEmpty(Others.FileName))
+                    tbl_importation_document at = new tbl_importation_document();
+                    if (!string.IsNullOrEmpty(CertificateOfIncorporationName))
                     {
-                        at = new tbl_attachment();
-                        at.date = DateTime.Now;
-                        at.status = 1;
-                        at.userid = userID;
-                        at.fileName = "Others";
-                        path =  OthersName;
-                        at.path = path;
-                        db.tbl_attachment.Add(at);
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Certificate Of Incorporation";
+                        at.documentpath = CertificateOfIncorporationName;
+                        at.statusid = 1;
+                        at.importationid = userID.ToString();
+                        db.tbl_importation_document.Add(at);
+                    }
+                    if (!string.IsNullOrEmpty(MemorandumofAssociationName))
+                    {
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Memorandum of Association";
+                        at.documentpath = MemorandumofAssociationName;
+                        at.statusid = 1;
+                        at.importationid = userID.ToString();
+                        db.tbl_importation_document.Add(at);
+                    }
+                    if (!string.IsNullOrEmpty(ArticlesofAssociationName))
+                    {
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Articles of AssociationName";
+                        at.documentpath = ArticlesofAssociationName;
+                        at.statusid = 1;
+                        at.importationid = userID.ToString();
+                        db.tbl_importation_document.Add(at);
+                    }
+                    if (!string.IsNullOrEmpty(PowerofAttorneyName))
+                    {
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Power of AttorneyName";
+                        at.documentpath = PowerofAttorneyName;
+                        at.statusid = 1;
+                        at.importationid = userID.ToString();
+                        db.tbl_importation_document.Add(at);
+                    }
+                    if (!string.IsNullOrEmpty(ValidbusinesslicenseName))
+                    {
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Valid business licenseName";
+                        at.documentpath = ValidbusinesslicenseName;
+                        at.statusid = 1;
+                        at.importationid = userID.ToString();
+                        db.tbl_importation_document.Add(at);
+                    }
+                    if (!string.IsNullOrEmpty(AuditedfinancialName))
+                    {
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Audited financialName";
+                        at.documentpath = AuditedfinancialName;
+                        at.statusid = 1;
+                        at.importationid = userID.ToString();
+                        db.tbl_importation_document.Add(at);
+                    }
+                    if (!string.IsNullOrEmpty(TaxclearanceName))
+                    {
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Tax clearanceName";
+                        at.documentpath = TaxclearanceName;
+                        at.statusid = 1;
+                        at.importationid = userID.ToString();
+                        db.tbl_importation_document.Add(at);
+                    }
+                    if (Others != null && !string.IsNullOrEmpty(Others.FileName))
+                    {
+                        at.dateadded = DateTime.Now;
+                        at.documentname = "Others";
+                        at.documentpath = OthersName;
+                        at.statusid = 1;
+                        at.importationid = userID.ToString();
+                        db.tbl_importation_document.Add(at);
                     }
                     
                     entity.userid = userID;

@@ -116,10 +116,10 @@ namespace ifreighters.Controllers
                 switch (vm.Entity.roleid)//switch (vm.Entity.StatusId)
                 {
                     case 2:
-                        return RedirectToAction("Index", "Company");
+                        RedirectToAction("Index", "Company");
                         break;
-                    case 3:
-                        return RedirectToAction("IndexAgent", "Company"); //Shipper/Importer FreightForwarder
+                    case 5:
+                        return RedirectToAction("IndexShipper", "Company"); //Shipper/Importer FreightForwarder
                         break;
                     default:
                         return RedirectToAction("Dashboard", "Customer");
@@ -144,8 +144,8 @@ namespace ifreighters.Controllers
                     ModelState.AddModelError(item.Key, item.Value);
                 }
             }
-            //return RedirectToAction("CompleteReg", "Shipper");
-            return null;
+            return RedirectToAction("CompleteReg", "Shipper");
+            //return View(vm);
         }
         public ActionResult LogOff()
         {

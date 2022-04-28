@@ -144,6 +144,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -304,13 +305,16 @@
     <Content Include="Views\Account\ForgetPassword.cshtml" />
     <Content Include="Views\Customer\Activebids.cshtml" />
     <Content Include="Views\Customer\Managebidders.cshtml" />
+    <Content Include="Views\Company\IndexAgent.cshtml" />
+    <Content Include="Views\Company\_agentMenu.cshtml" />
+    <Content Include="Views\Jobs\SearchJob.cshtml" />
+    <Content Include="Views\Company\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Agent\" />
     <Folder Include="Views\Bidding\" />
-    <Folder Include="Views\Company\" />
     <Folder Include="Views\Registration\" />
     <Folder Include="Views\Shipper\" />
   </ItemGroup>

@@ -15,14 +15,8 @@
 <section class="gray-bg pt-4">
     <div class="container-fluid">
         <div class="row m-0">
-           
-                @Html.Partial("_customerMenu")
-         
-            @*else if (Session["Role"] != null && Session["Role"].ToString() == "2")
-            {
-                @Html.Partial("_agentMenu")
-            }*@
 
+            @Html.Partial("_customerMenu")
             @*Html.RenderPartial("_employee");*@
             <!-- Item Wrap Start -->
             <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
