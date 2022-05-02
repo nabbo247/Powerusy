@@ -86,10 +86,8 @@ namespace ifreighters.Controllers
             //vm.EventCommand = "save";
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
-
             //vm.UserId = Session["userid"].ToString();
             vm.UserId = "nabbo247@gmail.com";
-            
             if (vm.BillofLading != null && vm.BillofLading.ContentLength > 0)
             {
                 Random rsm = new Random();

@@ -155,6 +155,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RegistrationViewModel.cs" />
+    <Compile Include="SearchjobViewModel.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="VerificationShipperViewModel.cs" />
     <Compile Include="Web References\njcweb\Reference.cs">
