@@ -268,6 +268,8 @@ namespace PowerusyData
                     string passwd = ency.enkrypt(entity.password);
                     entity.password = passwd;
                     entity.username = entity.email;
+                    Random rm = new Random();
+                    entity.authcode = rm.Next(100009, 999999).ToString(); 
                     entity.roleid = Convert.ToInt32( ActionTypeId);
                     //TODO: Create Insert Code here
                     db.tbl_users.Add(entity);
@@ -290,13 +292,14 @@ namespace PowerusyData
             sb.Append(line);
             sb.Replace("{UserName}", entity.username);
             sb.Replace("{FullName}", entity.firstname);
-            sb.Replace("{email}", entity.email);
-            sb.Replace("{Telephone}", entity.phonenumber);
-            sb.Replace("{date}", DateTime.Now.ToString());
+            sb.Replace("{code}", entity.authcode);
+            //sb.Replace("{Telephone}", entity.phonenumber);
+            //sb.Replace("{Telephone}", entity.phonenumber);
+            //sb.Replace("{date}", DateTime.Now.ToString());
             string body = sb.ToString();
             njcweb.WebService ser = new njcweb.WebService();
             //webmail.WebService ser = new webmail.WebService();
-            var status = ser.sendMail(entity.email, ourmail, "", body, "Account Details", "");
+            var status = ser.sendMail(entity.email, ourmail, "", body, "Please confirm your registration", "");
 
             //Task.Run(async () => await ency.sendMail(entity.email, ourmail, "", body, "Account Details", ""));
             string s = "sd";

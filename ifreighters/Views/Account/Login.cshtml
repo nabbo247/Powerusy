@@ -102,6 +102,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-body">
+
                                         <div class="login-form">
                                             <div class="form-group">
                                                 <label>User Name</label>
@@ -117,17 +118,27 @@
                                             </div>
                                         </div>
 
-                                        @*<div class="form-group text-center">
-                                            <span>Or Signin with</span>
-                                        </div>
-
-                                        <div class="social_logs mb-4">
-                                            <ul class="shares_jobs text-center">
-                                                <li><a href="#" class="share fb"><i class="fa fa-facebook"></i></a></li>
-                                                <li><a href="#" class="share gp"><i class="fa fa-google"></i></a></li>
-                                                <li><a href="#" class="share ln"><i class="fa fa-linkedin"></i></a></li>
-                                            </ul>
+                                        @*<div class="login-form">
+                                            <div class="form-group">
+                                                <label>Auth Code</label>
+                                                @Html.TextBoxFor(m => m.Entity.authcode, new { @class = "form-control" })
+                                            </div>
+                                           
+                                            <div class="form-group">
+                                                <button type="submit" class="btn dark-2 btn-md full-width pop-login">Login</button>
+                                            </div>
                                         </div>*@
+                                        @*<div class="form-group text-center">
+            <span>Or Signin with</span>
+        </div>
+
+        <div class="social_logs mb-4">
+            <ul class="shares_jobs text-center">
+                <li><a href="#" class="share fb"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#" class="share gp"><i class="fa fa-google"></i></a></li>
+                <li><a href="#" class="share ln"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>*@
 
                                     </div>
                                     <div class="modal-footer">

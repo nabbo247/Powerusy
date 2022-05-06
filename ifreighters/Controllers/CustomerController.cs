@@ -153,6 +153,10 @@ namespace ifreighters.Controllers
             //vm.Email = Session["Email"].ToString();
             //vm.IsDetailAreaVisible = true;
             //vm.IsSearchAreaVisible = false;
+            if(Session["Role"]!=null&& Session["Role"].ToString()=="2")
+            {
+                vm.Owner = false;
+            }else
             vm.Owner = true;
             vm.EventArgument = page.ToString();
             vm.EventCommand = "Edit";
@@ -172,6 +176,18 @@ namespace ifreighters.Controllers
             return View(vm);
         }
         public ActionResult Managebidders(int? page)
+        {
+            BiddingViewModel vm = new BiddingViewModel();
+            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = "eunicee";
+            //vm.Email = Session["Email"].ToString();
+            //vm.IsDetailAreaVisible = true;
+            //vm.IsSearchAreaVisible = false;
+            //vm.IsListAreaVisible = false;
+            vm.HandleRequest();
+            return View(vm);
+        }
+        public ActionResult Messages(int? page)
         {
             BiddingViewModel vm = new BiddingViewModel();
             //vm.UserId = Session["userid"].ToString();

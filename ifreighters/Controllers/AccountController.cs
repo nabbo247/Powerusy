@@ -115,26 +115,30 @@ namespace ifreighters.Controllers
                 //    return RedirectToAction("CompleteReg", "Company");
                 switch (vm.Entity.roleid)//switch (vm.Entity.StatusId)
                 {
-                    case 2:
-                        return RedirectToAction("Index", "Company");
+                    case 1:
+                        RedirectToAction("CompleteReg", "Admin");
                         break;
-                    case 3:
-                        return RedirectToAction("IndexAgent", "Company"); //Shipper/Importer FreightForwarder
+                    case 2:
+                        return RedirectToAction("IndexAgent", "Company");
                         break;
                     default:
                         return RedirectToAction("Dashboard", "Customer");
-
-                    //case 2:
-                    //    RedirectToAction("Index", "Company");
-                    //    break;
-                    //case 3:
-                    //    return RedirectToAction("IndexShipper", "Company"); //Shipper/Importer FreightForwarder
-                    //    break;
-                    //case 4:
-                    //    return RedirectToAction("FreightForwarder", "Company"); //Shipper/Importer 
-                    //    break;
-                    //default:
-                    //    return RedirectToAction("IndexForwarder", "Company");
+                        /*
+                          case 3:
+                        return RedirectToAction("IndexAgent", "Company"); //Shipper/Importer FreightForwarder
+                        break;
+                        */
+                        //case 2:
+                        //    RedirectToAction("Index", "Company");
+                        //    break;
+                        //case 3:
+                        //    return RedirectToAction("IndexShipper", "Company"); //Shipper/Importer FreightForwarder
+                        //    break;
+                        //case 4:
+                        //    return RedirectToAction("FreightForwarder", "Company"); //Shipper/Importer 
+                        //    break;
+                        //default:
+                        //    return RedirectToAction("IndexForwarder", "Company");
                 }
             }
             else

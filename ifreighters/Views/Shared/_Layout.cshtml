@@ -50,7 +50,7 @@
                                     @if (Session["userid"] != null)
                                     {
                                         <li>@Html.ActionLink("Dashboard", "Dashboard", "Customer")</li>
-                                        <li>@Html.ActionLink("Find Jobs", "Dashboard", "Customer")</li>
+
                                     }
                                     @if (Session["userid"] != null)
                                     {
@@ -60,6 +60,7 @@
                                     {
                                         <li> @Html.ActionLink("Registration", "Registration", "Account") </li>
                                     }
+                                    <li>@Html.ActionLink("Find Jobs", "SearchJob", "Jobs")</li>
                                 </ul>
                                 @if (Session["userid"] != null)
                                 {

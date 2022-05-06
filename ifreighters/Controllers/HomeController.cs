@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PowerusyData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,17 @@ namespace ifreighters.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            SearchjobViewModel vm = new SearchjobViewModel();
+            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = "eunicee";
+            //vm.Email = Session["Email"].ToString();
+            vm.ListView = true;
+            vm.pageSize = 10;
+            vm.pageNumber = 1;
+            //vm.IsSearchAreaVisible = false;
+            //vm.IsListAreaVisible = false;
+            vm.HandleRequest();
+            return View(vm);
         }
 
         public ActionResult About()
