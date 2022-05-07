@@ -1,8 +1,12 @@
-﻿using PagedList;
+﻿
+
+using PagedList;
 using PowerusyData.DB;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +14,9 @@ using System.Web;
 
 namespace PowerusyData
 {
-    public class JobdetailViewModel : ViewModelBase
+    public class BookmarkedViewModel : ViewModelBase
     {
-        public JobdetailViewModel()
+        public BookmarkedViewModel()
           : base()
         {
             // Initialize other variables
@@ -22,7 +26,7 @@ namespace PowerusyData
             CountryList = new List<SelectList>();
             SearchEntity = new tbl_bidding();
             Entity = new tbl_bidding();
-            JobBid = new tbl_bidding_jobs();
+            usrs = new tbl_users();
             ValidationErrors = new List<KeyValuePair<string, string>>();
         }
         public string ActionTypeId { get; set; }
@@ -31,16 +35,16 @@ namespace PowerusyData
         public int pageSize { get; set; }
         public int pageNumber { get; set; }
         public tbl_bidding UsrReq { get; set; }
-        public tbl_bidding_jobs JobBid { get; set; }
         public string ConfirmPassword { get; set; }
         public List<SelectList> List { set; get; }
         public List<SelectList> CountryList { set; get; }
-        public bool IsStep1 { get; set; }
-        public bool IsStep2 { get; set; }
-        public bool Agree { get; set; }
+        public bool GridView { get; set; }
+        public bool ListView { get; set; }
+        public bool IsStep3 { get; set; }
         public List<tbl_bidding> UsrLst { get; set; }
         public tbl_bidding SearchEntity { get; set; }
         public tbl_bidding Entity { get; set; }
+        public tbl_users usrs { get; set; }
         public HttpPostedFileBase uploadedImage { get; set; }
         public HttpPostedFileBase BillofLading { get; set; }
         public HttpPostedFileBase Proformainvoice { get; set; }
@@ -53,12 +57,13 @@ namespace PowerusyData
         public string PackagingListsName { get; set; }
         public string ItemPixName { get; set; }
         public string OthersName { get; set; }
-        public bool Owner { get; set; }
+        public bool EbizApproval { get; set; }
         protected override void Init()
         {
             UsrLst = new List<tbl_bidding>();
             SearchEntity = new tbl_bidding();
             Entity = new tbl_bidding();
+            usrs = new tbl_users();
             List = new List<SelectList>();
             CountryList = new List<SelectList>();
             GetDropDown();
@@ -70,28 +75,12 @@ namespace PowerusyData
             //// This is an example of adding on a new command
             switch (EventCommand.ToLower())
             {
-                case "continue":
-                    if (Validate(Entity))
-                    {
-                        IsStep2 = true;
-                        IsStep1 = false;
-                    }
-                    else
-                    {
-                        IsStep2 = false;
-                        IsStep1 = true;
-                    }
-                    break;
-                case "previous":
-                    IsStep2 = false;
-                    IsStep1 = true;
-                    break;
-                case "bid":
-                    SubmitBid();
+                case "listview":
+                    ListView = true;
                     Get();
                     break;
-                case "savejob":
-                    savejob();
+                case "gridview":
+                    GridView = true;
                     Get();
                     break;
             }
@@ -99,71 +88,6 @@ namespace PowerusyData
             base.HandleRequest();
         }
 
-        private void savejob()
-        {
-            using (var db = new powerusyDBCoreEntities())
-            {
-                tbl_bookmarked ent = new tbl_bookmarked();
-                int ID = Convert.ToInt32(UserId);
-                ent.BidID = JobBid.BidID;
-                ent.AgentID = ID;
-                ent.status = 1;
-                ent.Date = DateTime.Now;
-                db.tbl_bookmarked.Add(ent);
-                db.SaveChanges();
-                IsValid = true;
-                Msg = "Saved successful";
-            }
-            //throw new NotImplementedException();
-        }
-
-        private bool SubmitBid()
-        {
-            bool ret = false;
-            ret = ValidateBid(JobBid);
-            if (ret)
-            {
-                using (var db = new powerusyDBCoreEntities())
-                {
-                    int ID = Convert.ToInt32(UserId);
-                    JobBid.AgentID = ID;
-                    JobBid.Date = DateTime.Now;
-                    db.tbl_bidding_jobs.Add(JobBid);
-                    db.SaveChanges();
-                    IsValid = true;
-                    Msg = "Bid created successful";
-                }
-            }
-            return ret;
-        }
-        //savejob
-        public bool ValidateBid(tbl_bidding_jobs entity)
-        {
-            ValidationErrors.Clear();
-            if (string.IsNullOrEmpty(entity.Comment))
-            {
-                ValidationErrors.Add(new
-                  KeyValuePair<string, string>("Comment",
-                  "Please Supply comment."));
-                IsValid = false;
-            }
-            if (entity.Amount<=0)
-            {
-                ValidationErrors.Add(new
-                  KeyValuePair<string, string>("Comment",
-                  "Please Supply your amount."));
-                IsValid = false;
-            }
-            if (Agree != true)
-            {
-                ValidationErrors.Add(new
-                  KeyValuePair<string, string>("Comment",
-                  "You must agree to the policy."));
-                IsValid = false;
-            }
-            
-            return (ValidationErrors.Count == 0);
-        }
         protected override void Add()
         {
             IsValid = true;
@@ -194,7 +118,7 @@ namespace PowerusyData
             }
             else
             {
-                Update(Entity);
+                Delete(Entity);
             }
             // Set any validation errors
             ValidationErrors = ValidationErrors;
@@ -263,8 +187,10 @@ namespace PowerusyData
             UsrReq = GetPOSData();
             if (ReqID > 0)
                 ret = ret.Where(x => x.id == ReqID).ToList();
+            if (ret.Count > 0)
+                usrs = GetUsrData(ret[0].UserID);
 
-            GetDropDown();
+            //GetDropDown();
             // Find the specific product
             //entity = ret.Find(p =>
             //   p.MccCode == MccCode);
@@ -292,13 +218,18 @@ namespace PowerusyData
             }
             return ret;
         }
-        
+
         public bool Delete(tbl_bidding entity)
         {
             using (var db = new powerusyDBCoreEntities())
             {
-                db.Entry(entity).State = EntityState.Deleted;
+                int ID = Convert.ToInt32(EventArgument);
+                var retEnt = db.tbl_bidding_jobs.Where(x => x.BidID == ID).SingleOrDefault();
+                db.Entry(retEnt).State = EntityState.Deleted;
                 db.SaveChanges();
+                IsValid = true;
+                string op = "Deleted Bid successful";
+                Msg = op;
             }
             return true;
         }
@@ -381,78 +312,7 @@ namespace PowerusyData
             ret = Validate(entity);
             if (ret)
             {
-                using (var db = new powerusyDBCoreEntities())
-                {
-                    var UserIDI = db.tbl_users.Where(x => x.username == UserId).FirstOrDefault();
-                    //UserIDI.id = 1;
-                    int userID = UserIDI.id;
-                    if (!string.IsNullOrEmpty(BillofLadingName))
-                    {
-                        tbl_importation_document at = new tbl_importation_document();
-                        at.dateadded = DateTime.Now;
-                        at.documentname = "Bill of Lading";
-                        string path = BillofLadingName;
-                        at.documentpath = path;
-                        at.statusid = 1;
-                        at.statusid = userID;
-                        db.tbl_importation_document.Add(at);
-                    }
-                    if (!string.IsNullOrEmpty(PackagingListsName))
-                    {
-                        tbl_importation_document at = new tbl_importation_document();
-                        at.dateadded = DateTime.Now;
-                        at.documentname = "Packaging Lists";
-                        string path = PackagingListsName;
-                        at.documentpath = path;
-                        at.statusid = 1;
-                        at.statusid = userID;
-                        db.tbl_importation_document.Add(at);
-                    }
-                    if (!string.IsNullOrEmpty(ProformainvoiceName))
-                    {
-                        tbl_importation_document at = new tbl_importation_document();
-                        at.dateadded = DateTime.Now;
-                        at.documentname = "Proforma invoice";
-                        string path = ProformainvoiceName;
-                        at.documentpath = path;
-                        at.statusid = 1;
-                        at.statusid = userID;
-                        db.tbl_importation_document.Add(at);
-                    }
-                    if (!string.IsNullOrEmpty(OthersName))
-                    {
-                        tbl_importation_document at = new tbl_importation_document();
-                        at.dateadded = DateTime.Now;
-                        at.documentname = "Others Name";
-                        string path = OthersName;
-                        at.documentpath = path;
-                        at.statusid = 1;
-                        at.statusid = userID;
-                        db.tbl_importation_document.Add(at);
-                    }
-                    if (!string.IsNullOrEmpty(ItemPixName))
-                    {
-                        tbl_importation_document at = new tbl_importation_document();
-                        at.dateadded = DateTime.Now;
-                        at.documentname = "Item Pix";
-                        string path = ItemPixName;
-                        at.documentpath = path;
-                        at.statusid = 1;
-                        at.statusid = userID;
-                        db.tbl_importation_document.Add(at);
-                    }
-
-                    entity.UserID = userID;
-                    entity.GoodsType = ActionTypeId;
-                    entity.statusid = 1;
-                    entity.Date = DateTime.Now;
-                    db.tbl_bidding.Add(entity);
-                    db.SaveChanges();
-                    IsValid = true;
-                    string op = "created job order successful";
-                    Msg = op;
-                    //IsStep3 = true;
-                }
+               
             }
             return ret;
         }
@@ -508,6 +368,28 @@ namespace PowerusyData
             }
             return ret;
         }
+        protected tbl_users GetUsrData(int? Id)
+        {
+            tbl_users ret = new tbl_users();
+            try
+            {
+                using (var db = new powerusyDBCoreEntities())
+                {
+                    ret = db.tbl_users.Where(x => x.id == Id).SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                ValidationErrors.Add(new
+                      KeyValuePair<string, string>("POS",
+                      ex.Message));
+            }
+            finally
+            {
+                //db.Configuration.Close();
+            }
+            return ret;
+        }
         protected List<tbl_bidding> CreateData()
         {
             List<tbl_bidding> ret = new List<tbl_bidding>();
@@ -516,7 +398,9 @@ namespace PowerusyData
                 using (var db = new powerusyDBCoreEntities())
                 {
                     //PosReq_vws
-                    ret = db.tbl_bidding.ToList();
+                    int UsrID = Convert.ToInt32(UserId);
+                    var Bookmark = db.tbl_bookmarked.Where(m => m.AgentID == UsrID).ToList().Select(x=>x.BidID);
+                    ret = db.tbl_bidding.Where(z=> Bookmark.Contains(z.id)).ToList();
                     if (pageNumber > 0 && pageSize > 0)
                     {
                         PageList = ret.ToPagedList(pageNumber, pageSize);
@@ -539,3 +423,4 @@ namespace PowerusyData
 
     }
 }
+

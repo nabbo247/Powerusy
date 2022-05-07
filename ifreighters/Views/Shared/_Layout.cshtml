@@ -49,8 +49,13 @@
                                     </li>
                                     @if (Session["userid"] != null)
                                     {
-                                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Customer")</li>
-
+                                        if (Session["userid"] != null && Session["Role"].ToString() == "2")//AGENT
+                                        {
+                                            <li>@Html.ActionLink("Dashboard", "Dashboard", "Company")</li>
+                                        }if (Session["userid"] != null && Session["Role"].ToString() == "1")//customer
+                                        {
+                                            <li>@Html.ActionLink("Dashboard", "Dashboard", "Customer")</li>
+                                        }
                                     }
                                     @if (Session["userid"] != null)
                                     {
@@ -90,8 +95,6 @@
         <!-- ============================================================== -->
         <!-- Top header  -->
         <!-- ============================================================== -->
-
-
         @RenderBody()
         <!-- =========================== Footer Start ========================================= -->
         <footer class="light-footer">

@@ -120,7 +120,6 @@ namespace ifreighters.Controllers
                         break;
                     case 2:
                         return RedirectToAction("IndexAgent", "Company");
-                        break;
                     default:
                         return RedirectToAction("Dashboard", "Customer");
                         /*

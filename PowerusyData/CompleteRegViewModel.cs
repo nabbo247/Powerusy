@@ -183,12 +183,14 @@ namespace PowerusyData
             }
             if (!string.IsNullOrEmpty(UserId))
             {
-                //using (var db = new powerusyDBCoreEntities())
-                //{
-                //    ret = db.tbl_shipper.Where(x => x.AcctName.Contains(entity.AcctName)).OrderBy(x => x.ReqDate).ToList();
-                int uid = Convert.ToInt32(UserId);
-                //}
-                Entity = ret.Where(x=>x.userid==uid).FirstOrDefault();
+                try
+                {
+                    int uid = Convert.ToInt32(UserId);
+                    Entity = ret.Where(x => x.userid == uid).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                }
             }
             return ret;
         }
@@ -388,12 +390,21 @@ namespace PowerusyData
                         at.importationid = userID.ToString();
                         db.tbl_importation_document.Add(at);
                     }
+                    var CkEntity = db.tbl_shipper.Where(x => x.userid == userID).FirstOrDefault();
+                    if(CkEntity!=null)
+                    {
+                        CkEntity = entity;
+                        db.Entry(CkEntity).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        entity.userid = userID;
+                        entity.location = SeletedCountry;
+                        entity.statusid = 1;
+                        entity.dateadded = DateTime.Now;
+                        db.tbl_shipper.Add(entity);
+                    }
                     
-                    entity.userid = userID;
-                    entity.location = SeletedCountry;
-                    entity.statusid = 1;
-                    entity.dateadded = DateTime.Now;
-                    db.tbl_shipper.Add(entity);
                     db.SaveChanges();
                     IsValid = true;
                     string op = "Registration completed, request is pending verification";

@@ -42,8 +42,8 @@ namespace ifreighters.Controllers
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
 
-            //vm.UserId = Session["userid"].ToString();
-            vm.UserId = "nabbo247@gmail.com";
+            vm.UserId = Session["userid"].ToString();
+            //vm.UserId = "nabbo247@gmail.com";
             
             vm.HandleRequest();
             if (vm.IsValid)
@@ -172,8 +172,9 @@ namespace ifreighters.Controllers
                 vm.Owner = true;
             if (Session["usrID"] != null)
                 vm.UserId = Session["usrID"].ToString();
-            // vm.EventArgument = page.ToString();
+             vm.EventArgument = vm.JobBid.BidID.ToString();
             //vm.EventCommand = "Edit";
+            //vm.JobBid.BidID = Convert.ToInt32(page.ToString());
             vm.HandleRequest();
             if (vm.IsValid)
             {

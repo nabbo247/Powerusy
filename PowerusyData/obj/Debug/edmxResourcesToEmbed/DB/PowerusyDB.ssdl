@@ -60,6 +60,16 @@
     <Property Name="DueDate" Type="datetime" />
     <Property Name="status" Type="int" />
   </EntityType>
+  <EntityType Name="tbl_bookmarked">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BidID" Type="int" />
+    <Property Name="AgentID" Type="int" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="status" Type="int" />
+  </EntityType>
   <EntityType Name="tbl_clearing">
     <Key>
       <PropertyRef Name="id" />
@@ -260,6 +270,39 @@ warning 6002: The table/view 'Powerusydb.dbo.tbl_counntries' does not have a pri
     <Property Name="Logo" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'Powerusydb.dbo.View_bid_jobs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_bid_jobs">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="BidID" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="category" Type="nvarchar" MaxLength="50" />
+    <Property Name="subcategory" Type="nvarchar" MaxLength="50" />
+    <Property Name="service" Type="nvarchar" MaxLength="50" />
+    <Property Name="Consignee" Type="nvarchar" MaxLength="50" />
+    <Property Name="BookingNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="BLNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="VesselName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PortLoading" Type="nvarchar" MaxLength="50" />
+    <Property Name="PortDischarge" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShippingLines" Type="nvarchar" MaxLength="50" />
+    <Property Name="EstBudget" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="GoodDescription" Type="nvarchar(max)" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="statusid" Type="int" />
+    <Property Name="IconPath" Type="nvarchar" MaxLength="100" />
+    <Property Name="comment" Type="nvarchar(max)" />
+    <Property Name="AgentID" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="DueDate" Type="datetime" />
+    <Property Name="BidDate" Type="datetime" />
+    <Property Name="BidID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="View_Shipper">
     <Key>
@@ -302,6 +345,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
     <EntitySet Name="tbl_auditlog" EntityType="Self.tbl_auditlog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_bidding" EntityType="Self.tbl_bidding" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_bidding_jobs" EntityType="Self.tbl_bidding_jobs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_bookmarked" EntityType="Self.tbl_bookmarked" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="dbo" store:Type="Tables" />
@@ -322,6 +366,35 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
     [tbl_counntries].[Brief_desc] AS [Brief_desc], 
     [tbl_counntries].[CountryName] AS [CountryName]
     FROM [dbo].[tbl_counntries] AS [tbl_counntries]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_bid_jobs" EntityType="Self.View_bid_jobs" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_bid_jobs].[id] AS [id], 
+    [View_bid_jobs].[GoodsType] AS [GoodsType], 
+    [View_bid_jobs].[Name] AS [Name], 
+    [View_bid_jobs].[category] AS [category], 
+    [View_bid_jobs].[subcategory] AS [subcategory], 
+    [View_bid_jobs].[service] AS [service], 
+    [View_bid_jobs].[Consignee] AS [Consignee], 
+    [View_bid_jobs].[BookingNo] AS [BookingNo], 
+    [View_bid_jobs].[BLNumber] AS [BLNumber], 
+    [View_bid_jobs].[VesselName] AS [VesselName], 
+    [View_bid_jobs].[PortLoading] AS [PortLoading], 
+    [View_bid_jobs].[PortDischarge] AS [PortDischarge], 
+    [View_bid_jobs].[ShippingLines] AS [ShippingLines], 
+    [View_bid_jobs].[EstBudget] AS [EstBudget], 
+    [View_bid_jobs].[GoodDescription] AS [GoodDescription], 
+    [View_bid_jobs].[UserID] AS [UserID], 
+    [View_bid_jobs].[Date] AS [Date], 
+    [View_bid_jobs].[statusid] AS [statusid], 
+    [View_bid_jobs].[IconPath] AS [IconPath], 
+    [View_bid_jobs].[comment] AS [comment], 
+    [View_bid_jobs].[AgentID] AS [AgentID], 
+    [View_bid_jobs].[Amount] AS [Amount], 
+    [View_bid_jobs].[DueDate] AS [DueDate], 
+    [View_bid_jobs].[BidDate] AS [BidDate], 
+    [View_bid_jobs].[BidID] AS [BidID]
+    FROM [dbo].[View_bid_jobs] AS [View_bid_jobs]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="View_Shipper" EntityType="Self.View_Shipper" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

@@ -21,6 +21,8 @@
     <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
     <EntitySet Name="tbl_bidding" EntityType="powerusyDBCoreModel.tbl_bidding" />
     <EntitySet Name="tbl_bidding_jobs" EntityType="powerusyDBCoreModel.tbl_bidding_jobs" />
+    <EntitySet Name="tbl_bookmarked" EntityType="powerusyDBCoreModel.tbl_bookmarked" />
+    <EntitySet Name="View_bid_jobs" EntityType="powerusyDBCoreModel.View_bid_jobs" />
   </EntityContainer>
   <EntityType Name="tbl_auditlog">
     <Key>
@@ -314,5 +316,46 @@
     <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DueDate" Type="DateTime" Precision="3" />
     <Property Name="status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_bookmarked">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BidID" Type="Int32" />
+    <Property Name="AgentID" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="View_bid_jobs">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="BidID" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="GoodsType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="subcategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Consignee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BookingNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BLNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="VesselName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PortLoading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PortDischarge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShippingLines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EstBudget" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="GoodDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="statusid" Type="Int32" />
+    <Property Name="IconPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AgentID" Type="Int32" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="BidDate" Type="DateTime" Precision="3" />
+    <Property Name="BidID" Type="Int64" Nullable="false" />
   </EntityType>
 </Schema>

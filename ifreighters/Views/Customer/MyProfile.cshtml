@@ -17,8 +17,14 @@
 <section class="gray-bg pt-4">
     <div class="container-fluid">
         <div class="row m-0">
+            @if (Session["userid"] != null && Session["Role"].ToString() == "2")//AGENT
+            {
+                @Html.Partial("~/Views/Company/_agentMenu.cshtml")
+            }@if (Session["userid"] != null && Session["Role"].ToString() == "1")//customer
+            {
+                @Html.Partial("~/Views/Customer/_customerMenu.cshtml")
+            }
 
-            @Html.Partial("_customerMenu")
             @*Html.RenderPartial("_employee");*@
             <!-- Item Wrap Start -->
             <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
@@ -155,30 +161,30 @@
                                         <div class="col-xl-4 col-lg-4">
                                             <div class="form-group">
                                                 <label>New Password</label>
-                                               
+
                                                 @Html.TextBoxFor(m => m.NewPassword, "", new { @class = "form-control", @type = "password", autocomplete = "off" })
                                             </div>
                                         </div>
                                         <div class="col-xl-4 col-lg-4">
                                             <div class="form-group">
                                                 <label>Confirm Password</label>
-                                                
+
                                                 @Html.TextBoxFor(m => m.ConfirmPassword, "", new { @class = "form-control", @type = "password", autocomplete = "off" })
                                             </div>
                                         </div>
                                         @*<div class="col-xl-12 col-lg-12">
-                        <div class="form-group">
-                            <input id="sec" class="checkbox-custom" name="Security" type="checkbox">
-                            <label for="sec" class="checkbox-custom-label">Enable Two-Step Verification via Phone</label>
-                        </div>
-                    </div>*@
+                                        <div class="form-group">
+                                            <input id="sec" class="checkbox-custom" name="Security" type="checkbox">
+                                            <label for="sec" class="checkbox-custom-label">Enable Two-Step Verification via Phone</label>
+                                        </div>
+                                    </div>*@
                                     </div>
                                 </div>
                             }
                         </div>
                         <!-- Single Wrap End -->
 
-                        <button type="button" data-pdsa-action="save"  class="btn btn-save">Save Changes</button>
+                        <button type="button" data-pdsa-action="save" class="btn btn-save">Save Changes</button>
 
                     </div>
                 </div>
