@@ -313,5 +313,6 @@
     <Property Name="Date" Type="DateTime" Precision="3" />
     <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="DueDate" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Int32" />
   </EntityType>
 </Schema>

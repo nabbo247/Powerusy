@@ -303,6 +303,7 @@
     <EntitySetMapping Name="tbl_bidding_jobs">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_jobs">
         <MappingFragment StoreEntitySet="tbl_bidding_jobs">
+          <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="DueDate" ColumnName="DueDate" />
           <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="Date" ColumnName="Date" />

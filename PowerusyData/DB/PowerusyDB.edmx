@@ -63,6 +63,7 @@
           <Property Name="Date" Type="datetime" />
           <Property Name="Comment" Type="nvarchar(max)" />
           <Property Name="DueDate" Type="datetime" />
+          <Property Name="status" Type="int" />
         </EntityType>
         <EntityType Name="tbl_clearing">
           <Key>
@@ -680,6 +681,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -989,6 +991,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySetMapping Name="tbl_bidding_jobs">
             <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_jobs">
               <MappingFragment StoreEntitySet="tbl_bidding_jobs">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="DueDate" ColumnName="DueDate" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Date" ColumnName="Date" />

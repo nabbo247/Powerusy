@@ -58,6 +58,7 @@
     <Property Name="Date" Type="datetime" />
     <Property Name="Comment" Type="nvarchar(max)" />
     <Property Name="DueDate" Type="datetime" />
+    <Property Name="status" Type="int" />
   </EntityType>
   <EntityType Name="tbl_clearing">
     <Key>

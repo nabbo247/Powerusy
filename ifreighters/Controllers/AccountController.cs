@@ -48,7 +48,7 @@ namespace ifreighters.Controllers
                 string _path = Path.Combine(Server.MapPath("~/upload"), _FileName);
                 vm.uploadedImage.SaveAs(_path);
                 //file path 
-                //vm.PosR.ApplicationForm1 = _FileName;
+                vm.Entity.Logo = _FileName;
             }
             vm.HandleRequest();
             if (vm.IsValid)
