@@ -32,5 +32,6 @@ namespace PowerusyData.DB
         public Nullable<int> UserID { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> statusid { get; set; }
+        public string IconPath { get; set; }
     }
 }

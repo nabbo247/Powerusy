@@ -24,7 +24,7 @@ namespace ifreighters.Controllers
             //vm.IsDetailAreaVisible = true;
             //vm.IsSearchAreaVisible = false;
             //vm.IsListAreaVisible = false;
-            vm.EventArgument = "1012";//Session["usrID"].ToString();
+            vm.EventArgument = Session["usrID"].ToString();
             vm.EventCommand = "Edit";
             vm.HandleRequest();
             return View(vm);
@@ -86,8 +86,8 @@ namespace ifreighters.Controllers
             //vm.EventCommand = "save";
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
-            //vm.UserId = Session["userid"].ToString();
-            vm.UserId = "nabbo247@gmail.com";
+            vm.UserId = Session["userid"].ToString();
+            //vm.UserId = "nabbo247@gmail.com";
             if (vm.BillofLading != null && vm.BillofLading.ContentLength > 0)
             {
                 Random rsm = new Random();
@@ -148,19 +148,47 @@ namespace ifreighters.Controllers
         public ActionResult Jobdetail(int? page)
         {
             JobdetailViewModel vm = new JobdetailViewModel();
-            //vm.UserId = Session["userid"].ToString();
-            //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
-            //vm.IsDetailAreaVisible = true;
-            //vm.IsSearchAreaVisible = false;
             if(Session["Role"]!=null&& Session["Role"].ToString()=="2")
             {
                 vm.Owner = false;
             }else
             vm.Owner = true;
+            if(Session["usrID"]!=null)
+              vm.UserId = Session["usrID"].ToString();
             vm.EventArgument = page.ToString();
             vm.EventCommand = "Edit";
+            vm.JobBid.BidID = Convert.ToInt32(page.ToString());
             vm.HandleRequest();
+            return View(vm);
+        }
+        [HttpPost]
+        public ActionResult Jobdetail(JobdetailViewModel vm)
+        {
+            if (Session["Role"] != null && Session["Role"].ToString() == "2")
+            {
+                vm.Owner = false;
+            }
+            else
+                vm.Owner = true;
+            if (Session["usrID"] != null)
+                vm.UserId = Session["usrID"].ToString();
+            // vm.EventArgument = page.ToString();
+            //vm.EventCommand = "Edit";
+            vm.HandleRequest();
+            if (vm.IsValid)
+            {
+                TempData["Msg"] = vm.Msg;
+                // NOTE: Must clear the model state in order to bind
+                //       the @Html helpers to the new model values
+                ModelState.Clear();
+            }
+            else
+            {
+                foreach (KeyValuePair<string, string> item in vm.ValidationErrors)
+                {
+                    ModelState.AddModelError(item.Key, item.Value);
+                }
+            }
             return View(vm);
         }
         public ActionResult Activebids(int? page)

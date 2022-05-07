@@ -94,6 +94,9 @@
     <Compile Include="DB\tbl_bidding.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\tbl_bidding_jobs.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\tbl_clearing.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>

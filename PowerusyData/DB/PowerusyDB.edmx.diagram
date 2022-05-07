@@ -24,6 +24,7 @@
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_services" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_users" Width="1.5" PointX="13.375" PointY="3.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_bidding" Width="1.5" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_bidding_jobs" Width="1.5" PointX="13.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

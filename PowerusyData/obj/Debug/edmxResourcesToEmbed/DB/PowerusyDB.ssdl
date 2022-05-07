@@ -45,6 +45,19 @@
     <Property Name="UserID" Type="int" />
     <Property Name="Date" Type="datetime" />
     <Property Name="statusid" Type="int" />
+    <Property Name="IconPath" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tbl_bidding_jobs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BidID" Type="int" />
+    <Property Name="AgentID" Type="int" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="DueDate" Type="datetime" />
   </EntityType>
   <EntityType Name="tbl_clearing">
     <Key>
@@ -287,6 +300,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
     <EntitySet Name="tbl_attachment" EntityType="Self.tbl_attachment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_auditlog" EntityType="Self.tbl_auditlog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_bidding" EntityType="Self.tbl_bidding" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_bidding_jobs" EntityType="Self.tbl_bidding_jobs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="dbo" store:Type="Tables" />

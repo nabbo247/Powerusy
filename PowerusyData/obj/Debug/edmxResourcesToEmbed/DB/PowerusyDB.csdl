@@ -20,6 +20,7 @@
     <EntitySet Name="tbl_services" EntityType="powerusyDBCoreModel.tbl_services" />
     <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
     <EntitySet Name="tbl_bidding" EntityType="powerusyDBCoreModel.tbl_bidding" />
+    <EntitySet Name="tbl_bidding_jobs" EntityType="powerusyDBCoreModel.tbl_bidding_jobs" />
   </EntityContainer>
   <EntityType Name="tbl_auditlog">
     <Key>
@@ -299,5 +300,18 @@
     <Property Name="UserID" Type="Int32" />
     <Property Name="Date" Type="DateTime" Precision="3" />
     <Property Name="statusid" Type="Int32" />
+    <Property Name="IconPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_bidding_jobs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BidID" Type="Int32" />
+    <Property Name="AgentID" Type="Int32" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DueDate" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

@@ -23,6 +23,7 @@ namespace PowerusyData
             CountryList = new List<SelectList>();
             SearchEntity = new tbl_bidding();
             Entity = new tbl_bidding();
+            JobBid = new tbl_bidding_jobs();
             ValidationErrors = new List<KeyValuePair<string, string>>();
         }
         public string ActionTypeId { get; set; }
@@ -31,12 +32,13 @@ namespace PowerusyData
         public int pageSize { get; set; }
         public int pageNumber { get; set; }
         public tbl_bidding UsrReq { get; set; }
+        public tbl_bidding_jobs JobBid { get; set; }
         public string ConfirmPassword { get; set; }
         public List<SelectList> List { set; get; }
         public List<SelectList> CountryList { set; get; }
         public bool IsStep1 { get; set; }
         public bool IsStep2 { get; set; }
-        public bool IsStep3 { get; set; }
+        public bool Agree { get; set; }
         public List<tbl_bidding> UsrLst { get; set; }
         public tbl_bidding SearchEntity { get; set; }
         public tbl_bidding Entity { get; set; }
@@ -85,12 +87,64 @@ namespace PowerusyData
                     IsStep2 = false;
                     IsStep1 = true;
                     break;
-
+                case "bid":
+                    SubmitBid();
+                    break;
             }
             GetDropDown();
             base.HandleRequest();
         }
 
+        private bool SubmitBid()
+        {
+           
+            bool ret = false;
+            ret = ValidateBid(JobBid);
+
+            if (ret)
+            {
+                using (var db = new powerusyDBCoreEntities())
+                {
+                    int ID = Convert.ToInt32(UserId);
+                    JobBid.AgentID = ID;
+                    JobBid.Date = DateTime.Now;
+                    db.tbl_bidding_jobs.Add(JobBid);
+                    db.SaveChanges();
+                    IsValid = true;
+                    
+                    Msg = "Bid created successful";
+                }
+
+            }
+            return ret;
+        }
+        public bool ValidateBid(tbl_bidding_jobs entity)
+        {
+            ValidationErrors.Clear();
+            if (string.IsNullOrEmpty(entity.Comment))
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply comment."));
+                IsValid = false;
+            }
+            if (entity.Amount<=0)
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply your amount."));
+                IsValid = false;
+            }
+            if (Agree != true)
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "You must agree to the policy."));
+                IsValid = false;
+            }
+            
+            return (ValidationErrors.Count == 0);
+        }
         protected override void Add()
         {
             IsValid = true;
@@ -219,7 +273,7 @@ namespace PowerusyData
             }
             return ret;
         }
-
+        
         public bool Delete(tbl_bidding entity)
         {
             using (var db = new powerusyDBCoreEntities())

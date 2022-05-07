@@ -278,6 +278,7 @@
     <EntitySetMapping Name="tbl_bidding">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding">
         <MappingFragment StoreEntitySet="tbl_bidding">
+          <ScalarProperty Name="IconPath" ColumnName="IconPath" />
           <ScalarProperty Name="statusid" ColumnName="statusid" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -296,6 +297,19 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_bidding_jobs">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_jobs">
+        <MappingFragment StoreEntitySet="tbl_bidding_jobs">
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+          <ScalarProperty Name="BidID" ColumnName="BidID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

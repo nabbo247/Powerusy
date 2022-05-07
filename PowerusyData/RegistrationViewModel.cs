@@ -43,7 +43,7 @@ namespace PowerusyData
             SearchEntity = new tbl_users();
             Entity = new tbl_users();
             List = new List<SelectList>();
-            GetDropDown();
+            //GetDropDown();
             base.Init();
         }
 
