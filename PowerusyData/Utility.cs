@@ -480,14 +480,14 @@ namespace PowerusyData
     {
         public async Task<bool> sendMail(string destinationEmail, string sourceEmail, string ccEmailAddress, string body, string subject, string filename)
         {
-           
+
             bool status = false;
             try
             {
                 //MailMessage msgMail = new MailMessage();
                 webmail.WebService ser = new webmail.WebService();
                 status = ser.sendMail(destinationEmail, sourceEmail, ccEmailAddress, body, subject, filename);
-                
+
                 //int sf = Convert.ToInt16(status);
                 //_PensionDB.tbl_smsEmail.Add(new tbl_smsEmail
                 //{
@@ -674,9 +674,9 @@ namespace PowerusyData
             return symCryptography.Decrypt(strDek);
         }
 
-       
 
-       
+
+
         public static void formatMobile_to_234(ref string mobile)
         {
             if (mobile.StartsWith("0"))
@@ -702,5 +702,15 @@ namespace PowerusyData
                 mobile = string.Format("0{0}", mobile);
             }
         }
+    }
+
+    public class SessionKeys
+    {
+        public static readonly string Username = "userid";
+        public static readonly string Email = "email";
+        public static readonly string FName = "fname";
+        public static readonly string Role = "role";
+        public static readonly string UserId = "usrID";
+        public static readonly string Dashboard = "dashboard";
     }
 }
