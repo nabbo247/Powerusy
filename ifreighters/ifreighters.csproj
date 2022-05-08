@@ -145,6 +145,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -490,6 +491,9 @@
     <Content Include="Template\assets\fonts\themify9f24.ttf" />
     <Content Include="Template\assets\fonts\themify9f24.woff" />
     <Content Include="Template\assets\fonts\themifyd41d.eot" />
+    <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\Company\Bookmarked.cshtml" />
+    <Content Include="Views\Company\Activebids.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

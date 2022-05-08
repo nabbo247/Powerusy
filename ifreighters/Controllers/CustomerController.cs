@@ -47,9 +47,14 @@ namespace ifreighters.Controllers
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
 
+
             //vm.UserId = Session[SessionKeys.Username].ToString();
             vm.UserId = "nabbo247@gmail.com";
 
+
+           // vm.UserId = Session["userid"].ToString();
+            //vm.UserId = "nabbo247@gmail.com";
+            
             vm.HandleRequest();
             if (vm.IsValid)
             {
@@ -176,11 +181,20 @@ namespace ifreighters.Controllers
             }
             else
                 vm.Owner = true;
+
             if (Session[SessionKeys.UserId] != null)
                 vm.UserId = Session[SessionKeys.UserId].ToString();
             // vm.EventArgument = page.ToString();
             //vm.EventCommand = "Edit";
+
+            //if (Session["usrID"] != null)
+              //  vm.UserId = Session["usrID"].ToString();
+             vm.EventArgument = vm.JobBid.BidID.ToString();
+            //
+            //vm.JobBid.BidID = Convert.ToInt32(page.ToString());
+
             vm.HandleRequest();
+            vm.EventCommand = "Edit";
             if (vm.IsValid)
             {
                 TempData["Msg"] = vm.Msg;

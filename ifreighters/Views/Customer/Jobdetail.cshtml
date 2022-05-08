@@ -59,19 +59,18 @@
                                 <div class="_jb_details01_authors_caption">
                                     <h4 class="jbs_title">@Model.Entity.VesselName<img src="~/assets/img/verify.svg" class="ml-1" width="12" alt=""></h4>
                                     <ul class="jbx_info_list">
-
                                         <li><span><i class="ti-location-pin"></i>Port of loading : @Model.Entity.PortLoading</span></li>
                                         <li><span><i class="ti-location-pin"></i>Port of discharge : @Model.Entity.PortDischarge</span></li>
                                         <li><span><i class="ti-credit-card"></i>Est. Budget &#8358; @String.Format("{0:N0}", Model.Entity.EstBudget) </span></li>
                                         <li><span><i class="ti-timer"></i>@Model.Entity.Date</span></li>
                                     </ul>
                                     <ul class="jbx_info_list">
-                                        @*<li><div class="jb_types fulltime">@Model.Entity.PortLoading</div></li>*@
                                         <li><div class="jb_types urgent">B/L Number:@Model.Entity.BLNumber</div></li>
                                         <li><div class="jb_types remote">BookingNo:@Model.Entity.BookingNo</div></li>
                                     </ul>
                                 </div>
                             </div>
+
 
                             <div class="_jb_details01_last">
 
@@ -80,9 +79,17 @@
                                         <a href="@Url.Action("BookmarkJob", "Customer", new { bid = Model.EventArgument })" class="_saveed_jb"><i class="fa fa-heart"></i></a>
                                     </li>
                                 </ul>
-                            </div>
 
-                        </div>
+                            @if (!Model.Owner)
+                            {
+                                <div class="_exlio_buttons">
+                                    <ul class="bottoms_applies">
+                                        <li><a href="#" data-pdsa-action="savejob" class="_saveed_jb">Save Job</a></li>
+                                    </ul>
+                                </div>
+                            }
+
+                            </div>
                     </div>
 
                     <div class="_job_detail_single">
@@ -100,6 +107,7 @@
                             <li>Proforma invoice</li>
                             <li>Packaging Lists</li>
                             <li>Others</li>
+                            @*<a href="~/upload/@Model.PosR.ApplicationForm2" target="_blank">Bill of Lading</a>*@
                         </ul>
                     </div>
 
@@ -117,12 +125,12 @@
                                 </ul>
                             </div>
 
-                            <div class="_exlio_buttons">
+                            @*<div class="_exlio_buttons">
                                 <ul class="bottoms_applies">
                                     <li><a href="#" class="_saveed_jb">Save Job</a></li>
                                     <li><a href="#" class="_applied_jb">Apply Job</a></li>
                                 </ul>
-                            </div>
+                            </div>*@
                         </div>
                     }
 

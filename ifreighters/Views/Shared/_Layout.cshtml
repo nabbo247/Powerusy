@@ -51,8 +51,13 @@
                                     </li>
                                     @if (Session[SessionKeys.Username] != null)
                                     {
-                                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Customer")</li>
-
+                                        if (Session["userid"] != null && Session["Role"].ToString() == "2")//AGENT
+                                        {
+                                            <li>@Html.ActionLink("Dashboard", "Dashboard", "Company")</li>
+                                        }if (Session["userid"] != null && Session["Role"].ToString() == "1")//customer
+                                        {
+                                            <li>@Html.ActionLink("Dashboard", "Dashboard", "Customer")</li>
+                                        }
                                     }
                                     @if (Session[SessionKeys.Username] != null)
                                     {
@@ -92,8 +97,6 @@
         <!-- ============================================================== -->
         <!-- Top header  -->
         <!-- ============================================================== -->
-
-
         @RenderBody()
         <!-- =========================== Footer Start ========================================= -->
         <footer class="light-footer">
@@ -104,7 +107,7 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="footer-widget">
                                 <img src="~/assets/img/logo.png" class="img-fluid f-logo" width="120" alt="">
-                                <p>407-472 Rue Saint-Sulpice, Montreal<br>Quebec, H2Y 2V8</p>
+                                <p>Victoria Island 106104, Lagos Nigeria</p>
                                 <ul class="footer-bottom-social">
                                     <li><a href="#"><i class="ti-facebook"></i></a></li>
                                     <li><a href="#"><i class="ti-twitter"></i></a></li>

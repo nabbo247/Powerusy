@@ -45,7 +45,12 @@ namespace PowerusyData.DB
         public virtual DbSet<tbl_users> tbl_users { get; set; }
         public virtual DbSet<tbl_bidding> tbl_bidding { get; set; }
         public virtual DbSet<tbl_bidding_jobs> tbl_bidding_jobs { get; set; }
+
         public virtual DbSet<tbl_bidding_bookmark> tbl_bidding_bookmark { get; set; }
         public virtual DbSet<tbl_bidding_view> tbl_bidding_view { get; set; }
+
+        public virtual DbSet<tbl_bookmarked> tbl_bookmarked { get; set; }
+        public virtual DbSet<View_bid_jobs> View_bid_jobs { get; set; }
+
     }
 }
