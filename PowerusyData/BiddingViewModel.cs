@@ -40,6 +40,7 @@ namespace PowerusyData
         public bool IsStep2 { get; set; }
         public bool IsStep3 { get; set; }
         public List<tbl_bidding> UsrLst { get; set; }
+        public Dictionary<int, int> BiddingsApplied { get; set; }
         public tbl_bidding SearchEntity { get; set; }
         public tbl_bidding Entity { get; set; }
         public tbl_users usrs { get; set; }
@@ -59,6 +60,7 @@ namespace PowerusyData
         protected override void Init()
         {
             UsrLst = new List<tbl_bidding>();
+            BiddingsApplied = new Dictionary<int, int>();
             SearchEntity = new tbl_bidding();
             Entity = new tbl_bidding();
             usrs = new tbl_users();
@@ -189,13 +191,13 @@ namespace PowerusyData
             // TODO: Add data access method here
 
             ret = CreateData();
-            
+
             UsrReq.id = ReqID;
             UsrReq = GetPOSData();
             if (ReqID > 0)
                 ret = ret.Where(x => x.id == ReqID).ToList();
-            if(ret.Count>0)
-             usrs = GetUsrData(ret[0].UserID);
+            if (ret.Count > 0)
+                usrs = GetUsrData(ret[0].UserID);
 
             GetDropDown();
             // Find the specific product
@@ -268,7 +270,7 @@ namespace PowerusyData
                   "Please Supply your BLNumber."));
                 IsValid = false;
             }
-            if ((entity.EstBudget<=0))
+            if ((entity.EstBudget <= 0))
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
@@ -319,7 +321,7 @@ namespace PowerusyData
                     var UserIDI = db.tbl_users.Where(x => x.username == UserId).FirstOrDefault();
                     //UserIDI.id = 1;
                     int userID = UserIDI.id;
-                    if(!string.IsNullOrEmpty(BillofLadingName))
+                    if (!string.IsNullOrEmpty(BillofLadingName))
                     {
                         tbl_importation_document at = new tbl_importation_document();
                         at.dateadded = DateTime.Now;
@@ -472,6 +474,14 @@ namespace PowerusyData
                 {
                     //PosReq_vws
                     ret = db.tbl_bidding.ToList();
+
+                    var applied = db.tbl_bidding_jobs.GroupBy(x => x.BidID).Select(s => new { key = s.Key.Value, value = s.Count() });
+
+                    foreach (var job in applied)
+                    {
+                        BiddingsApplied.Add(job.key, job.value);
+                    }
+
                     if (pageNumber > 0 && pageSize > 0)
                     {
                         PageList = ret.ToPagedList(pageNumber, pageSize);
