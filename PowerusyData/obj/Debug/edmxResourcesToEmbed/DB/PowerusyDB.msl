@@ -314,17 +314,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_bookmarked">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bookmarked">
-        <MappingFragment StoreEntitySet="tbl_bookmarked">
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="AgentID" ColumnName="AgentID" />
-          <ScalarProperty Name="BidID" ColumnName="BidID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="View_bid_jobs">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.View_bid_jobs">
         <MappingFragment StoreEntitySet="View_bid_jobs">
@@ -353,6 +342,18 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_bidding_bookmark">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_bookmark">
+        <MappingFragment StoreEntitySet="tbl_bidding_bookmark">
+          <ScalarProperty Name="bid_owner_id" ColumnName="bid_owner_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="bookmarked_by_id" ColumnName="bookmarked_by_id" />
+          <ScalarProperty Name="bidding_id" ColumnName="bidding_id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

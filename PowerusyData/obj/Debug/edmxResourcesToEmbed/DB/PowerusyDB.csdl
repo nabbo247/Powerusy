@@ -21,8 +21,8 @@
     <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
     <EntitySet Name="tbl_bidding" EntityType="powerusyDBCoreModel.tbl_bidding" />
     <EntitySet Name="tbl_bidding_jobs" EntityType="powerusyDBCoreModel.tbl_bidding_jobs" />
-    <EntitySet Name="tbl_bookmarked" EntityType="powerusyDBCoreModel.tbl_bookmarked" />
     <EntitySet Name="View_bid_jobs" EntityType="powerusyDBCoreModel.View_bid_jobs" />
+    <EntitySet Name="tbl_bidding_bookmark" EntityType="powerusyDBCoreModel.tbl_bidding_bookmark" />
   </EntityContainer>
   <EntityType Name="tbl_auditlog">
     <Key>
@@ -317,16 +317,6 @@
     <Property Name="DueDate" Type="DateTime" Precision="3" />
     <Property Name="status" Type="Int32" />
   </EntityType>
-  <EntityType Name="tbl_bookmarked">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BidID" Type="Int32" />
-    <Property Name="AgentID" Type="Int32" />
-    <Property Name="Date" Type="DateTime" Precision="3" />
-    <Property Name="status" Type="Int32" />
-  </EntityType>
   <EntityType Name="View_bid_jobs">
     <Key>
       <PropertyRef Name="id" />
@@ -357,5 +347,16 @@
     <Property Name="DueDate" Type="DateTime" Precision="3" />
     <Property Name="BidDate" Type="DateTime" Precision="3" />
     <Property Name="BidID" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_bidding_bookmark">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bidding_id" Type="Int32" />
+    <Property Name="bookmarked_by_id" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="bid_owner_id" Type="Int32" />
   </EntityType>
 </Schema>

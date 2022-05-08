@@ -1,0 +1,197 @@
+﻿
+
+@model PowerusyData.BiddingViewModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Managebidders";
+}
+<!-- ============================ Page Title Start================================== -->
+<div class="page-title bg-cover" style="background: url(../../assets/img/bn-1.jpg)no-repeat; " data-overlay="5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12"></div>
+        </div>
+    </div>
+</div>
+<!-- ============================ Page Title End ================================== -->
+<!-- ============================ Main Section Start ================================== -->
+<section class="gray-bg pt-4">
+    <div class="container-fluid">
+        <div class="row m-0">
+
+            @Html.Partial("_customerMenu", Model)
+            @*Html.RenderPartial("_employee");*@
+            <!-- Item Wrap Start -->
+            <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <!-- Breadcrumbs -->
+                        <div class="bredcrumb_wrap">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Manage Bidders</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                @using (Html.BeginForm())
+                {
+                    <!-- BEGIN HIDDEN FIELDS AREA -->
+                    @Html.HiddenFor(m => m.EventCommand)
+                    @Html.HiddenFor(m => m.Mode)
+                    @Html.HiddenFor(m => m.EventArgument)
+
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12">
+                            @if (!Model.IsValid)
+                            {
+                                <div class="alert alert-danger
+                    alert-dismissable"
+                                     role="alert">
+                                    <button type="button" class="close"
+                                            data-dismiss="alert">
+                                        <span aria-hidden="true">
+                                            &times;
+                                        </span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    @Html.ValidationSummary(false)
+                                </div>
+                            }
+                            @if (TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-dismissable alert-success">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        x
+                                    </button>
+                                    @TempData["Msg"].ToString()
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    if (Model.IsListAreaVisible)
+                    {
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                <!-- Single Wrap -->
+                                <div class="_dashboard_content">
+                                    <div class="_dashboard_content_header">
+                                        <div class="_dashboard__header_flex">
+                                            <h4><i class="fa fa-user mr-1"></i>Manage Bidders</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="_dashboard_content_body p-0">
+                                        <div class="_grouping_list_task">
+
+                                            <!-- Single List -->
+                                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                                <div class="_dash_grid_box">
+                                                   
+                                                    <div class="_dash_grid_box_thumb">
+                                                        <img src="~/assets/img/team-1.jpg" class="img-fluid circle">
+                                                    </div>
+                                                    <div class="_dash_grid_box_caption">
+                                                        <span class="_elopi_location"><i class="ti-location-pin mr-1"></i>Denver, USA</span>
+                                                        <h4 class="_elcio_title"><a href="#">Jack J. Nabors</a></h4>
+                                                        <div class="_dash_usr_rates">
+                                                            <span class="good">4.5</span>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+
+                                                        <div class="_dash_usr_bid_rate">
+                                                            <ul>
+                                                                <li>$5500<span>Fixed price</span></li>
+                                                                <li>08 Days<span>Delivery Time</span></li>
+                                                            </ul>
+                                                        </div>
+
+                                                        <div class="_dash_usr_actioned">
+                                                            <ul>
+                                                                <li><a href="#" data-toggle="tooltip" data-placement="top" title="Accept Offer" class="_download_cv"><i class="fa fa-check"></i>Accept Offer</a></li>
+                                                                <li><a href="#" data-toggle="modal" data-target="#message" class="_send_message"><i class="fa fa-envelope"></i>Send Message</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="_dash_usr_information">
+                                                        <ul>
+                                                            <li><i class="fa fa-envelope mr-1"></i>uppcli@gmail.com</li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="+91 235 658 4758" class="_call_now"><i class="fa fa-phone"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Wrap End -->
+
+                            </div>
+                        </div>
+                    }
+
+
+                    if (Model.IsDetailAreaVisible)
+                    {
+
+
+                    }
+                }
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ============================ Main Section End ================================== -->
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+            $(document).ajaxStart(function () {
+                $("#loading").show();
+            });
+            $(document).ajaxStop(function () {
+                $("#loading").hide();
+            });
+
+            $("[data-pdsa-action]").on("click", function (e) {
+
+                $("#loading").show();
+                e.preventDefault();
+
+                $("#EventCommand").val($(this).data("pdsa-action"));
+
+                $("#EventArgument").val($(this).attr("data-pdsa-val"));
+
+                $("form").submit();
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        console.log('Submission was successful.');
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log('An error occurred.');
+                        console.log(data);
+                    },
+                });
+                $("#loading").hide();
+            });
+        });
+    </script>
+}
+
+

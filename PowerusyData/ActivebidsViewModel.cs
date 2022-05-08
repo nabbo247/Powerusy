@@ -222,7 +222,7 @@ namespace PowerusyData
             using (var db = new powerusyDBCoreEntities())
             {
                 int ID = Convert.ToInt32(EventArgument);
-                var retEnt = db.tbl_bookmarked.Where(x => x.BidID == ID).SingleOrDefault();
+                var retEnt = db.tbl_bidding_bookmark.Where(x => x.bidding_id == ID).SingleOrDefault();
                 db.Entry(retEnt).State = EntityState.Deleted;
                 db.SaveChanges();
                 IsValid = true;

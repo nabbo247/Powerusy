@@ -399,7 +399,7 @@ namespace PowerusyData
                 {
                     //PosReq_vws
                     int UsrID = Convert.ToInt32(UserId);
-                    var Bookmark = db.tbl_bookmarked.Where(m => m.AgentID == UsrID).ToList().Select(x=>x.BidID);
+                    var Bookmark = db.tbl_bidding_bookmark.Where(m => m.bookmarked_by_id == UsrID).ToList().Select(x=>x.bidding_id);
                     ret = db.tbl_bidding.Where(z=> Bookmark.Contains(z.id)).ToList();
                     if (pageNumber > 0 && pageSize > 0)
                     {

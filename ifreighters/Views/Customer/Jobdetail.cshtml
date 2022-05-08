@@ -42,15 +42,26 @@
                                     </ul>
                                 </div>
                             </div>
-                            @if (!Model.Owner)
-                            {
-                                <div class="_exlio_buttons">
-                                    <ul class="bottoms_applies">
-                                        <li><a href="#" data-pdsa-action="savejob" class="_saveed_jb">Save Job</a></li>
-                                    </ul>
-                                </div>
-                            }
+                            
+                            <div class="_jb_details01_last">
+
+                                <ul class="_flex_btn">
+                                    <li>
+                                        <a href="@Url.Action("BookmarkJob", "Customer", new { bid = Model.EventArgument })" class="_saveed_jb"><i class="fa fa-heart"></i></a>
+                                    </li>
+                                </ul>
+
+                                @if (!Model.Owner)
+                                {
+                                    <div class="_exlio_buttons">
+                                        <ul class="bottoms_applies">
+                                            <li><a href="#" data-pdsa-action="savejob" class="_saveed_jb">Save Job</a></li>
+                                        </ul>
+                                    </div>
+                                }
+
                             </div>
+                        </div>
                     </div>
 
                     <div class="_job_detail_single">

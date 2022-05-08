@@ -1,0 +1,52 @@
+﻿
+<div class="col-xl-3 col-lg-4 col-md-12 col-sm-12">
+    <div class="dashboard-navbar overlio-top">
+
+        <div class="d-user-avater">
+            @if (Session["LogoPath"] != null && !string.IsNullOrEmpty(Session["LogoPath"].ToString()))
+            {
+                <img src="~/upload/@Session["LogoPath"].ToString()" height="200" width="200" class="img-fluid rounded" alt="">
+            }
+            else
+            {
+                <img src="~/assets/img/team-1.jpg" height="200" width="200" class="img-fluid rounded" alt="">
+            }
+
+
+            <h4>@(Session["fname"].ToString()+" "+Session["fname"].ToString())</h4>
+            @*<span>Canada USA</span>*@
+        </div>
+
+        <div class="d-navigation">
+            <ul id="metismenu">
+                <li class="active">
+                    @Html.ActionLink("Dashboard", "Dashboard", "Company")
+                </li>
+                <li>@Html.ActionLink("My Profile", "MyProfile", "Customer")</li>
+                <li>@Html.ActionLink("Company Info", "IndexAgent", "Company")</li>
+                <li>
+                    @Html.ActionLink("Messages", "Index", "Messages")
+                </li>
+                <li>@Html.ActionLink("Bookmarked", "Bookmarked", "Company")</li>
+
+                @*<li>
+            <a href="javascript:void(0);" class="has-arrow" aria-expanded="false"><i class="ti-bookmark-alt"></i>Bookmark</a>
+            <ul>
+                <li><a href="bookmark-jobs.html">Bookmark jobs</a></li>
+            </ul>
+        </li>*@
+                @*<li><a href="reviews.html"><i class="fa fa-star"></i>Reviews</a></li>*@
+                
+                <li>@Html.ActionLink("Activebids", "Activebids", "Company")</li>
+                @*<li>
+                    <a href="javascript:void(0);" class="has-arrow" aria-expanded="false"><i class="ti-desktop"></i>Tasks</a>
+                    <ul>
+                        <li><a href="active-bids.html">My Active Bids</a></li>
+                    </ul>
+                </li>*@
+                <li><a href="#"><i class="ti-power-off"></i>Log Out</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>

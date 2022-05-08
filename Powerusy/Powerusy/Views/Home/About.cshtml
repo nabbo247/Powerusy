@@ -1,0 +1,306 @@
+﻿@model PowerusyData.LoginViewModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "About Us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Customer Registration Start -->
+@using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <!-- BEGIN HIDDEN FIELDS AREA -->
+    @Html.HiddenFor(m => m.EventCommand)
+    @Html.HiddenFor(m => m.Mode)
+    @Html.HiddenFor(m => m.EventArgument)
+    <!-- END HIDDEN FIELDS AREA -->
+    <!--start Loading panel-->
+    <!-- Breadcroumbs start -->
+    <div class="wshipping-content-block wshipping-breadcroumb inner-bg-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-7">
+                    <h1>About Us</h1>
+                    <a href="index.html" title="Home">Home</a> / About Us
+                </div>
+                <div class="col-12 col-lg-5 text-right">
+                    <h4>
+                        <b>Your one-stop digital freight centre  </b> 
+                        
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcroumbs end -->
+
+    <!-- About content start -->
+    <div class="wshipping-content-block">
+        <div class="container"> 
+            <div class="row flex-lg-row-reverse">
+                <div class="col-12 col-lg-9">
+                    <div class="right-block">
+                        <h2 class="text-uppercase">Company Overview</h2>
+                        <img src="~/assets/images/company-overview.jpg" alt="" class="img-responsive feat-img" />
+                        <p>
+                            POWERUSY Nigeria Limited is a technology-driven freight, logistics and supply chain solutions provider based in Lagos, Nigeria. It was established in December 2020
+                            as a direct response to the logistics and supply chain disruptions arising from the effects of corona virus-related restrictions globally.
+                        </p>
+                        <p>
+                            Our objective is to become the undisputed digital freight broker in Nigeria by providing bespoke services to our clients. Our interests span across Import and Export services, Documentation, Customs Clearance services, Bonded Warehousing, Sea and Air Freight, Transport Logistics, Container Stacking,
+                            Consultancy and Financial Services among others. We are revolutionizing the freight market place as we bring you these services at the simple touch of a button.
+                        </p>
+
+                        <p>Our office is located in Victoria Island and houses the administrative arm of the business, while we maintain operational offices and representatives in various locations in Nigeria.</p>
+
+                        @*<div class="why-choose-us-inner wow fadeInUp">
+                            <h3 class="heading3-border text-uppercase">Why Choose Us?</h3>
+                            <div class="row">
+                                <div class="col-12 col-sm-6 col-lg-3">
+                                    <div class="why-choose-us-icon">
+                                        <i class="far fa-handshake"></i>
+                                        <h5>We Are Trusted</h5>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 col-lg-3">
+                                    <div class="why-choose-us-icon">
+                                        <i class="fa fa-unlock-alt"></i>
+                                        <h5>The Best Security</h5>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 col-lg-3">
+                                    <div class="why-choose-us-icon">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <h5>100% guarantee</h5>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 col-lg-3">
+                                    <div class="why-choose-us-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <h5>Quick Location</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                        </div>*@
+                        <h3 class="heading3-border text-uppercase">OUR MISSION</h3>
+                        <p>
+                            POWERUSY, as a logistics and supply chain solutions provider, is committed to providing fast, reliable and secure services that constantly exceed our customers' expectations.
+                        </p>
+                        <h3 class="heading3-border text-uppercase">OUR VISION</h3>
+                        <p>
+                            To be the leading digital logistics and freight marketplace in Africa
+                        </p>
+                        <p>
+                            <h3 class="heading3-border text-uppercase">CORE VALUES</h3>
+                            At POWERUSY we believe in a set of core values for how we do business, how we innovate, how we treat our customers, employees and the environment. The following values define what's important to us:
+                            <div class="advantages">
+                                <ul>
+                                    <li class="trust">
+                                        <h5>Credibility</h5>
+                                        <p>Nothing matters to us more than living up to our promises. We keep our word and hold ourselves accountable to our customers;</p>
+                                    </li>
+                                    <li class="sequrity">
+                                        <h5>Transparency</h5>
+                                        <p>This is the foundation of all enduring relationships and every successful business. We are committed to always do the right thing and to treat everyone equally;</p>
+                                    </li>
+                                    <li class="guarantee">
+                                        <h5>Trust</h5>
+                                        <p>Our operating model is built on honesty and nurturing confidence among our customers;</p>
+                                    </li>
+                                    <li class="location">
+                                        <h5>Customer Satisfaction</h5>
+                                        <p>We know that a satisfied customer means increased profitability. This is why our approach to doing business aims to make your life simple and leave a permanent smile on your face.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3">
+                    <div class="left-block left-menu">
+                        <ul>
+                            <li class="active"><a href="" title="Company Overview">Company Overview</a></li>
+                            <li><a href="" title="Aspiration & Vision">Why Choose Us?</a></li>
+                            <li><a href="" title="Strength">OUR MISSION</a></li>
+                            <li><a href="" title="Quality Policy">OUR VISION</a></li>
+                            <li><a href="" title="MANAGEMENT">MANAGEMENT</a></li>
+                        </ul>
+                    </div>
+                    @* <div class="left-block wow fadeInUp">
+            <h3 class="heading3-border text-uppercase">Latest News</h3>
+            <div class="latest-news-section">
+                <a href="" title="">
+                    <div class="news-date">28<span>Feb</span></div>
+                    <h4>News Title</h4>
+                    <div class="news-post-by">By <span>Admin</span></div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </a>
+            </div>
+            <div class="latest-news-section">
+                <a href="" title="">
+                    <div class="news-date">28<span>Feb</span></div>
+                    <h4>News Title</h4>
+                    <div class="news-post-by">By <span>Admin</span></div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </a>
+            </div>
+        </div>
+        <div class="left-block wow fadeInUp"> <a href="#" class="wshipping-button">Send Us Quote</a> </div>
+        <div class="left-block wow fadeInUp">
+            <h3 class="heading3-border text-uppercase">Clients Testimonial</h3>
+            <div class="owl-carousel testimonial">
+                <div class="testimonial-item">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="testimonial-img-bg"></div>
+                        </div>
+                        <div class="col-12">
+                            <div class="testimonial-content">
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="testimonial-img-bg"></div>
+                        </div>
+                        <div class="col-12">
+                            <div class="testimonial-content">
+                                <p>22Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About content end -->
+
+    <!-- Counter start -->
+    @*<div class="wshipping-content-block counter-section">
+        <div class="container wow fadeInUp">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="counter-block">
+                        <span class="counter-icon"><i class="fa fa-folder-open"></i></span>
+                        <p><span class="counter" data-count="578">0</span> Project Done</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="counter-block">
+                        <span class="counter-icon"><i class="fas fa-users"></i></span>
+                        <p><span class="counter" data-count="347">0</span> Permanent Clients</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="counter-block">
+                        <span class="counter-icon"><i class="fa fa-truck"></i></span>
+                        <p><span class="counter" data-count="128">0</span> Owned Vehicles </p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="counter-block">
+                        <span class="counter-icon"><i class="fa fa-male"></i></span>
+                        <p><span class="counter" data-count="67">0</span> Support Member</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <!-- Counter End -->
+
+    <!-- Our Team start-->
+    <div class="wshipping-content-block meet-the-team">
+        <div class="container wow fadeInUp">
+            @*<div class="row">
+                <div class="col-12 col-lg-6 offset-lg-4">
+                    <div class="section-title">
+                        <h2>MANAGEMENT</h2>
+                        <p>People are the core of our activities at POWERUSY. Without them, we would not have a business. Our diverse team of associates, with their unique perspectives, ideas and experiences, provide in-depth appreciation and understanding of the global business environment with emphasis on sustainability and profitability. Meet our people.</p>
+                    </div>
+                </div>
+            </div>*@
+            <div class="row">
+                <div class="col-12 col-sm-12 col-lg-3">
+                    <div class="team-block">
+                        <div class="team-image">
+                            <img src="~/assets/images/team-member-1.jpg" alt="" />
+                            <div class="team-figure">
+                                <div class="item-table">
+                                    <div class="item-tablecell"> <a href="" title=""><i class="fab fa-facebook-f"></i></a> <a href="" title=""><i class="fab fa-twitter"></i></a> <a href="" title=""><i class="fab fa-skype"></i></a> <a href="" title=""><i class="fab fa-linkedin"></i></a> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-text">
+                            <h5>Usman Shuaibu</h5>
+                            <p>Chairman</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-lg-3">
+                    <div class="team-block">
+                        <div class="team-image">
+                            <img src="~/assets/images/team-member-2.jpg" alt="" />
+                            <div class="team-figure">
+                                <div class="item-table">
+                                    <div class="item-tablecell"> <a href="" title=""><i class="fab fa-facebook-f"></i></a> <a href="" title=""><i class="fab fa-twitter"></i></a> <a href="" title=""><i class="fab fa-skype"></i></a> <a href="" title=""><i class="fab fa-linkedin"></i></a> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-text">
+                            <h5>Shehu Popoola-Taiwo</h5>
+                            <p>Chief Markating Officer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-lg-3">
+                    <div class="team-block">
+                        <div class="team-image">
+                            <img src="~/assets/images/team-member-3.jpg" alt="" />
+                            <div class="team-figure">
+                                <div class="item-table">
+                                    <div class="item-tablecell"> <a href="" title=""><i class="fab fa-facebook-f"></i></a> <a href="" title=""><i class="fab fa-twitter"></i></a> <a href="" title=""><i class="fab fa-skype"></i></a> <a href="" title=""><i class="fab fa-linkedin"></i></a> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-text">
+                            <h5>Chukwunonso Udeh</h5>
+                            <p>Director, Business Development & Strategy</p>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+    <!-- Our Team end-->
+
+    <!-- Our client start -->
+    @*<div class="wshipping-content-block client-block pt0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="heading3-border text-uppercase">Our Valuable Client</h3>
+                </div>
+                <div class="owl-carousel our-client">
+                    <div class="client-item"><img src="~/assets/images/client-1.jpg" alt="" /></div>
+                    <div class="client-item"><img src="~/assets/images/client-2.jpg" alt="" /></div>
+                    <div class="client-item"><img src="~/assets/images/client-3.jpg" alt="" /></div>
+                    <div class="client-item"><img src="~/assets/images/client-4.jpg" alt="" /></div>
+                    <div class="client-item"><img src="~/assets/images/client-5.jpg" alt="" /></div>
+                    <div class="client-item"><img src="~/assets/images/client-6.jpg" alt="" /></div>
+                    <div class="client-item"><img src="~/assets/images/client-1.jpg" alt="" /></div>
+                    <div class="client-item"><img src="~/assets/images/client-2.jpg" alt="" /></div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <!-- Our client end -->
+
+}

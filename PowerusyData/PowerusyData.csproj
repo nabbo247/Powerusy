@@ -96,10 +96,10 @@
     <Compile Include="DB\tbl_bidding.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_bidding_jobs.cs">
+    <Compile Include="DB\tbl_bidding_bookmark.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_bookmarked.cs">
+    <Compile Include="DB\tbl_bidding_jobs.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_clearing.cs">

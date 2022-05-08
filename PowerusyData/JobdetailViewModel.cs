@@ -103,13 +103,13 @@ namespace PowerusyData
         {
             using (var db = new powerusyDBCoreEntities())
             {
-                tbl_bookmarked ent = new tbl_bookmarked();
+                tbl_bidding_bookmark ent = new tbl_bidding_bookmark();
                 int ID = Convert.ToInt32(UserId);
-                ent.BidID = JobBid.BidID;
-                ent.AgentID = ID;
+                ent.bidding_id = JobBid.BidID;
+                ent.bookmarked_by_id = ID;
                 ent.status = 1;
                 ent.Date = DateTime.Now;
-                db.tbl_bookmarked.Add(ent);
+                db.tbl_bidding_bookmark.Add(ent);
                 db.SaveChanges();
                 IsValid = true;
                 Msg = "Saved successful";
@@ -226,7 +226,50 @@ namespace PowerusyData
             Get();
             base.Delete();
         }
+        public void BookmarkJob(int bidId)
+        {
+            using (var db = new powerusyDBCoreEntities())
+            {
+                var bid = db.tbl_bidding.SingleOrDefault(b => b.id == bidId);
 
+                string viewerId = $"{HttpContext.Current.Session[SessionKeys.UserId]}";
+
+                int bookmarkedById = string.IsNullOrEmpty(viewerId) ? 0 : Convert.ToInt32(viewerId);
+
+                //User is not a logged in user do not attempt to save/bookmark this bidding
+                if (bookmarkedById == 0)
+                {
+                    ValidationErrors.Add(new KeyValuePair<string, string>("UnauthenticatedUser", "Please Login to bookmark(save) this job."));
+                    IsValid = false;
+                    return;
+
+                }
+
+                var bookmarkBid = db.tbl_bidding_bookmark.SingleOrDefault(b => b.bidding_id == bidId && b.bid_owner_id == bid.UserID && b.bookmarked_by_id == bookmarkedById);
+
+                //Bookmark already exist remove it
+                if (bookmarkBid != null)
+                {
+                    db.tbl_bidding_bookmark.Remove(bookmarkBid);
+                    Msg = "Removed successfully";
+                }
+                else
+                {
+                    var bookmarkJob = new tbl_bidding_bookmark
+                    {
+                        bidding_id = bidId,
+                        bid_owner_id = bid.UserID.Value,
+                        bookmarked_by_id = bookmarkedById,
+                    };
+
+                    db.tbl_bidding_bookmark.Add(bookmarkJob);
+                    Msg = "Saved Successfully";
+                }
+                IsValid = true;
+
+                db.SaveChanges();
+            }
+        }
         protected override void ResetSearch()
         {
             SearchEntity = new tbl_bidding();

@@ -1,0 +1,31 @@
+﻿* div,h5,h3,button{
+  font-family: cursive !important;
+}
+body{
+    background: #fff;
+}
+.main_content h3{
+	text-align: center;
+}
+.login-form-div{
+	width: 500px;
+	background: #fff;
+}
+.form-column{
+  padding: 20px 35px !important;  
+}
+.cell_con{
+	background: #fff;
+	padding-left: 20px;
+}
+.cell_con div{
+	width: 87%;
+}
+.links{
+	margin: auto;
+	text-align: center;
+}
+.btn{
+  margin:auto; 
+  width:100%;
+}

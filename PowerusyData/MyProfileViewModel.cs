@@ -58,6 +58,7 @@ namespace PowerusyData
         public bool EbizApproval { get; set; }
         public string NewPassword { get; set; }
         public string Password { get; set; }
+        public string AccountType { get; set; }
         protected override void Init()
         {
             UsrLst = new List<tbl_users>();
@@ -112,8 +113,7 @@ namespace PowerusyData
             //ListOfPOSManager mgr =
             // new ListOfPOSManager();
             // Get Product Data
-            Entity = Get(
-              Convert.ToInt32(EventArgument));
+            Entity = Get(Convert.ToInt32(EventArgument));
 
             base.Edit();
         }
@@ -249,9 +249,9 @@ namespace PowerusyData
             ValidationErrors.Clear();
             if (!string.IsNullOrEmpty(NewPassword))
             {
-                if(!Regex.IsMatch(NewPassword.Trim(), "((?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})"))
-                ValidationErrors.Add(new
-                  KeyValuePair<string, string>("Password", "A valid Password MUST contain a combination of atleast one Uppercase, Lowercase, Alphanumeric character and be between 6-20 characters"));
+                if (!Regex.IsMatch(NewPassword.Trim(), "((?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})"))
+                    ValidationErrors.Add(new
+                      KeyValuePair<string, string>("Password", "A valid Password MUST contain a combination of atleast one Uppercase, Lowercase, Alphanumeric character and be between 6-20 characters"));
             }
             if (string.IsNullOrEmpty(Password))
             {
@@ -277,8 +277,8 @@ namespace PowerusyData
                     ValidationErrors.Add(new KeyValuePair<string, string>("Password", "Please enter a strong password"));
                 }
             }
-            
-            
+
+
             //TODO
             return (ValidationErrors.Count == 0);
         }
@@ -325,7 +325,7 @@ namespace PowerusyData
                 {
                     var UserIDI = db.tbl_users.Where(x => x.username == UserId).FirstOrDefault();
                     //UserIDI.id = 1;
-                    
+
                     db.tbl_users.Add(entity);
                     db.SaveChanges();
                     IsValid = true;
@@ -374,6 +374,10 @@ namespace PowerusyData
                 using (var db = new powerusyDBCoreEntities())
                 {
                     ret = db.tbl_users.Where(x => x.id == UsrReq.id).SingleOrDefault();
+                    if (ret != null)
+                    {
+                        AccountType = db.tbl_role.FirstOrDefault(r => r.id == ret.roleid)?.name;
+                    }
                 }
             }
             catch (Exception ex)

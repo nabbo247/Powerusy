@@ -193,6 +193,40 @@ namespace ifreighters.Controllers
             }
             return View(vm);
         }
+        public ActionResult BookmarkJob(int bid)
+        {
+            JobdetailViewModel vm = new JobdetailViewModel();
+            if (Session[SessionKeys.Role] != null && Session[SessionKeys.Role].ToString() == "2")
+            {
+                vm.Owner = false;
+            }
+            else
+                vm.Owner = true;
+            if (Session[SessionKeys.UserId] != null)
+                vm.UserId = Session[SessionKeys.UserId].ToString();
+            vm.EventArgument = bid.ToString();
+            vm.EventCommand = "Edit";
+            vm.JobBid.BidID = Convert.ToInt32(bid.ToString());
+            vm.HandleRequest();
+            vm.BookmarkJob(bid);
+
+            if (vm.IsValid)
+            {
+                TempData["Msg"] = vm.Msg;
+                // NOTE: Must clear the model state in order to bind
+                //       the @Html helpers to the new model values
+                ModelState.Clear();
+            }
+            else
+            {
+                foreach (KeyValuePair<string, string> item in vm.ValidationErrors)
+                {
+                    ModelState.AddModelError(item.Key, item.Value);
+                }
+            }
+            return View("Jobdetail", vm);
+        }
+
         public ActionResult Activebids(int? page)
         {
             BiddingViewModel vm = new BiddingViewModel();

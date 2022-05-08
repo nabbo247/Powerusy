@@ -1,0 +1,235 @@
+﻿@model PowerusyData.MyProfileViewModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- ============================ Page Title Start================================== -->
+<div class="page-title bg-cover" style="background: url(../../assets/img/bn-1.jpg)no-repeat; " data-overlay="5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12"></div>
+        </div>
+    </div>
+</div>
+<!-- ============================ Page Title End ================================== -->
+<!-- ============================ Main Section Start ================================== -->
+<section class="gray-bg pt-4">
+    <div class="container-fluid">
+        <div class="row m-0">
+            @if (Session["userid"] != null && Session["Role"].ToString() == "2")//AGENT
+            {
+                @Html.Partial("~/Views/Company/_agentMenu.cshtml")
+            }@if (Session["userid"] != null && Session["Role"].ToString() == "1")//customer
+            {
+                @Html.Partial("~/Views/Customer/_customerMenu.cshtml")
+            }
+
+            @*Html.RenderPartial("_employee");*@
+            <!-- Item Wrap Start -->
+            <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <!-- Breadcrumbs -->
+                        <div class="bredcrumb_wrap">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Reviews</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+
+                        <!-- Single Wrap -->
+                        <div class="_dashboard_content">
+                            <div class="_dashboard_content_header">
+                                <div class="_dashboard__header_flex">
+                                    <h4><i class="fa fa-user mr-1"></i>My Account</h4>
+                                </div>
+                            </div>
+
+                            <div class="_dashboard_content_body">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <div class="custom-file avater_uploads">
+                                            <input type="file" class="custom-file-input" id="customFile">
+                                            <label class="custom-file-label" for="customFile"><i class="fa fa-user"></i></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>First Name</label>
+                                                    @Html.TextBoxFor(m => m.Entity.firstname, new { @class = "form-control", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    @Html.TextBoxFor(m => m.Entity.lastname, new { @class = "form-control", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Middle Name</label>
+                                                    @Html.TextBoxFor(m => m.Entity.middlename, new { @class = "form-control", @readonly = "readonly" })
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>PhoneNumber</label>
+                                                    @Html.TextBoxFor(m => m.Entity.phonenumber, new { @class = "form-control", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Account Type</label>
+                                                    <input type="text" class="form-control with-light" value="Importer">
+                                                    @*@Html.TextBoxFor(m => m.Entity.roleid, new { @class = "form-control", @readonly = "readonly" })*@
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    @Html.TextBoxFor(m => m.Entity.email, new { @class = "form-control", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Wrap End -->
+                        <!-- Single Wrap -->
+                        <div class="_dashboard_content">
+                            <div class="_dashboard_content_header">
+                                <div class="_dashboard__header_flex">
+                                    <h4><i class="ti-lock mr-1"></i>Change Password</h4>
+                                </div>
+                            </div>
+                            @using (Html.BeginForm())
+                            {
+                                <div class="col-12 col-md-12 col-lg-12">
+                                    @if (!Model.IsValid)
+                                    {
+                                        <div class="alert alert-danger
+                    alert-dismissable"
+                                             role="alert">
+                                            <button type="button" class="close"
+                                                    data-dismiss="alert">
+                                                <span aria-hidden="true">
+                                                    &times;
+                                                </span>
+                                                <span class="sr-only">Close</span>
+                                            </button>
+                                            @Html.ValidationSummary(false)
+                                        </div>
+                                    }
+                                    @if (TempData["Msg"] != null)
+                                    {
+                                        <div class="alert alert-dismissable alert-success">
+                                            <button type="button" class="close" data-dismiss="alert">
+                                                x
+                                            </button>
+                                            @TempData["Msg"].ToString()
+                                        </div>
+                                    }
+                                </div>
+                                <!-- BEGIN HIDDEN FIELDS AREA -->
+                                @Html.HiddenFor(m => m.EventCommand)
+                                @Html.HiddenFor(m => m.Mode)
+                                @Html.HiddenFor(m => m.EventArgument)
+                                <div class="_dashboard_content_body">
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-4">
+                                            <div class="form-group">
+                                                <label>Old Password</label>
+                                                @Html.TextBoxFor(m => m.Password, "", new { @class = "form-control", @type = "password", autocomplete = "off" })
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4">
+                                            <div class="form-group">
+                                                <label>New Password</label>
+
+                                                @Html.TextBoxFor(m => m.NewPassword, "", new { @class = "form-control", @type = "password", autocomplete = "off" })
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4">
+                                            <div class="form-group">
+                                                <label>Confirm Password</label>
+
+                                                @Html.TextBoxFor(m => m.ConfirmPassword, "", new { @class = "form-control", @type = "password", autocomplete = "off" })
+                                            </div>
+                                        </div>
+                                        @*<div class="col-xl-12 col-lg-12">
+                                        <div class="form-group">
+                                            <input id="sec" class="checkbox-custom" name="Security" type="checkbox">
+                                            <label for="sec" class="checkbox-custom-label">Enable Two-Step Verification via Phone</label>
+                                        </div>
+                                    </div>*@
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <!-- Single Wrap End -->
+
+                        <button type="button" data-pdsa-action="save" class="btn btn-save">Save Changes</button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ============================ Main Section End ================================== -->
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+            $(document).ajaxStart(function () {
+                $("#loading").show();
+            });
+            $(document).ajaxStop(function () {
+                $("#loading").hide();
+            });
+
+            $("[data-pdsa-action]").on("click", function (e) {
+
+                $("#loading").show();
+                e.preventDefault();
+
+                $("#EventCommand").val($(this).data("pdsa-action"));
+
+                $("#EventArgument").val($(this).attr("data-pdsa-val"));
+
+                $("form").submit();
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        console.log('Submission was successful.');
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log('An error occurred.');
+                        console.log(data);
+                    },
+                });
+                $("#loading").hide();
+            });
+        });
+    </script>
+}

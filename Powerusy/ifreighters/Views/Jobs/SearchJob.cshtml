@@ -1,0 +1,313 @@
+﻿@model PowerusyData.SearchjobViewModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "SearchJob";
+}
+
+<!-- ============================ Page Title Start================================== -->
+<div class="page-title">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <h2 class="ipt-title">Search Jobs</h2>
+                <span class="ipn-subtitle">Browse All Jobs List </span>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================ Page Title End ================================== -->
+<!-- ============================ Main Section Start ================================== -->
+@using (Html.BeginForm())
+{
+    <!-- BEGIN HIDDEN FIELDS AREA -->
+    @Html.HiddenFor(m => m.EventCommand)
+    @Html.HiddenFor(m => m.Mode)
+    @Html.HiddenFor(m => m.EventArgument)
+    <section class="gray-bg">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="simple-sidebar sm-sidebar">
+
+                        <div class="search-sidebar_header">
+                            <h4 class="ssh_heading">Search Filter</h4>
+                            @*<a href="javascript:void(0);" class="clear_all">Clear All</a><a href="#search_open" data-toggle="collapse" aria-expanded="false" role="button" class="collapsed _filter-ico"><i class="fa fa-sliders"></i></a>*@
+                        </div>
+
+                        <!-- Find New Property -->
+                        <div class="sidebar-widgets collapse miz_show" id="search_open" data-parent="#search_open">
+
+                            <div class="search-inner p-0">
+                                <div class="filter-search-box pb-0">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Search by keywords...">
+                                    </div>
+
+                                </div>
+
+                                <div class="filter_wraps">
+
+                                    <!-- Job categories Search -->
+                                    <div class="single_search_boxed">
+                                        <div class="widget-boxed-header">
+                                            <h4>
+                                                <a href="#categories" data-toggle="collapse" aria-expanded="true" role="button">Port Of Loading</a>
+                                            </h4>
+                                        </div>
+                                        <div class="widget-boxed-body collapse show" id="categories" data-parent="#categories">
+                                            <div class="side-list no-border">
+                                                <!-- Single Filter Card -->
+                                                <div class="single_filter_card">
+                                                    <div class="card-body pt-0">
+                                                        <div class="inner_widget_link">
+                                                            <ul class="no-ul-list filter-list">
+                                                                <li>
+                                                                    <input id="a1" class="checkbox-custom" name="ADA" type="checkbox" checked="">
+                                                                    <label for="a1" class="checkbox-custom-label">IT Computers (62)</label>
+                                                                    <ul class="no-ul-list filter-list">
+                                                                        <li>
+                                                                            <input id="aa1" class="checkbox-custom" name="ADA" type="checkbox">
+                                                                            <label for="aa1" class="checkbox-custom-label">Web Design (31)</label>
+                                                                        </li>
+                                                                    </ul>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Job Skills Search -->
+                                    <div class="single_search_boxed">
+                                        <div class="widget-boxed-header">
+                                            <h4>
+                                                <a href="#skills" data-toggle="collapse" aria-expanded="false" role="button" class="collapsed">Port Of Discharge</a>
+                                            </h4>
+
+                                        </div>
+                                        <div class="widget-boxed-body collapse" id="skills" data-parent="#skills">
+                                            <div class="side-list no-border">
+                                                <!-- Single Filter Card -->
+                                                <div class="single_filter_card">
+                                                    <div class="card-body pt-0">
+                                                        <div class="inner_widget_link">
+                                                            <ul class="no-ul-list filter-list">
+                                                                <li>
+                                                                    <input id="c1" class="checkbox-custom" name="ADA" type="checkbox" checked="">
+                                                                    <label for="c1" class="checkbox-custom-label">Administrative (15)</label>
+                                                                </li>
+                                                                <li>
+                                                                    <input id="c2" class="checkbox-custom" name="Parking" type="checkbox">
+                                                                    <label for="c2" class="checkbox-custom-label">iPhone & Android (33)</label>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group filter_button pt-2">
+                                    <button type="submit" class="btn btn btn-theme-2 rounded full-width">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sidebar End -->
+                </div>
+
+                <!-- Item Wrap Start -->
+                <div class="col-lg-8 col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!-- Filter Search -->
+                            <div class="_filt_tag786">
+                                <div class="_tag782">
+                                    <div class="_tag780">@Model.UsrLst.Count Items found</div>
+                                </div>
+                                <div class="_tag785">
+                                    <div class="__g72juy">
+                                        <button id="btnListGrid" class="_ujh_tyr" data-pdsa-action="GridView">
+                                            <i class="ti-layout-grid2"></i>
+                                        </button>
+                                        <button id="btnListGrid" class="_ujh_tyr" data-pdsa-action="ListView">
+                                            <i class="ti-view-list"></i>
+                                        </button>
+                                        @*<a href="../Jobs/SearchJob" class="_ujh_tyr"><i class="ti-layout-grid2"></i></a>
+                                            <a href="search-job-list-1.html" class="_ujh_tyr active"><i class="ti-view-list"></i></a>*@
+                                    </div>
+                                    <div class="_g78juy">
+                                        <select class="form-control">
+                                            <option>Best Match</option>
+                                            <option>Best Sellers</option>
+                                            <option>Recent Items</option>
+                                            <option>Featured Items</option>
+                                            <option>Trending Items</option>
+                                            <option>Best Rated</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            @if (Model.ListView)
+                            {
+
+                                foreach (var item in Model.UsrLst)
+                                {
+                                    <!-- List Single Item -->
+                                    <div class="_list_jobs_wraps shadow_0">
+                                        <div class="_list_jobs_f1ex first">
+                                            <div class="_list_110">
+                                                <div class="_list_110_thumb">
+                                                    <a href="employer-detail.html"><img src="~/assets/img/c-1.png" class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="_list_110_caption">
+                                                    <h4 class="_jb_title">
+                                                        @*Html.ActionLink(item.VesselName, "Jobdetail", "Customer", new { page = item.id }, new { style = "display:block" })*@
+                                                        <a href="#">@item.VesselName</a>
+                                                    </h4>
+                                                    @*<div class="_emp_jb">Drive Due</div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="_list_jobs_f1ex">
+                                            <div class="_list_110_caption">
+                                                <h4 class="_jb_title">POL : @item.PortLoading</h4>
+                                                <div class="_emp_jb">POD : @item.PortDischarge</div>
+                                            </div>
+                                        </div>
+                                        <div class="_list_jobs_f1ex">
+                                            <div class="_list_110_caption">
+                                                <h4 class="_jb_title">Est Budget</h4>
+                                                <div class="_emp_jb"> @String.Format("{0:N0}", item.EstBudget) </div>
+                                            </div>
+                                        </div>
+                                        <div class="_list_jobs_f1ex">
+                                            @Html.ActionLink("View Job", "Jobdetail", "Customer", new { page = item.id }, new { @class = "_jb_apply" })
+                                            @*<a href="job-detail.html" class="_jb_apply">View Job</a>*@
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+
+                            @if (Model.GridView)
+                            {
+                                foreach (var item in Model.UsrLst)
+                                {
+                                    <!-- Grid Single Item -->
+                                    <div class="col-lg-6 col-md-6 col-sm-6">
+                                        <div class="job_grid_01 shadow_0">
+                                            <div class="jb_grid_01_thumb">
+                                                <a href="employer-detail.html"><img src="~/assets/img/c-1.png" class="img-fluid" alt=""></a>
+                                            </div>
+                                            <div class="jb_grid_01_caption">
+                                                <h4 class="_jb_title"><a href="job-detail.html">WordPress Web Developer</a></h4>
+                                                <div class="_emp_jb">Bikker Inso Inc.</div>
+                                            </div>
+                                            <div class="jb_grid_01_footer">
+                                                <div class="jb_grid_01_footer_flex">
+                                                    <div class="_lot_jb"><i class="ti-location-pin mr-1"></i>Lucknow, UP</div>
+                                                </div>
+                                                <div class="jb_grid_01_footer_right">
+                                                    <a href="javascript:void(0);" class="_jb_likes"><i class="fa fa-heart mr-1"></i>Save</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <ul class="pagination">
+                                        @if (Model.PageList != null)
+                                        {
+                                            @Html.PagedListPager(Model.PageList, page => Url.Action("SearchJob", new { page }))
+                                        }
+                                        @*<li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span class="ti-arrow-left"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item active"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">18</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <span class="ti-arrow-right"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>*@
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+}
+<!-- ============================ Main Section End ================================== -->
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+
+            $(document).ajaxStart(function () {
+                $("#loading").show();
+            });
+
+            $(document).ajaxStop(function () {
+                $("#loading").hide();
+            });
+
+            $("[data-pdsa-action]").on("click", function (e) {
+
+                $("#loading").show();
+                e.preventDefault();
+
+                $("#EventCommand").val($(this).data("pdsa-action"));
+
+                $("#EventArgument").val($(this).attr("data-pdsa-val"));
+
+                $("form").submit();
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        console.log('Submission was successful.');
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log('An error occurred.');
+                        console.log(data);
+                    },
+                });
+                $("#loading").hide();
+            });
+        });
+    </script>
+}
