@@ -88,8 +88,8 @@
                                             <div class="col-xl-6 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Account Type</label>
-                                                    <input type="text" class="form-control with-light" value="Importer">
-                                                    @*@Html.TextBoxFor(m => m.Entity.roleid, new { @class = "form-control", @readonly = "readonly" })*@
+                                                    @Html.TextBoxFor(m => m.AccountType, new { @class = "form-control", @readonly = "readonly" })
+                                                    @Html.HiddenFor(m => m.Entity.roleid, new { @class = "form-control", @readonly = "readonly" })
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6">

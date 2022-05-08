@@ -12,9 +12,9 @@ namespace ifreighters.Controllers
         public ActionResult Index()
         {
             SearchjobViewModel vm = new SearchjobViewModel();
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.ListView = true;
             vm.pageSize = 10;
             vm.pageNumber = 1;

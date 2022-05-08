@@ -17,10 +17,10 @@ namespace ifreighters.Controllers
         }
         public ActionResult SearchJob()
         {
-             SearchjobViewModel vm = new SearchjobViewModel();
-            //vm.UserId = Session["userid"].ToString();
+            SearchjobViewModel vm = new SearchjobViewModel();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.ListView = true;
             vm.pageSize = 10;
             vm.pageNumber = 1;
@@ -33,7 +33,7 @@ namespace ifreighters.Controllers
         [HttpPost]
         public ActionResult SearchJob(SearchjobViewModel vm)
         {
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsValid = ModelState.IsValid;
             //vm.IsDetailAreaVisible = true;
             //vm.IsSearchAreaVisible = false;
@@ -41,7 +41,7 @@ namespace ifreighters.Controllers
             //vm.EventArgument = "";
             //vm.EventCommand = "save";
             //vm.url = ConfigurationManager.AppSettings["url"];
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
             if (vm.EventCommand == "resetsearch" || vm.EventCommand == "save" || vm.EventCommand == "cancel")
             {

@@ -1,6 +1,8 @@
-﻿
+﻿@using PowerusyData
+
 @{
     ViewBag.Title = "ManageJobs";
+    var viewModel = (DashboardViewModel)Session["dashboard"];
 }
 <!-- ============================ Page Title Start================================== -->
 <div class="page-title bg-cover" style="background: url(../../assets/img/bn-1.jpg)no-repeat; " data-overlay="5">
@@ -15,13 +17,13 @@
 <section class="gray-bg pt-4">
     <div class="container-fluid">
         <div class="row m-0">
-           
-                @Html.Partial("_customerMenu")
-         
-            @*else if (Session["Role"] != null && Session["Role"].ToString() == "2")
-            {
-                @Html.Partial("_agentMenu")
-            }*@
+
+            @Html.Partial("_customerMenu")
+
+            @*else if (Session[SessionKeys.Role] != null && Session[SessionKeys.Role].ToString() == "2")
+                {
+                    @Html.Partial("_agentMenu")
+                }*@
 
             @*Html.RenderPartial("_employee");*@
             <!-- Item Wrap Start -->
@@ -44,28 +46,28 @@
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="dashboard-stat">
                             <div class="dashboard-stat-icon widget-1"><i class="ti-location-pin"></i></div>
-                            <div class="dashboard-stat-content"><h4><span class="cto">0</span></h4> <p>Job Posted</p></div>
+                            <div class="dashboard-stat-content"><h4><span class="cto">@viewModel.TotalJobs</span></h4> <p>Jobs Posted</p></div>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="dashboard-stat">
                             <div class="dashboard-stat-icon widget-2"><i class="ti-pie-chart"></i></div>
-                            <div class="dashboard-stat-content"><h4><span class="cto">0</span>M</h4> <p>Total Viewed</p></div>
+                            <div class="dashboard-stat-content"><h4><span class="cto">@viewModel.TotalJobsViewed</span>M</h4> <p>Total Viewes</p></div>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="dashboard-stat">
                             <div class="dashboard-stat-icon widget-3"><i class="ti-user"></i></div>
-                            <div class="dashboard-stat-content"><h4><span class="cto">0</span>K</h4> <p>User Applied</p></div>
+                            <div class="dashboard-stat-content"><h4><span class="cto">@viewModel.TotalJobsApplied</span>K</h4> <p>User Applied</p></div>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="dashboard-stat">
                             <div class="dashboard-stat-icon widget-4"><i class="ti-bookmark"></i></div>
-                            <div class="dashboard-stat-content"><h4><span class="cto">0</span></h4> <p>Job Bookmarked</p></div>
+                            <div class="dashboard-stat-content"><h4><span class="cto">@viewModel.TotalJobsBookmarked</span></h4> <p>Jobs Bookmarked</p></div>
                         </div>
                     </div>
                 </div>

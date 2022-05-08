@@ -10,7 +10,7 @@ using System.Web;
 
 namespace PowerusyData
 {
- 
+
     public class JobdetailViewModel : ViewModelBase
     {
         public JobdetailViewModel()
@@ -97,7 +97,7 @@ namespace PowerusyData
 
         private bool SubmitBid()
         {
-           
+
             bool ret = false;
             ret = ValidateBid(JobBid);
 
@@ -111,7 +111,7 @@ namespace PowerusyData
                     db.tbl_bidding_jobs.Add(JobBid);
                     db.SaveChanges();
                     IsValid = true;
-                    
+
                     Msg = "Bid created successful";
                 }
 
@@ -128,7 +128,7 @@ namespace PowerusyData
                   "Please Supply comment."));
                 IsValid = false;
             }
-            if (entity.Amount<=0)
+            if (entity.Amount <= 0)
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
@@ -142,7 +142,7 @@ namespace PowerusyData
                   "You must agree to the policy."));
                 IsValid = false;
             }
-            
+
             return (ValidationErrors.Count == 0);
         }
         protected override void Add()
@@ -196,6 +196,51 @@ namespace PowerusyData
             // Reload the Data
             Get();
             base.Delete();
+        }
+
+        public void BookmarkJob(int bidId)
+        {
+            using (var db = new powerusyDBCoreEntities())
+            {
+                var bid = db.tbl_bidding.SingleOrDefault(b => b.id == bidId);
+
+                string viewerId = $"{HttpContext.Current.Session[SessionKeys.UserId]}";
+
+                int bookmarkedById = string.IsNullOrEmpty(viewerId) ? 0 : Convert.ToInt32(viewerId);
+
+                //User is not a logged in user do not attempt to save/bookmark this bidding
+                if (bookmarkedById == 0)
+                {
+                    ValidationErrors.Add(new KeyValuePair<string, string>("UnauthenticatedUser", "Please Login to bookmark(save) this job."));
+                    IsValid = false;
+                    return;
+
+                }
+
+                var bookmarkBid = db.tbl_bidding_bookmark.SingleOrDefault(b => b.bidding_id == bidId && b.bid_owner_id == bid.UserID && b.bookmarked_by_id == bookmarkedById);
+
+                //Bookmark already exist remove it
+                if (bookmarkBid != null)
+                {
+                    db.tbl_bidding_bookmark.Remove(bookmarkBid);
+                    Msg = "Removed successfully";
+                }
+                else
+                {
+                    var bookmarkJob = new tbl_bidding_bookmark
+                    {
+                        bidding_id = bidId,
+                        bid_owner_id = bid.UserID.Value,
+                        bookmarked_by_id = bookmarkedById,
+                    };
+
+                    db.tbl_bidding_bookmark.Add(bookmarkJob);
+                    Msg = "Saved Successfully";
+                }
+                IsValid = true;
+
+                db.SaveChanges();
+            }
         }
 
         protected override void ResetSearch()
@@ -273,7 +318,7 @@ namespace PowerusyData
             }
             return ret;
         }
-        
+
         public bool Delete(tbl_bidding entity)
         {
             using (var db = new powerusyDBCoreEntities())
@@ -475,6 +520,32 @@ namespace PowerusyData
                 using (var db = new powerusyDBCoreEntities())
                 {
                     ret = db.tbl_bidding.Where(x => x.id == UsrReq.id).SingleOrDefault();
+
+                    string viewerId = $"{HttpContext.Current.Session[SessionKeys.UserId]}";
+
+                    //If viewer is not owner of the bid increment view count
+                    if ($"{ret.UserID}" != viewerId)
+                    {
+                        var jobView = db.tbl_bidding_view.SingleOrDefault(b => b.bidding_id == ret.id);
+                        if (jobView != null)
+                        {
+                            jobView.view_count++;
+                            db.Entry(jobView).State = EntityState.Modified;
+                        }
+                        else
+                        {
+                            jobView = new tbl_bidding_view
+                            {
+                                bidding_id = ret.id,
+                                user_id = ret.UserID.Value,
+                                view_count = 1
+                            };
+
+                            db.tbl_bidding_view.Add(jobView);
+
+                        }
+                        db.SaveChanges();
+                    }
                 }
             }
             catch (Exception ex)

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using PowerusyData;
+
+<!DOCTYPE html>
 <html lang="zxx">
 
 <!-- Mirrored from themezhub.net/workoo-demo/workoo/freelancer-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 18 Apr 2022 19:35:01 GMT -->
@@ -47,12 +49,12 @@
                                         @*<a href="#">Home<span class="submenu-indicator"></span></a>*@
                                         @Html.ActionLink("Home", "index", "Home")
                                     </li>
-                                    @if (Session["userid"] != null)
+                                    @if (Session[SessionKeys.Username] != null)
                                     {
                                         <li>@Html.ActionLink("Dashboard", "Dashboard", "Customer")</li>
 
                                     }
-                                    @if (Session["userid"] != null)
+                                    @if (Session[SessionKeys.Username] != null)
                                     {
 
                                     }
@@ -62,12 +64,12 @@
                                     }
                                     <li>@Html.ActionLink("Find Jobs", "SearchJob", "Jobs")</li>
                                 </ul>
-                                @if (Session["userid"] != null)
+                                @if (Session[SessionKeys.Username] != null)
                                 {
                                     <ul class="nav-menu nav-menu-social align-to-right">
-                                        <li>Welcome @Session["fname"].ToString() </li>
+                                        <li>Welcome @Session[SessionKeys.FName].ToString() </li>
                                         <li class="add-listing bg-whit">
-                                            @Html.ActionLink("LogOff", "LogOff", "Account") 
+                                            @Html.ActionLink("LogOff", "LogOff", "Account")
                                         </li>
                                     </ul>
                                 }

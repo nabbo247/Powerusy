@@ -27,21 +27,21 @@ namespace ifreighters.Controllers
             CompleteRegViewModel vm = new CompleteRegViewModel();
             vm.Mode = "Add";
             vm.IsStep1 = true;
-            vm.UserId = Session["usrID"].ToString();
+            vm.UserId = Session[SessionKeys.UserId].ToString();
             vm.HandleRequest();
             return View(vm);
         }
         [HttpPost]
         public ActionResult IndexAgent(CompleteRegViewModel vm)
         {
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsValid = ModelState.IsValid;
             vm.IsDetailAreaVisible = true;
             vm.IsSearchAreaVisible = false;
             vm.IsListAreaVisible = false;
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
-            vm.UserId = Session["userid"].ToString();
+            vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "nabbo247@gmail.com";
             if (vm.IsStep2 == true || vm.EventCommand == "save")
             {

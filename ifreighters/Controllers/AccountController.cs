@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ifreighters.Controllers
 {
+
     public class AccountController : Controller
     {
         // GET: Account
@@ -15,13 +16,13 @@ namespace ifreighters.Controllers
         {
             return View();
         }
-        
+
         public ActionResult Registration(int? page)
         {
             RegistrationViewModel vm = new RegistrationViewModel();
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             //vm.IsDetailAreaVisible = true;
             //vm.IsSearchAreaVisible = false;
             //vm.IsListAreaVisible = false;
@@ -31,7 +32,7 @@ namespace ifreighters.Controllers
         [HttpPost]
         public ActionResult Registration(RegistrationViewModel vm)
         {
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsValid = ModelState.IsValid;
             vm.IsDetailAreaVisible = true;
             vm.IsSearchAreaVisible = false;
@@ -40,7 +41,7 @@ namespace ifreighters.Controllers
             //vm.EventCommand = "save";
             vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
             if (vm.uploadedImage != null && vm.uploadedImage.ContentLength > 0)
             {
@@ -70,9 +71,9 @@ namespace ifreighters.Controllers
         public ActionResult Login(int? page)
         {
             LoginViewModel vm = new LoginViewModel();
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsDetailAreaVisible = true;
             //vm.IsSearchAreaVisible = false;
             vm.IsValid = true;
@@ -82,7 +83,7 @@ namespace ifreighters.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel vm)
         {
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsValid = ModelState.IsValid;
             vm.IsDetailAreaVisible = true;
             vm.IsSearchAreaVisible = false;
@@ -98,11 +99,14 @@ namespace ifreighters.Controllers
                 //TempData["Msg"] = "Invalid User, Check your username and password";
                 return View(vm);
             }
-            Session["userid"] = vm.Entity.username;// vm.UserId;
-            Session["fname"] = vm.Entity.firstname;
-            Session["Email"] = vm.Entity.email;
-            Session["Role"] = vm.Entity.roleid;
-            Session["usrID"] = vm.Entity.id;
+
+            Session["view_model"] = vm;
+
+            Session[SessionKeys.Username] = vm.Entity.username;// vm.UserId;
+            Session[SessionKeys.FName] = vm.Entity.firstname;
+            Session[SessionKeys.Email] = vm.Entity.email;
+            Session[SessionKeys.Role] = vm.Entity.roleid;
+            Session[SessionKeys.UserId] = vm.Entity.id;
             if (vm.IsValid)
             {
                 TempData["Msg"] = vm.Msg;
@@ -160,9 +164,9 @@ namespace ifreighters.Controllers
         public ActionResult ForgetPassword(int? page)
         {
             LoginViewModel vm = new LoginViewModel();
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsDetailAreaVisible = true;
             //vm.IsSearchAreaVisible = false;
             vm.IsValid = true;
@@ -172,7 +176,7 @@ namespace ifreighters.Controllers
         [HttpPost]
         public ActionResult ForgetPassword(LoginViewModel vm)
         {
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsValid = ModelState.IsValid;
             vm.IsDetailAreaVisible = true;
             vm.IsSearchAreaVisible = false;
@@ -182,7 +186,7 @@ namespace ifreighters.Controllers
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
 
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "nabbo247@gmail.com";
 
             vm.HandleRequest();
@@ -202,6 +206,6 @@ namespace ifreighters.Controllers
             }
             return View(vm);
         }
-        
+
     }
 }

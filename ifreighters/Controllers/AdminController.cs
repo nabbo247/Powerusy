@@ -29,7 +29,7 @@ namespace ifreighters.Controllers
         [HttpPost]
         public ActionResult CompleteReg(CompleteRegViewModel vm)
         {
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsValid = ModelState.IsValid;
             vm.IsDetailAreaVisible = true;
             vm.IsSearchAreaVisible = false;
@@ -37,7 +37,7 @@ namespace ifreighters.Controllers
             var sss = vm.EventCommand;
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
-            vm.UserId = Session["userid"].ToString();
+            vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "nabbo247";
             if (vm.IsStep2 == true || vm.EventCommand == "save")
             {
@@ -136,7 +136,7 @@ namespace ifreighters.Controllers
         [HttpPost]
         public ActionResult Registration(CompleteRegViewModel vm)
         {
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsValid = ModelState.IsValid;
             vm.IsDetailAreaVisible = true;
             vm.IsSearchAreaVisible = false;
@@ -144,7 +144,7 @@ namespace ifreighters.Controllers
             var sss = vm.EventCommand;
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             vm.UserId = "nabbo247";
             if (vm.IsStep2 == true || vm.EventCommand == "save")
             {
@@ -241,12 +241,12 @@ namespace ifreighters.Controllers
         [HttpPost]
         public ActionResult VerificationShipper(VerificationShipperViewModel vm)
         {
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsValid = ModelState.IsValid;
             //var sss = vm.EventCommand;
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             vm.UserId = "nabbo247";
 
             vm.HandleRequest();

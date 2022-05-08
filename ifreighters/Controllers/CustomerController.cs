@@ -13,18 +13,23 @@ namespace ifreighters.Controllers
         // GET: Customer
         public ActionResult Dashboard()
         {
+
+            var dash = new DashboardViewModel();
+            dash.Username = $"{Session[SessionKeys.Username]}";
+            dash.HandleRequest();
+            Session[SessionKeys.Dashboard] = dash;
             return View();
         }
         public ActionResult MyProfile(int? page)
         {
             MyProfileViewModel vm = new MyProfileViewModel();
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
             //vm.Email = "nabbo247@gmail.com";
             //vm.IsDetailAreaVisible = true;
             //vm.IsSearchAreaVisible = false;
             //vm.IsListAreaVisible = false;
-            vm.EventArgument = Session["usrID"].ToString();
+            vm.EventArgument = Session[SessionKeys.UserId].ToString();
             vm.EventCommand = "Edit";
             vm.HandleRequest();
             return View(vm);
@@ -32,7 +37,7 @@ namespace ifreighters.Controllers
         [HttpPost]
         public ActionResult MyProfile(MyProfileViewModel vm)
         {
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsValid = ModelState.IsValid;
             vm.IsDetailAreaVisible = true;
             vm.IsSearchAreaVisible = false;
@@ -42,9 +47,9 @@ namespace ifreighters.Controllers
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
 
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             vm.UserId = "nabbo247@gmail.com";
-            
+
             vm.HandleRequest();
             if (vm.IsValid)
             {
@@ -65,9 +70,9 @@ namespace ifreighters.Controllers
         public ActionResult ManageJobs(int? page)
         {
             BiddingViewModel vm = new BiddingViewModel();
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             //vm.IsDetailAreaVisible = true;
             //vm.IsSearchAreaVisible = false;
             //vm.IsListAreaVisible = false;
@@ -77,7 +82,7 @@ namespace ifreighters.Controllers
         [HttpPost]
         public ActionResult ManageJobs(BiddingViewModel vm)
         {
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             vm.IsValid = ModelState.IsValid;
             vm.IsDetailAreaVisible = true;
             vm.IsSearchAreaVisible = false;
@@ -86,7 +91,7 @@ namespace ifreighters.Controllers
             //vm.EventCommand = "save";
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
-            vm.UserId = Session["userid"].ToString();
+            vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "nabbo247@gmail.com";
             if (vm.BillofLading != null && vm.BillofLading.ContentLength > 0)
             {
@@ -145,33 +150,34 @@ namespace ifreighters.Controllers
             }
             return View(vm);
         }
-        public ActionResult Jobdetail(int? page)
+        public ActionResult Jobdetail(int? view)
         {
             JobdetailViewModel vm = new JobdetailViewModel();
-            if(Session["Role"]!=null&& Session["Role"].ToString()=="2")
+            if (Session[SessionKeys.Role] != null && Session[SessionKeys.Role].ToString() == "2")
             {
                 vm.Owner = false;
-            }else
-            vm.Owner = true;
-            if(Session["usrID"]!=null)
-              vm.UserId = Session["usrID"].ToString();
-            vm.EventArgument = page.ToString();
+            }
+            else
+                vm.Owner = true;
+            if (Session[SessionKeys.UserId] != null)
+                vm.UserId = Session[SessionKeys.UserId].ToString();
+            vm.EventArgument = view.ToString();
             vm.EventCommand = "Edit";
-            vm.JobBid.BidID = Convert.ToInt32(page.ToString());
+            vm.JobBid.BidID = Convert.ToInt32(view.ToString());
             vm.HandleRequest();
             return View(vm);
         }
         [HttpPost]
         public ActionResult Jobdetail(JobdetailViewModel vm)
         {
-            if (Session["Role"] != null && Session["Role"].ToString() == "2")
+            if (Session[SessionKeys.Role] != null && Session[SessionKeys.Role].ToString() == "2")
             {
                 vm.Owner = false;
             }
             else
                 vm.Owner = true;
-            if (Session["usrID"] != null)
-                vm.UserId = Session["usrID"].ToString();
+            if (Session[SessionKeys.UserId] != null)
+                vm.UserId = Session[SessionKeys.UserId].ToString();
             // vm.EventArgument = page.ToString();
             //vm.EventCommand = "Edit";
             vm.HandleRequest();
@@ -191,12 +197,49 @@ namespace ifreighters.Controllers
             }
             return View(vm);
         }
+
+
+        public ActionResult BookmarkJob(int bid)
+        {
+            JobdetailViewModel vm = new JobdetailViewModel();
+            if (Session[SessionKeys.Role] != null && Session[SessionKeys.Role].ToString() == "2")
+            {
+                vm.Owner = false;
+            }
+            else
+                vm.Owner = true;
+            if (Session[SessionKeys.UserId] != null)
+                vm.UserId = Session[SessionKeys.UserId].ToString();
+            vm.EventArgument = bid.ToString();
+            vm.EventCommand = "Edit";
+            vm.JobBid.BidID = Convert.ToInt32(bid.ToString());
+            vm.HandleRequest();
+            vm.BookmarkJob(bid);
+
+            if (vm.IsValid)
+            {
+                TempData["Msg"] = vm.Msg;
+                // NOTE: Must clear the model state in order to bind
+                //       the @Html helpers to the new model values
+                ModelState.Clear();
+            }
+            else
+            {
+                foreach (KeyValuePair<string, string> item in vm.ValidationErrors)
+                {
+                    ModelState.AddModelError(item.Key, item.Value);
+                }
+            }
+            return View("Jobdetail", vm);
+        }
+
+
         public ActionResult Activebids(int? page)
         {
             BiddingViewModel vm = new BiddingViewModel();
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             //vm.IsDetailAreaVisible = true;
             //vm.IsSearchAreaVisible = false;
             //vm.IsListAreaVisible = false;
@@ -206,9 +249,9 @@ namespace ifreighters.Controllers
         public ActionResult Managebidders(int? page)
         {
             BiddingViewModel vm = new BiddingViewModel();
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             //vm.IsDetailAreaVisible = true;
             //vm.IsSearchAreaVisible = false;
             //vm.IsListAreaVisible = false;
@@ -218,15 +261,15 @@ namespace ifreighters.Controllers
         public ActionResult Messages(int? page)
         {
             BiddingViewModel vm = new BiddingViewModel();
-            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = Session[SessionKeys.Username].ToString();
             //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
+            //vm.Email = Session[SessionKeys.Email].ToString();
             //vm.IsDetailAreaVisible = true;
             //vm.IsSearchAreaVisible = false;
             //vm.IsListAreaVisible = false;
             vm.HandleRequest();
             return View(vm);
         }
-        
+
     }
 }

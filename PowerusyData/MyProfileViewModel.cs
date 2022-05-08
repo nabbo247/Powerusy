@@ -58,6 +58,7 @@ namespace PowerusyData
         public bool EbizApproval { get; set; }
         public string NewPassword { get; set; }
         public string Password { get; set; }
+        public string AccountType { get; set; }
         protected override void Init()
         {
             UsrLst = new List<tbl_users>();
@@ -112,8 +113,7 @@ namespace PowerusyData
             //ListOfPOSManager mgr =
             // new ListOfPOSManager();
             // Get Product Data
-            Entity = Get(
-              Convert.ToInt32(EventArgument));
+            Entity = Get(Convert.ToInt32(EventArgument));
 
             base.Edit();
         }
@@ -374,6 +374,10 @@ namespace PowerusyData
                 using (var db = new powerusyDBCoreEntities())
                 {
                     ret = db.tbl_users.Where(x => x.id == UsrReq.id).SingleOrDefault();
+                    if (ret != null)
+                    {
+                        AccountType = db.tbl_role.FirstOrDefault(r => r.id == ret.roleid)?.name;
+                    }
                 }
             }
             catch (Exception ex)
