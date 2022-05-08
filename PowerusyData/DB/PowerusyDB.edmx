@@ -28,6 +28,53 @@
           <Property Name="pagevisited" Type="nvarchar" MaxLength="255" />
           <Property Name="dateaccessed" Type="datetimeoffset" Precision="7" />
         </EntityType>
+        <EntityType Name="tbl_bidding">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="category" Type="nvarchar" MaxLength="50" />
+          <Property Name="subcategory" Type="nvarchar" MaxLength="50" />
+          <Property Name="service" Type="nvarchar" MaxLength="50" />
+          <Property Name="Consignee" Type="nvarchar" MaxLength="50" />
+          <Property Name="BookingNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="BLNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="VesselName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PortLoading" Type="nvarchar" MaxLength="50" />
+          <Property Name="PortDischarge" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShippingLines" Type="nvarchar" MaxLength="50" />
+          <Property Name="EstBudget" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GoodDescription" Type="nvarchar(max)" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="statusid" Type="int" />
+          <Property Name="IconPath" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tbl_bidding_jobs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BidID" Type="int" />
+          <Property Name="AgentID" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="DueDate" Type="datetime" />
+          <Property Name="status" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_bookmarked">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BidID" Type="int" />
+          <Property Name="AgentID" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="status" Type="int" />
+        </EntityType>
         <EntityType Name="tbl_clearing">
           <Key>
             <PropertyRef Name="id" />
@@ -142,6 +189,13 @@ warning 6002: The table/view 'Powerusydb.dbo.tbl_counntries' does not have a pri
           <Property Name="datecreated" Type="datetimeoffset" Precision="7" />
           <Property Name="status" Type="bit" />
         </EntityType>
+        <EntityType Name="tbl_services">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tbl_servicetype">
           <Key>
             <PropertyRef Name="id" />
@@ -218,6 +272,40 @@ warning 6002: The table/view 'Powerusydb.dbo.tbl_counntries' does not have a pri
           <Property Name="email" Type="nvarchar" MaxLength="255" />
           <Property Name="password" Type="nvarchar" MaxLength="255" />
           <Property Name="authcode" Type="nvarchar" MaxLength="255" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Powerusydb.dbo.View_bid_jobs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_bid_jobs">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="BidID" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="category" Type="nvarchar" MaxLength="50" />
+          <Property Name="subcategory" Type="nvarchar" MaxLength="50" />
+          <Property Name="service" Type="nvarchar" MaxLength="50" />
+          <Property Name="Consignee" Type="nvarchar" MaxLength="50" />
+          <Property Name="BookingNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="BLNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="VesselName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PortLoading" Type="nvarchar" MaxLength="50" />
+          <Property Name="PortDischarge" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShippingLines" Type="nvarchar" MaxLength="50" />
+          <Property Name="EstBudget" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GoodDescription" Type="nvarchar(max)" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="statusid" Type="int" />
+          <Property Name="IconPath" Type="nvarchar" MaxLength="100" />
+          <Property Name="comment" Type="nvarchar(max)" />
+          <Property Name="AgentID" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DueDate" Type="datetime" />
+          <Property Name="BidDate" Type="datetime" />
+          <Property Name="BidID" Type="bigint" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -260,6 +348,9 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
         <EntityContainer Name="powerusyDBCoreModelStoreContainer">
           <EntitySet Name="tbl_attachment" EntityType="Self.tbl_attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_auditlog" EntityType="Self.tbl_auditlog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_bidding" EntityType="Self.tbl_bidding" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_bidding_jobs" EntityType="Self.tbl_bidding_jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_bookmarked" EntityType="Self.tbl_bookmarked" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="dbo" store:Type="Tables" />
@@ -267,6 +358,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySet Name="tbl_kyc" EntityType="Self.tbl_kyc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_registered" EntityType="Self.tbl_registered" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_services" EntityType="Self.tbl_services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_servicetype" EntityType="Self.tbl_servicetype" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_shipper" EntityType="Self.tbl_shipper" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_status" EntityType="Self.tbl_status" Schema="dbo" store:Type="Tables" />
@@ -279,6 +371,35 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
     [tbl_counntries].[Brief_desc] AS [Brief_desc], 
     [tbl_counntries].[CountryName] AS [CountryName]
     FROM [dbo].[tbl_counntries] AS [tbl_counntries]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_bid_jobs" EntityType="Self.View_bid_jobs" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_bid_jobs].[id] AS [id], 
+    [View_bid_jobs].[GoodsType] AS [GoodsType], 
+    [View_bid_jobs].[Name] AS [Name], 
+    [View_bid_jobs].[category] AS [category], 
+    [View_bid_jobs].[subcategory] AS [subcategory], 
+    [View_bid_jobs].[service] AS [service], 
+    [View_bid_jobs].[Consignee] AS [Consignee], 
+    [View_bid_jobs].[BookingNo] AS [BookingNo], 
+    [View_bid_jobs].[BLNumber] AS [BLNumber], 
+    [View_bid_jobs].[VesselName] AS [VesselName], 
+    [View_bid_jobs].[PortLoading] AS [PortLoading], 
+    [View_bid_jobs].[PortDischarge] AS [PortDischarge], 
+    [View_bid_jobs].[ShippingLines] AS [ShippingLines], 
+    [View_bid_jobs].[EstBudget] AS [EstBudget], 
+    [View_bid_jobs].[GoodDescription] AS [GoodDescription], 
+    [View_bid_jobs].[UserID] AS [UserID], 
+    [View_bid_jobs].[Date] AS [Date], 
+    [View_bid_jobs].[statusid] AS [statusid], 
+    [View_bid_jobs].[IconPath] AS [IconPath], 
+    [View_bid_jobs].[comment] AS [comment], 
+    [View_bid_jobs].[AgentID] AS [AgentID], 
+    [View_bid_jobs].[Amount] AS [Amount], 
+    [View_bid_jobs].[DueDate] AS [DueDate], 
+    [View_bid_jobs].[BidDate] AS [BidDate], 
+    [View_bid_jobs].[BidID] AS [BidID]
+    FROM [dbo].[View_bid_jobs] AS [View_bid_jobs]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="View_Shipper" EntityType="Self.View_Shipper" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -332,12 +453,17 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySet Name="tbl_servicetype" EntityType="powerusyDBCoreModel.tbl_servicetype" />
           <EntitySet Name="tbl_status" EntityType="powerusyDBCoreModel.tbl_status" />
           <EntitySet Name="tbl_subgoodstype" EntityType="powerusyDBCoreModel.tbl_subgoodstype" />
-          <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
           <EntitySet Name="tbl_counntries" EntityType="powerusyDBCoreModel.tbl_counntries" />
           <EntitySet Name="tbl_shipper" EntityType="powerusyDBCoreModel.tbl_shipper" />
           <EntitySet Name="View_Shipper" EntityType="powerusyDBCoreModel.View_Shipper" />
           <EntitySet Name="tbl_attachment" EntityType="powerusyDBCoreModel.tbl_attachment" />
           <EntitySet Name="tbl_uploadDocType" EntityType="powerusyDBCoreModel.tbl_uploadDocType" />
+          <EntitySet Name="tbl_services" EntityType="powerusyDBCoreModel.tbl_services" />
+          <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
+          <EntitySet Name="tbl_bidding" EntityType="powerusyDBCoreModel.tbl_bidding" />
+          <EntitySet Name="tbl_bidding_jobs" EntityType="powerusyDBCoreModel.tbl_bidding_jobs" />
+          <EntitySet Name="tbl_bookmarked" EntityType="powerusyDBCoreModel.tbl_bookmarked" />
+          <EntitySet Name="View_bid_jobs" EntityType="powerusyDBCoreModel.View_bid_jobs" />
         </EntityContainer>
         <EntityType Name="tbl_auditlog">
           <Key>
@@ -482,23 +608,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
           <Property Name="statusid" Type="Int32" />
         </EntityType>
-        <EntityType Name="tbl_users">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="middlename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
-          <Property Name="roleid" Type="Int32" />
-          <Property Name="status" Type="Boolean" />
-          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="tbl_counntries">
           <Key>
             <PropertyRef Name="Country_Code" />
@@ -586,6 +695,109 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Docname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_services">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="middlename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+          <Property Name="roleid" Type="Int32" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_bidding">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoodsType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="subcategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Consignee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookingNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BLNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VesselName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PortLoading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PortDischarge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShippingLines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EstBudget" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GoodDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="statusid" Type="Int32" />
+          <Property Name="IconPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_bidding_jobs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BidID" Type="Int32" />
+          <Property Name="AgentID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_bookmarked">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BidID" Type="Int32" />
+          <Property Name="AgentID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="View_bid_jobs">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="BidID" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="GoodsType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="subcategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Consignee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BookingNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BLNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VesselName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PortLoading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PortDischarge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShippingLines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EstBudget" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GoodDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="statusid" Type="Int32" />
+          <Property Name="IconPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AgentID" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="BidDate" Type="DateTime" Precision="3" />
+          <Property Name="BidID" Type="Int64" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -747,24 +959,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_users">
-            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_users">
-              <MappingFragment StoreEntitySet="tbl_users">
-                <ScalarProperty Name="authcode" ColumnName="authcode" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="roleid" ColumnName="roleid" />
-                <ScalarProperty Name="dateadded" ColumnName="dateadded" />
-                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
-                <ScalarProperty Name="middlename" ColumnName="middlename" />
-                <ScalarProperty Name="lastname" ColumnName="lastname" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="firstname" ColumnName="firstname" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_counntries">
             <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_counntries">
               <MappingFragment StoreEntitySet="tbl_counntries">
@@ -854,6 +1048,114 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
               <MappingFragment StoreEntitySet="tbl_uploadDocType">
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Docname" ColumnName="Docname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_services">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_services">
+              <MappingFragment StoreEntitySet="tbl_services">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_users">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_users">
+              <MappingFragment StoreEntitySet="tbl_users">
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="authcode" ColumnName="authcode" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+                <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_bidding">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding">
+              <MappingFragment StoreEntitySet="tbl_bidding">
+                <ScalarProperty Name="IconPath" ColumnName="IconPath" />
+                <ScalarProperty Name="statusid" ColumnName="statusid" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
+                <ScalarProperty Name="EstBudget" ColumnName="EstBudget" />
+                <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
+                <ScalarProperty Name="PortDischarge" ColumnName="PortDischarge" />
+                <ScalarProperty Name="PortLoading" ColumnName="PortLoading" />
+                <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+                <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
+                <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+                <ScalarProperty Name="Consignee" ColumnName="Consignee" />
+                <ScalarProperty Name="service" ColumnName="service" />
+                <ScalarProperty Name="subcategory" ColumnName="subcategory" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_bidding_jobs">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_jobs">
+              <MappingFragment StoreEntitySet="tbl_bidding_jobs">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="BidID" ColumnName="BidID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_bookmarked">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bookmarked">
+              <MappingFragment StoreEntitySet="tbl_bookmarked">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="BidID" ColumnName="BidID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_bid_jobs">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.View_bid_jobs">
+              <MappingFragment StoreEntitySet="View_bid_jobs">
+                <ScalarProperty Name="BidID" ColumnName="BidID" />
+                <ScalarProperty Name="BidDate" ColumnName="BidDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="IconPath" ColumnName="IconPath" />
+                <ScalarProperty Name="statusid" ColumnName="statusid" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
+                <ScalarProperty Name="EstBudget" ColumnName="EstBudget" />
+                <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
+                <ScalarProperty Name="PortDischarge" ColumnName="PortDischarge" />
+                <ScalarProperty Name="PortLoading" ColumnName="PortLoading" />
+                <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+                <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
+                <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+                <ScalarProperty Name="Consignee" ColumnName="Consignee" />
+                <ScalarProperty Name="service" ColumnName="service" />
+                <ScalarProperty Name="subcategory" ColumnName="subcategory" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

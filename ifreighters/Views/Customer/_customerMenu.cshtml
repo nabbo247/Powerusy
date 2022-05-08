@@ -1,0 +1,39 @@
+﻿
+<div class="col-xl-3 col-lg-4 col-md-12 col-sm-12">
+    <div class="dashboard-navbar overlio-top">
+
+        <div class="d-user-avater">
+            <img src="~/assets/img/team-1.jpg" class="img-fluid rounded" alt="">
+            <h4>nabil Abubakar</h4>
+            @*<span>Canada USA</span>*@
+        </div>
+
+        <div class="d-navigation">
+            <ul id="metismenu">
+                <li class="active">
+                    @Html.ActionLink("Dashboard", "Dashboard", "Customer")
+                </li>
+                <li>@Html.ActionLink("My Profile", "MyProfile", "Customer")</li>
+
+                <li>
+                    @Html.ActionLink("Messages", "Messages", "Customer")
+                </li>
+
+                <li><a href="reviews.html"><i class="fa fa-star"></i>Reviews</a></li>
+
+                <li>
+                    <a href="javascript:void(0);" class="has-arrow" aria-expanded="false"><i class="ti-desktop"></i>Tasks</a>
+                    <ul>
+                        <li>
+                            @Html.ActionLink("Post A Job", "ManageJobs", "Customer")
+                        </li>
+                        <li>@Html.ActionLink("Manage Bidders", "Managebidders", "Customer")</li>
+                        <li>@Html.ActionLink("My Active Bids", "Activebids", "Customer")</li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="ti-power-off"></i>Log Out</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>

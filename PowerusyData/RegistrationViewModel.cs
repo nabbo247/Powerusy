@@ -43,7 +43,7 @@ namespace PowerusyData
             SearchEntity = new tbl_users();
             Entity = new tbl_users();
             List = new List<SelectList>();
-            GetDropDown();
+            //GetDropDown();
             base.Init();
         }
 
@@ -256,11 +256,25 @@ namespace PowerusyData
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
+                    var rs = (from info in db.tbl_users where info.email == entity.email select info).FirstOrDefault();
+                    if(rs != null)
+                    {
+                        ValidationErrors.Add(new KeyValuePair<string, string>("Comment", "User already exist."));
+                        IsValid = false;
+                        return ret;
+                    }
+                    //if (!string.IsNullOrEmpty(_FileName))
+                    //{
+                    //    entity.Logo = _FileName;
+                    //}
                     Gadget ency = new Gadget();
                     //string ssss = ency.dekrypt("3H0h8gr44jrBbJ3SXaQdSQ==");
                     string passwd = ency.enkrypt(entity.password);
                     entity.password = passwd;
                     entity.username = entity.email;
+                    entity.dateadded = DateTime.Now;
+                    Random rm = new Random();
+                    entity.authcode = rm.Next(100009, 999999).ToString(); 
                     entity.roleid = Convert.ToInt32( ActionTypeId);
                     //TODO: Create Insert Code here
                     db.tbl_users.Add(entity);
@@ -283,12 +297,14 @@ namespace PowerusyData
             sb.Append(line);
             sb.Replace("{UserName}", entity.username);
             sb.Replace("{FullName}", entity.firstname);
-            sb.Replace("{email}", entity.email);
-            sb.Replace("{Telephone}", entity.phonenumber);
-            sb.Replace("{date}", DateTime.Now.ToString());
+            sb.Replace("{code}", entity.authcode);
+            //sb.Replace("{Telephone}", entity.phonenumber);
+            //sb.Replace("{Telephone}", entity.phonenumber);
+            //sb.Replace("{date}", DateTime.Now.ToString());
             string body = sb.ToString();
-            webmail.WebService ser = new webmail.WebService();
-            var status = ser.sendMail(entity.email, ourmail, "", body, "Account Details", "");
+            njcweb.WebService ser = new njcweb.WebService();
+            //webmail.WebService ser = new webmail.WebService();
+            var status = ser.sendMail(entity.email, ourmail, "", body, "Please confirm your registration", "");
 
             //Task.Run(async () => await ency.sendMail(entity.email, ourmail, "", body, "Account Details", ""));
             string s = "sd";

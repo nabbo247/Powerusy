@@ -36,11 +36,16 @@ namespace PowerusyData.DB
         public virtual DbSet<tbl_servicetype> tbl_servicetype { get; set; }
         public virtual DbSet<tbl_status> tbl_status { get; set; }
         public virtual DbSet<tbl_subgoodstype> tbl_subgoodstype { get; set; }
-        public virtual DbSet<tbl_users> tbl_users { get; set; }
         public virtual DbSet<tbl_counntries> tbl_counntries { get; set; }
         public virtual DbSet<tbl_shipper> tbl_shipper { get; set; }
         public virtual DbSet<View_Shipper> View_Shipper { get; set; }
         public virtual DbSet<tbl_attachment> tbl_attachment { get; set; }
         public virtual DbSet<tbl_uploadDocType> tbl_uploadDocType { get; set; }
+        public virtual DbSet<tbl_services> tbl_services { get; set; }
+        public virtual DbSet<tbl_users> tbl_users { get; set; }
+        public virtual DbSet<tbl_bidding> tbl_bidding { get; set; }
+        public virtual DbSet<tbl_bidding_jobs> tbl_bidding_jobs { get; set; }
+        public virtual DbSet<tbl_bookmarked> tbl_bookmarked { get; set; }
+        public virtual DbSet<View_bid_jobs> View_bid_jobs { get; set; }
     }
 }

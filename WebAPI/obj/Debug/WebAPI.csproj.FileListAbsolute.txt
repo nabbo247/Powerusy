@@ -82,4 +82,4 @@ D:\Users\nabbo247\source\repos\Powerusy\WebAPI\obj\Debug\WebAPI.csproj.CoreCompi
 D:\Users\nabbo247\source\repos\Powerusy\WebAPI\obj\Debug\WebAPI.csproj.CopyComplete
 D:\Users\nabbo247\source\repos\Powerusy\WebAPI\obj\Debug\WebAPI.dll
 D:\Users\nabbo247\source\repos\Powerusy\WebAPI\obj\Debug\WebAPI.pdb
-D:\Users\nabbo247\source\repos\Powerusy\WebAPI\obj\Debug\WebAPI.csprojAssemblyReference.cache
+D:\Users\nabbo247\source\repos\Powerusy\WebAPI\obj\Debug\WebAPI.csproj.AssemblyReference.cache

@@ -66,8 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivebidsViewModel.cs" />
+    <Compile Include="BiddingViewModel.cs" />
+    <Compile Include="BookmarkedViewModel.cs" />
     <Compile Include="CompanyRegViewModel.cs" />
     <Compile Include="CompleteRegViewModel.cs" />
+    <Compile Include="Crypto.cs" />
     <Compile Include="DB\PowerusyDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +91,15 @@
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_auditlog.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tbl_bidding.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tbl_bidding_jobs.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tbl_bookmarked.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_clearing.cs">
@@ -113,6 +126,9 @@
     <Compile Include="DB\tbl_role.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\tbl_services.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\tbl_servicetype.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
@@ -131,13 +147,19 @@
     <Compile Include="DB\tbl_users.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\View_bid_jobs.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\View_Shipper.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="HomeViewModel.cs" />
     <Compile Include="IndexViewModel.cs" />
+    <Compile Include="JobdetailViewModel.cs" />
     <Compile Include="LoginViewModel.cs" />
     <Compile Include="ModelCommon\MenuModels.cs" />
     <Compile Include="ModelCommon\ViewModelBase.cs" />
+    <Compile Include="MyProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -145,8 +167,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RegistrationViewModel.cs" />
+    <Compile Include="SearchjobViewModel.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="VerificationShipperViewModel.cs" />
+    <Compile Include="Web References\njcweb\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\webmail\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -167,6 +195,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Web References\njcweb\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\njcweb\WebService.wsdl" />
     <None Include="Web References\webmail\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -188,6 +221,7 @@
       <DependentUpon>PowerusyDB.edmx</DependentUpon>
       <LastGenOutput>PowerusyDB.cs</LastGenOutput>
     </Content>
+    <None Include="Web References\njcweb\WebService.disco" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -196,6 +230,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://webapi.njcpension.com/Controllers/WebService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\njcweb\</RelPath>
+      <UpdateFromURL>http://webapi.njcpension.com/Controllers/WebService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>PowerusyData_njcweb_WebService</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://webapi.powerusy.com/Controllers/WebService.asmx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\webmail\</RelPath>

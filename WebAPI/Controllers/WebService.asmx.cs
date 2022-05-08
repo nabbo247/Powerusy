@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
             {
                 //MailMessage msgMail = new MailMessage();
                 MailMessage myMessage = new MailMessage();
-                myMessage.From = new MailAddress(sourceEmail, "NJCPENSION");
+                myMessage.From = new MailAddress(sourceEmail, "Powerusy");
                 myMessage.To.Add(destinationEmail);
                 if (!string.IsNullOrEmpty(ccEmailAddress))
                     myMessage.CC.Add(ccEmailAddress);

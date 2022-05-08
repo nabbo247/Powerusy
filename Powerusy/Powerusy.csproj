@@ -144,6 +144,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BiddingController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -7842,6 +7843,10 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Bidding\Index.cshtml" />
+    <Content Include="Views\Home\Media.cshtml" />
+    <Content Include="Views\Home\Careers.cshtml" />
+    <Content Include="Views\Home\MarketInfo.cshtml" />
     <None Include="Web References\webmail\WebService.wsdl" />
   </ItemGroup>
   <ItemGroup>

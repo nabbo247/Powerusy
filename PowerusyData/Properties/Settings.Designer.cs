@@ -32,5 +32,15 @@ namespace PowerusyData.Properties {
                 return ((string)(this["PowerusyData_webmail_WebService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://webapi.njcpension.com/Controllers/WebService.asmx")]
+        public string PowerusyData_njcweb_WebService {
+            get {
+                return ((string)(this["PowerusyData_njcweb_WebService"]));
+            }
+        }
     }
 }

@@ -38,9 +38,9 @@ namespace Powerusy.Controllers
             var sss = vm.EventCommand ;
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
-            vm.UserId = Session["userid"].ToString();
-            //vm.UserId = "nabbo247";
-            if(vm.IsStep2==true||vm.EventCommand=="save")
+            //vm.UserId = Session["userid"].ToString();
+            vm.UserId = "nabbo247@gmail.com";
+            if (vm.IsStep2==true||vm.EventCommand=="save")
             {
                 if (vm.CertificateOfIncorporation != null && vm.CertificateOfIncorporation.ContentLength > 0)
                 {

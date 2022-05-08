@@ -1,0 +1,183 @@
+﻿@model PowerusyData.BiddingViewModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Activebids";
+}
+<!-- ============================ Page Title Start================================== -->
+<div class="page-title bg-cover" style="background: url(../../assets/img/bn-1.jpg)no-repeat; " data-overlay="5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12"></div>
+        </div>
+    </div>
+</div>
+<!-- ============================ Page Title End ================================== -->
+<!-- ============================ Main Section Start ================================== -->
+<section class="gray-bg pt-4">
+    <div class="container-fluid">
+        <div class="row m-0">
+
+            @Html.Partial("_customerMenu", Model)
+            @*Html.RenderPartial("_employee");*@
+            <!-- Item Wrap Start -->
+            <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <!-- Breadcrumbs -->
+                        <div class="bredcrumb_wrap">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Active Bids</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                @using (Html.BeginForm())
+                {
+                    <!-- BEGIN HIDDEN FIELDS AREA -->
+                    @Html.HiddenFor(m => m.EventCommand)
+                    @Html.HiddenFor(m => m.Mode)
+                    @Html.HiddenFor(m => m.EventArgument)
+
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12">
+                            @if (!Model.IsValid)
+                            {
+                                <div class="alert alert-danger
+                    alert-dismissable"
+                                     role="alert">
+                                    <button type="button" class="close"
+                                            data-dismiss="alert">
+                                        <span aria-hidden="true">
+                                            &times;
+                                        </span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    @Html.ValidationSummary(false)
+                                </div>
+                            }
+                            @if (TempData["Msg"] != null)
+                            {
+                                <div class="alert alert-dismissable alert-success">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        x
+                                    </button>
+                                    @TempData["Msg"].ToString()
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    if (Model.IsListAreaVisible)
+                    {
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                <!-- Single Wrap -->
+                                <div class="_dashboard_content">
+                                    <div class="_dashboard_content_header">
+                                        <div class="_dashboard__header_flex">
+                                            <h4><i class="ti-layers mr-1"></i>Active Bids</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="_dashboard_content_body p-0">
+                                        <div class="_grouping_list_task">
+
+                                            <!-- Single List -->
+                                            <div class="_manage_task_list">
+                                                <div class="_manage_task_list_flex">
+                                                    <h4 class="_jb_title">New Landing Page For Beauty Site</h4>
+                                                    <span class="_elopi_designation">10min ago</span>
+                                                    <ul class="_action_grouping_list">
+                                                        <li><a href="#" data-toggle="tooltip" data-placement="top" title="" class="_edit_list_point" data-original-title="Edit job"><i class="fa fa-edit"></i></a></li>
+                                                        <li><a href="#" data-toggle="tooltip" data-placement="top" title="" class="_delete_point" data-original-title="Delete Job"><i class="fa fa-trash"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="_manage_task_list_right">
+                                                    <div class="_act_tsk_info">
+                                                        <ul class="_act_tsk_list">
+                                                            <li>
+                                                                <div class="_act_capt_01">
+                                                                    <h5>$45</h5>
+                                                                    <span>Hourly Rate</span>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="_act_capt_01">
+                                                                    <h5>5 days</h5>
+                                                                    <span>Delivery Time</span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Wrap End -->
+
+                            </div>
+                        </div>
+                    }
+
+
+                    if (Model.IsDetailAreaVisible)
+                    {
+
+
+                    }
+                }
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- ============================ Main Section End ================================== -->
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+            $(document).ajaxStart(function () {
+                $("#loading").show();
+            });
+            $(document).ajaxStop(function () {
+                $("#loading").hide();
+            });
+
+            $("[data-pdsa-action]").on("click", function (e) {
+
+                $("#loading").show();
+                e.preventDefault();
+
+                $("#EventCommand").val($(this).data("pdsa-action"));
+
+                $("#EventArgument").val($(this).attr("data-pdsa-val"));
+
+                $("form").submit();
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        console.log('Submission was successful.');
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log('An error occurred.');
+                        console.log(data);
+                    },
+                });
+                $("#loading").hide();
+            });
+        });
+    </script>
+}
+
+

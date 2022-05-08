@@ -49,7 +49,30 @@ namespace PowerusyData
         public override void HandleRequest()
         {
             //// This is an example of adding on a new command
-
+            switch (EventCommand.ToLower())
+            {
+                case "forgetpassword":
+                    using (var db = new powerusyDBCoreEntities())
+                    {
+                        var rs = (from info in db.tbl_users
+                                  where info.username == Entity.username
+                                  select info).FirstOrDefault();
+                        if (rs != null)
+                        {
+                            IsValid = true;
+                            Entity = rs;
+                            Msg = "Your iFreighter account password was requested to be reset. Please check your registered email ";
+                        }
+                        else
+                        {
+                            ValidationErrors.Add(new
+                              KeyValuePair<string, string>("Comment",
+                              "Invalid User username "));
+                            IsValid = false;
+                        }
+                    }
+                    break;
+            }
             //GetDropDown();
             //base.HandleRequest();
             switch (Mode.ToLower())
@@ -94,6 +117,7 @@ namespace PowerusyData
 
                     }
                     break;
+                
             }
             
         }
