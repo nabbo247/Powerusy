@@ -25,10 +25,15 @@ namespace ifreighters.Controllers
         public ActionResult IndexAgent(int? page)
         {
             CompleteRegViewModel vm = new CompleteRegViewModel();
-            vm.Mode = "Add";
-            vm.IsStep1 = true;
+            //vm.Mode = "Add";
+            //vm.IsStep1 = true;
             vm.UserId = Session["usrID"].ToString();
             vm.HandleRequest();
+            if(vm.Entity==null)
+            {
+                vm.Mode = "Add";
+                vm.IsStep1 = true;
+            }
             return View(vm);
         }
         [HttpPost]
@@ -111,7 +116,10 @@ namespace ifreighters.Controllers
                     vm.OthersName = _FileName;
                 }
             }
-
+            if(vm.EventCommand=="edit")
+            {
+                vm.IsStep1 = true;
+            }
             vm.HandleRequest();
             if (vm.IsValid)
             {

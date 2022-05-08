@@ -173,9 +173,10 @@ namespace ifreighters.Controllers
             if (Session["usrID"] != null)
                 vm.UserId = Session["usrID"].ToString();
              vm.EventArgument = vm.JobBid.BidID.ToString();
-            //vm.EventCommand = "Edit";
+            //
             //vm.JobBid.BidID = Convert.ToInt32(page.ToString());
             vm.HandleRequest();
+            vm.EventCommand = "Edit";
             if (vm.IsValid)
             {
                 TempData["Msg"] = vm.Msg;

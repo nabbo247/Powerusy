@@ -263,11 +263,16 @@ namespace PowerusyData
                         IsValid = false;
                         return ret;
                     }
+                    //if (!string.IsNullOrEmpty(_FileName))
+                    //{
+                    //    entity.Logo = _FileName;
+                    //}
                     Gadget ency = new Gadget();
                     //string ssss = ency.dekrypt("3H0h8gr44jrBbJ3SXaQdSQ==");
                     string passwd = ency.enkrypt(entity.password);
                     entity.password = passwd;
                     entity.username = entity.email;
+                    entity.dateadded = DateTime.Now;
                     Random rm = new Random();
                     entity.authcode = rm.Next(100009, 999999).ToString(); 
                     entity.roleid = Convert.ToInt32( ActionTypeId);

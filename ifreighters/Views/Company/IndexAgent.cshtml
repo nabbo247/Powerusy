@@ -32,7 +32,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Reviews</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Company Info</li>
                                 </ol>
                             </nav>
                         </div>
@@ -81,7 +81,66 @@
                     }
                     if (Model.IsListAreaVisible)
                     {
+                        
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <!-- Single Wrap -->
+                                <div class="_dashboard_content">
+                                    <div class="_dashboard_content_header">
+                                        <div class="_dashboard__header_flex">
+                                            <h4><i class="fa fa-briefcase mr-1"></i>Company Info</h4>
+                                        </div>
+                                    </div>
 
+                                    <div class="_dashboard_content_body p-0">
+                                        <div class="_dashboard_list_group">
+                                            @foreach (var item in Model.UsrLst)
+                                            {
+                                                <!-- Single Job -->
+                                                <div class="_list_jobs_wraps mng_list shadow_0 border">
+                                                    <div class="_list_jobs_f1ex first">
+                                                        <div class="_list_110">
+                                                            <div class="_list_110_thumb">
+                                                                <a href="#">
+                                                                    @if (Session["LogoPath"] != null && !string.IsNullOrEmpty(Session["LogoPath"].ToString()))
+                                                                    {
+                                                                        <img src="~/upload/@Session["LogoPath"].ToString()" height="200" width="200" class="img-fluid" alt="">
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <img src="~/assets/img/c-1.png" height="200" width="200" class="img-fluid" alt="">
+                                                                    }
+                                                                </a>
+                                                            </div>
+                                                            <div class="_list_110_caption">
+                                                                <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id">@item.companyname</a>
+                                                                <ul class="_grouping_list">
+                                                                    <li><span><i class="ti-location-pin"></i>Port of loading : @item.address</span></li>
+                                                                    <li>
+                                                                        <span>
+                                                                            <i class="ti-timer"></i>
+                                                                            @if (item.statusid == 1)
+                                                                            {
+                                                                                <span class="_dash_status approval">Pending Approval</span>
+                                                                            }
+                                                                        </span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="_list_jobs_f1ex">
+                                                        <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id" class="_jb_apply">Update</a>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Single Wrap End -->
+                            </div>
+                        </div>
                     }
 
 
@@ -232,6 +291,15 @@
                                                                 data-pdsa-action="Continue">
                                                             <i class="glyphicon glyphicon-search"></i>
                                                             &nbsp;Continue
+                                                        </button>
+
+                                                        <button id="btnCancel"
+                                                                class="btn btn-sm btn-primary"
+                                                                formnovalidate="formnovalidate"
+                                                                data-pdsa-action="cancel">
+                                                            <i class="glyphicon
+           glyphicon-remove-circle"></i>
+                                                            &nbsp;Cancel
                                                         </button>
                                                     </div>
                                                 </div>

@@ -19,12 +19,6 @@ namespace ifreighters.Controllers
         public ActionResult Registration(int? page)
         {
             RegistrationViewModel vm = new RegistrationViewModel();
-            //vm.UserId = Session["userid"].ToString();
-            //vm.UserId = "eunicee";
-            //vm.Email = Session["Email"].ToString();
-            //vm.IsDetailAreaVisible = true;
-            //vm.IsSearchAreaVisible = false;
-            //vm.IsListAreaVisible = false;
             vm.HandleRequest();
             return View(vm);
         }
@@ -39,15 +33,12 @@ namespace ifreighters.Controllers
             //vm.EventArgument = "";
             //vm.EventCommand = "save";
             vm.Mode = "Add";
-            //vm.url = ConfigurationManager.AppSettings["url"];
-            //vm.UserId = Session["userid"].ToString();
-            //vm.UserId = "eunicee";
             if (vm.uploadedImage != null && vm.uploadedImage.ContentLength > 0)
             {
-                string _FileName = Path.GetFileName(vm.uploadedImage.FileName);
+                Random rsm = new Random();
+                string _FileName = Path.GetFileName( rsm.Next(10009, 99999) +"_"+ vm.uploadedImage.FileName);
                 string _path = Path.Combine(Server.MapPath("~/upload"), _FileName);
                 vm.uploadedImage.SaveAs(_path);
-                //file path 
                 vm.Entity.Logo = _FileName;
             }
             vm.HandleRequest();
@@ -103,6 +94,7 @@ namespace ifreighters.Controllers
             Session["Email"] = vm.Entity.email;
             Session["Role"] = vm.Entity.roleid;
             Session["usrID"] = vm.Entity.id;
+            Session["LogoPath"] = vm.Entity.Logo;
             if (vm.IsValid)
             {
                 TempData["Msg"] = vm.Msg;

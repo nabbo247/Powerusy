@@ -3,14 +3,22 @@
     <div class="dashboard-navbar overlio-top">
 
         <div class="d-user-avater">
-            <img src="~/assets/img/team-1.jpg" class="img-fluid rounded" alt="">
-            <h4>nabil Abubakar</h4>
+            @if (Session["LogoPath"] != null && !string.IsNullOrEmpty(Session["LogoPath"].ToString()))
+            {
+                <img src="~/upload/@Session["LogoPath"].ToString()" height="200" width="200" class="img-fluid rounded" alt="">
+            }
+            else
+            {
+                <img src="~/assets/img/team-1.jpg" height="200" width="200" class="img-fluid rounded" alt="">
+            }
+
+
+            <h4>@(Session["fname"].ToString()+" "+Session["fname"].ToString())</h4>
             @*<span>Canada USA</span>*@
         </div>
 
         <div class="d-navigation">
             <ul id="metismenu">
-
                 <li class="active">
                     @Html.ActionLink("Dashboard", "Dashboard", "Company")
                 </li>

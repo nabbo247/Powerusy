@@ -113,6 +113,7 @@ namespace PowerusyData
                 db.SaveChanges();
                 IsValid = true;
                 Msg = "Saved successful";
+                Entity = Get( Convert.ToInt32(EventArgument));
             }
             //throw new NotImplementedException();
         }
@@ -126,6 +127,14 @@ namespace PowerusyData
                 using (var db = new powerusyDBCoreEntities())
                 {
                     int ID = Convert.ToInt32(UserId);
+                    var rs = (from info in db.tbl_shipper where info.userid == ID && info.statusid==0 select info).FirstOrDefault();
+                    if (rs == null)
+                    {
+                        ValidationErrors.Add(new KeyValuePair<string, string>("Comment", "Update your company profile to bid for jobs."));
+                        IsValid = false;
+                        Entity = Get( Convert.ToInt32(EventArgument));
+                        return ret;
+                    }
                     JobBid.AgentID = ID;
                     JobBid.Date = DateTime.Now;
                     db.tbl_bidding_jobs.Add(JobBid);
@@ -133,7 +142,8 @@ namespace PowerusyData
                     IsValid = true;
                     Msg = "Bid created successful";
                 }
-            }
+            }else
+                Entity = Get(Convert.ToInt32(EventArgument));
             return ret;
         }
         //savejob
