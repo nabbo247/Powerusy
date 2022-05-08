@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\DB\PowerusyDB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\abdul\source\repos\nabbo247\Powerusy\PowerusyData\DB\PowerusyDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

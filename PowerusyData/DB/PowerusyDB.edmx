@@ -52,6 +52,16 @@
           <Property Name="statusid" Type="int" />
           <Property Name="IconPath" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="tbl_bidding_bookmark">
+          <Key>
+            <PropertyRef Name="bidding_id" />
+            <PropertyRef Name="bookmarked_by_id" />
+            <PropertyRef Name="bid_owner_id" />
+          </Key>
+          <Property Name="bidding_id" Type="int" Nullable="false" />
+          <Property Name="bookmarked_by_id" Type="int" Nullable="false" />
+          <Property Name="bid_owner_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_bidding_jobs">
           <Key>
             <PropertyRef Name="ID" />
@@ -64,6 +74,15 @@
           <Property Name="Comment" Type="nvarchar(max)" />
           <Property Name="DueDate" Type="datetime" />
           <Property Name="status" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_bidding_view">
+          <Key>
+            <PropertyRef Name="bidding_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="bidding_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="view_count" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_clearing">
           <Key>
@@ -306,7 +325,9 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySet Name="tbl_attachment" EntityType="Self.tbl_attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_auditlog" EntityType="Self.tbl_auditlog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_bidding" EntityType="Self.tbl_bidding" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_bidding_bookmark" EntityType="Self.tbl_bidding_bookmark" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_bidding_jobs" EntityType="Self.tbl_bidding_jobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_bidding_view" EntityType="Self.tbl_bidding_view" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="dbo" store:Type="Tables" />
@@ -389,6 +410,8 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
           <EntitySet Name="tbl_bidding" EntityType="powerusyDBCoreModel.tbl_bidding" />
           <EntitySet Name="tbl_bidding_jobs" EntityType="powerusyDBCoreModel.tbl_bidding_jobs" />
+          <EntitySet Name="tbl_bidding_bookmark" EntityType="powerusyDBCoreModel.tbl_bidding_bookmark" />
+          <EntitySet Name="tbl_bidding_view" EntityType="powerusyDBCoreModel.tbl_bidding_view" />
         </EntityContainer>
         <EntityType Name="tbl_auditlog">
           <Key>
@@ -682,6 +705,25 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DueDate" Type="DateTime" Precision="3" />
           <Property Name="status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_bidding_bookmark">
+          <Key>
+            <PropertyRef Name="bidding_id" />
+            <PropertyRef Name="bookmarked_by_id" />
+            <PropertyRef Name="bid_owner_id" />
+          </Key>
+          <Property Name="bidding_id" Type="Int32" Nullable="false" />
+          <Property Name="bookmarked_by_id" Type="Int32" Nullable="false" />
+          <Property Name="bid_owner_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_bidding_view">
+          <Key>
+            <PropertyRef Name="bidding_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="bidding_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="view_count" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -999,6 +1041,24 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
                 <ScalarProperty Name="AgentID" ColumnName="AgentID" />
                 <ScalarProperty Name="BidID" ColumnName="BidID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_bidding_bookmark">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_bookmark">
+              <MappingFragment StoreEntitySet="tbl_bidding_bookmark">
+                <ScalarProperty Name="bid_owner_id" ColumnName="bid_owner_id" />
+                <ScalarProperty Name="bookmarked_by_id" ColumnName="bookmarked_by_id" />
+                <ScalarProperty Name="bidding_id" ColumnName="bidding_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_bidding_view">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_view">
+              <MappingFragment StoreEntitySet="tbl_bidding_view">
+                <ScalarProperty Name="view_count" ColumnName="view_count" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="bidding_id" ColumnName="bidding_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
