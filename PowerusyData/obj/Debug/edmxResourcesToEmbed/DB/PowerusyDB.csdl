@@ -23,6 +23,7 @@
     <EntitySet Name="tbl_bidding_jobs" EntityType="powerusyDBCoreModel.tbl_bidding_jobs" />
     <EntitySet Name="View_bid_jobs" EntityType="powerusyDBCoreModel.View_bid_jobs" />
     <EntitySet Name="tbl_bidding_bookmark" EntityType="powerusyDBCoreModel.tbl_bidding_bookmark" />
+    <EntitySet Name="tbl_bidding_view" EntityType="powerusyDBCoreModel.tbl_bidding_view" />
   </EntityContainer>
   <EntityType Name="tbl_auditlog">
     <Key>
@@ -358,5 +359,14 @@
     <Property Name="Date" Type="DateTime" Precision="3" />
     <Property Name="status" Type="Int32" />
     <Property Name="bid_owner_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_bidding_view">
+    <Key>
+      <PropertyRef Name="bidding_id" />
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="bidding_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="view_count" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

@@ -357,5 +357,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tbl_bidding_view">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_view">
+        <MappingFragment StoreEntitySet="tbl_bidding_view">
+          <ScalarProperty Name="view_count" ColumnName="view_count" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="bidding_id" ColumnName="bidding_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -108,8 +108,8 @@ namespace ifreighters.Controllers
                 switch (vm.Entity.roleid)//switch (vm.Entity.StatusId)
                 {
                     case 1:
-                        RedirectToAction("CompleteReg", "Admin");
-                        break;
+                        return RedirectToAction("Dashboard", "Admin");
+                        
                     case 2:
                         return RedirectToAction("IndexAgent", "Company");
                     default:

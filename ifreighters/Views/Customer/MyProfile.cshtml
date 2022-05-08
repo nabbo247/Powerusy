@@ -20,9 +20,12 @@
             @if (Session["userid"] != null && Session["Role"].ToString() == "2")//AGENT
             {
                 @Html.Partial("~/Views/Company/_agentMenu.cshtml")
-            }@if (Session["userid"] != null && Session["Role"].ToString() == "1")//customer
+            }@if (Session["userid"] != null && Session["Role"].ToString() == "3")//customer
             {
                 @Html.Partial("~/Views/Customer/_customerMenu.cshtml")
+            }@if (Session["userid"] != null && Session["Role"].ToString() == "1")//customer
+            {
+                @Html.Partial("~/Views/Admin/_AdminMenu.cshtml")
             }
 
             @*Html.RenderPartial("_employee");*@
@@ -173,11 +176,11 @@
                                             </div>
                                         </div>
                                         @*<div class="col-xl-12 col-lg-12">
-                                                <div class="form-group">
-                                                    <input id="sec" class="checkbox-custom" name="Security" type="checkbox">
-                                                    <label for="sec" class="checkbox-custom-label">Enable Two-Step Verification via Phone</label>
-                                                </div>
-                                            </div>*@
+                                        <div class="form-group">
+                                            <input id="sec" class="checkbox-custom" name="Security" type="checkbox">
+                                            <label for="sec" class="checkbox-custom-label">Enable Two-Step Verification via Phone</label>
+                                        </div>
+                                    </div>*@
                                     </div>
                                 </div>
                             }

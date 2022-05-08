@@ -72,6 +72,7 @@
     <Compile Include="CompanyRegViewModel.cs" />
     <Compile Include="CompleteRegViewModel.cs" />
     <Compile Include="Crypto.cs" />
+    <Compile Include="DashboardViewModel.cs" />
     <Compile Include="DB\PowerusyDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,6 +101,9 @@
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_bidding_jobs.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tbl_bidding_view.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_clearing.cs">

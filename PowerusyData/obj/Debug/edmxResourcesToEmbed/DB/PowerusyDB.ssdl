@@ -71,6 +71,15 @@
     <Property Name="DueDate" Type="datetime" />
     <Property Name="status" Type="int" />
   </EntityType>
+  <EntityType Name="tbl_bidding_view">
+    <Key>
+      <PropertyRef Name="bidding_id" />
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="bidding_id" Type="int" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="view_count" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="tbl_clearing">
     <Key>
       <PropertyRef Name="id" />
@@ -347,6 +356,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
     <EntitySet Name="tbl_bidding" EntityType="Self.tbl_bidding" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_bidding_bookmark" EntityType="Self.tbl_bidding_bookmark" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_bidding_jobs" EntityType="Self.tbl_bidding_jobs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_bidding_view" EntityType="Self.tbl_bidding_view" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="dbo" store:Type="Tables" />

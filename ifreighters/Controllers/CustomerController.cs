@@ -13,6 +13,10 @@ namespace ifreighters.Controllers
         // GET: Customer
         public ActionResult Dashboard()
         {
+            var dash = new DashboardViewModel();
+            dash.Username = $"{Session[SessionKeys.Username]}";
+            dash.HandleRequest();
+            Session[SessionKeys.Dashboard] = dash;
             return View();
         }
         public ActionResult MyProfile(int? page)

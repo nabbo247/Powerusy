@@ -1,7 +1,7 @@
 ﻿@using PowerusyData
 
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "dashboard";
     var viewModel = (DashboardViewModel)Session["dashboard"];
 }
 <!-- ============================ Page Title Start================================== -->
@@ -18,7 +18,7 @@
     <div class="container-fluid">
         <div class="row m-0">
 
-            @Html.Partial("_customerMenu")
+            @Html.Partial("_AdminMenu")
 
             @*else if (Session[SessionKeys.Role] != null && Session[SessionKeys.Role].ToString() == "2")
                 {
