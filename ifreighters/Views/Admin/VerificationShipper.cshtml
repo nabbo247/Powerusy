@@ -1,7 +1,6 @@
 ﻿@model PowerusyData.VerificationShipperViewModel
-@using PagedList.Mvc;
 @{
-    ViewBag.Title = "Manage Agent";
+    ViewBag.Title = "Agent";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -19,8 +18,7 @@
     <div class="container-fluid">
         <div class="row m-0">
 
-            @Html.Partial("_AdminMenu")
-
+            @Html.Partial("_AdminMenu", Model)
             @*Html.RenderPartial("_employee");*@
             <!-- Item Wrap Start -->
             <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
@@ -33,7 +31,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                                     <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Manager Agent</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Company Info</li>
                                 </ol>
                             </nav>
                         </div>
@@ -77,263 +75,358 @@
                     </div>
                     if (Model.IsSearchAreaVisible)
                     {
-                        <div class="panel-default panel-heading-custom">
-                            <div class="col-12 col-lg-9">
-                                <div class="form-group">
-                                    @Html.TextBoxFor(m => m.SearchEntity.Name, new { @class = "form-control", placeholder = "Search " })
-                                    <button id="btnSearch"
-                                            class="btn btn-sm btn-primary"
-                                            data-pdsa-action="search">
-                                        <i class="glyphicon glyphicon-search"></i>
-                                        &nbsp;Search
-                                    </button>
-                                    <button id="btnReset"
-                                            class="btn btn-sm btn-primary"
-                                            data-pdsa-action="resetsearch">
-                                        <i class="glyphicon glyphicon-share-alt"></i>
-                                        &nbsp;Reset
-                                    </button>
-                                    <button id="btnAdd"
-                                            class="btn btn-sm btn-success"
-                                            data-pdsa-action="add">
-                                        <i class="glyphicon glyphicon-plus"></i>
-                                        &nbsp;Post New Job
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+
                         <!-- ** END SEARCH AREA ** -->
                     }
                     if (Model.IsListAreaVisible)
                     {
+
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
-
                                 <!-- Single Wrap -->
                                 <div class="_dashboard_content">
                                     <div class="_dashboard_content_header">
                                         <div class="_dashboard__header_flex">
-                                            <h4><i class="ti-briefcase mr-1"></i>Manage Jobs</h4>
+                                            <h4><i class="fa fa-briefcase mr-1"></i>Company Info</h4>
                                         </div>
                                     </div>
 
                                     <div class="_dashboard_content_body p-0">
                                         <div class="_dashboard_list_group">
-
-
                                             @foreach (var item in Model.UsrLst)
                                             {
-                                                <!-- Single List jobs -->
-                                                <div class="_dash_singl_box">
-                                                    <div class="_dash_singl_thumbs">
-                                                        <img src="~/assets/img/c-1.png" class="img-fluid" alt="">
+                                                <!-- Single Job -->
+                                                <div class="_list_jobs_wraps mng_list shadow_0 border">
+                                                    <div class="_list_jobs_f1ex first">
+                                                        <div class="_list_110">
+                                                            <div class="_list_110_thumb">
+                                                                <a href="#">
+                                                                    @if (Session["LogoPath"] != null && !string.IsNullOrEmpty(Session["LogoPath"].ToString()))
+                                                                    {
+                                                                        <img src="~/upload/@Session["LogoPath"].ToString()" height="200" width="200" class="img-fluid" alt="">
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <img src="~/assets/img/c-1.png" height="200" width="200" class="img-fluid" alt="">
+                                                                    }
+                                                                </a>
+                                                            </div>
+                                                            <div class="_list_110_caption">
+                                                                <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id">@item.companyname</a>
+                                                                <ul class="_grouping_list">
+                                                                    <li><span><i class="ti-location-pin"></i>Port of loading : @item.address</span></li>
+                                                                    <li>
+                                                                        <span>
+                                                                            <i class="ti-timer"></i>
+                                                                            @if (item.statusid == 1)
+                                                                            {
+                                                                                <span class="_dash_status approval">Pending Approval</span>
+                                                                            }
+                                                                        </span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="_dash_singl_captions">
-                                                        <h4 class="_jb_title">
-                                                            @Html.ActionLink(item.VesselName, "Jobdetail", "Customer", new { page = item.id }, new { style = "display:block" })
-                                                            @*@Url.Action("Jobdetail", new { page = item.id })*@
-                                                            <span class="_dash_status approval">Open</span>
-                                                        </h4>
-                                                        <ul class="_grouping_list">
-                                                            <li><span><i class="ti-location-pin"></i>Port of loading : @item.PortLoading</span></li>
-                                                            <li><span><i class="ti-location-pin"></i>Port of discharge : @item.PortDischarge</span></li>
-                                                            <li><span><i class="ti-credit-card"></i>Est. Budget &#8358; @String.Format("{0:N0}", item.EstBudget) </span></li>
-                                                            <li><span><i class="ti-timer"></i>@item.Date</span></li>
-                                                        </ul>
-                                                        @if (item.GoodDescription.Length > 100)
-                                                        {
-                                                            @item.GoodDescription.Substring(0, 100)
-                                                        }
-                                                        else
-                                                        {
-                                                            @item.GoodDescription
-                                                        }
-                                                        <ul class="_action_grouping_list">
-                                                            <li><a href="#" class="_aaplied_candidates">Applied<span>0</span></a></li>
-                                                            <li>
-                                                                @*<a href="#" data-pdsa-action="edit"
-                                                               data-pdsa-val="@item.id"
-                                                               class="btn btn-default btn-sm">
-                                                                <i class="glyphicon glyphicon-edit">Click to View</i>
-                                                            </a>*@
-                                                                <a href="#" data-toggle="tooltip" data-pdsa-action="edit" data-pdsa-val="@item.id" data-placement="top" title="Edit job" class="_edit_list_point"><i class="fa fa-edit"></i></a>
-                                                            </li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point"><i class="fa fa-trash"></i></a></li>
-                                                        </ul>
+                                                    <div class="_list_jobs_f1ex">
+                                                        <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id" class="_jb_apply">View</a>
                                                     </div>
                                                 </div>
-                                                @*<tr>
-                                                <td class="pdsa-action-button-column">
-                                                    <a href="#" data-pdsa-action="edit"
-                                                       data-pdsa-val="@item.id"
-                                                       class="btn btn-default btn-sm">
-                                                        <i class="glyphicon glyphicon-edit">Click to View</i>
-                                                    </a>
-                                                </td>
-                                                <td>@item.username</td>
-                                                <td>@item.companyname</td>
-                                                <td>@item.phonenumber</td>
-                                                <td>@item.location</td>
-                                                <td>@item.address</td>
-                                                @if (item.statusid == 1)
-                                                {
-                                                    <td>Processing</td>
-                                                }
-                                                <td><a href="" title=""><i class="fa fa-check-circle" aria-hidden="true"></i></a></td>
-                                            </tr>*@
                                             }
-
-
                                         </div>
                                     </div>
 
                                 </div>
                                 <!-- Single Wrap End -->
-
                             </div>
                         </div>
                     }
 
 
-                    if (Model.IsDetailAreaVisible)
-                    {
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
 
-                                <!-- Single Wrap -->
-                                <div class="_dashboard_content">
-                                    <div class="_dashboard_content_header">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+
+                            <!-- Single Wrap -->
+                            <div class="_dashboard_content">
+                                <div class="_dashboard_content_header">
+                                    @if (Model.IsStep1)
+                                    {
                                         <div class="_dashboard__header_flex">
-                                            <h4><i class="ti-briefcase mr-1"></i>Create Job Order</h4>
+                                            <h4><i class="ti-briefcase mr-1"></i>Complete Registration</h4>
                                         </div>
-                                    </div>
+                                    }
+                                    @if (Model.IsStep2)
+                                    {
+                                        <div class="_dashboard__header_flex">
+                                            <h4><i class="ti-briefcase mr-1"></i>KYC REQUIREMENTS</h4>
+                                        </div>
+                                    }
+                                    @if (Model.IsStep3)
+                                    {
+                                        <div class="_dashboard__header_flex">
+                                            <h4><i class="ti-briefcase mr-1"></i>Profile Status</h4>
+                                        </div>
+                                    }
+                                </div>
 
-                                    <div class="_dashboard_content_body">
-                                        <div class="row">
+                                <div class="_dashboard_content_body">
+                                    <div class="row">
+                                        @if (Model.IsStep1)
+                                        {
+                                            <!-- progressbar -->
+                                            @*<ul id="progressbar">
+                                                    <li class="active">COMPANY INFORMATION</li>
+                                                    <li>KYC REQUIREMENTS</li>
+                                                </ul>*@
+                                            <!-- fieldsets Shipping From Start-->
+
+                                            @*<h3 class="fs-subtitle">* Indicates required field </h3>*@
 
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Name of Vessel<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.VesselName, new { @class = "form-control" })
-                                                    @*<input type="text" class="form-control with-light">*@
+                                                    <label>Company name<sup>*</sup></label>
+                                                    @Html.TextBoxFor(m => m.Entity.companyname, new { @class = "form-control" })
+                                                    <span class="error1" style="display: none;"> <i class="error-log fa fa-exclamation-triangle"></i> </span>
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Consignee<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.Consignee, new { @class = "form-control" })
-                                                    @*<input type="text" class="form-control with-light">*@
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4 col-lg-6">
-                                                <div class="form-group">
-                                                    <label>Service to be rendered <sup>*</sup></label>
-                                                    @Html.DropDownListFor(m => m.ActionTypeId, new SelectList(Model.List, "Value", "Text"), new { @class = "form-control" })
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xl-4 col-lg-6">
-                                                <div class="form-group">
-                                                    <label>B/L Number<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.BLNumber, new { @class = "form-control" })
-                                                    @*<input type="text" class="form-control with-light">*@
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4 col-lg-6">
-                                                <div class="form-group">
-                                                    <label>Port Of Loading<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.PortLoading, new { @class = "form-control" })
-                                                    @*<input type="text" class="form-control with-light">*@
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4 col-lg-6">
-                                                <div class="form-group">
-                                                    <label>Port Of Discharge</label>
-                                                    @Html.TextBoxFor(m => m.Entity.PortDischarge, new { @class = "form-control" })
+                                                    <label>Services rendered<sup>*</sup></label>
+                                                    @Html.DropDownListFor(m => m.ActionTypeId, new SelectList(Model.List, "Text", "Value"), new { @class = "form-control" })
                                                 </div>
                                             </div>
 
 
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
-                                                    <label>EstBudge<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.EstBudget, new { @class = "form-control" })
-
+                                                    <label>Address<sup>*</sup></label>
+                                                    @Html.TextBoxFor(m => m.Entity.address, new { @class = "form-control" })
+                                                    @*<input type="text" class="form-control" name="address1" placeholder="Street Address" />*@
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
-                                                    <label>Shipping Lines/Terminal  <sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.category, new { @class = "form-control" })
-
+                                                    <label>Company phone number<sup>*</sup></label>
+                                                    @Html.TextBoxFor(m => m.Entity.phonenumber, new { @class = "form-control" })
+                                                    @*<input type="text" class="form-control" name="phone" placeholder="+23480" />*@
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>TIN Number</label>
+                                                    @Html.TextBoxFor(m => m.Entity.tin, new { @class = "form-control" })
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
-                                                    <label>BookingNo <sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.BookingNo, new { @class = "form-control" })
+                                                    <label>Bankname<sup>*</sup></label>
+                                                    @Html.TextBoxFor(m => m.Entity.bankname, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Account number<sup>*</sup></label>
+                                                    @Html.TextBoxFor(m => m.Entity.accountnumber, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>TIN password (Optional)</label>
+                                                    @Html.TextBoxFor(m => m.Entity.tinpassword, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-4 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Workingdays<sup>*</sup></label>
+                                                    @Html.TextBoxFor(m => m.Entity.workingdays, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Workinghours</label>
+                                                    @Html.TextBoxFor(m => m.Entity.workinghours, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-xl-4 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Country<sup>*</sup></label>
+                                                    @Html.DropDownListFor(m => m.SeletedCountry, new SelectList(Model.CountryList, "Text", "Value"), new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>State<sup>*</sup></label>
+                                                    @Html.TextBoxFor(m => m.Entity.state, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    @Html.TextBoxFor(m => m.Entity.city, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6">
+                                                <div class="form-group">
 
                                                 </div>
                                             </div>
                                             <div class="col-xl-12 col-lg-12">
                                                 <div class="form-group">
-                                                    <label>Job Description</label>
-                                                    @Html.TextAreaFor(model => model.Entity.GoodDescription, new { @class = "form-control", @rows = 4 })
+                                                    <label>Description of the commercial activity<sup>*</sup></label>
+                                                    @Html.TextBoxFor(m => m.Entity.description, new { @class = "form-control", @rows = 4 })
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-xl-4 col-lg-6">
+                                                    <div class="form-group">
+                                                        <button id="btnContinue"
+                                                                class="btn btn-sm btn-primary"
+                                                                data-pdsa-action="Continue">
+                                                            <i class="glyphicon glyphicon-search"></i>
+                                                            &nbsp;Continue
+                                                        </button>
+
+                                                        <button id="btnCancel"
+                                                                class="btn btn-sm btn-primary"
+                                                                formnovalidate="formnovalidate"
+                                                                data-pdsa-action="cancel">
+                                                            <i class="glyphicon
+           glyphicon-remove-circle"></i>
+                                                            &nbsp;Cancel
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
 
-
+                                        }
+                                        @if (Model.IsStep2)
+                                        {
+                                            @Html.HiddenFor(model => model.Entity.companyname)
+                                            @Html.HiddenFor(model => model.Entity.description)
+                                            @Html.HiddenFor(model => model.ActionTypeId)
+                                            @Html.HiddenFor(model => model.SeletedCountry)
+                                            @Html.HiddenFor(model => model.Entity.phonenumber)
+                                            @Html.HiddenFor(model => model.Entity.tin)
+                                            @Html.HiddenFor(model => model.Entity.bankname)
+                                            @Html.HiddenFor(model => model.Entity.accountnumber)
+                                            @Html.HiddenFor(model => model.Entity.workingdays)
+                                            @Html.HiddenFor(model => model.Entity.workinghours)
+                                            @Html.HiddenFor(model => model.Entity.address)
+                                            @Html.HiddenFor(model => model.Entity.city)
+                                            @Html.HiddenFor(model => model.Entity.state)
                                             <hr />
+                                            <!-- fieldsets Shipping From end-->
+                                            <!-- fieldsets Shipping going Start-->
+
                                             <div class="col-xl-6 col-lg-6">
                                                 <div class="form-group">
-                                                    <label class="col-md-6 control-label req">Bill of Lading</label>
+                                                    <label class="col-md-12 control-label req">Certificate of Incorporation **</label>
                                                     <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.BillofLading" name="BillofLadingName" />
-
+                                                        <input class="form-control required" type="file" id="@Model.CertificateOfIncorporation" name="CertificateOfIncorporation" />
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6 col-lg-6">
+                                            <div class="col-xl-6 col-lg-6">
                                                 <div class="form-group">
-                                                    <label class="col-md-6 control-label">Proforma invoice</label>
+                                                    <label class="col-md-12 control-label">Memorandum of Association **</label>
                                                     <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.Proformainvoice" name="ProformainvoiceName" />
+                                                        <input class="form-control required" type="file" id="@Model.MemorandumofAssociation" name="MemorandumofAssociation" />
                                                     </div>
                                                 </div>
                                             </div>
 
-
-                                            <div class="col-6 col-lg-6">
+                                            <div class="col-xl-6 col-lg-6">
                                                 <div class="form-group">
-                                                    <label class="col-md-6 control-label req">Packaging Lists</label>
+                                                    <label class="col-md-12 control-label">Articles of Association **</label>
                                                     <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.PackagingLists" name="PackagingListsName" />
+                                                        <input class="form-control required" type="file" id="@Model.ArticlesofAssociation" name="ArticlesofAssociation" />
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="col-6 col-lg-6">
+                                            <div class="col-xl-6 col-lg-6">
                                                 <div class="form-group">
-                                                    <label class="col-md-6 control-label req">Others</label>
+                                                    <label class="col-md-12 control-label">Power of Attorney **</label>
                                                     <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.Others" name="OthersName" />
+                                                        <input class="form-control required" type="file" id="@Model.PowerofAttorney" name="PowerofAttorney" />
                                                     </div>
                                                 </div>
                                             </div>
 
-                                        </div>
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">Valid business license or permit **</label>
+                                                    <div class="form-group">
+                                                        <input class="form-control required" type="file" id="@Model.Validbusinesslicense" name="Validbusinesslicense" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">Audited financial statements **</label>
+                                                    <div class="form-group">
+                                                        <input class="form-control required" type="file" id="@Model.Auditedfinancial" name="Auditedfinancial" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">Tax clearance certificate **</label>
+                                                    <div class="form-group">
+                                                        <input class="form-control required" type="file" id="@Model.Taxclearance" name="Taxclearance" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">Others</label>
+                                                    <div class="form-group">
+                                                        <input class="form-control required" type="file" id="@Model.Others" name="Others" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br /><br />
+                                            <div>
+                                                <button id="btnSave"
+                                                        class="btn btn-sm btn-primary pull-left"
+                                                        data-pdsa-action="previous">
+                                                    <i class="glyphicon glyphicon-floppy-disk"></i>
+                                                    &nbsp;Previous
+                                                </button>
+
+                                                <button id="btnSearch"
+                                                        class="btn btn-sm btn-primary"
+                                                        data-pdsa-action="save">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                    &nbsp;Upload &amp; Submit
+                                                </button>
+
+                                                <button id="btnReset"
+                                                        class="btn btn-sm btn-primary"
+                                                        data-pdsa-action="resetsearch">
+                                                    <i class="glyphicon glyphicon-share-alt"></i>
+                                                    &nbsp;Reset
+                                                </button>
+                                            </div>
+
+                                        }
+                                        
+
                                     </div>
                                 </div>
-                                <!-- Single Wrap End -->
-
-                                <button type="button" data-pdsa-action="save" class="btn btn-save">Submit Job</button>
-
                             </div>
-                        </div>
+                            <!-- Single Wrap End -->
 
-                    }
+
+                        </div>
+                    </div>
+
                 }
             </div>
 
