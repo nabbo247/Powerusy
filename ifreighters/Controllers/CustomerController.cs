@@ -69,7 +69,7 @@ namespace ifreighters.Controllers
         public ActionResult ManageJobs(int? page)
         {
             BiddingViewModel vm = new BiddingViewModel();
-            //vm.UserId = Session["userid"].ToString();
+            vm.UserId = Session["usrID"].ToString();
             //vm.UserId = "eunicee";
             //vm.Email = Session["Email"].ToString();
             //vm.IsDetailAreaVisible = true;

@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivebidsViewModel.cs" />
+    <Compile Include="AdminBiddingViewModel.cs" />
     <Compile Include="BiddingViewModel.cs" />
     <Compile Include="BookmarkedViewModel.cs" />
     <Compile Include="CompanyRegViewModel.cs" />

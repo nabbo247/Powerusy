@@ -52,5 +52,45 @@ namespace ifreighters.Controllers
             }
             return View(vm);
         }
+        public ActionResult ManageJobsA(int? page)
+        {
+            AdminBiddingViewModel vm = new AdminBiddingViewModel();
+            vm.UserId = Session["usrID"].ToString();
+            //vm.UserId = "eunicee";
+            //vm.Email = Session["Email"].ToString();
+            //vm.IsDetailAreaVisible = true;
+            //vm.IsSearchAreaVisible = false;
+            //vm.IsListAreaVisible = false;
+            vm.HandleRequest();
+            return View(vm);
+        }
+        [HttpPost]
+        public ActionResult ManageJobsA(AdminBiddingViewModel vm)
+        {
+            vm.UserId = Session["usrID"].ToString();
+            vm.IsValid = ModelState.IsValid;
+            vm.IsDetailAreaVisible = true;
+            vm.IsSearchAreaVisible = false;
+            vm.IsListAreaVisible = false;
+            vm.UserId = Session["userid"].ToString();
+            //vm.UserId = "nabbo247@gmail.com";
+            
+            vm.HandleRequest();
+            if (vm.IsValid)
+            {
+                TempData["Msg"] = vm.Msg;
+                // NOTE: Must clear the model state in order to bind
+                //       the @Html helpers to the new model values
+                ModelState.Clear();
+            }
+            else
+            {
+                foreach (KeyValuePair<string, string> item in vm.ValidationErrors)
+                {
+                    ModelState.AddModelError(item.Key, item.Value);
+                }
+            }
+            return View(vm);
+        }
     }
 }

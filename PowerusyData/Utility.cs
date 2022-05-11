@@ -11,7 +11,6 @@ using System.Web;
 using Tj.Cryptography;
 using ExcelLibrary.Office.Excel;
 using System.Data;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace PowerusyData

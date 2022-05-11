@@ -46,6 +46,6 @@ namespace PowerusyData.DB
         public string state { get; set; }
         public string city { get; set; }
         public string Logo { get; set; }
-        public int AID { get; set; }
+       
     }
 }

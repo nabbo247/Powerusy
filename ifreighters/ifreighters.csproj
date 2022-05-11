@@ -59,7 +59,8 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="PowerusyData">
+    <Reference Include="PowerusyData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\PowerusyData\bin\Debug\PowerusyData.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -495,6 +496,7 @@
     <Content Include="Views\Admin\Dashboard.cshtml" />
     <Content Include="Views\Admin\_AdminMenu.cshtml" />
     <Content Include="Views\Admin\VerificationShipper.cshtml" />
+    <Content Include="Views\Admin\ManageJobsA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
