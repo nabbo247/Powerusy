@@ -147,7 +147,17 @@
                                                 <!-- Single List jobs -->
                                                 <div class="_dash_singl_box">
                                                     <div class="_dash_singl_thumbs">
-                                                        <img src="~/assets/img/c-1.png" class="img-fluid" alt="">
+                                                        @*<img src="~/assets/img/c-1.png" class="img-fluid" alt="">*@
+                                                        <a href="#">
+                                                            @if (!string.IsNullOrEmpty(item.IconPath))
+                                                            {
+                                                                <img src="~/upload/@item.IconPath" height="200" width="200" class="img-fluid" alt="">
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src="~/assets/img/team-1.jpg" height="200" width="200" class="img-fluid" alt="">
+                                                            }
+                                                        </a>
                                                     </div>
                                                     <div class="_dash_singl_captions">
                                                         <h4 class="_jb_title">

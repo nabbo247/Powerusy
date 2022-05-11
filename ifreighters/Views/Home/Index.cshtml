@@ -39,13 +39,13 @@
                                                 <div class="col-xl-4 col-lg-6">
                                                     <div class="form-group">
                                                         <label>Port of Loading</label>
-                                                        <input type="text" class="form-control with-light">
+                                                        @Html.DropDownListFor(m => m.ListVehileType, new SelectList(Model.ListPOL, "Value", "Text"), new { @class = "form-control" })
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-lg-6">
                                                     <div class="form-group">
                                                         <label>Port of Discharge</label>
-                                                        <input type="text" class="form-control with-light">
+                                                        @Html.DropDownListFor(m => m.ListVehileType, new SelectList(Model.ListPOD, "Value", "Text"), new { @class = "form-control" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -53,25 +53,29 @@
                                                 <div class="col-xl-3 col-lg-6">
                                                     <div class="form-group">
                                                         <label>Vehicle Type</label>
-                                                        <input type="text" class="form-control with-light">
+                                                        @Html.DropDownListFor(m => m.ListVehileType, new SelectList(Model.ListVehileType, "Value", "Text"), new { @class = "form-control" })
+
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-lg-6">
                                                     <div class="form-group">
                                                         <label>Make</label>
-                                                        <input type="text" class="form-control with-light">
+                                                        @Html.DropDownListFor(m => m.ListVehileType, new SelectList(Model.ListMake, "Value", "Text"), new { @class = "form-control", id = "MakeId" })
+
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-lg-6">
                                                     <div class="form-group">
                                                         <label>Model</label>
-                                                        <input type="text" class="form-control with-light">
+                                                        @Html.DropDownListFor(m => m.ListVehileType, new SelectList(Model.ListModel, "Value", "Text"), new { @class = "form-control", id = "ModelId" })
+
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-3 col-lg-6">
                                                     <div class="form-group">
                                                         <label>Year</label>
-                                                        <input type="text" class="form-control with-light">
+                                                        @Html.DropDownListFor(m => m.CountryList, new SelectList(Model.ListYear, "Value", "Text"), new { @class = "form-control" })
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -111,13 +115,13 @@
                                                 <div class="col-xl-4 col-lg-6">
                                                     <div class="form-group">
                                                         <label>Port of Loading</label>
-                                                        <input type="text" class="form-control with-light">
+                                                        @Html.DropDownListFor(m => m.ListVehileType, new SelectList(Model.ListPOL, "Value", "Text"), new { @class = "form-control" })
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-lg-6">
                                                     <div class="form-group">
                                                         <label>Port of Discharge</label>
-                                                        <input type="text" class="form-control with-light">
+                                                        @Html.DropDownListFor(m => m.ListVehileType, new SelectList(Model.ListPOD, "Value", "Text"), new { @class = "form-control" })
                                                     </div>
                                                 </div>
                                             </div>
@@ -241,7 +245,17 @@
                                         <div class="_list_jobs_f1ex first">
                                             <div class="_list_110">
                                                 <div class="_list_110_thumb">
-                                                    <a href="employer-detail.html"><img src="~/assets/img/c-1.png" class="img-fluid" alt=""></a>
+                                                    @*<a href="#"><img src="~/assets/img/c-1.png" class="img-fluid" alt=""></a>*@
+                                                    <a href="#">
+                                                        @if (!string.IsNullOrEmpty(item.IconPath))
+                                                        {
+                                                            <img src="~/upload/@item.IconPath" height="200" width="200" class="img-fluid" alt="">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/assets/img/team-1.jpg" height="200" width="200" class="img-fluid" alt="">
+                                                        }
+                                                    </a>
                                                 </div>
                                                 <div class="_list_110_caption">
                                                     <h4 class="_jb_title">
@@ -350,6 +364,19 @@
                     },
                 });
                 $("#loading").hide();
+            });
+
+            $("#MakeId").change(function () {
+                var val = $(this).val();
+                var options = $("#ModelId");
+                $.post('@Url.Action("GetModel", "Home")', { MakeId: val }, function (data) {
+                    $("#ModelId").empty();
+                $.each(data, function (i, val) {
+                    var value = data[i].Value;
+                    var text = data[i].Text;
+                    options.append($("<option />").val(value).text(text));
+                });
+                });
             });
         });
     </script>

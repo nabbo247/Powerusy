@@ -1,8 +1,10 @@
-﻿using PagedList;
+﻿using Newtonsoft.Json;
+using PagedList;
 using PowerusyData.DB;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,7 +47,22 @@ namespace PowerusyData
             GetDropDown();
             base.Init();
         }
+        public void test()
+        {
+            //using (StreamReader r = new StreamReader("C:\\Users\\nabbo247\\Downloadsfile.json"))
+            //{
+            //    string json = r.ReadToEnd();
+            //    var items = JsonConvert.DeserializeObject<tbl_sea_ports>(json);
+            //    foreach (var item in items)
+            //    {
 
+
+            //    }
+            //}
+            //dynamic dynObj = JsonConvert.DeserializeObject("{a:1,b:2}");
+            //var json = 
+            //var dict = JsonConvert.DeserializeObject<tbl_sea_ports>(json);
+        }
         public override void HandleRequest()
         {
             //// This is an example of adding on a new command

@@ -14,7 +14,6 @@
     <EntitySet Name="tbl_subgoodstype" EntityType="powerusyDBCoreModel.tbl_subgoodstype" />
     <EntitySet Name="tbl_counntries" EntityType="powerusyDBCoreModel.tbl_counntries" />
     <EntitySet Name="tbl_shipper" EntityType="powerusyDBCoreModel.tbl_shipper" />
-    <EntitySet Name="View_Shipper" EntityType="powerusyDBCoreModel.View_Shipper" />
     <EntitySet Name="tbl_attachment" EntityType="powerusyDBCoreModel.tbl_attachment" />
     <EntitySet Name="tbl_uploadDocType" EntityType="powerusyDBCoreModel.tbl_uploadDocType" />
     <EntitySet Name="tbl_services" EntityType="powerusyDBCoreModel.tbl_services" />
@@ -24,6 +23,9 @@
     <EntitySet Name="View_bid_jobs" EntityType="powerusyDBCoreModel.View_bid_jobs" />
     <EntitySet Name="tbl_bidding_bookmark" EntityType="powerusyDBCoreModel.tbl_bidding_bookmark" />
     <EntitySet Name="tbl_bidding_view" EntityType="powerusyDBCoreModel.tbl_bidding_view" />
+    <EntitySet Name="tbl_cars_models" EntityType="powerusyDBCoreModel.tbl_cars_models" />
+    <EntitySet Name="tbl_sea_ports" EntityType="powerusyDBCoreModel.tbl_sea_ports" />
+    <EntitySet Name="View_Shipper" EntityType="powerusyDBCoreModel.View_Shipper" />
   </EntityContainer>
   <EntityType Name="tbl_auditlog">
     <Key>
@@ -200,42 +202,6 @@
     <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="View_Shipper">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
-    <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="middlename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
-    <Property Name="roleid" Type="Int32" />
-    <Property Name="status" Type="Boolean" />
-    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ShipID" Type="Int32" />
-    <Property Name="userid" Type="Int32" />
-    <Property Name="companyname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="tinpassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ShipPhon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="statusid" Type="Int32" />
-    <Property Name="approvedby" Type="Int32" />
-    <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="workingdays" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="workinghours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="bankname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="accountnumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ShipDate" Type="DateTime" Precision="3" />
-    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="tbl_attachment">
     <Key>
       <PropertyRef Name="id" />
@@ -368,5 +334,70 @@
     <Property Name="bidding_id" Type="Int32" Nullable="false" />
     <Property Name="user_id" Type="Int32" Nullable="false" />
     <Property Name="view_count" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_cars_models">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Year" Type="Int32" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbl_sea_ports">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="alias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="regions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="timezone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="unlocs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="View_Shipper">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="AID" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="middlename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+    <Property Name="roleid" Type="Int32" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ShipID" Type="Int32" />
+    <Property Name="userid" Type="Int32" />
+    <Property Name="companyname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="tinpassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ShipPhon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="statusid" Type="Int32" />
+    <Property Name="approvedby" Type="Int32" />
+    <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="workingdays" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="workinghours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="bankname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="accountnumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ShipDate" Type="DateTime" Precision="3" />
+    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Logo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AID" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

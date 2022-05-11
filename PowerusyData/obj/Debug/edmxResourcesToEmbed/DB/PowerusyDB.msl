@@ -189,43 +189,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="View_Shipper">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.View_Shipper">
-        <MappingFragment StoreEntitySet="View_Shipper">
-          <ScalarProperty Name="city" ColumnName="city" />
-          <ScalarProperty Name="state" ColumnName="state" />
-          <ScalarProperty Name="address" ColumnName="address" />
-          <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
-          <ScalarProperty Name="accountnumber" ColumnName="accountnumber" />
-          <ScalarProperty Name="bankname" ColumnName="bankname" />
-          <ScalarProperty Name="workinghours" ColumnName="workinghours" />
-          <ScalarProperty Name="workingdays" ColumnName="workingdays" />
-          <ScalarProperty Name="description" ColumnName="description" />
-          <ScalarProperty Name="comment" ColumnName="comment" />
-          <ScalarProperty Name="approvedby" ColumnName="approvedby" />
-          <ScalarProperty Name="statusid" ColumnName="statusid" />
-          <ScalarProperty Name="ShipPhon" ColumnName="ShipPhon" />
-          <ScalarProperty Name="location" ColumnName="location" />
-          <ScalarProperty Name="tinpassword" ColumnName="tinpassword" />
-          <ScalarProperty Name="tin" ColumnName="tin" />
-          <ScalarProperty Name="companyname" ColumnName="companyname" />
-          <ScalarProperty Name="userid" ColumnName="userid" />
-          <ScalarProperty Name="ShipID" ColumnName="ShipID" />
-          <ScalarProperty Name="authcode" ColumnName="authcode" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="roleid" ColumnName="roleid" />
-          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
-          <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
-          <ScalarProperty Name="middlename" ColumnName="middlename" />
-          <ScalarProperty Name="lastname" ColumnName="lastname" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="firstname" ColumnName="firstname" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbl_attachment">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_attachment">
         <MappingFragment StoreEntitySet="tbl_attachment">
@@ -363,6 +326,73 @@
           <ScalarProperty Name="view_count" ColumnName="view_count" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="bidding_id" ColumnName="bidding_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_cars_models">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_cars_models">
+        <MappingFragment StoreEntitySet="tbl_cars_models">
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="CarMake" ColumnName="CarMake" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_sea_ports">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_sea_ports">
+        <MappingFragment StoreEntitySet="tbl_sea_ports">
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="unlocs" ColumnName="unlocs" />
+          <ScalarProperty Name="timezone" ColumnName="timezone" />
+          <ScalarProperty Name="province" ColumnName="province" />
+          <ScalarProperty Name="coordinates" ColumnName="coordinates" />
+          <ScalarProperty Name="regions" ColumnName="regions" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_Shipper">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.View_Shipper">
+        <MappingFragment StoreEntitySet="View_Shipper">
+          <ScalarProperty Name="AID" ColumnName="AID" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+          <ScalarProperty Name="accountnumber" ColumnName="accountnumber" />
+          <ScalarProperty Name="bankname" ColumnName="bankname" />
+          <ScalarProperty Name="workinghours" ColumnName="workinghours" />
+          <ScalarProperty Name="workingdays" ColumnName="workingdays" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="comment" ColumnName="comment" />
+          <ScalarProperty Name="approvedby" ColumnName="approvedby" />
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="ShipPhon" ColumnName="ShipPhon" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="tinpassword" ColumnName="tinpassword" />
+          <ScalarProperty Name="tin" ColumnName="tin" />
+          <ScalarProperty Name="companyname" ColumnName="companyname" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="ShipID" ColumnName="ShipID" />
+          <ScalarProperty Name="authcode" ColumnName="authcode" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="roleid" ColumnName="roleid" />
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+          <ScalarProperty Name="middlename" ColumnName="middlename" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

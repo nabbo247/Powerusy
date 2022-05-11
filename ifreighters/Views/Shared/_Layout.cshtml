@@ -49,12 +49,17 @@
                                     </li>
                                     @if (Session["userid"] != null)
                                     {
+                                        if (Session["userid"] != null && Session["Role"].ToString() == "3")//customer
+                                        {
+                                            <li>@Html.ActionLink("Dashboard", "Dashboard", "Customer")</li>
+                                        }
                                         if (Session["userid"] != null && Session["Role"].ToString() == "2")//AGENT
                                         {
                                             <li>@Html.ActionLink("Dashboard", "Dashboard", "Company")</li>
-                                        }if (Session["userid"] != null && Session["Role"].ToString() == "1")//customer
+                                        }
+                                        if (Session["userid"] != null && Session["Role"].ToString() == "1")//Admin
                                         {
-                                            <li>@Html.ActionLink("Dashboard", "Dashboard", "Customer")</li>
+                                            <li>@Html.ActionLink("Dashboard", "Dashboard", "Admin")</li>
                                         }
                                     }
                                     @if (Session["userid"] != null)

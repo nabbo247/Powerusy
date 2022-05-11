@@ -15,4 +15,6 @@ D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\bin\Debug\PagedList.Mvc.xml
 D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\obj\Debug\PowerusyData.csproj.CopyComplete
 D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\obj\Debug\PowerusyData.dll
 D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\obj\Debug\PowerusyData.pdb
+D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\bin\Debug\Newtonsoft.Json.dll
+D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\bin\Debug\Newtonsoft.Json.xml
 D:\Users\nabbo247\source\repos\Powerusy\PowerusyData\obj\Debug\PowerusyData.csproj.AssemblyReference.cache

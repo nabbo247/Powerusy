@@ -17,7 +17,7 @@ namespace PowerusyData
             // Initialize other variables
             UsrReq = new tbl_shipper();
             UsrLst = new List<View_Shipper>();
-            Attach = new List<tbl_attachment>();
+            Attach = new List<tbl_importation_document>();
             List = new List<SelectList>();
             CountryList = new List<SelectList>();
             SearchEntity = new View_Shipper();
@@ -34,7 +34,7 @@ namespace PowerusyData
         public List<SelectList> List { set; get; }
         public List<SelectList> CountryList { set; get; }
         public List<View_Shipper> UsrLst { get; set; }
-        public List<tbl_attachment> Attach { get; set; }
+        public List<tbl_importation_document> Attach { get; set; }
         public View_Shipper SearchEntity { get; set; }
         public View_Shipper Entity { get; set; }
         //public HttpPostedFileBase uploadedImage { get; set; }
@@ -59,7 +59,7 @@ namespace PowerusyData
         protected override void Init()
         {
             UsrLst = new List<View_Shipper>();
-            Attach = new List<tbl_attachment>();
+            Attach = new List<tbl_importation_document>();
             SearchEntity = new View_Shipper();
             Entity = new View_Shipper();
             List = new List<SelectList>();
@@ -187,9 +187,9 @@ namespace PowerusyData
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
-                    int? userid = ret[0].userid;
+                    string userid = ret[0].userid.ToString();
                     //var UserIDI = db.tbl_users.Where(x => x.username == UserId).FirstOrDefault();
-                    Attach = db.tbl_attachment.Where(x => x.userid == userid).ToList();
+                    Attach = db.tbl_importation_document.Where(x => x.importationid == userid).ToList();
                     if (pageNumber > 0 && pageSize > 0)
                     {
                         PageList = ret.ToPagedList(pageNumber, pageSize);
@@ -204,8 +204,8 @@ namespace PowerusyData
         public bool Update(View_Shipper entity)
         {
             bool ret = false;
-            //ret = Validate(entity);
-            GetDropDown();
+            ret = Validate2(entity);
+            //GetDropDown();
             string op = "";
 
             if (ret)
@@ -213,12 +213,15 @@ namespace PowerusyData
                 using (var db = new powerusyDBCoreEntities())
                 {
                     var rs = (from info in db.tbl_shipper where info.id == UsrReq.id select info).FirstOrDefault();
-                    //rs.TermOwnerCode = TextBox6.Text;
-
+                    rs.comment = entity.comment;
+                    int usrid = Convert.ToInt32(UserId);
+                    rs.approvedby = usrid;
+                    rs.statusid = 0;
                     db.Entry(rs).State = EntityState.Modified;
                     db.SaveChanges();
+                    Msg = "Successfully approved request";
+                    IsValid = true;
                 }
-
             }
             return ret;
         }
@@ -290,7 +293,20 @@ namespace PowerusyData
             //TODO
             return (ValidationErrors.Count == 0);
         }
-
+        public bool Validate2(View_Shipper entity)
+        {
+            ValidationErrors.Clear();
+            
+            if (string.IsNullOrEmpty(entity.comment))
+            {
+                ValidationErrors.Add(new
+                  KeyValuePair<string, string>("Comment",
+                  "Please Supply your comment."));
+                IsValid = false;
+            }
+            //TODO
+            return (ValidationErrors.Count == 0);
+        }
         public bool Insert(View_Shipper entity)
         {
             bool ret = true;

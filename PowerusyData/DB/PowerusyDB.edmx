@@ -85,6 +85,16 @@
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="view_count" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbl_cars_models">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarMake" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tbl_clearing">
           <Key>
             <PropertyRef Name="id" />
@@ -198,6 +208,22 @@ warning 6002: The table/view 'Powerusydb.dbo.tbl_counntries' does not have a pri
           <Property Name="name" Type="nvarchar" MaxLength="255" />
           <Property Name="datecreated" Type="datetimeoffset" Precision="7" />
           <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_sea_ports">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" />
+          <Property Name="country" Type="nvarchar" MaxLength="100" />
+          <Property Name="alias" Type="nvarchar" MaxLength="50" />
+          <Property Name="regions" Type="nvarchar" MaxLength="50" />
+          <Property Name="coordinates" Type="nvarchar" MaxLength="50" />
+          <Property Name="province" Type="nvarchar" MaxLength="50" />
+          <Property Name="timezone" Type="nvarchar" MaxLength="50" />
+          <Property Name="unlocs" Type="nvarchar" MaxLength="50" />
+          <Property Name="code" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbl_services">
           <Key>
@@ -322,6 +348,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
         <EntityType Name="View_Shipper">
           <Key>
             <PropertyRef Name="id" />
+            <PropertyRef Name="AID" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="firstname" Type="nvarchar" MaxLength="255" />
@@ -354,6 +381,8 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <Property Name="address" Type="nvarchar" MaxLength="500" />
           <Property Name="state" Type="nvarchar" MaxLength="50" />
           <Property Name="city" Type="nvarchar" MaxLength="50" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="100" />
+          <Property Name="AID" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="powerusyDBCoreModelStoreContainer">
           <EntitySet Name="tbl_attachment" EntityType="Self.tbl_attachment" Schema="dbo" store:Type="Tables" />
@@ -362,6 +391,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySet Name="tbl_bidding_bookmark" EntityType="Self.tbl_bidding_bookmark" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_bidding_jobs" EntityType="Self.tbl_bidding_jobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_bidding_view" EntityType="Self.tbl_bidding_view" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_cars_models" EntityType="Self.tbl_cars_models" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_clearing" EntityType="Self.tbl_clearing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_goodstype" EntityType="Self.tbl_goodstype" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_importation" EntityType="Self.tbl_importation" Schema="dbo" store:Type="Tables" />
@@ -369,6 +399,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySet Name="tbl_kyc" EntityType="Self.tbl_kyc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_registered" EntityType="Self.tbl_registered" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_role" EntityType="Self.tbl_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_sea_ports" EntityType="Self.tbl_sea_ports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_services" EntityType="Self.tbl_services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_servicetype" EntityType="Self.tbl_servicetype" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_shipper" EntityType="Self.tbl_shipper" Schema="dbo" store:Type="Tables" />
@@ -444,7 +475,9 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
     [View_Shipper].[ShipDate] AS [ShipDate], 
     [View_Shipper].[address] AS [address], 
     [View_Shipper].[state] AS [state], 
-    [View_Shipper].[city] AS [city]
+    [View_Shipper].[city] AS [city], 
+    [View_Shipper].[Logo] AS [Logo], 
+    [View_Shipper].[AID] AS [AID]
     FROM [dbo].[View_Shipper] AS [View_Shipper]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -466,7 +499,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySet Name="tbl_subgoodstype" EntityType="powerusyDBCoreModel.tbl_subgoodstype" />
           <EntitySet Name="tbl_counntries" EntityType="powerusyDBCoreModel.tbl_counntries" />
           <EntitySet Name="tbl_shipper" EntityType="powerusyDBCoreModel.tbl_shipper" />
-          <EntitySet Name="View_Shipper" EntityType="powerusyDBCoreModel.View_Shipper" />
           <EntitySet Name="tbl_attachment" EntityType="powerusyDBCoreModel.tbl_attachment" />
           <EntitySet Name="tbl_uploadDocType" EntityType="powerusyDBCoreModel.tbl_uploadDocType" />
           <EntitySet Name="tbl_services" EntityType="powerusyDBCoreModel.tbl_services" />
@@ -476,6 +508,9 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySet Name="View_bid_jobs" EntityType="powerusyDBCoreModel.View_bid_jobs" />
           <EntitySet Name="tbl_bidding_bookmark" EntityType="powerusyDBCoreModel.tbl_bidding_bookmark" />
           <EntitySet Name="tbl_bidding_view" EntityType="powerusyDBCoreModel.tbl_bidding_view" />
+          <EntitySet Name="tbl_cars_models" EntityType="powerusyDBCoreModel.tbl_cars_models" />
+          <EntitySet Name="tbl_sea_ports" EntityType="powerusyDBCoreModel.tbl_sea_ports" />
+          <EntitySet Name="View_Shipper" EntityType="powerusyDBCoreModel.View_Shipper" />
         </EntityContainer>
         <EntityType Name="tbl_auditlog">
           <Key>
@@ -652,42 +687,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="View_Shipper">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="middlename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
-          <Property Name="roleid" Type="Int32" />
-          <Property Name="status" Type="Boolean" />
-          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ShipID" Type="Int32" />
-          <Property Name="userid" Type="Int32" />
-          <Property Name="companyname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="tin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="tinpassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ShipPhon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="statusid" Type="Int32" />
-          <Property Name="approvedby" Type="Int32" />
-          <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="workingdays" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="workinghours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="bankname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="accountnumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ShipDate" Type="DateTime" Precision="3" />
-          <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="tbl_attachment">
           <Key>
             <PropertyRef Name="id" />
@@ -820,6 +819,71 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <Property Name="bidding_id" Type="Int32" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <Property Name="view_count" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_cars_models">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_sea_ports">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="alias" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="regions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="province" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="timezone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="unlocs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="View_Shipper">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="AID" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="middlename" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="phonenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+          <Property Name="roleid" Type="Int32" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="authcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ShipID" Type="Int32" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="companyname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tinpassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ShipPhon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="statusid" Type="Int32" />
+          <Property Name="approvedby" Type="Int32" />
+          <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="workingdays" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="workinghours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="bankname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="accountnumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ShipDate" Type="DateTime" Precision="3" />
+          <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AID" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1015,43 +1079,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="View_Shipper">
-            <EntityTypeMapping TypeName="powerusyDBCoreModel.View_Shipper">
-              <MappingFragment StoreEntitySet="View_Shipper">
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
-                <ScalarProperty Name="accountnumber" ColumnName="accountnumber" />
-                <ScalarProperty Name="bankname" ColumnName="bankname" />
-                <ScalarProperty Name="workinghours" ColumnName="workinghours" />
-                <ScalarProperty Name="workingdays" ColumnName="workingdays" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="comment" ColumnName="comment" />
-                <ScalarProperty Name="approvedby" ColumnName="approvedby" />
-                <ScalarProperty Name="statusid" ColumnName="statusid" />
-                <ScalarProperty Name="ShipPhon" ColumnName="ShipPhon" />
-                <ScalarProperty Name="location" ColumnName="location" />
-                <ScalarProperty Name="tinpassword" ColumnName="tinpassword" />
-                <ScalarProperty Name="tin" ColumnName="tin" />
-                <ScalarProperty Name="companyname" ColumnName="companyname" />
-                <ScalarProperty Name="userid" ColumnName="userid" />
-                <ScalarProperty Name="ShipID" ColumnName="ShipID" />
-                <ScalarProperty Name="authcode" ColumnName="authcode" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="roleid" ColumnName="roleid" />
-                <ScalarProperty Name="dateadded" ColumnName="dateadded" />
-                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
-                <ScalarProperty Name="middlename" ColumnName="middlename" />
-                <ScalarProperty Name="lastname" ColumnName="lastname" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="firstname" ColumnName="firstname" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_attachment">
             <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_attachment">
               <MappingFragment StoreEntitySet="tbl_attachment">
@@ -1189,6 +1216,73 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
                 <ScalarProperty Name="view_count" ColumnName="view_count" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="bidding_id" ColumnName="bidding_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_cars_models">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_cars_models">
+              <MappingFragment StoreEntitySet="tbl_cars_models">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="CarMake" ColumnName="CarMake" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_sea_ports">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_sea_ports">
+              <MappingFragment StoreEntitySet="tbl_sea_ports">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="unlocs" ColumnName="unlocs" />
+                <ScalarProperty Name="timezone" ColumnName="timezone" />
+                <ScalarProperty Name="province" ColumnName="province" />
+                <ScalarProperty Name="coordinates" ColumnName="coordinates" />
+                <ScalarProperty Name="regions" ColumnName="regions" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Shipper">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.View_Shipper">
+              <MappingFragment StoreEntitySet="View_Shipper">
+                <ScalarProperty Name="AID" ColumnName="AID" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="ShipDate" ColumnName="ShipDate" />
+                <ScalarProperty Name="accountnumber" ColumnName="accountnumber" />
+                <ScalarProperty Name="bankname" ColumnName="bankname" />
+                <ScalarProperty Name="workinghours" ColumnName="workinghours" />
+                <ScalarProperty Name="workingdays" ColumnName="workingdays" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="approvedby" ColumnName="approvedby" />
+                <ScalarProperty Name="statusid" ColumnName="statusid" />
+                <ScalarProperty Name="ShipPhon" ColumnName="ShipPhon" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="tinpassword" ColumnName="tinpassword" />
+                <ScalarProperty Name="tin" ColumnName="tin" />
+                <ScalarProperty Name="companyname" ColumnName="companyname" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="ShipID" ColumnName="ShipID" />
+                <ScalarProperty Name="authcode" ColumnName="authcode" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+                <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -62,9 +62,30 @@ namespace PowerusyData
             }
             base.Get();
         }
+        public void Get2()
+        {
+
+            using (var db = new powerusyDBCoreEntities())
+            {
+                 IsValid = true;
+
+                    TotalJobs = db.tbl_bidding.Count();
+
+                    TotalJobsApplied = db.tbl_bidding_jobs.Count();
+
+                    var views = db.tbl_bidding_view.Select(b => b.view_count);
+
+                    if (views.Count() > 0)
+                        TotalJobsViewed = views.Sum();
+
+                    TotalJobsBookmarked = db.tbl_bidding_bookmark.Count();
+                
+            }
+            //base.Get();
+        }
 
 
-
+        
 
     }
 }

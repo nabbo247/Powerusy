@@ -26,7 +26,7 @@ namespace PowerusyData.DB
         public string email { get; set; }
         public string password { get; set; }
         public string authcode { get; set; }
-        public Nullable<int> ShipID { get; set; }
+        public Nullable<int> AID { get; set; }
         public Nullable<int> userid { get; set; }
         public string companyname { get; set; }
         public string tin { get; set; }
@@ -45,5 +45,7 @@ namespace PowerusyData.DB
         public string address { get; set; }
         public string state { get; set; }
         public string city { get; set; }
+        public string Logo { get; set; }
+        public int AID { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace ifreighters.Controllers
         {
             var dash = new DashboardViewModel();
             dash.Username = $"{Session[SessionKeys.Username]}";
-            dash.HandleRequest();
+            dash.Get2();
             Session[SessionKeys.Dashboard] = dash;
             return View();
         }
@@ -33,8 +33,7 @@ namespace ifreighters.Controllers
             //var sss = vm.EventCommand;
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
-            vm.UserId = Session["userid"].ToString();
-            //vm.UserId = "nabbo247";
+            vm.UserId = Session["usrID"].ToString();
 
             vm.HandleRequest();
             if (vm.IsValid)

@@ -21,19 +21,63 @@ namespace PowerusyData
             UsrReq = new tbl_bidding();
             UsrLst = new List<tbl_bidding>();
             List = new List<SelectList>();
+            ListVehileType = new List<SelectList>();
+            ListMake = new List<SelectList>();
+            ListModel = new List<SelectList>();
+            ListYear = new List<SelectList>();
+            ListPOL = new List<SelectList>();
+            ListPOD = new List<SelectList>();
             CountryList = new List<SelectList>();
             SearchEntity = new tbl_bidding();
             Entity = new tbl_bidding();
             usrs = new tbl_users();
             ValidationErrors = new List<KeyValuePair<string, string>>();
         }
+
+        
+        public List<SelectList> GetModel(string state)
+        {
+            List<SelectList> Item = new List<SelectList>();
+            using (var db = new powerusyDBCoreEntities())
+            {
+                //var lg = from g in db.LGAs where g.StateName == state select g.LGA1;
+                //foreach (var bn in lg)
+                //{
+                //    SelectList item = new SelectList();
+                //    item.Text = bn;
+                //    item.Value = bn;
+                //    Item.Add(item);
+                //}
+                var Model = db.tbl_cars_models.Where(x=>x.CarMake == state).Select(s => s.Model).ToList().Distinct().OrderBy(x => x);
+                //var Model = (from s in db.tbl_cars_models orderby s.Model select s.Model).Distinct();
+                foreach (var bn in Model)
+                {
+                    SelectList item = new SelectList();
+                    item.Text = bn;
+                    item.Value = bn;
+                    Item.Add(item);
+                }
+            }
+            return Item;
+        }
         public string ActionTypeId { get; set; }
+        public string VechileType { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public string Year { get; set; }
+
         public string SeletedCountry { get; set; }
         public IPagedList PageList { get; set; }
         public int pageSize { get; set; }
         public int pageNumber { get; set; }
         public tbl_bidding UsrReq { get; set; }
         public string ConfirmPassword { get; set; }
+        public List<SelectList> ListVehileType { set; get; }
+        public List<SelectList> ListPOL { set; get; }
+        public List<SelectList> ListPOD { set; get; }
+        public List<SelectList> ListMake { set; get; }
+        public List<SelectList> ListModel { set; get; }
+        public List<SelectList> ListYear { set; get; }
         public List<SelectList> List { set; get; }
         public List<SelectList> CountryList { set; get; }
         public bool GridView { get; set; }
@@ -64,6 +108,12 @@ namespace PowerusyData
             usrs = new tbl_users();
             List = new List<SelectList>();
             CountryList = new List<SelectList>();
+            ListVehileType = new List<SelectList>();
+            ListMake = new List<SelectList>();
+            ListModel = new List<SelectList>();
+            ListYear = new List<SelectList>();
+            ListPOL = new List<SelectList>();
+            ListPOD = new List<SelectList>();
             GetDropDown();
             base.Init();
         }
@@ -399,15 +449,60 @@ namespace PowerusyData
                     item.Value = bn;
                     List.Add(item);
                 }
+                var Category = db.tbl_cars_models.Select(s => s.Category).ToList().Distinct().OrderBy(x => x);
+                //var Category = (from s in db.tbl_cars_models orderby s.Category select s.Category).Distinct();
+                foreach (var bn in Category)
+                {
+                    SelectList item = new SelectList();
+                    item.Text = bn;
+                    item.Value = bn;
+                    ListVehileType.Add(item);
+                }
+                var CarMake = db.tbl_cars_models.Select(s => s.CarMake).ToList().Distinct().OrderBy(x => x);
+                //var CarMake = db.tbl_cars_models.Select(s=>s.CarMake).ToList().Distinct().OrderBy(x=>x);
+                foreach (var bn in CarMake)
+                {
+                    SelectList item = new SelectList();
+                    item.Text = bn;
+                    item.Value = bn;
+                    ListMake.Add(item);
+                }
+                var Year = db.tbl_cars_models.Select(s => s.Year).ToList().Distinct().OrderBy(x => x);
+                //var Year = (from s in db.tbl_cars_models orderby s.Year select s.Year ).Distinct();
+                foreach (var bn in Year)
+                {
+                    SelectList item = new SelectList();
+                    item.Text = bn.ToString();
+                    item.Value = bn.ToString();
+                    ListYear.Add(item);
+                }
+                var Model = db.tbl_cars_models.Select(s => s.Model).ToList().Distinct().OrderBy(x => x);
+                //var Model = (from s in db.tbl_cars_models orderby s.Model select s.Model).Distinct();
+                foreach (var bn in Model)
+                {
+                    SelectList item = new SelectList();
+                    item.Text = bn;
+                    item.Value = bn;
+                    ListModel.Add(item);
+                }
 
-                //var Countrysta = (from s in db.tbl_counntries select s.CountryName).Distinct();
-                //foreach (var bn in Countrysta)
-                //{
-                //    SelectList item = new SelectList();
-                //    item.Text = bn;
-                //    item.Value = bn;
-                //    CountryList.Add(item);
-                //}
+                var SeaPorts = (from s in db.tbl_sea_ports  select s).Distinct();
+                foreach (var bn in SeaPorts)
+                {
+                    SelectList item = new SelectList();
+                    item.Text = bn.name +" "+bn.country;
+                    item.Value = bn.ID.ToString();
+                    ListPOD.Add(item);
+                }
+
+                
+                foreach (var bn in SeaPorts)
+                {
+                    SelectList item = new SelectList();
+                    item.Text = bn.name + " " + bn.country;
+                    item.Value = bn.ID.ToString();
+                    ListPOL.Add(item);
+                }
             }
         }
         protected tbl_bidding GetPOSData()

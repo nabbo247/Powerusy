@@ -58,7 +58,6 @@ D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\Microsoft.Web.Infrastruc
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\Newtonsoft.Json.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PagedList.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PagedList.Mvc.dll
-D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PowerusyData.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.Helpers.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.Mvc.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.Optimization.dll

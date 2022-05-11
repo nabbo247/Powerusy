@@ -101,9 +101,9 @@
                                                         <div class="_list_110">
                                                             <div class="_list_110_thumb">
                                                                 <a href="#">
-                                                                    @if (Session["LogoPath"] != null && !string.IsNullOrEmpty(Session["LogoPath"].ToString()))
+                                                                    @if (!string.IsNullOrEmpty(item.Logo))
                                                                     {
-                                                                        <img src="~/upload/@Session["LogoPath"].ToString()" height="200" width="200" class="img-fluid" alt="">
+                                                                        <img src="~/upload/@item.Logo" height="200" width="200" class="img-fluid" alt="">
                                                                     }
                                                                     else
                                                                     {
@@ -142,51 +142,25 @@
                         </div>
                     }
 
+                    if (Model.IsDetailAreaVisible)
+                    {
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
 
-
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-
-                            <!-- Single Wrap -->
-                            <div class="_dashboard_content">
-                                <div class="_dashboard_content_header">
-                                    @if (Model.IsStep1)
-                                    {
-                                        <div class="_dashboard__header_flex">
-                                            <h4><i class="ti-briefcase mr-1"></i>Complete Registration</h4>
-                                        </div>
-                                    }
-                                    @if (Model.IsStep2)
-                                    {
+                                <!-- Single Wrap -->
+                                <div class="_dashboard_content">
+                                    <div class="_dashboard_content_header">
                                         <div class="_dashboard__header_flex">
                                             <h4><i class="ti-briefcase mr-1"></i>KYC REQUIREMENTS</h4>
                                         </div>
-                                    }
-                                    @if (Model.IsStep3)
-                                    {
-                                        <div class="_dashboard__header_flex">
-                                            <h4><i class="ti-briefcase mr-1"></i>Profile Status</h4>
-                                        </div>
-                                    }
-                                </div>
+                                    </div>
 
-                                <div class="_dashboard_content_body">
-                                    <div class="row">
-                                        @if (Model.IsStep1)
-                                        {
-                                            <!-- progressbar -->
-                                            @*<ul id="progressbar">
-                                                    <li class="active">COMPANY INFORMATION</li>
-                                                    <li>KYC REQUIREMENTS</li>
-                                                </ul>*@
-                                            <!-- fieldsets Shipping From Start-->
-
-                                            @*<h3 class="fs-subtitle">* Indicates required field </h3>*@
-
+                                    <div class="_dashboard_content_body">
+                                        <div class="row">
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Company name<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.companyname, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.companyname, new { @readonly = "readonly", @class = "form-control" })
                                                     <span class="error1" style="display: none;"> <i class="error-log fa fa-exclamation-triangle"></i> </span>
                                                 </div>
                                             </div>
@@ -197,77 +171,75 @@
                                                 </div>
                                             </div>
 
-
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Address<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.address, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.address, new { @readonly = "readonly", @class = "form-control" })
                                                     @*<input type="text" class="form-control" name="address1" placeholder="Street Address" />*@
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Company phone number<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.phonenumber, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.phonenumber, new { @readonly = "readonly", @class = "form-control" })
                                                     @*<input type="text" class="form-control" name="phone" placeholder="+23480" />*@
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>TIN Number</label>
-                                                    @Html.TextBoxFor(m => m.Entity.tin, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.tin, new { @readonly = "readonly", @class = "form-control" })
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Bankname<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.bankname, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.bankname, new { @readonly = "readonly", @class = "form-control" })
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Account number<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.accountnumber, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.accountnumber, new { @readonly = "readonly", @class = "form-control" })
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>TIN password (Optional)</label>
-                                                    @Html.TextBoxFor(m => m.Entity.tinpassword, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.tinpassword, new { @readonly = "readonly", @class = "form-control" })
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Workingdays<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.workingdays, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.workingdays, new { @readonly = "readonly", @class = "form-control" })
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Workinghours</label>
-                                                    @Html.TextBoxFor(m => m.Entity.workinghours, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.workinghours, new { @readonly = "readonly", @class = "form-control" })
                                                 </div>
                                             </div>
-
 
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Country<sup>*</sup></label>
-                                                    @Html.DropDownListFor(m => m.SeletedCountry, new SelectList(Model.CountryList, "Text", "Value"), new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.location, new { @readonly = "readonly", @class = "form-control" })
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>State<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.state, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.state, new { @readonly = "readonly", @class = "form-control" })
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>City</label>
-                                                    @Html.TextBoxFor(m => m.Entity.city, new { @class = "form-control" })
+                                                    @Html.TextBoxFor(m => m.Entity.city, new { @readonly = "readonly", @class = "form-control" })
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-6">
@@ -278,154 +250,134 @@
                                             <div class="col-xl-12 col-lg-12">
                                                 <div class="form-group">
                                                     <label>Description of the commercial activity<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.description, new { @class = "form-control", @rows = 4 })
+                                                    @Html.TextBoxFor(m => m.Entity.description, new { @readonly = "readonly", @class = "form-control", @rows = 4 })
+                                                </div>
+                                            </div>
+                                            <br />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- Single Wrap End -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <!-- Single Wrap -->
+                                <div class="_dashboard_content">
+                                    <div class="_dashboard_content_header">
+                                        <div class="_dashboard__header_flex">
+                                            <h4><i class="ti-briefcase mr-1"></i>KYC ATTACHMENT</h4>
+                                        </div>
+                                    </div>
+
+                                            <div class="col-xl-8 col-lg-8">
+                                                <div role="tabpanel" class="tab-pane" id="track-by-reference">
+                                                    <div class="put-reference-number">
+                                                        <div class="order-list">
+                                                            <!-- BEGIN GRID AREA -->
+                                                            <div class="table-responsive">
+                                                                <table class="table" id="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Date</th>
+                                                                            <th>FileName</th>
+                                                                            <th></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach (var item in Model.Attach)
+                                                                        {
+                                                                            <tr>
+
+                                                                                <td>@item.dateadded</td>
+
+                                                                                <td>@item.documentname</td>
+                                                                                <td>
+                                                                                    <a target='_blank' href='~/Upload/@item.documentpath'>
+                                                                                        <img src='~/Models/view.png' />
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                            <!-- END GRID AREA -->
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <br />
                                             <div class="row">
-                                                <div class="col-xl-4 col-lg-6">
-                                                    <div class="form-group">
-                                                        <button id="btnContinue"
-                                                                class="btn btn-sm btn-primary"
-                                                                data-pdsa-action="Continue">
-                                                            <i class="glyphicon glyphicon-search"></i>
-                                                            &nbsp;Continue
-                                                        </button>
+                                                <div class="col-md-2">
+                                                    <label class="col-sm-10 control-label">
+                                                        @Html.LabelFor(m => m.Entity.comment, "Comment", new { @class = "col-sm-2 col-form-label" })
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.TextAreaFor(model => model.Entity.comment, new { @class = "form-control", @rows = 4,@colums=20 })
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="col-sm-10 control-label ">
 
-                                                        <button id="btnCancel"
-                                                                class="btn btn-sm btn-primary"
-                                                                formnovalidate="formnovalidate"
-                                                                data-pdsa-action="cancel">
-                                                            <i class="glyphicon
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-3">
+
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label class="col-sm-10 control-label">
+
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <button id="btnSave"
+                                                            class="btn btn-sm btn-primary"
+                                                            data-pdsa-action="save">
+                                                        <i class="glyphicon
+           glyphicon-floppy-disk"></i>
+                                                        &nbsp;Approve
+                                                    </button>
+                                                    <button id="btnCancel"
+                                                            class="btn btn-sm btn-primary"
+                                                            formnovalidate="formnovalidate"
+                                                            data-pdsa-action="cancel">
+                                                        <i class="glyphicon
            glyphicon-remove-circle"></i>
-                                                            &nbsp;Cancel
-                                                        </button>
-                                                    </div>
+                                                        &nbsp;Cancel
+                                                    </button>
+                                                    <button id="btnReject"
+                                                            class="btn btn-sm btn-primary"
+                                                            formnovalidate="formnovalidate"
+                                                            data-pdsa-action="reject">
+                                                        <i class="glyphicon
+           glyphicon-remove-circle"></i>
+                                                        &nbsp;Reject
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="col-sm-10 control-label ">
+
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-3">
+
                                                 </div>
                                             </div>
 
-                                        }
-                                        @if (Model.IsStep2)
-                                        {
-                                            @Html.HiddenFor(model => model.Entity.companyname)
-                                            @Html.HiddenFor(model => model.Entity.description)
-                                            @Html.HiddenFor(model => model.ActionTypeId)
-                                            @Html.HiddenFor(model => model.SeletedCountry)
-                                            @Html.HiddenFor(model => model.Entity.phonenumber)
-                                            @Html.HiddenFor(model => model.Entity.tin)
-                                            @Html.HiddenFor(model => model.Entity.bankname)
-                                            @Html.HiddenFor(model => model.Entity.accountnumber)
-                                            @Html.HiddenFor(model => model.Entity.workingdays)
-                                            @Html.HiddenFor(model => model.Entity.workinghours)
-                                            @Html.HiddenFor(model => model.Entity.address)
-                                            @Html.HiddenFor(model => model.Entity.city)
-                                            @Html.HiddenFor(model => model.Entity.state)
-                                            <hr />
-                                            <!-- fieldsets Shipping From end-->
-                                            <!-- fieldsets Shipping going Start-->
-
-                                            <div class="col-xl-6 col-lg-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-12 control-label req">Certificate of Incorporation **</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.CertificateOfIncorporation" name="CertificateOfIncorporation" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-12 control-label">Memorandum of Association **</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.MemorandumofAssociation" name="MemorandumofAssociation" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xl-6 col-lg-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-12 control-label">Articles of Association **</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.ArticlesofAssociation" name="ArticlesofAssociation" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-12 control-label">Power of Attorney **</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.PowerofAttorney" name="PowerofAttorney" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xl-6 col-lg-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-12 control-label">Valid business license or permit **</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.Validbusinesslicense" name="Validbusinesslicense" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-12 control-label">Audited financial statements **</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.Auditedfinancial" name="Auditedfinancial" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xl-6 col-lg-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-12 control-label">Tax clearance certificate **</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.Taxclearance" name="Taxclearance" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-12 control-label">Others</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.Others" name="Others" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <br /><br />
-                                            <div>
-                                                <button id="btnSave"
-                                                        class="btn btn-sm btn-primary pull-left"
-                                                        data-pdsa-action="previous">
-                                                    <i class="glyphicon glyphicon-floppy-disk"></i>
-                                                    &nbsp;Previous
-                                                </button>
-
-                                                <button id="btnSearch"
-                                                        class="btn btn-sm btn-primary"
-                                                        data-pdsa-action="save">
-                                                    <i class="glyphicon glyphicon-search"></i>
-                                                    &nbsp;Upload &amp; Submit
-                                                </button>
-
-                                                <button id="btnReset"
-                                                        class="btn btn-sm btn-primary"
-                                                        data-pdsa-action="resetsearch">
-                                                    <i class="glyphicon glyphicon-share-alt"></i>
-                                                    &nbsp;Reset
-                                                </button>
-                                            </div>
-
-                                        }
                                         
-
-                                    </div>
                                 </div>
+                                <!-- Single Wrap End -->
                             </div>
-                            <!-- Single Wrap End -->
-
-
                         </div>
-                    </div>
+                    }
+
+
 
                 }
             </div>

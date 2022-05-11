@@ -38,7 +38,6 @@ namespace PowerusyData.DB
         public virtual DbSet<tbl_subgoodstype> tbl_subgoodstype { get; set; }
         public virtual DbSet<tbl_counntries> tbl_counntries { get; set; }
         public virtual DbSet<tbl_shipper> tbl_shipper { get; set; }
-        public virtual DbSet<View_Shipper> View_Shipper { get; set; }
         public virtual DbSet<tbl_attachment> tbl_attachment { get; set; }
         public virtual DbSet<tbl_uploadDocType> tbl_uploadDocType { get; set; }
         public virtual DbSet<tbl_services> tbl_services { get; set; }
@@ -48,5 +47,8 @@ namespace PowerusyData.DB
         public virtual DbSet<View_bid_jobs> View_bid_jobs { get; set; }
         public virtual DbSet<tbl_bidding_bookmark> tbl_bidding_bookmark { get; set; }
         public virtual DbSet<tbl_bidding_view> tbl_bidding_view { get; set; }
+        public virtual DbSet<tbl_cars_models> tbl_cars_models { get; set; }
+        public virtual DbSet<tbl_sea_ports> tbl_sea_ports { get; set; }
+        public virtual DbSet<View_Shipper> View_Shipper { get; set; }
     }
 }

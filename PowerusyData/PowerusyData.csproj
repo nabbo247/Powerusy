@@ -43,6 +43,9 @@
     <Reference Include="ExcelLibrary">
       <HintPath>..\..\..\..\..\..\nabbo247\source\repos\NJCPension\NJCPension\DLL\ExcelLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -106,6 +109,9 @@
     <Compile Include="DB\tbl_bidding_view.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\tbl_cars_models.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\tbl_clearing.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
@@ -128,6 +134,9 @@
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_role.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tbl_sea_ports.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\tbl_services.cs">

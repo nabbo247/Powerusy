@@ -18,7 +18,6 @@
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_subgoodstype" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_counntries" Width="1.5" PointX="4.75" PointY="9.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_shipper" Width="1.5" PointX="11.375" PointY="0.75" />
-        <EntityTypeShape EntityType="powerusyDBCoreModel.View_Shipper" Width="1.5" PointX="11.375" PointY="6.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_attachment" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_uploadDocType" Width="1.5" PointX="7.75" PointY="11.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_services" Width="1.5" PointX="13.375" PointY="0.75" />
@@ -28,6 +27,9 @@
         <EntityTypeShape EntityType="powerusyDBCoreModel.View_bid_jobs" Width="1.5" PointX="5.375" PointY="14.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_bidding_bookmark" Width="1.5" PointX="13.375" PointY="12.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_bidding_view" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_cars_models" Width="1.5" PointX="9.375" PointY="14.75" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_sea_ports" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.View_Shipper" Width="1.5" PointX="0.75" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

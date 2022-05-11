@@ -23,7 +23,12 @@ namespace ifreighters.Controllers
             vm.HandleRequest();
             return View(vm);
         }
-
+        public JsonResult GetModel(string MakeId)
+        {
+            SearchjobViewModel vm = new SearchjobViewModel();
+            var retu = vm.GetModel(MakeId);
+            return Json(retu);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
