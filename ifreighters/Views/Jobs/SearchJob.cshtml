@@ -66,11 +66,11 @@
                                                             <ul class="no-ul-list filter-list">
                                                                 <li>
                                                                     <input id="a1" class="checkbox-custom" name="ADA" type="checkbox" checked="">
-                                                                    <label for="a1" class="checkbox-custom-label">IT Computers (62)</label>
+                                                                    <label for="a1" class="checkbox-custom-label">Lagos (4)</label>
                                                                     <ul class="no-ul-list filter-list">
                                                                         <li>
                                                                             <input id="aa1" class="checkbox-custom" name="ADA" type="checkbox">
-                                                                            <label for="aa1" class="checkbox-custom-label">Web Design (31)</label>
+                                                                            <label for="aa1" class="checkbox-custom-label">Lagos (4)</label>
                                                                         </li>
                                                                     </ul>
                                                                 </li>
@@ -171,7 +171,16 @@
                                         <div class="_list_jobs_f1ex first">
                                             <div class="_list_110">
                                                 <div class="_list_110_thumb">
-                                                    <a href="employer-detail.html"><img src="~/assets/img/c-1.png" class="img-fluid" alt=""></a>
+                                                    <a href="#">
+                                                        @if (!string.IsNullOrEmpty(item.IconPath))
+                                                        {
+                                                            <img src="~/upload/@item.IconPath" height="200" width="200" class="img-fluid" alt="">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img src="~/assets/img/team-1.jpg" height="200" width="200" class="img-fluid" alt="">
+                                                        }
+                                                    </a>
                                                 </div>
                                                 <div class="_list_110_caption">
                                                     <h4 class="_jb_title">

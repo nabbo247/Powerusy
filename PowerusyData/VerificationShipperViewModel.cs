@@ -73,7 +73,9 @@ namespace PowerusyData
             //// This is an example of adding on a new command
             switch (EventCommand.ToLower())
             {
-               
+                case "reject":
+                    Update(Entity, 2);
+                    break;
             }
             GetDropDown();
             base.HandleRequest();
@@ -109,7 +111,7 @@ namespace PowerusyData
             }
             else
             {
-                Update(Entity);
+                Update(Entity,0);
             }
             // Set any validation errors
             ValidationErrors = ValidationErrors;
@@ -177,7 +179,7 @@ namespace PowerusyData
             UsrReq.id = ReqID;
             UsrReq = GetPOSData();
             if (ReqID > 0)
-                ret = ret.Where(x => x.id == ReqID).ToList();
+                ret = ret.Where(x => x.TID == ReqID).ToList();
 
             GetDropDown();
             // Find the specific product
@@ -201,7 +203,7 @@ namespace PowerusyData
             return ret[0] == null ? null : ret[0];
         }
 
-        public bool Update(View_Shipper entity)
+        public bool Update(View_Shipper entity, int st)
         {
             bool ret = false;
             ret = Validate2(entity);
@@ -212,14 +214,17 @@ namespace PowerusyData
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
-                    var rs = (from info in db.tbl_shipper where info.id == UsrReq.id select info).FirstOrDefault();
+                    var rs = (from info in db.tbl_shipper where info.id == entity.TID select info).FirstOrDefault();
                     rs.comment = entity.comment;
                     int usrid = Convert.ToInt32(UserId);
                     rs.approvedby = usrid;
-                    rs.statusid = 0;
+                    rs.statusid = st;
                     db.Entry(rs).State = EntityState.Modified;
                     db.SaveChanges();
-                    Msg = "Successfully approved request";
+                    if (st == 0)
+                        Msg = "Successfully approved request";
+                    else
+                        Msg = "Return successful";
                     IsValid = true;
                 }
             }
@@ -391,7 +396,7 @@ namespace PowerusyData
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
-                    ret = db.View_Shipper.Where(x=>x.roleid!=1).ToList();
+                    ret = db.View_Shipper.Where(x=>x.roleid!=1 && x.statusid == 1).ToList();
                     if (pageNumber > 0 && pageSize > 0)
                     {
                         PageList = ret.ToPagedList(pageNumber, pageSize);

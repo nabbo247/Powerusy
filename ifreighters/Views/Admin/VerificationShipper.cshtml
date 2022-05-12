@@ -107,7 +107,7 @@
                                                                     }
                                                                     else
                                                                     {
-                                                                        <img src="~/assets/img/c-1.png" height="200" width="200" class="img-fluid" alt="">
+                                                                        <img src="~/assets/img/team-1.jpg" height="200" width="200" class="img-fluid" alt="">
                                                                     }
                                                                 </a>
                                                             </div>
@@ -122,14 +122,16 @@
                                                                             {
                                                                                 <span class="_dash_status approval">Pending Approval</span>
                                                                             }
+
                                                                         </span>
                                                                     </li>
+                                                                    <li><span><i class="ti-location-pin"></i>Date Created : @item.ShipDate</span></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="_list_jobs_f1ex">
-                                                        <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.id" class="_jb_apply">View</a>
+                                                        <a href="#" data-pdsa-action="edit" data-pdsa-val="@item.TID" class="_jb_apply">View</a>
                                                     </div>
                                                 </div>
                                             }
@@ -154,9 +156,16 @@
                                             <h4><i class="ti-briefcase mr-1"></i>KYC REQUIREMENTS</h4>
                                         </div>
                                     </div>
-
+                                    @Html.HiddenFor(m => m.Entity.TID)
                                     <div class="_dashboard_content_body">
                                         <div class="row">
+                                            <div class="col-xl-4 col-lg-6">
+                                                <div class="form-group">
+                                                    <label>ID<sup>*</sup></label>
+                                                    @Html.TextBoxFor(m => m.Entity.TID, new { @readonly = "readonly", @class = "form-control" })
+                                                    <span class="error1" style="display: none;"> <i class="error-log fa fa-exclamation-triangle"></i> </span>
+                                                </div>
+                                            </div>
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Company name<sup>*</sup></label>

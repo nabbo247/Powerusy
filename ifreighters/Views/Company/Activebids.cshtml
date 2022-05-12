@@ -23,6 +23,10 @@
                 @Html.Partial("~/Views/Company/_agentMenu.cshtml")
             }@if (Session["userid"] != null && Session["Role"].ToString() == "1")//customer
             {
+                @Html.Partial("~/Views/Admin/_AdminMenu.cshtml")
+            }
+            @if (Session["userid"] != null && Session["Role"].ToString() == "3")//customer
+            {
                 @Html.Partial("~/Views/Customer/_customerMenu.cshtml")
             }
             <!-- Item Wrap Start -->
@@ -100,34 +104,35 @@
                                             {
                                                 <!-- Single Job -->
                                                 @*<div class="_list_jobs_wraps mng_list shadow_0 border">
-                                                    <div class="_list_jobs_f1ex first">
-                                                        <div class="_list_110">
-                                                            <div class="_list_110_thumb">
-                                                                <a href="employer-detail.html"><img src="~/assets/img/c-1.png" class="img-fluid" alt=""></a>
-                                                            </div>
-                                                            <div class="_list_110_caption">
-                                                                @Html.ActionLink(item.VesselName, "Jobdetail", "Customer", new { page = item.id }, new { style = "display:block" })
-                                                                <ul class="_grouping_list">
-                                                                    <li><span><i class="ti-location-pin"></i>Port of loading : @item.PortLoading</span></li>
-                                                                    <li><span><i class="ti-location-pin"></i>Port of discharge : @item.PortDischarge</span></li>
-                                                                    <li><span><i class="ti-credit-card"></i>Est. Budget &#8358; @String.Format("{0:N0}", item.EstBudget) </span></li>
-                                                                    <li><span><i class="ti-timer"></i>@item.Date</span></li>
+                                                <div class="_list_jobs_f1ex first">
+                                                    <div class="_list_110">
+                                                        <div class="_list_110_thumb">
+                                                            <a href="employer-detail.html"><img src="~/assets/img/c-1.png" class="img-fluid" alt=""></a>
+                                                        </div>
+                                                        <div class="_list_110_caption">
+                                                            @Html.ActionLink(item.VesselName, "Jobdetail", "Customer", new { page = item.id }, new { style = "display:block" })
+                                                            <ul class="_grouping_list">
+                                                                <li><span><i class="ti-location-pin"></i>Port of loading : @item.PortLoading</span></li>
+                                                                <li><span><i class="ti-location-pin"></i>Port of discharge : @item.PortDischarge</span></li>
+                                                                <li><span><i class="ti-credit-card"></i>Est. Budget &#8358; @String.Format("{0:N0}", item.EstBudget) </span></li>
+                                                                <li><span><i class="ti-timer"></i>@item.Date</span></li>
 
-                                                                </ul>
-                                                            </div>
+                                                            </ul>
                                                         </div>
                                                     </div>
-                                                    <div class="_list_jobs_f1ex">
-                                                        <a href="#" data-pdsa-action="save" data-pdsa-val="@item.id" class="_jb_apply">Remove</a>
-                                                    </div>
-                                                </div>*@
+                                                </div>
+                                                <div class="_list_jobs_f1ex">
+                                                    <a href="#" data-pdsa-action="save" data-pdsa-val="@item.id" class="_jb_apply">Remove</a>
+                                                </div>
+                                            </div>*@
 
                                                 <!-- Single List -->
                                                 <div class="_manage_task_list">
                                                     <div class="_manage_task_list_flex">
                                                         <h4 class="_jb_title"> @Html.ActionLink(item.VesselName, "Jobdetail", "Customer", new { page = item.id }, new { style = "display:block" })</h4>
                                                         <span class="_elopi_designation">
-                                                        @(DateTime.Now.Hour - item.BidDate.Value.Hour) Hrs ago</span>
+                                                            @(DateTime.Now.Hour - item.BidDate.Value.Hour) Hrs ago
+                                                        </span>
                                                         <ul class="_action_grouping_list">
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="" class="_edit_list_point" data-original-title="Edit job"><i class="fa fa-edit"></i></a></li>
                                                             <li><a href="#" data-toggle="tooltip" data-pdsa-action="save" data-pdsa-val="@item.BidID" data-placement="top" title="" class="_delete_point" data-original-title="Delete Job"><i class="fa fa-trash"></i></a></li>

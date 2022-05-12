@@ -23,6 +23,10 @@
                 @Html.Partial("~/Views/Company/_agentMenu.cshtml")
             }@if (Session["userid"] != null && Session["Role"].ToString() == "1")//customer
             {
+                @Html.Partial("~/Views/Admin/_AdminMenu.cshtml")
+            }
+            @if (Session["userid"] != null && Session["Role"].ToString() == "3")//customer
+            {
                 @Html.Partial("~/Views/Customer/_customerMenu.cshtml")
             }
             <!-- Item Wrap Start -->
@@ -103,8 +107,17 @@
                                                     <div class="_list_jobs_f1ex first">
                                                         <div class="_list_110">
                                                             <div class="_list_110_thumb">
-                                                                <a href="employer-detail.html"><img src="~/assets/img/c-1.png" class="img-fluid" alt=""></a>
 
+                                                                <a href="#">
+                                                                    @if (!string.IsNullOrEmpty(item.IconPath))
+                                                                    {
+                                                                        <img src="~/upload/@item.IconPath" height="200" width="200" class="img-fluid" alt="">
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <img src="~/assets/img/team-1.jpg" height="200" width="200" class="img-fluid" alt="">
+                                                                    }
+                                                                </a>
                                                             </div>
                                                             <div class="_list_110_caption">
                                                                 @Html.ActionLink(item.VesselName, "Jobdetail", "Customer", new { page = item.id }, new { style = "display:block" })

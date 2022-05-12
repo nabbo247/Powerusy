@@ -171,6 +171,9 @@
     <Compile Include="IndexViewModel.cs" />
     <Compile Include="JobdetailViewModel.cs" />
     <Compile Include="LoginViewModel.cs" />
+    <Compile Include="ManageCarViewModel.cs" />
+    <Compile Include="ManageCustomerViewModel.cs" />
+    <Compile Include="ManagePortsViewModels.cs" />
     <Compile Include="ModelCommon\MenuModels.cs" />
     <Compile Include="ModelCommon\ViewModelBase.cs" />
     <Compile Include="MyProfileViewModel.cs" />

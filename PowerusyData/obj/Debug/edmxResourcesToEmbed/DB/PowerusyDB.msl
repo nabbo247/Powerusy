@@ -360,6 +360,7 @@
     <EntitySetMapping Name="View_Shipper">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.View_Shipper">
         <MappingFragment StoreEntitySet="View_Shipper">
+          <ScalarProperty Name="TID" ColumnName="TID" />
           <ScalarProperty Name="AID" ColumnName="AID" />
           <ScalarProperty Name="Logo" ColumnName="Logo" />
           <ScalarProperty Name="city" ColumnName="city" />

@@ -383,6 +383,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <Property Name="city" Type="nvarchar" MaxLength="50" />
           <Property Name="Logo" Type="nvarchar" MaxLength="100" />
           <Property Name="AID" Type="int" Nullable="false" />
+          <Property Name="TID" Type="int" />
         </EntityType>
         <EntityContainer Name="powerusyDBCoreModelStoreContainer">
           <EntitySet Name="tbl_attachment" EntityType="Self.tbl_attachment" Schema="dbo" store:Type="Tables" />
@@ -477,7 +478,8 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
     [View_Shipper].[state] AS [state], 
     [View_Shipper].[city] AS [city], 
     [View_Shipper].[Logo] AS [Logo], 
-    [View_Shipper].[AID] AS [AID]
+    [View_Shipper].[AID] AS [AID], 
+    [View_Shipper].[TID] AS [TID]
     FROM [dbo].[View_Shipper] AS [View_Shipper]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -884,6 +886,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Logo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AID" Type="Int32" Nullable="false" />
+          <Property Name="TID" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1250,6 +1253,7 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
           <EntitySetMapping Name="View_Shipper">
             <EntityTypeMapping TypeName="powerusyDBCoreModel.View_Shipper">
               <MappingFragment StoreEntitySet="View_Shipper">
+                <ScalarProperty Name="TID" ColumnName="TID" />
                 <ScalarProperty Name="AID" ColumnName="AID" />
                 <ScalarProperty Name="Logo" ColumnName="Logo" />
                 <ScalarProperty Name="city" ColumnName="city" />

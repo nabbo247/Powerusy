@@ -490,16 +490,15 @@ namespace PowerusyData
                 foreach (var bn in SeaPorts)
                 {
                     SelectList item = new SelectList();
-                    item.Text = bn.name +" "+bn.country;
+                    item.Text = bn.name +" - "+bn.country;
                     item.Value = bn.ID.ToString();
                     ListPOD.Add(item);
                 }
-
                 
                 foreach (var bn in SeaPorts)
                 {
                     SelectList item = new SelectList();
-                    item.Text = bn.name + " " + bn.country;
+                    item.Text = bn.name + " - " + bn.country;
                     item.Value = bn.ID.ToString();
                     ListPOL.Add(item);
                 }

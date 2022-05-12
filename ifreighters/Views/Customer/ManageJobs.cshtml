@@ -19,8 +19,18 @@
     <div class="container-fluid">
         <div class="row m-0">
 
-            @Html.Partial("_customerMenu", Model)
-            @*Html.RenderPartial("_employee");*@
+
+            @if (Session["userid"] != null && Session["Role"].ToString() == "2")//AGENT
+            {
+                @Html.Partial("~/Views/Company/_agentMenu.cshtml")
+            }@if (Session["userid"] != null && Session["Role"].ToString() == "1")//customer
+            {
+                @Html.Partial("~/Views/Admin/_AdminMenu.cshtml")
+            }
+            @if (Session["userid"] != null && Session["Role"].ToString() == "3")//customer
+            {
+                @Html.Partial("~/Views/Customer/_customerMenu.cshtml")
+            }
             <!-- Item Wrap Start -->
             <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
 
@@ -122,25 +132,25 @@
 
                                             <!-- Single List jobs -->
                                             @*<div class="_dash_singl_box">
-                                                    <div class="_dash_singl_thumbs">
-                                                        <img src="~/assets/img/c-1.png" class="img-fluid" alt="">
-                                                    </div>
-                                                    <div class="_dash_singl_captions">
-                                                        <h4 class="_jb_title"><a href="#">SALLAUM LINES SWITZERLAND SA</a><span class="_dash_status approval">Open</span></h4>
-                                                        <ul class="_grouping_list">
-                                                            <li><span><i class="ti-location-pin"></i>Port of loading : Baltimore</span></li>
-                                                            <li><span><i class="ti-location-pin"></i>Port of discharge : Lagos</span></li>
-                                                            <li><span><i class="ti-credit-card"></i>Est Budget NGN 1,700,000</span></li>
-                                                            <li><span><i class="ti-timer"></i>Expiring on 10 Feb</span></li>
-                                                        </ul>
-                                                        <ul class="_action_grouping_list">
-                                                            <li><a href="#" class="_aaplied_candidates">Applied<span>42</span></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Edit job" class="_edit_list_point"><i class="fa fa-edit"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point"><i class="fa fa-trash"></i></a></li>
+                                            <div class="_dash_singl_thumbs">
+                                                <img src="~/assets/img/c-1.png" class="img-fluid" alt="">
+                                            </div>
+                                            <div class="_dash_singl_captions">
+                                                <h4 class="_jb_title"><a href="#">SALLAUM LINES SWITZERLAND SA</a><span class="_dash_status approval">Open</span></h4>
+                                                <ul class="_grouping_list">
+                                                    <li><span><i class="ti-location-pin"></i>Port of loading : Baltimore</span></li>
+                                                    <li><span><i class="ti-location-pin"></i>Port of discharge : Lagos</span></li>
+                                                    <li><span><i class="ti-credit-card"></i>Est Budget NGN 1,700,000</span></li>
+                                                    <li><span><i class="ti-timer"></i>Expiring on 10 Feb</span></li>
+                                                </ul>
+                                                <ul class="_action_grouping_list">
+                                                    <li><a href="#" class="_aaplied_candidates">Applied<span>42</span></a></li>
+                                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Edit job" class="_edit_list_point"><i class="fa fa-edit"></i></a></li>
+                                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point"><i class="fa fa-trash"></i></a></li>
 
-                                                        </ul>
-                                                    </div>
-                                                </div>*@
+                                                </ul>
+                                            </div>
+                                        </div>*@
 
                                             @foreach (var item in Model.UsrLst)
                                             {
@@ -191,10 +201,10 @@
                                                             <li><a href="#" class="_aaplied_candidates">Applied<span>@count</span></a></li>
                                                             <li>
                                                                 @*<a href="#" data-pdsa-action="edit"
-                                                                       data-pdsa-val="@item.id"
-                                                                       class="btn btn-default btn-sm">
-                                                                        <i class="glyphicon glyphicon-edit">Click to View</i>
-                                                                    </a>*@
+                                                               data-pdsa-val="@item.id"
+                                                               class="btn btn-default btn-sm">
+                                                                <i class="glyphicon glyphicon-edit">Click to View</i>
+                                                            </a>*@
                                                                 <a href="#" data-toggle="tooltip" data-pdsa-action="edit" data-pdsa-val="@item.id" data-placement="top" title="Edit job" class="_edit_list_point"><i class="fa fa-edit"></i></a>
                                                             </li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point"><i class="fa fa-trash"></i></a></li>
@@ -202,24 +212,24 @@
                                                     </div>
                                                 </div>
                                                 @*<tr>
-                                                        <td class="pdsa-action-button-column">
-                                                            <a href="#" data-pdsa-action="edit"
-                                                               data-pdsa-val="@item.id"
-                                                               class="btn btn-default btn-sm">
-                                                                <i class="glyphicon glyphicon-edit">Click to View</i>
-                                                            </a>
-                                                        </td>
-                                                        <td>@item.username</td>
-                                                        <td>@item.companyname</td>
-                                                        <td>@item.phonenumber</td>
-                                                        <td>@item.location</td>
-                                                        <td>@item.address</td>
-                                                        @if (item.statusid == 1)
-                                                        {
-                                                            <td>Processing</td>
-                                                        }
-                                                        <td><a href="" title=""><i class="fa fa-check-circle" aria-hidden="true"></i></a></td>
-                                                    </tr>*@
+                                                <td class="pdsa-action-button-column">
+                                                    <a href="#" data-pdsa-action="edit"
+                                                       data-pdsa-val="@item.id"
+                                                       class="btn btn-default btn-sm">
+                                                        <i class="glyphicon glyphicon-edit">Click to View</i>
+                                                    </a>
+                                                </td>
+                                                <td>@item.username</td>
+                                                <td>@item.companyname</td>
+                                                <td>@item.phonenumber</td>
+                                                <td>@item.location</td>
+                                                <td>@item.address</td>
+                                                @if (item.statusid == 1)
+                                                {
+                                                    <td>Processing</td>
+                                                }
+                                                <td><a href="" title=""><i class="fa fa-check-circle" aria-hidden="true"></i></a></td>
+                                            </tr>*@
                                             }
 
 
@@ -282,14 +292,13 @@
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Port Of Loading<sup>*</sup></label>
-                                                    @Html.TextBoxFor(m => m.Entity.PortLoading, new { @class = "form-control" })
-                                                    @*<input type="text" class="form-control with-light">*@
+                                                    @Html.DropDownListFor(m => m.Entity.PortLoading, new SelectList(Model.ListPOL, "Value", "Text"), new { @class = "form-control" })
                                                 </div>
                                             </div>
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Port Of Discharge</label>
-                                                    @Html.TextBoxFor(m => m.Entity.PortDischarge, new { @class = "form-control" })
+                                                    @Html.DropDownListFor(m => m.Entity.PortDischarge, new SelectList(Model.ListPOL, "Value", "Text"), new { @class = "form-control" })
                                                 </div>
                                             </div>
 
@@ -323,13 +332,13 @@
                                                 </div>
                                             </div>
                                             @*<div class="col-xl-6 col-lg-12">
-                                                    <label>Shipping Lines/Terminal  <sup>*</sup></label>
-                                                    <div class="custom-file">
+                                            <label>Shipping Lines/Terminal  <sup>*</sup></label>
+                                            <div class="custom-file">
 
-                                                        <input type="file" class="custom-file-input" id="upfile">
-                                                        <label class="custom-file-label" for="upfile">Upload file</label>
-                                                    </div><span class="uploadButton-file-name">Images or documents that might be helpful in describing your job</span>
-                                                </div>*@
+                                                <input type="file" class="custom-file-input" id="upfile">
+                                                <label class="custom-file-label" for="upfile">Upload file</label>
+                                            </div><span class="uploadButton-file-name">Images or documents that might be helpful in describing your job</span>
+                                        </div>*@
 
                                             <hr />
                                             <div class="col-xl-6 col-lg-6">

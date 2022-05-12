@@ -21,7 +21,9 @@ namespace PowerusyData
             UsrReq = new tbl_bidding();
             UsrLst = new List<tbl_bidding>();
             List = new List<SelectList>();
-            CountryList = new List<SelectList>();
+            CountryList = new List<SelectList>(); 
+            ListPOL = new List<SelectList>();
+            ListPOD = new List<SelectList>();
             SearchEntity = new tbl_bidding();
             Entity = new tbl_bidding();
             usrs = new tbl_users();
@@ -34,6 +36,8 @@ namespace PowerusyData
         public int pageNumber { get; set; }
         public tbl_bidding UsrReq { get; set; }
         public string ConfirmPassword { get; set; }
+        public List<SelectList> ListPOL { get; set; }
+        public List<SelectList> ListPOD { get; set; }
         public List<SelectList> List { set; get; }
         public List<SelectList> CountryList { set; get; }
         public bool IsStep1 { get; set; }
@@ -66,6 +70,8 @@ namespace PowerusyData
             usrs = new tbl_users();
             List = new List<SelectList>();
             CountryList = new List<SelectList>();
+            ListPOL = new List<SelectList>();
+            ListPOD = new List<SelectList>();
             GetDropDown();
             base.Init();
         }
@@ -195,7 +201,14 @@ namespace PowerusyData
             UsrReq.id = ReqID;
             UsrReq = GetPOSData();
             if (ReqID > 0)
-                ret = ret.Where(x => x.id == ReqID).ToList();
+            {
+                using (var db = new powerusyDBCoreEntities())
+                {
+                    //PosReq_vws
+                    ret = db.tbl_bidding.Where(x => x.id == ReqID).ToList();
+                }
+            }
+                
             if(ret.Count>0)
              usrs = GetUsrData(ret[0].UserID);
 
@@ -411,14 +424,22 @@ namespace PowerusyData
                     List.Add(item);
                 }
 
-                //var Countrysta = (from s in db.tbl_counntries select s.CountryName).Distinct();
-                //foreach (var bn in Countrysta)
-                //{
-                //    SelectList item = new SelectList();
-                //    item.Text = bn;
-                //    item.Value = bn;
-                //    CountryList.Add(item);
-                //}
+                var SeaPorts = (from s in db.tbl_sea_ports select s).Distinct();
+                foreach (var bn in SeaPorts)
+                {
+                    SelectList item = new SelectList();
+                    item.Text = bn.name + " - " + bn.country;
+                    item.Value = bn.ID.ToString();
+                    ListPOD.Add(item);
+                }
+
+                foreach (var bn in SeaPorts)
+                {
+                    SelectList item = new SelectList();
+                    item.Text = bn.name + " - " + bn.country;
+                    item.Value = bn.ID.ToString();
+                    ListPOL.Add(item);
+                }
             }
         }
         protected tbl_bidding GetPOSData()
