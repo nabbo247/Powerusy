@@ -28,24 +28,24 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="category" Type="nvarchar" MaxLength="50" />
-    <Property Name="subcategory" Type="nvarchar" MaxLength="50" />
-    <Property Name="service" Type="nvarchar" MaxLength="50" />
-    <Property Name="Consignee" Type="nvarchar" MaxLength="50" />
-    <Property Name="BookingNo" Type="nvarchar" MaxLength="50" />
-    <Property Name="BLNumber" Type="nvarchar" MaxLength="50" />
-    <Property Name="VesselName" Type="nvarchar" MaxLength="50" />
-    <Property Name="PortLoading" Type="nvarchar" MaxLength="50" />
-    <Property Name="PortDischarge" Type="nvarchar" MaxLength="50" />
-    <Property Name="ShippingLines" Type="nvarchar" MaxLength="50" />
+    <Property Name="GoodsType" Type="nvarchar" MaxLength="200" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="category" Type="nvarchar" MaxLength="200" />
+    <Property Name="subcategory" Type="nvarchar" MaxLength="200" />
+    <Property Name="service" Type="nvarchar" MaxLength="200" />
+    <Property Name="Consignee" Type="nvarchar" MaxLength="200" />
+    <Property Name="BookingNo" Type="nvarchar" MaxLength="200" />
+    <Property Name="BLNumber" Type="nvarchar" MaxLength="200" />
+    <Property Name="VesselName" Type="nvarchar" MaxLength="200" />
+    <Property Name="PortLoading" Type="int" />
+    <Property Name="PortDischarge" Type="int" />
+    <Property Name="ShippingLines" Type="nvarchar" MaxLength="200" />
     <Property Name="EstBudget" Type="decimal" Precision="18" Scale="2" />
     <Property Name="GoodDescription" Type="nvarchar(max)" />
     <Property Name="UserID" Type="int" />
     <Property Name="Date" Type="datetime" />
     <Property Name="statusid" Type="int" />
-    <Property Name="IconPath" Type="nvarchar" MaxLength="100" />
+    <Property Name="IconPath" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="tbl_bidding_bookmark">
     <Key>
@@ -70,6 +70,7 @@
     <Property Name="Comment" Type="nvarchar(max)" />
     <Property Name="DueDate" Type="datetime" />
     <Property Name="status" Type="int" />
+    <Property Name="Days" Type="int" />
   </EntityType>
   <EntityType Name="tbl_bidding_view">
     <Key>
@@ -151,6 +152,7 @@ warning 6002: The table/view 'Powerusydb.dbo.tbl_counntries' does not have a pri
     <Property Name="approvedby" Type="nvarchar" MaxLength="255" />
     <Property Name="dateapproved" Type="nvarchar" MaxLength="255" />
     <Property Name="approvalcomment" Type="nvarchar" MaxLength="255" />
+    <Property Name="bid_id" Type="int" />
   </EntityType>
   <EntityType Name="tbl_kyc">
     <Key>
@@ -313,30 +315,31 @@ warning 6002: The table/view 'Powerusydb.dbo.View_bid_jobs' does not have a prim
       <PropertyRef Name="BidID" />
     </Key>
     <Property Name="id" Type="int" Nullable="false" />
-    <Property Name="GoodsType" Type="nvarchar" MaxLength="50" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="category" Type="nvarchar" MaxLength="50" />
-    <Property Name="subcategory" Type="nvarchar" MaxLength="50" />
-    <Property Name="service" Type="nvarchar" MaxLength="50" />
-    <Property Name="Consignee" Type="nvarchar" MaxLength="50" />
-    <Property Name="BookingNo" Type="nvarchar" MaxLength="50" />
-    <Property Name="BLNumber" Type="nvarchar" MaxLength="50" />
-    <Property Name="VesselName" Type="nvarchar" MaxLength="50" />
-    <Property Name="PortLoading" Type="nvarchar" MaxLength="50" />
-    <Property Name="PortDischarge" Type="nvarchar" MaxLength="50" />
-    <Property Name="ShippingLines" Type="nvarchar" MaxLength="50" />
+    <Property Name="GoodsType" Type="nvarchar" MaxLength="200" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="category" Type="nvarchar" MaxLength="200" />
+    <Property Name="subcategory" Type="nvarchar" MaxLength="200" />
+    <Property Name="service" Type="nvarchar" MaxLength="200" />
+    <Property Name="Consignee" Type="nvarchar" MaxLength="200" />
+    <Property Name="BookingNo" Type="nvarchar" MaxLength="200" />
+    <Property Name="BLNumber" Type="nvarchar" MaxLength="200" />
+    <Property Name="VesselName" Type="nvarchar" MaxLength="200" />
+    <Property Name="PortLoading" Type="int" />
+    <Property Name="PortDischarge" Type="int" />
+    <Property Name="ShippingLines" Type="nvarchar" MaxLength="200" />
     <Property Name="EstBudget" Type="decimal" Precision="18" Scale="2" />
     <Property Name="GoodDescription" Type="nvarchar(max)" />
     <Property Name="UserID" Type="int" />
     <Property Name="Date" Type="datetime" />
     <Property Name="statusid" Type="int" />
-    <Property Name="IconPath" Type="nvarchar" MaxLength="100" />
-    <Property Name="comment" Type="nvarchar(max)" />
+    <Property Name="IconPath" Type="nvarchar" MaxLength="200" />
+    <Property Name="Comment" Type="nvarchar(max)" />
     <Property Name="AgentID" Type="int" />
     <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
     <Property Name="DueDate" Type="datetime" />
     <Property Name="BidDate" Type="datetime" />
     <Property Name="BidID" Type="bigint" Nullable="false" />
+    <Property Name="Days" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -344,7 +347,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
     <Key>
       <PropertyRef Name="id" />
       <PropertyRef Name="AID" />
-      <PropertyRef Name="TID" />
     </Key>
     <Property Name="id" Type="int" Nullable="false" />
     <Property Name="firstname" Type="nvarchar" MaxLength="255" />
@@ -379,7 +381,33 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
     <Property Name="city" Type="nvarchar" MaxLength="50" />
     <Property Name="Logo" Type="nvarchar" MaxLength="100" />
     <Property Name="AID" Type="int" Nullable="false" />
-    <Property Name="TID" Type="int" Nullable="false" />
+    <Property Name="TID" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_tbl_bidding">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="GoodsType" Type="nvarchar" MaxLength="200" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="subcategory" Type="nvarchar" MaxLength="200" />
+    <Property Name="category" Type="nvarchar" MaxLength="200" />
+    <Property Name="service" Type="nvarchar" MaxLength="200" />
+    <Property Name="Consignee" Type="nvarchar" MaxLength="200" />
+    <Property Name="BookingNo" Type="nvarchar" MaxLength="200" />
+    <Property Name="BLNumber" Type="nvarchar" MaxLength="200" />
+    <Property Name="VesselName" Type="nvarchar" MaxLength="200" />
+    <Property Name="PortLoading1" Type="nvarchar" MaxLength="203" />
+    <Property Name="PortDischarge2" Type="nvarchar" MaxLength="203" />
+    <Property Name="ShippingLines" Type="nvarchar" MaxLength="200" />
+    <Property Name="EstBudget" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="GoodDescription" Type="nvarchar(max)" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="statusid" Type="int" />
+    <Property Name="IconPath" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityContainer Name="powerusyDBCoreModelStoreContainer">
     <EntitySet Name="tbl_attachment" EntityType="Self.tbl_attachment" Schema="dbo" store:Type="Tables" />
@@ -432,12 +460,13 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
     [View_bid_jobs].[Date] AS [Date], 
     [View_bid_jobs].[statusid] AS [statusid], 
     [View_bid_jobs].[IconPath] AS [IconPath], 
-    [View_bid_jobs].[comment] AS [comment], 
+    [View_bid_jobs].[Comment] AS [Comment], 
     [View_bid_jobs].[AgentID] AS [AgentID], 
     [View_bid_jobs].[Amount] AS [Amount], 
     [View_bid_jobs].[DueDate] AS [DueDate], 
     [View_bid_jobs].[BidDate] AS [BidDate], 
-    [View_bid_jobs].[BidID] AS [BidID]
+    [View_bid_jobs].[BidID] AS [BidID], 
+    [View_bid_jobs].[Days] AS [Days]
     FROM [dbo].[View_bid_jobs] AS [View_bid_jobs]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="View_Shipper" EntityType="Self.View_Shipper" store:Type="Views" store:Schema="dbo">
@@ -477,6 +506,29 @@ warning 6002: The table/view 'Powerusydb.dbo.View_Shipper' does not have a prima
     [View_Shipper].[AID] AS [AID], 
     [View_Shipper].[TID] AS [TID]
     FROM [dbo].[View_Shipper] AS [View_Shipper]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_tbl_bidding" EntityType="Self.View_tbl_bidding" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_tbl_bidding].[id] AS [id], 
+    [View_tbl_bidding].[GoodsType] AS [GoodsType], 
+    [View_tbl_bidding].[Name] AS [Name], 
+    [View_tbl_bidding].[subcategory] AS [subcategory], 
+    [View_tbl_bidding].[category] AS [category], 
+    [View_tbl_bidding].[service] AS [service], 
+    [View_tbl_bidding].[Consignee] AS [Consignee], 
+    [View_tbl_bidding].[BookingNo] AS [BookingNo], 
+    [View_tbl_bidding].[BLNumber] AS [BLNumber], 
+    [View_tbl_bidding].[VesselName] AS [VesselName], 
+    [View_tbl_bidding].[PortLoading1] AS [PortLoading1], 
+    [View_tbl_bidding].[PortDischarge2] AS [PortDischarge2], 
+    [View_tbl_bidding].[ShippingLines] AS [ShippingLines], 
+    [View_tbl_bidding].[EstBudget] AS [EstBudget], 
+    [View_tbl_bidding].[GoodDescription] AS [GoodDescription], 
+    [View_tbl_bidding].[UserID] AS [UserID], 
+    [View_tbl_bidding].[Date] AS [Date], 
+    [View_tbl_bidding].[statusid] AS [statusid], 
+    [View_tbl_bidding].[IconPath] AS [IconPath]
+    FROM [dbo].[View_tbl_bidding] AS [View_tbl_bidding]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>

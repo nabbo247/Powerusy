@@ -22,5 +22,6 @@ namespace PowerusyData.DB
         public string Comment { get; set; }
         public Nullable<System.DateTime> DueDate { get; set; }
         public Nullable<int> status { get; set; }
+        public Nullable<int> Days { get; set; }
     }
 }

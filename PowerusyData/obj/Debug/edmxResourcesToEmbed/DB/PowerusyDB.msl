@@ -57,6 +57,7 @@
     <EntitySetMapping Name="tbl_importation_document">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_importation_document">
         <MappingFragment StoreEntitySet="tbl_importation_document">
+          <ScalarProperty Name="bid_id" ColumnName="bid_id" />
           <ScalarProperty Name="approvalcomment" ColumnName="approvalcomment" />
           <ScalarProperty Name="dateapproved" ColumnName="dateapproved" />
           <ScalarProperty Name="approvedby" ColumnName="approvedby" />
@@ -238,76 +239,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_bidding">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding">
-        <MappingFragment StoreEntitySet="tbl_bidding">
-          <ScalarProperty Name="IconPath" ColumnName="IconPath" />
-          <ScalarProperty Name="statusid" ColumnName="statusid" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
-          <ScalarProperty Name="EstBudget" ColumnName="EstBudget" />
-          <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
-          <ScalarProperty Name="PortDischarge" ColumnName="PortDischarge" />
-          <ScalarProperty Name="PortLoading" ColumnName="PortLoading" />
-          <ScalarProperty Name="VesselName" ColumnName="VesselName" />
-          <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
-          <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
-          <ScalarProperty Name="Consignee" ColumnName="Consignee" />
-          <ScalarProperty Name="service" ColumnName="service" />
-          <ScalarProperty Name="subcategory" ColumnName="subcategory" />
-          <ScalarProperty Name="category" ColumnName="category" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tbl_bidding_jobs">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_jobs">
-        <MappingFragment StoreEntitySet="tbl_bidding_jobs">
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="AgentID" ColumnName="AgentID" />
-          <ScalarProperty Name="BidID" ColumnName="BidID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="View_bid_jobs">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.View_bid_jobs">
-        <MappingFragment StoreEntitySet="View_bid_jobs">
-          <ScalarProperty Name="BidID" ColumnName="BidID" />
-          <ScalarProperty Name="BidDate" ColumnName="BidDate" />
-          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-          <ScalarProperty Name="AgentID" ColumnName="AgentID" />
-          <ScalarProperty Name="comment" ColumnName="comment" />
-          <ScalarProperty Name="IconPath" ColumnName="IconPath" />
-          <ScalarProperty Name="statusid" ColumnName="statusid" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
-          <ScalarProperty Name="EstBudget" ColumnName="EstBudget" />
-          <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
-          <ScalarProperty Name="PortDischarge" ColumnName="PortDischarge" />
-          <ScalarProperty Name="PortLoading" ColumnName="PortLoading" />
-          <ScalarProperty Name="VesselName" ColumnName="VesselName" />
-          <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
-          <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
-          <ScalarProperty Name="Consignee" ColumnName="Consignee" />
-          <ScalarProperty Name="service" ColumnName="service" />
-          <ScalarProperty Name="subcategory" ColumnName="subcategory" />
-          <ScalarProperty Name="category" ColumnName="category" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbl_bidding_bookmark">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_bookmark">
         <MappingFragment StoreEntitySet="tbl_bidding_bookmark">
@@ -393,6 +324,103 @@
           <ScalarProperty Name="lastname" ColumnName="lastname" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_tbl_bidding">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.View_tbl_bidding">
+        <MappingFragment StoreEntitySet="View_tbl_bidding">
+          <ScalarProperty Name="IconPath" ColumnName="IconPath" />
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
+          <ScalarProperty Name="EstBudget" ColumnName="EstBudget" />
+          <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
+          <ScalarProperty Name="PortDischarge2" ColumnName="PortDischarge2" />
+          <ScalarProperty Name="PortLoading1" ColumnName="PortLoading1" />
+          <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+          <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
+          <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+          <ScalarProperty Name="Consignee" ColumnName="Consignee" />
+          <ScalarProperty Name="service" ColumnName="service" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="subcategory" ColumnName="subcategory" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_bidding">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding">
+        <MappingFragment StoreEntitySet="tbl_bidding">
+          <ScalarProperty Name="IconPath" ColumnName="IconPath" />
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
+          <ScalarProperty Name="EstBudget" ColumnName="EstBudget" />
+          <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
+          <ScalarProperty Name="PortDischarge" ColumnName="PortDischarge" />
+          <ScalarProperty Name="PortLoading" ColumnName="PortLoading" />
+          <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+          <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
+          <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+          <ScalarProperty Name="Consignee" ColumnName="Consignee" />
+          <ScalarProperty Name="service" ColumnName="service" />
+          <ScalarProperty Name="subcategory" ColumnName="subcategory" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_bidding_jobs">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_jobs">
+        <MappingFragment StoreEntitySet="tbl_bidding_jobs">
+          <ScalarProperty Name="Days" ColumnName="Days" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+          <ScalarProperty Name="BidID" ColumnName="BidID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_bid_jobs">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.View_bid_jobs">
+        <MappingFragment StoreEntitySet="View_bid_jobs">
+          <ScalarProperty Name="Days" ColumnName="Days" />
+          <ScalarProperty Name="BidID" ColumnName="BidID" />
+          <ScalarProperty Name="BidDate" ColumnName="BidDate" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="IconPath" ColumnName="IconPath" />
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
+          <ScalarProperty Name="EstBudget" ColumnName="EstBudget" />
+          <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
+          <ScalarProperty Name="PortDischarge" ColumnName="PortDischarge" />
+          <ScalarProperty Name="PortLoading" ColumnName="PortLoading" />
+          <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+          <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
+          <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+          <ScalarProperty Name="Consignee" ColumnName="Consignee" />
+          <ScalarProperty Name="service" ColumnName="service" />
+          <ScalarProperty Name="subcategory" ColumnName="subcategory" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

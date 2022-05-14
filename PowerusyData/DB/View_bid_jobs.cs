@@ -24,8 +24,8 @@ namespace PowerusyData.DB
         public string BookingNo { get; set; }
         public string BLNumber { get; set; }
         public string VesselName { get; set; }
-        public string PortLoading { get; set; }
-        public string PortDischarge { get; set; }
+        public Nullable<int> PortLoading { get; set; }
+        public Nullable<int> PortDischarge { get; set; }
         public string ShippingLines { get; set; }
         public Nullable<decimal> EstBudget { get; set; }
         public string GoodDescription { get; set; }
@@ -33,11 +33,12 @@ namespace PowerusyData.DB
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> statusid { get; set; }
         public string IconPath { get; set; }
-        public string comment { get; set; }
+        public string Comment { get; set; }
         public Nullable<int> AgentID { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public Nullable<System.DateTime> DueDate { get; set; }
         public Nullable<System.DateTime> BidDate { get; set; }
         public long BidID { get; set; }
+        public Nullable<int> Days { get; set; }
     }
 }

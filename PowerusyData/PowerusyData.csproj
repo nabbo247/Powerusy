@@ -167,6 +167,9 @@
     <Compile Include="DB\View_Shipper.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\View_tbl_bidding.cs">
+      <DependentUpon>PowerusyDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="HomeViewModel.cs" />
     <Compile Include="IndexViewModel.cs" />
     <Compile Include="JobdetailViewModel.cs" />

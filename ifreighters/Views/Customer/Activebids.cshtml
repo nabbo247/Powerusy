@@ -84,42 +84,109 @@
                                             <h4><i class="ti-layers mr-1"></i>Active Bids</h4>
                                         </div>
                                     </div>
+                                    @foreach (var item in Model.UsrLst)
+                                    {
+                                        {
+                                            var count2 = 0;
 
-                                    <div class="_dashboard_content_body p-0">
-                                        <div class="_grouping_list_task">
+                                            var hasApplicants = Model.BiddingsApplied.Any(b => b.Key == item.id);
+                                            if (hasApplicants)
+                                            {
+                                                count2 = Model.BiddingsApplied.Single(b => b.Key == item.id).Value;
+                                            }
+                                            if (count2 > 0)
+                                            {
+                                                <!-- Single List jobs -->
+                                               
+                                                <div class="_manage_task_list">
+                                                    <div class="_manage_task_list_flex">
+                                                        <span class="_dash_status approval">Oepn</span>
+                                                        <h4 class="_jb_title">@item.VesselName</h4>
+                                                        <ul class="_action_grouping_list">
+                                                            @{
+                                                                var count = 0;
 
-                                            <!-- Single List -->
-                                            <div class="_manage_task_list">
-                                                <div class="_manage_task_list_flex">
-                                                    <h4 class="_jb_title">New Landing Page For Beauty Site</h4>
-                                                    <span class="_elopi_designation">10min ago</span>
-                                                    <ul class="_action_grouping_list">
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="top" title="" class="_edit_list_point" data-original-title="Edit job"><i class="fa fa-edit"></i></a></li>
-                                                        <li><a href="#" data-toggle="tooltip" data-placement="top" title="" class="_delete_point" data-original-title="Delete Job"><i class="fa fa-trash"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="_manage_task_list_right">
-                                                    <div class="_act_tsk_info">
-                                                        <ul class="_act_tsk_list">
+                                                                var hasApplicant = Model.BiddingsApplied.Any(b => b.Key == item.id);
+                                                                if (hasApplicant)
+                                                                {
+                                                                    count = Model.BiddingsApplied.Single(b => b.Key == item.id).Value;
+                                                                }
+                                                            }
                                                             <li>
-                                                                <div class="_act_capt_01">
-                                                                    <h5>$45</h5>
-                                                                    <span>Hourly Rate</span>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="_act_capt_01">
-                                                                    <h5>5 days</h5>
-                                                                    <span>Delivery Time</span>
-                                                                </div>
-                                                            </li>
+                                                                <a href="#" data-toggle="tooltip" data-pdsa-action="edit" data-pdsa-val="@item.id"
+                                                                   data-placement="top" title="@item.VesselName" class="_aaplied_candidates">
+                                                                    Manage Bidders<span>@count</span>
+                                                                </a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="" class="_edit_list_point" data-original-title="Edit job"><i class="fa fa-edit"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="" class="_delete_point" data-original-title="Delete Job"><i class="fa fa-trash"></i></a></li>
                                                         </ul>
                                                     </div>
+                                                    <div class="_manage_task_list_right">
+                                                        <div class="_mng_tsk_info">
+                                                            <ul class="_mng_tsk_list">
+                                                                
+                                                                <li><span class="text-success">@count</span>Bids</li>
+                                                                <li><span class="text-warning">@String.Format("{0:N0}", item.EstBudget) </span>Avg. Bids</li>
+                                                                @*<li><span class="text-danger">0.00</span>Avg Rate</li>*@
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        </div>
-                                    </div>
+                                                @*<div class="_dash_singl_box">
+                                                    <div class="_dash_singl_thumbs">
+                                                        <a href="#">
+                                                            @if (!string.IsNullOrEmpty(item.IconPath))
+                                                            {
+                                                                <img src="~/upload/@item.IconPath" height="200" width="200" class="img-fluid" alt="">
+                                                            }
+                                                            else
+                                                            {
+                                                                <img src="~/assets/img/team-1.jpg" height="200" width="200" class="img-fluid" alt="">
+                                                            }
+                                                        </a>
+                                                    </div>
+                                                    <div class="_dash_singl_captions">
+                                                        <h4 class="_jb_title">
+
+                                                            <a href="#" data-toggle="tooltip" data-pdsa-action="edit" data-pdsa-val="@item.id"
+                                                               data-placement="top" title="@item.VesselName" class="_edit_list_point">
+                                                                @item.VesselName
+                                                        </a>
+                                                        <span class="_dash_status approval">Open</span>
+                                                    </h4>
+                                                    <ul class="_grouping_list">
+                                                        <li><span><i class="ti-location-pin"></i>Port of loading : @item.PortLoading1</span></li>
+                                                        <li><span><i class="ti-location-pin"></i>Port of discharge : @item.PortDischarge2</span></li>
+                                                        <li><span><i class="ti-credit-card"></i>Est. Budget &#8358; @String.Format("{0:N0}", item.EstBudget) </span></li>
+                                                        <li><span><i class="ti-timer"></i>@item.Date</span></li>
+                                                    </ul>
+                                                    @if (item.GoodDescription.Length > 100)
+                                                    {
+                                                        @item.GoodDescription.Substring(0, 100)
+                                                    }
+                                                    else
+                                                    {
+                                                        @item.GoodDescription
+                                                    }
+                                                    <ul class="_action_grouping_list">
+
+                                                        <li>
+                                                            <a href="#" data-toggle="tooltip" data-pdsa-action="edit" data-pdsa-val="@item.id"
+                                                               data-placement="top" title="@item.VesselName" class="_aaplied_candidates">
+                                                                Applied<span>@count</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>*@
+                                        }
+                                    }
+                                }
+
+
+
                                 </div>
                                 <!-- Single Wrap End -->
 
@@ -130,8 +197,101 @@
 
                     if (Model.IsDetailAreaVisible)
                     {
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                    <!-- Single Wrap -->
+                    <div class="_dashboard_content">
+                        <div class="_dashboard_content_header">
+                            <div class="_dashboard__header_flex">
+                                <h4><i class="ti-briefcase mr-1"></i>Active Bid</h4>
+                            </div>
+                        </div>
+
+                        <div class="_dashboard_content_body">
+                            <div class="row">
+                                @foreach (var itemJ in Model.bidjos.Where(x => x.id == Model.Entity.id))
+                                {
+                                    @*<div class="_manage_task_list">
+                <div class="_manage_task_list_flex">
+                    <h4 class="_jb_title">@itemJ.Comment</h4>
+                    <span class="_elopi_designation">10min ago</span>
+                    <ul class="_action_grouping_list">
+                        <li><a href="#" data-toggle="tooltip" data-placement="top" title="" class="_edit_list_point" data-original-title="Edit job"><i class="fa fa-edit"></i></a></li>
+                    </ul>
+                </div>
+                <div class="_manage_task_list_right">
+                    <div class="_act_tsk_info">
+                        <ul class="_act_tsk_list">
+                            <li>
+                                <div class="_act_capt_01">
+                                    <h5>Bidded Amt &#8358; @String.Format("{0:N0}", @itemJ.Amount)</h5>
+                                    <span>Est. Budget &#8358;@String.Format("{0:N0}", @itemJ.EstBudget) </span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="_act_capt_01">
+                                    <h5>@itemJ.Days</h5>
+                                    <span>Delivery Time</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>*@
+                                    <!-- Single List -->
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="_dash_grid_box">
+                                            <div class="_dash_remove_wrap">
+                                            
+                                            </div>
+                                            <div class="_dash_grid_box_thumb">
+                                                <img src="~/assets/img/team-1.jpg" class="img-fluid circle">
+                                            </div>
+                                            <div class="_dash_grid_box_caption">
+                                                <span class="_elopi_location"><i class="ti-location-pin mr-1"></i>Nigeria</span>
+                                                <h4 class="_elcio_title"><a href="#">Nabil </a></h4>
+                                                <div class="_dash_usr_rates">
+                                                    <span class="good">4.5</span>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+
+                                                <div class="_dash_usr_bid_rate">
+                                                    <ul>
+                                                        <li>&#8358; @String.Format("{0:N0}", @itemJ.Amount)<span></span></li>
+                                                        <li>@itemJ.Days<span>Delivery Time</span></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="_dash_usr_actioned">
+                                                    <ul>
+                                                        <li><a href="#" data-toggle="tooltip" data-placement="top" title="Accept Offer" class="_download_cv"><i class="fa fa-check"></i>Accept Offer</a></li>
+                                                        <li><a href="#" data-toggle="modal" data-target="#message" class="_send_message"><i class="fa fa-envelope"></i>Send Message</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="_dash_usr_information">
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
 
 
+                                <hr />
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Wrap End -->
+
+
+                </div>
+            </div>
                     }
                 }
             </div>

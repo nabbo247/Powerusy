@@ -12,20 +12,20 @@ namespace PowerusyData.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_bidding
+    public partial class View_tbl_bidding
     {
         public int id { get; set; }
         public string GoodsType { get; set; }
         public string Name { get; set; }
-        public string category { get; set; }
         public string subcategory { get; set; }
+        public string category { get; set; }
         public string service { get; set; }
         public string Consignee { get; set; }
         public string BookingNo { get; set; }
         public string BLNumber { get; set; }
         public string VesselName { get; set; }
-        public Nullable<int> PortLoading { get; set; }
-        public Nullable<int> PortDischarge { get; set; }
+        public string PortLoading1 { get; set; }
+        public string PortDischarge2 { get; set; }
         public string ShippingLines { get; set; }
         public Nullable<decimal> EstBudget { get; set; }
         public string GoodDescription { get; set; }

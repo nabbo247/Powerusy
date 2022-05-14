@@ -175,8 +175,8 @@
                                                             <span class="_dash_status approval">Open</span>
                                                         </h4>
                                                         <ul class="_grouping_list">
-                                                            <li><span><i class="ti-location-pin"></i>Port of loading : @item.PortLoading</span></li>
-                                                            <li><span><i class="ti-location-pin"></i>Port of discharge : @item.PortDischarge</span></li>
+                                                            <li><span><i class="ti-location-pin"></i>Port of loading : @item.PortLoading1</span></li>
+                                                            <li><span><i class="ti-location-pin"></i>Port of discharge : @item.PortDischarge2</span></li>
                                                             <li><span><i class="ti-credit-card"></i>Est. Budget &#8358; @String.Format("{0:N0}", item.EstBudget) </span></li>
                                                             <li><span><i class="ti-timer"></i>@item.Date</span></li>
                                                         </ul>
@@ -200,36 +200,13 @@
                                                             }
                                                             <li><a href="#" class="_aaplied_candidates">Applied<span>@count</span></a></li>
                                                             <li>
-                                                                @*<a href="#" data-pdsa-action="edit"
-                                                               data-pdsa-val="@item.id"
-                                                               class="btn btn-default btn-sm">
-                                                                <i class="glyphicon glyphicon-edit">Click to View</i>
-                                                            </a>*@
                                                                 <a href="#" data-toggle="tooltip" data-pdsa-action="edit" data-pdsa-val="@item.id" data-placement="top" title="Edit job" class="_edit_list_point"><i class="fa fa-edit"></i></a>
                                                             </li>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point"><i class="fa fa-trash"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                @*<tr>
-                                                <td class="pdsa-action-button-column">
-                                                    <a href="#" data-pdsa-action="edit"
-                                                       data-pdsa-val="@item.id"
-                                                       class="btn btn-default btn-sm">
-                                                        <i class="glyphicon glyphicon-edit">Click to View</i>
-                                                    </a>
-                                                </td>
-                                                <td>@item.username</td>
-                                                <td>@item.companyname</td>
-                                                <td>@item.phonenumber</td>
-                                                <td>@item.location</td>
-                                                <td>@item.address</td>
-                                                @if (item.statusid == 1)
-                                                {
-                                                    <td>Processing</td>
-                                                }
-                                                <td><a href="" title=""><i class="fa fa-check-circle" aria-hidden="true"></i></a></td>
-                                            </tr>*@
+                                               
                                             }
 
 
@@ -305,7 +282,7 @@
 
                                             <div class="col-xl-4 col-lg-6">
                                                 <div class="form-group">
-                                                    <label>EstBudge<sup>*</sup></label>
+                                                    <label>Est. Budge<sup>*</sup></label>
                                                     @Html.TextBoxFor(m => m.Entity.EstBudget, new { @class = "form-control" })
 
                                                 </div>
@@ -332,20 +309,30 @@
                                                 </div>
                                             </div>
                                             @*<div class="col-xl-6 col-lg-12">
-                                            <label>Shipping Lines/Terminal  <sup>*</sup></label>
-                                            <div class="custom-file">
+            <label>Shipping Lines/Terminal  <sup>*</sup></label>
+            <div class="custom-file">
 
-                                                <input type="file" class="custom-file-input" id="upfile">
-                                                <label class="custom-file-label" for="upfile">Upload file</label>
-                                            </div><span class="uploadButton-file-name">Images or documents that might be helpful in describing your job</span>
-                                        </div>*@
+                <input type="file" class="custom-file-input" id="upfile">
+                <label class="custom-file-label" for="upfile">Upload file</label>
+            </div><span class="uploadButton-file-name">Images or documents that might be helpful in describing your job</span>
+        </div>*@
 
                                             <hr />
                                             <div class="col-xl-6 col-lg-6">
                                                 <div class="form-group">
+                                                    <label class="col-md-6 control-label req">Item Picture</label>
+                                                    <div class="form-group">
+                                                        <input class="form-control required" type="file" id="@Model.ItemPix" name="ItemPix" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-6 col-lg-6">
+                                                <div class="form-group">
                                                     <label class="col-md-6 control-label req">Bill of Lading</label>
                                                     <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.BillofLading" name="BillofLadingName" />
+                                                        <input class="form-control required" type="file" id="@Model.BillofLading" name="BillofLading" />
 
                                                     </div>
                                                 </div>
@@ -354,7 +341,7 @@
                                                 <div class="form-group">
                                                     <label class="col-md-6 control-label">Proforma invoice</label>
                                                     <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.Proformainvoice" name="ProformainvoiceName" />
+                                                        <input class="form-control required" type="file" id="@Model.Proformainvoice" name="Proformainvoice" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -364,7 +351,7 @@
                                                 <div class="form-group">
                                                     <label class="col-md-6 control-label req">Packaging Lists</label>
                                                     <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.PackagingLists" name="PackagingListsName" />
+                                                        <input class="form-control required" type="file" id="@Model.PackagingLists" name="PackagingLists" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -373,7 +360,7 @@
                                                 <div class="form-group">
                                                     <label class="col-md-6 control-label req">Others</label>
                                                     <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.Others" name="OthersName" />
+                                                        <input class="form-control required" type="file" id="@Model.Others" name="Others" />
                                                     </div>
                                                 </div>
                                             </div>

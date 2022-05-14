@@ -23,5 +23,6 @@ namespace PowerusyData.DB
         public string approvedby { get; set; }
         public string dateapproved { get; set; }
         public string approvalcomment { get; set; }
+        public Nullable<int> bid_id { get; set; }
     }
 }

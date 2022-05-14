@@ -279,20 +279,20 @@ namespace PowerusyData
                   "Please Supply your Consignee."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.PortDischarge))
-            {
-                ValidationErrors.Add(new
-                  KeyValuePair<string, string>("Comment",
-                  "Please Supply your Port of Discharge."));
-                IsValid = false;
-            }
-            if (string.IsNullOrEmpty(entity.PortLoading))
-            {
-                ValidationErrors.Add(new
-                  KeyValuePair<string, string>("Comment",
-                  "Please Supply your Port of Loading."));
-                IsValid = false;
-            }
+            //if (string.IsNullOrEmpty(entity.PortDischarge))
+            //{
+            //    ValidationErrors.Add(new
+            //      KeyValuePair<string, string>("Comment",
+            //      "Please Supply your Port of Discharge."));
+            //    IsValid = false;
+            //}
+            //if (string.IsNullOrEmpty(entity.PortLoading))
+            //{
+            //    ValidationErrors.Add(new
+            //      KeyValuePair<string, string>("Comment",
+            //      "Please Supply your Port of Loading."));
+            //    IsValid = false;
+            //}
             if (string.IsNullOrEmpty(entity.GoodDescription))
             {
                 ValidationErrors.Add(new

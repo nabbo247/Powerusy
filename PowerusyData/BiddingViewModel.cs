@@ -2,12 +2,8 @@
 using PowerusyData.DB;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace PowerusyData
@@ -18,14 +14,15 @@ namespace PowerusyData
           : base()
         {
             // Initialize other variables
-            UsrReq = new tbl_bidding();
-            UsrLst = new List<tbl_bidding>();
+            UsrReq = new View_tbl_bidding();
+            UsrLst = new List<View_tbl_bidding>();
             List = new List<SelectList>();
             CountryList = new List<SelectList>(); 
             ListPOL = new List<SelectList>();
             ListPOD = new List<SelectList>();
-            SearchEntity = new tbl_bidding();
+            SearchEntity = new View_tbl_bidding();
             Entity = new tbl_bidding();
+            bidjos = new List<View_bid_jobs>();
             usrs = new tbl_users();
             ValidationErrors = new List<KeyValuePair<string, string>>();
         }
@@ -34,7 +31,8 @@ namespace PowerusyData
         public IPagedList PageList { get; set; }
         public int pageSize { get; set; }
         public int pageNumber { get; set; }
-        public tbl_bidding UsrReq { get; set; }
+        public View_tbl_bidding UsrReq { get; set; }
+        public List<View_bid_jobs> bidjos { get; set; }
         public string ConfirmPassword { get; set; }
         public List<SelectList> ListPOL { get; set; }
         public List<SelectList> ListPOD { get; set; }
@@ -43,9 +41,9 @@ namespace PowerusyData
         public bool IsStep1 { get; set; }
         public bool IsStep2 { get; set; }
         public bool IsStep3 { get; set; }
-        public List<tbl_bidding> UsrLst { get; set; }
+        public List<View_tbl_bidding> UsrLst { get; set; }
         public Dictionary<int, int> BiddingsApplied { get; set; }
-        public tbl_bidding SearchEntity { get; set; }
+        public View_tbl_bidding SearchEntity { get; set; }
         public tbl_bidding Entity { get; set; }
         public tbl_users usrs { get; set; }
         public HttpPostedFileBase uploadedImage { get; set; }
@@ -63,9 +61,10 @@ namespace PowerusyData
         public bool EbizApproval { get; set; }
         protected override void Init()
         {
-            UsrLst = new List<tbl_bidding>();
+            bidjos = new List<View_bid_jobs>();
+            UsrLst = new List<View_tbl_bidding>();
             BiddingsApplied = new Dictionary<int, int>();
-            SearchEntity = new tbl_bidding();
+            SearchEntity = new View_tbl_bidding();
             Entity = new tbl_bidding();
             usrs = new tbl_users();
             List = new List<SelectList>();
@@ -158,7 +157,7 @@ namespace PowerusyData
 
         protected override void ResetSearch()
         {
-            SearchEntity = new tbl_bidding();
+            SearchEntity = new View_tbl_bidding();
             base.ResetSearch();
         }
 
@@ -168,9 +167,9 @@ namespace PowerusyData
             base.Get();
         }
 
-        public List<tbl_bidding> Get(tbl_bidding entity)
+        public List<View_tbl_bidding> Get(View_tbl_bidding entity)
         {
-            List<tbl_bidding> ret = new List<tbl_bidding>();
+            List<View_tbl_bidding> ret = new List<View_tbl_bidding>();
             // TODO: Add your own data access method here
             ret = CreateData();
             // Do any searching
@@ -191,9 +190,9 @@ namespace PowerusyData
 
         public tbl_bidding Get(int ReqID)
         {
-            List<tbl_bidding> ret =
-              new List<tbl_bidding>();
-            tbl_bidding entity = null;
+            List<View_tbl_bidding> ret =
+              new List<View_tbl_bidding>();
+            tbl_bidding entity = new tbl_bidding();
             // TODO: Add data access method here
 
             ret = CreateData();
@@ -205,7 +204,7 @@ namespace PowerusyData
                 using (var db = new powerusyDBCoreEntities())
                 {
                     //PosReq_vws
-                    ret = db.tbl_bidding.Where(x => x.id == ReqID).ToList();
+                    entity = db.tbl_bidding.Where(x => x.id == ReqID).FirstOrDefault();
                 }
             }
                 
@@ -216,7 +215,7 @@ namespace PowerusyData
             // Find the specific product
             //entity = ret.Find(p =>
             //   p.MccCode == MccCode);
-            return ret[0] == null ? null : ret[0];
+            return entity;
         }
 
         public bool Update(tbl_bidding entity)
@@ -298,14 +297,14 @@ namespace PowerusyData
                   "Please Supply your Consignee."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.PortDischarge))
+            if (entity.PortDischarge!=0)
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your Port of Discharge."));
                 IsValid = false;
             }
-            if (string.IsNullOrEmpty(entity.PortLoading))
+            if (entity.PortLoading!=0)
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
@@ -334,7 +333,26 @@ namespace PowerusyData
                     var UserIDI = db.tbl_users.Where(x => x.username == UserId).FirstOrDefault();
                     //UserIDI.id = 1;
                     int userID = UserIDI.id;
-                    if(!string.IsNullOrEmpty(BillofLadingName))
+                    //if (!string.IsNullOrEmpty(ItemPixName))
+                    //{
+                    //    tbl_importation_document at = new tbl_importation_document();
+                    //    at.dateadded = DateTime.Now;
+                    //    at.documentname = "Item Pix";
+                    //    string path = ItemPixName;
+                    //    at.documentpath = path;
+                    //    at.statusid = 1;
+                    //    //at.statusid = userID;
+                    //    db.tbl_importation_document.Add(at);
+                    //}
+                    entity.IconPath = ItemPixName;
+                    entity.UserID = userID;
+                    entity.GoodsType = ActionTypeId;
+                    entity.statusid = 1;
+                    entity.Date = DateTime.Now;
+                    db.tbl_bidding.Add(entity);
+                    db.SaveChanges();
+                    
+                    if (!string.IsNullOrEmpty(BillofLadingName))
                     {
                         tbl_importation_document at = new tbl_importation_document();
                         at.dateadded = DateTime.Now;
@@ -342,7 +360,7 @@ namespace PowerusyData
                         string path = BillofLadingName;
                         at.documentpath = path;
                         at.statusid = 1;
-                        at.statusid = userID;
+                        at.bid_id = entity.id;
                         db.tbl_importation_document.Add(at);
                     }
                     if (!string.IsNullOrEmpty(PackagingListsName))
@@ -353,7 +371,7 @@ namespace PowerusyData
                         string path = PackagingListsName;
                         at.documentpath = path;
                         at.statusid = 1;
-                        at.statusid = userID;
+                        at.bid_id = entity.id;
                         db.tbl_importation_document.Add(at);
                     }
                     if (!string.IsNullOrEmpty(ProformainvoiceName))
@@ -364,7 +382,7 @@ namespace PowerusyData
                         string path = ProformainvoiceName;
                         at.documentpath = path;
                         at.statusid = 1;
-                        at.statusid = userID;
+                        at.bid_id = entity.id;
                         db.tbl_importation_document.Add(at);
                     }
                     if (!string.IsNullOrEmpty(OthersName))
@@ -375,26 +393,9 @@ namespace PowerusyData
                         string path = OthersName;
                         at.documentpath = path;
                         at.statusid = 1;
-                        at.statusid = userID;
+                        at.bid_id = entity.id;
                         db.tbl_importation_document.Add(at);
                     }
-                    if (!string.IsNullOrEmpty(ItemPixName))
-                    {
-                        tbl_importation_document at = new tbl_importation_document();
-                        at.dateadded = DateTime.Now;
-                        at.documentname = "Item Pix";
-                        string path = ItemPixName;
-                        at.documentpath = path;
-                        at.statusid = 1;
-                        at.statusid = userID;
-                        db.tbl_importation_document.Add(at);
-                    }
-
-                    entity.UserID = userID;
-                    entity.GoodsType = ActionTypeId;
-                    entity.statusid = 1;
-                    entity.Date = DateTime.Now;
-                    db.tbl_bidding.Add(entity);
                     db.SaveChanges();
                     IsValid = true;
                     string op = "created job order successful";
@@ -423,8 +424,8 @@ namespace PowerusyData
                     item.Value = bn;
                     List.Add(item);
                 }
-
-                var SeaPorts = (from s in db.tbl_sea_ports select s).Distinct();
+                var SeaPorts = db.tbl_sea_ports.ToList().Distinct().OrderBy(x=>x.name);
+               // var SeaPorts = (from s in db.tbl_sea_ports select s).Distinct();
                 foreach (var bn in SeaPorts)
                 {
                     SelectList item = new SelectList();
@@ -442,14 +443,14 @@ namespace PowerusyData
                 }
             }
         }
-        protected tbl_bidding GetPOSData()
+        protected View_tbl_bidding GetPOSData()
         {
-            tbl_bidding ret = new tbl_bidding();
+            View_tbl_bidding ret = new View_tbl_bidding();
             try
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
-                    ret = db.tbl_bidding.Where(x => x.id == UsrReq.id).SingleOrDefault();
+                    ret = db.View_tbl_bidding.Where(x => x.id == UsrReq.id).SingleOrDefault();
                 }
             }
             catch (Exception ex)
@@ -486,16 +487,36 @@ namespace PowerusyData
             }
             return ret;
         }
-        protected List<tbl_bidding> CreateData()
+        public string GetSeaPort(string ID)
         {
-            List<tbl_bidding> ret = new List<tbl_bidding>();
+            string name = "";
+            using (var db = new powerusyDBCoreEntities())
+            {
+                int MID = Convert.ToInt32(ID);
+                var bn = db.tbl_sea_ports.Where(x => x.ID == MID).FirstOrDefault();
+                name = bn.name + " - " + bn.country;
+            }
+            return name;
+        }
+        protected List<View_tbl_bidding> CreateData()
+        {
+            List<View_tbl_bidding> ret = new List<View_tbl_bidding>();
             try
             {
                 using (var db = new powerusyDBCoreEntities())
                 {
                     //PosReq_vws
                     int UID = Convert.ToInt32(UserId);
-                    ret = db.tbl_bidding.Where(x=>x.UserID== UID).ToList();
+                    ret = db.View_tbl_bidding.Where(x=>x.UserID== UID).ToList();
+                    var seaList = db.tbl_sea_ports.ToList();
+
+                    bidjos = db.View_bid_jobs.ToList();
+                    //                 var query = db.tbl_bidding    // your starting point - table in the "from" statement
+                    //.Join(db.tbl_sea_ports, // the source table of the inner join
+                    //   post => post.PortDischarge,        // Select the primary key (the first part of the "on" clause in an sql "join" statement)
+                    //   meta => meta.ID,   // Select the foreign key (the second part of the "on" clause)
+                    //   (post, meta) => new { Post = post, Meta = meta }) // selection
+                    //.Where(postAndMeta => postAndMeta. == );    // where statement
 
                     var applied = db.tbl_bidding_jobs.GroupBy(x => x.BidID).Select(s => new { key = s.Key.Value, value = s.Count() });
 
