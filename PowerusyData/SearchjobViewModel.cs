@@ -283,7 +283,7 @@ namespace PowerusyData
                     //PosReq_vws
                     int UsrID = Convert.ToInt32(UserId);
                     //var Bookmark = db.tbl_bidding_bookmark.Where(m => m.bookmarked_by_id == UsrID).ToList().Select(x => x.bidding_id);
-                    ret = db.View_tbl_bidding.ToList();
+                    ret = db.View_tbl_bidding.OrderByDescending(x=>x.id).ToList();
                     if (pageNumber > 0 && pageSize > 0)
                     {
                         PageList = ret.ToPagedList(pageNumber, pageSize);

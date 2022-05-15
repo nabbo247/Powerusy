@@ -507,16 +507,10 @@ namespace PowerusyData
                 {
                     //PosReq_vws
                     int UID = Convert.ToInt32(UserId);
-                    ret = db.View_tbl_bidding.Where(x=>x.UserID== UID).ToList();
+                    ret = db.View_tbl_bidding.OrderByDescending(x => x.id).Where(x=>x.UserID== UID).ToList();
                     var seaList = db.tbl_sea_ports.ToList();
 
                     bidjos = db.View_bid_jobs.ToList();
-                    //                 var query = db.tbl_bidding    // your starting point - table in the "from" statement
-                    //.Join(db.tbl_sea_ports, // the source table of the inner join
-                    //   post => post.PortDischarge,        // Select the primary key (the first part of the "on" clause in an sql "join" statement)
-                    //   meta => meta.ID,   // Select the foreign key (the second part of the "on" clause)
-                    //   (post, meta) => new { Post = post, Meta = meta }) // selection
-                    //.Where(postAndMeta => postAndMeta. == );    // where statement
 
                     var applied = db.tbl_bidding_jobs.GroupBy(x => x.BidID).Select(s => new { key = s.Key.Value, value = s.Count() });
 

@@ -241,6 +241,7 @@
       <DependentUpon>PowerusyDB.edmx</DependentUpon>
       <LastGenOutput>PowerusyDB.cs</LastGenOutput>
     </Content>
+    <None Include="Web References\webmail\WebService.disco" />
     <None Include="Web References\njcweb\WebService.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -261,10 +262,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>PowerusyData_njcweb_WebService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://webapi.powerusy.com/Controllers/WebService.asmx%3fwsdl">
+    <WebReferenceUrl Include="http://webapi.powerusy.com/Controllers/WebService.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\webmail\</RelPath>
-      <UpdateFromURL>http://webapi.powerusy.com/Controllers/WebService.asmx%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>http://webapi.powerusy.com/Controllers/WebService.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
