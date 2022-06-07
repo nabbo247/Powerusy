@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2022-05-03T20:32:17.6297661Z;True|2022-04-20T21:38:19.9097008+01:00;True|2022-04-20T20:30:26.8071818+01:00;False|2022-04-03T09:37:49.5950566+01:00;False|2022-04-03T09:36:25.7128994+01:00;</History>
+    <History>True|2022-05-15T21:51:41.5190551Z;True|2022-05-15T21:27:28.3419429+01:00;True|2022-05-03T21:32:17.6297661+01:00;True|2022-04-20T21:38:19.9097008+01:00;True|2022-04-20T20:30:26.8071818+01:00;False|2022-04-03T09:37:49.5950566+01:00;False|2022-04-03T09:36:25.7128994+01:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="assets/css/animate.min.css">
@@ -426,22 +426,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/30/2013 18:15:20</publishTime>
     </File>
     <File Include="bin/Powerusy.dll">
-      <publishTime>05/03/2022 21:31:54</publishTime>
+      <publishTime>06/06/2022 20:52:56</publishTime>
     </File>
     <File Include="bin/Powerusy.pdb">
-      <publishTime>05/03/2022 21:31:54</publishTime>
+      <publishTime>06/06/2022 20:52:56</publishTime>
     </File>
     <File Include="bin/Powerusy.XmlSerializers.dll">
-      <publishTime>05/03/2022 21:31:56</publishTime>
+      <publishTime>06/06/2022 20:52:56</publishTime>
     </File>
     <File Include="bin/PowerusyData.dll">
-      <publishTime>05/01/2022 22:48:16</publishTime>
+      <publishTime>06/05/2022 22:44:38</publishTime>
     </File>
     <File Include="bin/PowerusyData.dll.config">
-      <publishTime>04/23/2022 15:32:34</publishTime>
+      <publishTime>05/15/2022 17:24:26</publishTime>
     </File>
     <File Include="bin/PowerusyData.pdb">
-      <publishTime>05/01/2022 22:48:16</publishTime>
+      <publishTime>06/05/2022 22:44:38</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 13:38:22</publishTime>
@@ -23130,7 +23130,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>01/20/2019 10:54:22</publishTime>
     </File>
     <File Include="style.css">
-      <publishTime>04/02/2022 23:32:52</publishTime>
+      <publishTime>05/15/2022 20:28:42</publishTime>
     </File>
     <File Include="Upload/PowerUSYN.pdf">
       <publishTime>04/02/2022 23:00:40</publishTime>
@@ -23142,16 +23142,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/23/2022 20:43:54</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>05/02/2022 22:06:40</publishTime>
+      <publishTime>06/06/2022 20:23:22</publishTime>
     </File>
     <File Include="Views/Home/Careers.cshtml">
       <publishTime>05/03/2022 21:27:10</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
-      <publishTime>05/03/2022 17:57:10</publishTime>
+      <publishTime>05/15/2022 21:26:36</publishTime>
+    </File>
+    <File Include="Views/Home/Features.cshtml">
+      <publishTime>05/17/2022 21:21:24</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>05/03/2022 20:07:18</publishTime>
+      <publishTime>06/06/2022 20:08:02</publishTime>
     </File>
     <File Include="Views/Home/MarketInfo.cshtml">
       <publishTime>05/03/2022 21:18:02</publishTime>
@@ -23163,7 +23166,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/20/2022 15:18:14</publishTime>
     </File>
     <File Include="Views/Products/Import.cshtml">
-      <publishTime>05/03/2022 21:21:40</publishTime>
+      <publishTime>05/15/2022 22:51:24</publishTime>
     </File>
     <File Include="Views/Products/Inport.cshtml">
       <publishTime>04/20/2022 15:18:14</publishTime>
@@ -23175,7 +23178,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/20/2022 15:18:14</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/03/2022 21:11:32</publishTime>
+      <publishTime>06/06/2022 20:04:46</publishTime>
     </File>
     <File Include="Views/Shipper/CompleteReg.cshtml">
       <publishTime>04/20/2022 15:18:14</publishTime>

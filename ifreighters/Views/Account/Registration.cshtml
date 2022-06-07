@@ -176,24 +176,53 @@
                                     </div>
                                     <label>Logo</label>
                                     <br /><br />
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="form-group">
-                                            <div class="custom-file">
-                                                <input class="form-control required" type="file" id="@Model.uploadedImage" name="uploadedImage" />
-                                            </div>
+                                          <div class="col-lg-12 col-md-12">
+
+                                              <div class="input-group">
+                                                  <div class="custom-file">
+                                                      @Html.TextBoxFor(model => model.ItemPix, "", new { @class = "custom-file-input", @type = "file", @accept = ".jfif,.jpg,.jpeg,.png,.gif" })
+                                                      <label class="custom-file-label" for="InputFile">Choose file</label>
+                                                  </div>
+                                              </div>
+                                              @Html.ValidationMessageFor(model => model.ItemPix)
+                                              <div id="divImageMediaPreview">
+                                              </div>
+                                              
+                                              @*<div class="form-group">
+            <ul class="list-group">
+                <li class="list-group-item pt-2 d-flex flex-column align-items-center">
+                    <div class="custom-file avater_uploads">
+                        @Html.TextBoxFor(m => m.ItemPix, new { @class = "custom-file-input", type = "file", accept = ".png, .jpg, .jpeg" })
+                        <label class="custom-file-label" for="@nameof(Model.ItemPix)"><i class="fa fa-file"></i></label>
+                    </div>
+                    <label class="control-label">Job Icon</label>
+                </li>
+                <li class="list-group-item p-0 d-flex justify-content-center">
+                    <img src="@(string.IsNullOrEmpty(Model.ItemPixName) ? "/assets/img/team-1.jpg" : Model.ItemPixName)" id="@($"{nameof(Model.ItemPix)}Preview")" class="rounded js-preview" width="200" height="200" />
+                </li>
+                <li class="list-group-item pt-2 pb-2 d-flex justify-content-center align-content-center">
+                    <button class="btn btn-danger btn-sm js-clear-attachment" type="button">Delete</button>
+                </li>
+            </ul>
+            @Html.HiddenFor(m => m.ItemPixName, new { @class = "js-attachment-name" })
+        </div>*@
+                                          </div>
+
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-auto">
+
                                         </div>
                                     </div>
-
                                     <div class="col-lg-12 col-md-12">
-                                        
+
                                         <div class="form-group">
                                             <button type="button" class="btn dark-3" data-pdsa-action="save">Registration</button>
                                             @*<button id="btnSave"
-                    class="btn btn-submit"
-                    data-pdsa-action="save">
-                <i class="glyphicon glyphicon-floppy-disk"></i>
-                &nbsp;Registration
-            </button>*@
+                                                        class="btn btn-submit"
+                                                        data-pdsa-action="save">
+                                                    <i class="glyphicon glyphicon-floppy-disk"></i>
+                                                    &nbsp;Registration
+                                                </button>*@
                                         </div>
                                     </div>
 
@@ -210,8 +239,28 @@
 </section>
 <!-- ============================ Main Section End ================================== -->
 @section scripts {
-
     <script>
+        $("#ItemPix").change(function () {
+            if (typeof (FileReader) != "undefined") {
+                var dvPreview = $("#divImageMediaPreview");
+                dvPreview.html("");
+                $($(this)[0].files).each(function () {
+                    var file = $(this);
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = $("<img />");
+                        img.attr("style", "width: 150px; height:100px; padding: 10px");
+                        img.attr("src", e.target.result);
+                        dvPreview.append(img);
+                    }
+                    reader.readAsDataURL(file[0]);
+                });
+            } else {
+                alert("This browser does not support HTML5 FileReader.");
+            }
+        });
+        
+        
         $(document).ready(function () {
             $(document).ajaxStart(function () {
                 $("#loading").show();

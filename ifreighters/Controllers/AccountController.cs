@@ -33,12 +33,12 @@ namespace ifreighters.Controllers
             //vm.EventArgument = "";
             //vm.EventCommand = "save";
             vm.Mode = "Add";
-            if (vm.uploadedImage != null && vm.uploadedImage.ContentLength > 0)
+            if (vm.ItemPix != null && vm.ItemPix.ContentLength > 0)
             {
                 Random rsm = new Random();
-                string _FileName = Path.GetFileName( rsm.Next(10009, 99999) +"_"+ vm.uploadedImage.FileName);
+                string _FileName = Path.GetFileName( rsm.Next(10009, 99999) +"_"+ vm.ItemPix.FileName);
                 string _path = Path.Combine(Server.MapPath("~/upload"), _FileName);
-                vm.uploadedImage.SaveAs(_path);
+                vm.ItemPix.SaveAs(_path);
                 vm.Entity.Logo = _FileName;
             }
             vm.HandleRequest();
@@ -95,6 +95,16 @@ namespace ifreighters.Controllers
             Session["Role"] = vm.Entity.roleid;
             Session["usrID"] = vm.Entity.id;
             Session["LogoPath"] = vm.Entity.Logo;
+
+            //Session["view_model"] = vm;
+
+            //Session[SessionKeys.Username] = vm.Entity.username;// vm.UserId;
+            //Session[SessionKeys.FName] = vm.Entity.firstname;
+            //Session[SessionKeys.Email] = vm.Entity.email;
+            //Session[SessionKeys.Role] = vm.Entity.roleid;
+            //Session[SessionKeys.LogoPath] = vm.Entity.Logo;
+            //Session[SessionKeys.UserId] = vm.Entity.id;
+
             if (vm.IsValid)
             {
                 TempData["Msg"] = vm.Msg;

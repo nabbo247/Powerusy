@@ -24,5 +24,7 @@ namespace PowerusyData.DB
         public string dateapproved { get; set; }
         public string approvalcomment { get; set; }
         public Nullable<int> bid_id { get; set; }
+    
+        public virtual tbl_bidding tbl_bidding { get; set; }
     }
 }

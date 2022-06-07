@@ -7847,6 +7847,7 @@
     <Content Include="Views\Home\Media.cshtml" />
     <Content Include="Views\Home\Careers.cshtml" />
     <Content Include="Views\Home\MarketInfo.cshtml" />
+    <Content Include="Views\Home\Features.cshtml" />
     <None Include="Web References\webmail\WebService.wsdl" />
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,13 @@
 ﻿@model PowerusyData.BiddingViewModel
+@using System.Net.Mail
+@using ExcelLibrary.Office.Excel
 @using PagedList.Mvc;
+@using PowerusyData
+@using SelectList = System.Web.Mvc.SelectList
 @{
     ViewBag.Title = "ManageJobs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <!-- ============================ Page Title Start================================== -->
 <div class="page-title bg-cover" style="background: url(../../assets/img/bn-1.jpg)no-repeat; " data-overlay="5">
     <div class="container">
@@ -132,25 +135,25 @@
 
                                             <!-- Single List jobs -->
                                             @*<div class="_dash_singl_box">
-                                            <div class="_dash_singl_thumbs">
-                                                <img src="~/assets/img/c-1.png" class="img-fluid" alt="">
-                                            </div>
-                                            <div class="_dash_singl_captions">
-                                                <h4 class="_jb_title"><a href="#">SALLAUM LINES SWITZERLAND SA</a><span class="_dash_status approval">Open</span></h4>
-                                                <ul class="_grouping_list">
-                                                    <li><span><i class="ti-location-pin"></i>Port of loading : Baltimore</span></li>
-                                                    <li><span><i class="ti-location-pin"></i>Port of discharge : Lagos</span></li>
-                                                    <li><span><i class="ti-credit-card"></i>Est Budget NGN 1,700,000</span></li>
-                                                    <li><span><i class="ti-timer"></i>Expiring on 10 Feb</span></li>
-                                                </ul>
-                                                <ul class="_action_grouping_list">
-                                                    <li><a href="#" class="_aaplied_candidates">Applied<span>42</span></a></li>
-                                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Edit job" class="_edit_list_point"><i class="fa fa-edit"></i></a></li>
-                                                    <li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point"><i class="fa fa-trash"></i></a></li>
+                                                    <div class="_dash_singl_thumbs">
+                                                        <img src="~/assets/img/c-1.png" class="img-fluid" alt="">
+                                                    </div>
+                                                    <div class="_dash_singl_captions">
+                                                        <h4 class="_jb_title"><a href="#">SALLAUM LINES SWITZERLAND SA</a><span class="_dash_status approval">Open</span></h4>
+                                                        <ul class="_grouping_list">
+                                                            <li><span><i class="ti-location-pin"></i>Port of loading : Baltimore</span></li>
+                                                            <li><span><i class="ti-location-pin"></i>Port of discharge : Lagos</span></li>
+                                                            <li><span><i class="ti-credit-card"></i>Est Budget NGN 1,700,000</span></li>
+                                                            <li><span><i class="ti-timer"></i>Expiring on 10 Feb</span></li>
+                                                        </ul>
+                                                        <ul class="_action_grouping_list">
+                                                            <li><a href="#" class="_aaplied_candidates">Applied<span>42</span></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Edit job" class="_edit_list_point"><i class="fa fa-edit"></i></a></li>
+                                                            <li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point"><i class="fa fa-trash"></i></a></li>
 
-                                                </ul>
-                                            </div>
-                                        </div>*@
+                                                        </ul>
+                                                    </div>
+                                                </div>*@
 
                                             @foreach (var item in Model.UsrLst)
                                             {
@@ -206,7 +209,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                               
+
                                             }
 
 
@@ -299,7 +302,6 @@
                                                 <div class="form-group">
                                                     <label>BookingNo <sup>*</sup></label>
                                                     @Html.TextBoxFor(m => m.Entity.BookingNo, new { @class = "form-control" })
-
                                                 </div>
                                             </div>
                                             <div class="col-xl-12 col-lg-12">
@@ -308,63 +310,134 @@
                                                     @Html.TextAreaFor(model => model.Entity.GoodDescription, new { @class = "form-control", @rows = 4 })
                                                 </div>
                                             </div>
-                                            @*<div class="col-xl-6 col-lg-12">
-            <label>Shipping Lines/Terminal  <sup>*</sup></label>
-            <div class="custom-file">
 
-                <input type="file" class="custom-file-input" id="upfile">
-                <label class="custom-file-label" for="upfile">Upload file</label>
-            </div><span class="uploadButton-file-name">Images or documents that might be helpful in describing your job</span>
-        </div>*@
 
-                                            <hr />
-                                            <div class="col-xl-6 col-lg-6">
+                                        </div>
+
+                                        <hr />
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-auto">
                                                 <div class="form-group">
-                                                    <label class="col-md-6 control-label req">Item Picture</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.ItemPix" name="ItemPix" />
-
-                                                    </div>
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item pt-2 d-flex flex-column align-items-center">
+                                                            <div class="custom-file avater_uploads">
+                                                                @Html.TextBoxFor(m => m.ItemPix, new { @class = "custom-file-input", type = "file", accept = ".png, .jpg, .jpeg" })
+                                                                <label class="custom-file-label" for="@nameof(Model.ItemPix)"><i class="fa fa-file"></i></label>
+                                                            </div>
+                                                            <label class="control-label">Job Icon</label>
+                                                        </li>
+                                                        <li class="list-group-item p-0 d-flex justify-content-center">
+                                                            <img src="@(string.IsNullOrEmpty(Model.ItemPixName) ? "/assets/img/team-1.jpg" : Path.Combine($"/{Utility.UploadDirectory}", Model.ItemPixName))" id="@($"{nameof(Model.ItemPix)}Preview")" class="rounded js-preview" width="200" height="200" />
+                                                        </li>
+                                                        <li class="list-group-item pt-2 pb-2 d-flex justify-content-center align-content-center">
+                                                            <button class="btn btn-danger btn-sm js-clear-attachment" type="button">Delete</button>
+                                                        </li>
+                                                    </ul>
+                                                    @Html.HiddenFor(m => m.ItemPixName, new { @class = "js-attachment-name" })
                                                 </div>
                                             </div>
 
-                                            <div class="col-xl-6 col-lg-6">
+                                            <div class="col-auto">
                                                 <div class="form-group">
-                                                    <label class="col-md-6 control-label req">Bill of Lading</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.BillofLading" name="BillofLading" />
-
-                                                    </div>
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item pt-2 d-flex flex-column align-items-center">
+                                                            <div class="custom-file avater_uploads">
+                                                                @Html.TextBoxFor(m => m.BillofLading, new { @class = "custom-file-input", type = "file", accept = ".png, .jpg, .jpeg, .pdf" })
+                                                                <label class="custom-file-label" for="@nameof(Model.BillofLading)"><i class="fa fa-file"></i></label>
+                                                            </div>
+                                                            <label class="control-label">Bill of Landing</label>
+                                                        </li>
+                                                        <li class="list-group-item p-0 d-flex justify-content-center">
+                                                            <img src="@(string.IsNullOrEmpty(Model.BillofLadingName) ? "/assets/img/team-1.jpg" : Path.Combine($"/{Utility.UploadDirectory}", Model.BillofLadingName))" id="@($"{nameof(Model.BillofLading)}Preview")" class="rounded js-preview" width="200" height="200" />
+                                                        </li>
+                                                        <li class="list-group-item pt-2 pb-2 d-flex justify-content-center align-content-center">
+                                                            <button class="btn btn-danger btn-sm js-clear-attachment" type="button">Delete</button>
+                                                        </li>
+                                                    </ul>
+                                                    @Html.HiddenFor(m => m.BillofLadingName, new { @class = "js-attachment-name" })
                                                 </div>
                                             </div>
-                                            <div class="col-6 col-lg-6">
+                                            <div class="col-auto">
                                                 <div class="form-group">
-                                                    <label class="col-md-6 control-label">Proforma invoice</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.Proformainvoice" name="Proformainvoice" />
-                                                    </div>
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item pt-2 d-flex flex-column align-items-center">
+                                                            <div class="custom-file avater_uploads">
+                                                                @Html.TextBoxFor(m => m.Proformainvoice, new { @class = "custom-file-input", type = "file", accept = ".png, .jpg, .jpeg, .pdf" })
+                                                                <label class="custom-file-label" for="@nameof(Model.Proformainvoice)"><i class="fa fa-file"></i></label>
+                                                            </div>
+                                                            <label class="control-label">Proforma invoice</label>
+                                                        </li>
+                                                        <li class="list-group-item p-0 d-flex justify-content-center">
+                                                            <img src="@(string.IsNullOrEmpty(Model.ProformainvoiceName) ? "/assets/img/team-1.jpg" : Path.Combine($"/{Utility.UploadDirectory}", Model.ProformainvoiceName))" id="@($"{nameof(Model.Proformainvoice)}Preview")" class="rounded js-preview" width="200" height="200" />
+                                                        </li>
+                                                        <li class="list-group-item pt-2 pb-2 d-flex justify-content-center align-content-center">
+                                                            <button class="btn btn-danger btn-sm js-clear-attachment" type="button">Delete</button>
+                                                        </li>
+                                                    </ul>
+                                                    @Html.HiddenFor(m => m.ProformainvoiceName, new { @class = "js-attachment-name" })
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="form-group">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item pt-2 d-flex flex-column align-items-center">
+                                                            <div class="custom-file avater_uploads">
+                                                                @Html.TextBoxFor(m => m.PackagingLists, new { @class = "custom-file-input", type = "file", accept = ".png, .jpg, .jpeg, .pdf" })
+                                                                <label class="custom-file-label" for="@nameof(Model.PackagingLists)"><i class="fa fa-file"></i></label>
+                                                            </div>
+                                                            <label class="control-label">Packaging Lists</label>
+                                                        </li>
+                                                        <li class="list-group-item p-0 d-flex justify-content-center">
+                                                            <img src="@(string.IsNullOrEmpty(Model.PackagingListsName) ? "/assets/img/team-1.jpg" : Path.Combine($"/{Utility.UploadDirectory}", Model.PackagingListsName))" id="@($"{nameof(Model.PackagingLists)}Preview")" class="rounded js-preview" width="200" height="200" />
+                                                        </li>
+                                                        <li class="list-group-item pt-2 pb-2 d-flex justify-content-center align-content-center">
+                                                            <button class="btn btn-danger btn-sm js-clear-attachment" type="button">Delete</button>
+                                                        </li>
+                                                    </ul>
+                                                    @Html.HiddenFor(m => m.PackagingListsName, new { @class = "js-attachment-name" })
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div class="form-group">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item pt-2 d-flex flex-column align-items-center">
+                                                            <div class="custom-file avater_uploads">
+                                                                @Html.TextBoxFor(m => m.Others, new { @class = "custom-file-input", type = "file", accept = ".png, .jpg, .jpeg, .pdf" })
+                                                                <label class="custom-file-label" for="@nameof(Model.Others)"><i class="fa fa-file"></i></label>
+                                                            </div>
+                                                            <label class="control-label">Others</label>
+                                                        </li>
+                                                        <li class="list-group-item p-0 d-flex justify-content-center">
+                                                            <img src="@(string.IsNullOrEmpty(Model.OthersName) ? "/assets/img/team-1.jpg" : Path.Combine($"/{Utility.UploadDirectory}", Model.OthersName))" id="@($"{nameof(Model.Others)}Preview")" class="rounded js-preview" width="200" height="200" />
+                                                        </li>
+                                                        <li class="list-group-item pt-2 pb-2 d-flex justify-content-center align-content-center">
+                                                            <button class="btn btn-danger btn-sm js-clear-attachment" type="button">Delete</button>
+                                                        </li>
+                                                    </ul>
+                                                    @Html.HiddenFor(m => m.OthersName, new { @class = "js-attachment-name" })
                                                 </div>
                                             </div>
 
 
-                                            <div class="col-6 col-lg-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-6 control-label req">Packaging Lists</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.PackagingLists" name="PackagingLists" />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                            <div class="col-6 col-lg-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-6 control-label req">Others</label>
-                                                    <div class="form-group">
-                                                        <input class="form-control required" type="file" id="@Model.Others" name="Others" />
-                                                    </div>
-                                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="diplay-attachment" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Attachment</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
-
+                                            <div class="modal-body d-flex justify-content-center align-content-center">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -384,9 +457,152 @@
 </section>
 <!-- ============================ Main Section End ================================== -->
 @section scripts {
-
+    <script src="~/Scripts/pdfjs/pdf.js"></script>
+    <script src="~/Scripts/pdfjs/pdfThumbnails.js"></script>
     <script>
+
+        var extensions = [".png", ".jpg", ".jpeg"];
+
+        var process = function (control, preview) {
+            control.addEventListener("change",
+                function () {
+                    getImageData(control, preview);
+                });
+        }
+
+        var getImageData = function (control, preview) {
+            let selectedFile = control.files[0];
+
+            if (selectedFile) {
+                var fileReader = new FileReader();
+
+
+                var url = URL.createObjectURL(selectedFile);
+                fileReader.readAsDataURL(selectedFile);
+                fileReader.addEventListener("load",
+                    function () {
+                        if (selectedFile.type == "application/pdf") {
+                            preview.setAttribute("data-pdf-thumbnail-file", url);
+
+                            let thumbnail = $(preview);
+                            preview.setAttribute("data-pdf-thumbnail-width", thumbnail.attr("width"));
+                            preview.setAttribute("data-pdf-thumbnail-height", thumbnail.attr("height"));
+                            preview.setAttribute("src", "/Scripts/pdfjs/pdf.png");
+                            preview.onclick = function () {
+                                var attach = embedPdf(url);
+                                viewAttachment(attach);
+                            };
+                            createPDFThumbnails();
+                        } else {
+                            preview.onclick = function () {
+                                var attach = embedImage(url);
+                                viewAttachment(attach);
+                            };
+                            preview.setAttribute("src", URL.createObjectURL(selectedFile));
+                        }
+                        preview.classList.remove("js-preview");
+                    });
+            }
+        }
+
+
+        var viewAttachment = function (attachment) {
+            $('.embed').remove();
+            $('#diplay-attachment .modal-body').append(attachment);
+            $('#diplay-attachment').modal();
+        }
+
+        var embedPdf = function (src) {
+            return '<object data="' + src + '" class="embed" width="100%" height="500px">PDF Viewer not supported on this screen.</object>';
+        }
+
+        var embedImage = function (src) {
+            return '<img src="' + src + '" class="embed img-thumbnail">';
+        }
+
+        var isExtensionValid = function (extension) {
+            for (var i = 0; i < extensions.length; i++) {
+                if (extensions[i] == extension) {
+                    return extensions[i] === extension;
+                }
+            }
+
+            return false;
+        }
+
         $(document).ready(function () {
+
+            //Get all file input controls on the page
+            $(".custom-file-input").each(function (index, element) {
+                var imageTag = $(element).parent().parent().siblings().find("img");
+                var control = document.getElementById(element.id);
+                var preview = document.getElementById(imageTag.attr("id"));
+                process(control, preview);
+
+            });
+
+
+            $(".form-group").on("click", ".js-preview",
+                function () {
+                    var source = $(this);
+                    var src = source.attr("src");
+                    var indexOfPeriod = src.indexOf('.');
+
+                    var extension = src.substr(indexOfPeriod, src.length - indexOfPeriod);
+                    var attach;
+                    if (extension == ".pdf") {
+                        attach = embedPdf(src);
+                        viewAttachment(attach);
+                    } else if (isExtensionValid(extension)) {
+
+                        attach = embedImage(src);
+
+                        viewAttachment(attach);
+                    } else {
+                        alert("Unsupported File type selected.");
+                    }
+                });
+
+            $(".form-group").on("click", ".js-clear-attachment",
+                function () {
+                    var source = $(this);
+
+                    //Get source parents
+                    //Loop through the parent's siblings
+                    //On each iteration,
+                    // - if a child of the sibling has a child that is file filed, reset the input to empty.
+                    // - if a child of the sibling has a child that is img tag, reset the img src to default image.
+
+                    source.parent().siblings().each(function (index, element) {
+                        var input = $(element).find("input[class*=custom-file-input]")[0];
+                        var thumbnail = $(element).find("img")[0];
+
+                        if (input) {
+                            var $el = $(input);
+                            $el.wrap('<form>').closest('form').get(0).reset();
+                            $el.unwrap();
+                        } else if (thumbnail) {
+
+                            var thumb = $(thumbnail);
+                            thumb.wrap('<form>').closest('form').get(0).reset();
+                            thumb.unwrap();
+                            thumb.attr("src", "/assets/img/team-1.jpg");
+                            thumb.addClass("js-preview");
+                        }
+
+                        source.parent().parent().parent(".form-group").children(".js-attachment-name").val('');
+                        console.log(source.parent().parent().parent(".form-group").children(".js-attachment-name"));
+
+                    });
+
+                    //$('#btn-example-file-reset').on('click', function(e) {
+                    //    var $el = $('#example-file');
+                    //    $el.wrap('<form>').closest('form').get(0).reset();
+                    //    $el.unwrap();
+                    //});
+                });
+
+
             $(document).ajaxStart(function () {
                 $("#loading").show();
             });

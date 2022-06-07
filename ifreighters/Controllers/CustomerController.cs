@@ -91,47 +91,6 @@ namespace ifreighters.Controllers
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
             vm.UserId = Session["userid"].ToString();
-            //vm.UserId = "nabbo247@gmail.com";
-            if (vm.BillofLading != null && vm.BillofLading.ContentLength > 0)
-            {
-                Random rsm = new Random();
-                string _FileName = Path.GetFileName( rsm.Next(10009, 99999) + vm.BillofLading.FileName);
-                string _path = Path.Combine(Server.MapPath("~/upload"), _FileName);
-                vm.BillofLading.SaveAs(_path);
-                vm.BillofLadingName = _FileName;
-            }
-            if (vm.PackagingLists != null && vm.PackagingLists.ContentLength > 0)
-            {
-                Random rsm = new Random();
-                string _FileName = Path.GetFileName(rsm.Next(10009, 99999) + vm.PackagingLists.FileName);
-                string _path = Path.Combine(Server.MapPath("~/upload"), _FileName);
-                vm.PackagingLists.SaveAs(_path);
-                vm.PackagingListsName = _FileName;
-            }
-            if (vm.Proformainvoice != null && vm.Proformainvoice.ContentLength > 0)
-            {
-                Random rsm = new Random();
-                string _FileName = Path.GetFileName( rsm.Next(10009, 99999) + vm.Proformainvoice.FileName);
-                string _path = Path.Combine(Server.MapPath("~/upload"), _FileName);
-                vm.Proformainvoice.SaveAs(_path);
-                vm.ProformainvoiceName = _FileName;
-            }
-            if (vm.Others != null && vm.Others.ContentLength > 0)
-            {
-                Random rsm = new Random();
-                string _FileName = Path.GetFileName( rsm.Next(10009, 99999) + vm.Others.FileName);
-                string _path = Path.Combine(Server.MapPath("~/upload"), _FileName);
-                vm.Others.SaveAs(_path);
-                vm.OthersName = _FileName;
-            }
-            if (vm.ItemPix != null && vm.ItemPix.ContentLength > 0)
-            {
-                Random rsm = new Random();
-                string _FileName = Path.GetFileName(rsm.Next(10009, 99999) + vm.ItemPix.FileName);
-                string _path = Path.Combine(Server.MapPath("~/upload"), _FileName);
-                vm.ItemPix.SaveAs(_path);
-                vm.ItemPixName = _FileName;
-            }
             vm.HandleRequest();
             if (vm.IsValid)
             {

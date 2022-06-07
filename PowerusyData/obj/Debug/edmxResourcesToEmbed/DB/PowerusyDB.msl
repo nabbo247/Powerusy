@@ -54,22 +54,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_importation_document">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_importation_document">
-        <MappingFragment StoreEntitySet="tbl_importation_document">
-          <ScalarProperty Name="bid_id" ColumnName="bid_id" />
-          <ScalarProperty Name="approvalcomment" ColumnName="approvalcomment" />
-          <ScalarProperty Name="dateapproved" ColumnName="dateapproved" />
-          <ScalarProperty Name="approvedby" ColumnName="approvedby" />
-          <ScalarProperty Name="statusid" ColumnName="statusid" />
-          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
-          <ScalarProperty Name="documentpath" ColumnName="documentpath" />
-          <ScalarProperty Name="documentname" ColumnName="documentname" />
-          <ScalarProperty Name="importationid" ColumnName="importationid" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbl_kyc">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_kyc">
         <MappingFragment StoreEntitySet="tbl_kyc">
@@ -186,19 +170,6 @@
           <ScalarProperty Name="tin" ColumnName="tin" />
           <ScalarProperty Name="companyname" ColumnName="companyname" />
           <ScalarProperty Name="userid" ColumnName="userid" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tbl_attachment">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_attachment">
-        <MappingFragment StoreEntitySet="tbl_attachment">
-          <ScalarProperty Name="userid" ColumnName="userid" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="commnet" ColumnName="commnet" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="path" ColumnName="path" />
-          <ScalarProperty Name="fileName" ColumnName="fileName" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -353,31 +324,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tbl_bidding">
-      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding">
-        <MappingFragment StoreEntitySet="tbl_bidding">
-          <ScalarProperty Name="IconPath" ColumnName="IconPath" />
-          <ScalarProperty Name="statusid" ColumnName="statusid" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
-          <ScalarProperty Name="EstBudget" ColumnName="EstBudget" />
-          <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
-          <ScalarProperty Name="PortDischarge" ColumnName="PortDischarge" />
-          <ScalarProperty Name="PortLoading" ColumnName="PortLoading" />
-          <ScalarProperty Name="VesselName" ColumnName="VesselName" />
-          <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
-          <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
-          <ScalarProperty Name="Consignee" ColumnName="Consignee" />
-          <ScalarProperty Name="service" ColumnName="service" />
-          <ScalarProperty Name="subcategory" ColumnName="subcategory" />
-          <ScalarProperty Name="category" ColumnName="category" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tbl_bidding_jobs">
       <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_jobs">
         <MappingFragment StoreEntitySet="tbl_bidding_jobs">
@@ -421,6 +367,47 @@
           <ScalarProperty Name="category" ColumnName="category" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_bidding">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding">
+        <MappingFragment StoreEntitySet="tbl_bidding">
+          <ScalarProperty Name="IconPath" ColumnName="IconPath" />
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
+          <ScalarProperty Name="EstBudget" ColumnName="EstBudget" />
+          <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
+          <ScalarProperty Name="PortDischarge" ColumnName="PortDischarge" />
+          <ScalarProperty Name="PortLoading" ColumnName="PortLoading" />
+          <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+          <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
+          <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+          <ScalarProperty Name="Consignee" ColumnName="Consignee" />
+          <ScalarProperty Name="service" ColumnName="service" />
+          <ScalarProperty Name="subcategory" ColumnName="subcategory" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_importation_document">
+      <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_importation_document">
+        <MappingFragment StoreEntitySet="tbl_importation_document">
+          <ScalarProperty Name="bid_id" ColumnName="bid_id" />
+          <ScalarProperty Name="approvalcomment" ColumnName="approvalcomment" />
+          <ScalarProperty Name="dateapproved" ColumnName="dateapproved" />
+          <ScalarProperty Name="approvedby" ColumnName="approvedby" />
+          <ScalarProperty Name="statusid" ColumnName="statusid" />
+          <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+          <ScalarProperty Name="documentpath" ColumnName="documentpath" />
+          <ScalarProperty Name="documentname" ColumnName="documentname" />
+          <ScalarProperty Name="importationid" ColumnName="importationid" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

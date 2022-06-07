@@ -92,9 +92,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PowerusyDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DB\tbl_attachment.cs">
-      <DependentUpon>PowerusyDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="DB\tbl_auditlog.cs">
       <DependentUpon>PowerusyDB.tt</DependentUpon>
     </Compile>

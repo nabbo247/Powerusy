@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_clearing" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_goodstype" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_importation" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_importation_document" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_kyc" Width="1.5" PointX="4.75" PointY="3.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_registered" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_role" Width="1.5" PointX="6.75" PointY="6.75" />
@@ -18,19 +17,20 @@
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_subgoodstype" Width="1.5" PointX="8.75" PointY="3.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_counntries" Width="1.5" PointX="4.75" PointY="9.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_shipper" Width="1.5" PointX="11.375" PointY="0.75" />
-        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_attachment" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_uploadDocType" Width="1.5" PointX="7.75" PointY="11.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_services" Width="1.5" PointX="13.375" PointY="0.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_users" Width="1.5" PointX="13.375" PointY="3.75" />
-        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_bidding_bookmark" Width="1.5" PointX="13.375" PointY="12.75" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_bidding_bookmark" Width="2.25" PointX="13.375" PointY="12.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_bidding_view" Width="1.5" PointX="7.375" PointY="14.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_cars_models" Width="1.5" PointX="9.375" PointY="14.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_sea_ports" Width="1.5" PointX="15.375" PointY="0.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.View_Shipper" Width="1.5" PointX="0.75" PointY="15.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.View_tbl_bidding" Width="1.5" PointX="10.375" PointY="6.75" />
-        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_bidding" Width="1.5" PointX="15.375" PointY="4.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_bidding_jobs" Width="1.5" PointX="12.375" PointY="8.75" />
         <EntityTypeShape EntityType="powerusyDBCoreModel.View_bid_jobs" Width="1.5" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_bidding" Width="1.5" PointX="15.375" PointY="5.125" />
+        <EntityTypeShape EntityType="powerusyDBCoreModel.tbl_importation_document" Width="1.5" PointX="17.625" PointY="5.875" />
+        <AssociationConnector Association="powerusyDBCoreModel.FK_tbl_importation_document_tbl_bidding" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

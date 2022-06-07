@@ -5,18 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="powerusyDBCoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tbl_attachment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fileName" Type="nvarchar" MaxLength="200" />
-          <Property Name="path" Type="nvarchar" MaxLength="500" />
-          <Property Name="status" Type="int" />
-          <Property Name="commnet" Type="nvarchar" MaxLength="50" />
-          <Property Name="date" Type="datetime" />
-          <Property Name="userid" Type="int" />
-        </EntityType>
         <EntityType Name="tbl_auditlog">
           <Key>
             <PropertyRef Name="id" />
@@ -414,8 +402,19 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
           <Property Name="statusid" Type="int" />
           <Property Name="IconPath" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <Association Name="FK_tbl_importation_document_tbl_bidding">
+          <End Role="tbl_bidding" Type="Self.tbl_bidding" Multiplicity="0..1" />
+          <End Role="tbl_importation_document" Type="Self.tbl_importation_document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_bidding">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_importation_document">
+              <PropertyRef Name="bid_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="powerusyDBCoreModelStoreContainer">
-          <EntitySet Name="tbl_attachment" EntityType="Self.tbl_attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_auditlog" EntityType="Self.tbl_auditlog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_bidding" EntityType="Self.tbl_bidding" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_bidding_bookmark" EntityType="Self.tbl_bidding_bookmark" Schema="dbo" store:Type="Tables" />
@@ -535,6 +534,10 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
     [View_tbl_bidding].[IconPath] AS [IconPath]
     FROM [dbo].[View_tbl_bidding] AS [View_tbl_bidding]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_tbl_importation_document_tbl_bidding" Association="Self.FK_tbl_importation_document_tbl_bidding">
+            <End Role="tbl_bidding" EntitySet="tbl_bidding" />
+            <End Role="tbl_importation_document" EntitySet="tbl_importation_document" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -545,7 +548,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
           <EntitySet Name="tbl_clearing" EntityType="powerusyDBCoreModel.tbl_clearing" />
           <EntitySet Name="tbl_goodstype" EntityType="powerusyDBCoreModel.tbl_goodstype" />
           <EntitySet Name="tbl_importation" EntityType="powerusyDBCoreModel.tbl_importation" />
-          <EntitySet Name="tbl_importation_document" EntityType="powerusyDBCoreModel.tbl_importation_document" />
           <EntitySet Name="tbl_kyc" EntityType="powerusyDBCoreModel.tbl_kyc" />
           <EntitySet Name="tbl_registered" EntityType="powerusyDBCoreModel.tbl_registered" />
           <EntitySet Name="tbl_role" EntityType="powerusyDBCoreModel.tbl_role" />
@@ -554,7 +556,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
           <EntitySet Name="tbl_subgoodstype" EntityType="powerusyDBCoreModel.tbl_subgoodstype" />
           <EntitySet Name="tbl_counntries" EntityType="powerusyDBCoreModel.tbl_counntries" />
           <EntitySet Name="tbl_shipper" EntityType="powerusyDBCoreModel.tbl_shipper" />
-          <EntitySet Name="tbl_attachment" EntityType="powerusyDBCoreModel.tbl_attachment" />
           <EntitySet Name="tbl_uploadDocType" EntityType="powerusyDBCoreModel.tbl_uploadDocType" />
           <EntitySet Name="tbl_services" EntityType="powerusyDBCoreModel.tbl_services" />
           <EntitySet Name="tbl_users" EntityType="powerusyDBCoreModel.tbl_users" />
@@ -564,9 +565,14 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
           <EntitySet Name="tbl_sea_ports" EntityType="powerusyDBCoreModel.tbl_sea_ports" />
           <EntitySet Name="View_Shipper" EntityType="powerusyDBCoreModel.View_Shipper" />
           <EntitySet Name="View_tbl_bidding" EntityType="powerusyDBCoreModel.View_tbl_bidding" />
-          <EntitySet Name="tbl_bidding" EntityType="powerusyDBCoreModel.tbl_bidding" />
           <EntitySet Name="tbl_bidding_jobs" EntityType="powerusyDBCoreModel.tbl_bidding_jobs" />
           <EntitySet Name="View_bid_jobs" EntityType="powerusyDBCoreModel.View_bid_jobs" />
+          <EntitySet Name="tbl_bidding" EntityType="powerusyDBCoreModel.tbl_bidding" />
+          <EntitySet Name="tbl_importation_document" EntityType="powerusyDBCoreModel.tbl_importation_document" />
+          <AssociationSet Name="FK_tbl_importation_document_tbl_bidding" Association="powerusyDBCoreModel.FK_tbl_importation_document_tbl_bidding">
+            <End Role="tbl_bidding" EntitySet="tbl_bidding" />
+            <End Role="tbl_importation_document" EntitySet="tbl_importation_document" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tbl_auditlog">
           <Key>
@@ -616,21 +622,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
           <Property Name="servicetypeid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Int32" />
           <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
-        </EntityType>
-        <EntityType Name="tbl_importation_document">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="importationid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="documentname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="documentpath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
-          <Property Name="statusid" Type="Int32" />
-          <Property Name="approvedby" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="dateapproved" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="approvalcomment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="bid_id" Type="Int32" />
         </EntityType>
         <EntityType Name="tbl_kyc">
           <Key>
@@ -743,18 +734,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
           <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="tbl_attachment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="path" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="Int32" />
-          <Property Name="commnet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="date" Type="DateTime" Precision="3" />
-          <Property Name="userid" Type="Int32" />
         </EntityType>
         <EntityType Name="tbl_uploadDocType">
           <Key>
@@ -899,30 +878,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
           <Property Name="statusid" Type="Int32" />
           <Property Name="IconPath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="tbl_bidding">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GoodsType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="category" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="subcategory" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="service" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Consignee" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="BookingNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="BLNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="VesselName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PortLoading" Type="Int32" />
-          <Property Name="PortDischarge" Type="Int32" />
-          <Property Name="ShippingLines" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="EstBudget" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="GoodDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserID" Type="Int32" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
-          <Property Name="statusid" Type="Int32" />
-          <Property Name="IconPath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="tbl_bidding_jobs">
           <Key>
             <PropertyRef Name="ID" />
@@ -969,6 +924,59 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
           <Property Name="BidID" Type="Int64" Nullable="false" />
           <Property Name="Days" Type="Int32" />
         </EntityType>
+        <EntityType Name="tbl_bidding">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoodsType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="category" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="subcategory" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="service" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Consignee" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BookingNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BLNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VesselName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PortLoading" Type="Int32" />
+          <Property Name="PortDischarge" Type="Int32" />
+          <Property Name="ShippingLines" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EstBudget" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="GoodDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="statusid" Type="Int32" />
+          <Property Name="IconPath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_importation_document" Relationship="powerusyDBCoreModel.FK_tbl_importation_document_tbl_bidding" FromRole="tbl_bidding" ToRole="tbl_importation_document" />
+        </EntityType>
+        <EntityType Name="tbl_importation_document">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="importationid" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="documentname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="documentpath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="dateadded" Type="DateTimeOffset" Precision="7" />
+          <Property Name="statusid" Type="Int32" />
+          <Property Name="approvedby" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="dateapproved" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="approvalcomment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="bid_id" Type="Int32" />
+          <NavigationProperty Name="tbl_bidding" Relationship="powerusyDBCoreModel.FK_tbl_importation_document_tbl_bidding" FromRole="tbl_importation_document" ToRole="tbl_bidding" />
+        </EntityType>
+        <Association Name="FK_tbl_importation_document_tbl_bidding">
+          <End Type="powerusyDBCoreModel.tbl_bidding" Role="tbl_bidding" Multiplicity="0..1" />
+          <End Type="powerusyDBCoreModel.tbl_importation_document" Role="tbl_importation_document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_bidding">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tbl_importation_document">
+              <PropertyRef Name="bid_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1024,22 +1032,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
                 <ScalarProperty Name="subgoodtypeid" ColumnName="subgoodtypeid" />
                 <ScalarProperty Name="goodstypeid" ColumnName="goodstypeid" />
                 <ScalarProperty Name="shipperid" ColumnName="shipperid" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_importation_document">
-            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_importation_document">
-              <MappingFragment StoreEntitySet="tbl_importation_document">
-                <ScalarProperty Name="bid_id" ColumnName="bid_id" />
-                <ScalarProperty Name="approvalcomment" ColumnName="approvalcomment" />
-                <ScalarProperty Name="dateapproved" ColumnName="dateapproved" />
-                <ScalarProperty Name="approvedby" ColumnName="approvedby" />
-                <ScalarProperty Name="statusid" ColumnName="statusid" />
-                <ScalarProperty Name="dateadded" ColumnName="dateadded" />
-                <ScalarProperty Name="documentpath" ColumnName="documentpath" />
-                <ScalarProperty Name="documentname" ColumnName="documentname" />
-                <ScalarProperty Name="importationid" ColumnName="importationid" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1160,19 +1152,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
                 <ScalarProperty Name="tin" ColumnName="tin" />
                 <ScalarProperty Name="companyname" ColumnName="companyname" />
                 <ScalarProperty Name="userid" ColumnName="userid" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_attachment">
-            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_attachment">
-              <MappingFragment StoreEntitySet="tbl_attachment">
-                <ScalarProperty Name="userid" ColumnName="userid" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="commnet" ColumnName="commnet" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="path" ColumnName="path" />
-                <ScalarProperty Name="fileName" ColumnName="fileName" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1327,31 +1306,6 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_bidding">
-            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding">
-              <MappingFragment StoreEntitySet="tbl_bidding">
-                <ScalarProperty Name="IconPath" ColumnName="IconPath" />
-                <ScalarProperty Name="statusid" ColumnName="statusid" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
-                <ScalarProperty Name="EstBudget" ColumnName="EstBudget" />
-                <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
-                <ScalarProperty Name="PortDischarge" ColumnName="PortDischarge" />
-                <ScalarProperty Name="PortLoading" ColumnName="PortLoading" />
-                <ScalarProperty Name="VesselName" ColumnName="VesselName" />
-                <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
-                <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
-                <ScalarProperty Name="Consignee" ColumnName="Consignee" />
-                <ScalarProperty Name="service" ColumnName="service" />
-                <ScalarProperty Name="subcategory" ColumnName="subcategory" />
-                <ScalarProperty Name="category" ColumnName="category" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_bidding_jobs">
             <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding_jobs">
               <MappingFragment StoreEntitySet="tbl_bidding_jobs">
@@ -1395,6 +1349,47 @@ warning 6002: The table/view 'Powerusydb.dbo.View_tbl_bidding' does not have a p
                 <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_bidding">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_bidding">
+              <MappingFragment StoreEntitySet="tbl_bidding">
+                <ScalarProperty Name="IconPath" ColumnName="IconPath" />
+                <ScalarProperty Name="statusid" ColumnName="statusid" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="GoodDescription" ColumnName="GoodDescription" />
+                <ScalarProperty Name="EstBudget" ColumnName="EstBudget" />
+                <ScalarProperty Name="ShippingLines" ColumnName="ShippingLines" />
+                <ScalarProperty Name="PortDischarge" ColumnName="PortDischarge" />
+                <ScalarProperty Name="PortLoading" ColumnName="PortLoading" />
+                <ScalarProperty Name="VesselName" ColumnName="VesselName" />
+                <ScalarProperty Name="BLNumber" ColumnName="BLNumber" />
+                <ScalarProperty Name="BookingNo" ColumnName="BookingNo" />
+                <ScalarProperty Name="Consignee" ColumnName="Consignee" />
+                <ScalarProperty Name="service" ColumnName="service" />
+                <ScalarProperty Name="subcategory" ColumnName="subcategory" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_importation_document">
+            <EntityTypeMapping TypeName="powerusyDBCoreModel.tbl_importation_document">
+              <MappingFragment StoreEntitySet="tbl_importation_document">
+                <ScalarProperty Name="bid_id" ColumnName="bid_id" />
+                <ScalarProperty Name="approvalcomment" ColumnName="approvalcomment" />
+                <ScalarProperty Name="dateapproved" ColumnName="dateapproved" />
+                <ScalarProperty Name="approvedby" ColumnName="approvedby" />
+                <ScalarProperty Name="statusid" ColumnName="statusid" />
+                <ScalarProperty Name="dateadded" ColumnName="dateadded" />
+                <ScalarProperty Name="documentpath" ColumnName="documentpath" />
+                <ScalarProperty Name="documentname" ColumnName="documentname" />
+                <ScalarProperty Name="importationid" ColumnName="importationid" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

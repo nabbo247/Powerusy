@@ -43,5 +43,12 @@ namespace Powerusy.Controllers
 
             return View();
         }
+        public ActionResult Features()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        
     }
 }

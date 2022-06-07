@@ -14,6 +14,12 @@ namespace PowerusyData.DB
     
     public partial class tbl_bidding
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbl_bidding()
+        {
+            this.tbl_importation_document = new HashSet<tbl_importation_document>();
+        }
+    
         public int id { get; set; }
         public string GoodsType { get; set; }
         public string Name { get; set; }
@@ -33,5 +39,8 @@ namespace PowerusyData.DB
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> statusid { get; set; }
         public string IconPath { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_importation_document> tbl_importation_document { get; set; }
     }
 }

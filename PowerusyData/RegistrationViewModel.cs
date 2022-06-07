@@ -35,7 +35,8 @@ namespace PowerusyData
         public List<tbl_users> UsrLst { get; set; }
         public tbl_users SearchEntity { get; set; }
         public tbl_users Entity { get; set; }
-        public HttpPostedFileBase uploadedImage { get; set; }
+        public HttpPostedFileBase ItemPix { get; set; }
+        public string ItemPixName { get; set; }
         public bool EbizApproval { get; set; }
         protected override void Init()
         {

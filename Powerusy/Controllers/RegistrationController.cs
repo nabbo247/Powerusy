@@ -38,11 +38,11 @@ namespace Powerusy.Controllers
             //vm.url = ConfigurationManager.AppSettings["url"];
             //vm.UserId = Session["userid"].ToString();
             //vm.UserId = "eunicee";
-            if (vm.uploadedImage != null && vm.uploadedImage.ContentLength > 0)
+            if (vm.ItemPix != null && vm.ItemPix.ContentLength > 0)
             {
-                string _FileName = Path.GetFileName(vm.uploadedImage.FileName);
+                string _FileName = Path.GetFileName(vm.ItemPix.FileName);
                 string _path = Path.Combine(Server.MapPath("~/upload"), _FileName);
-                vm.uploadedImage.SaveAs(_path);
+                vm.ItemPix.SaveAs(_path);
                 //file path 
                 //vm.PosR.ApplicationForm1 = _FileName;
             }

@@ -3,6 +3,7 @@ using PowerusyData.DB;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -118,8 +119,38 @@ namespace PowerusyData
             //ListOfPOSManager mgr =
             // new ListOfPOSManager();
             // Get Product Data
-            Entity = Get(
-              Convert.ToInt32(EventArgument));
+            Entity = Get(Convert.ToInt32(EventArgument));
+            ItemPixName = Entity.IconPath;
+
+            foreach (var document in Entity.tbl_importation_document)
+            {
+                var oldPath = document.documentpath;
+
+                //if file is pdf convert file to base64
+                //if (Path.GetExtension(oldPath) == ".pdf")
+                //{
+                //    oldPath = Utility.ReadFileAsBase64String(oldPath);
+                //}
+
+                switch (document.documentname)
+                {
+                    case Utility.BillOfLadingName:
+                        BillofLadingName = oldPath;
+                        break;
+                    case Utility.PackagingListName:
+                        PackagingListsName = oldPath;
+                        break;
+                    case Utility.ProformaInvoiceName:
+                        ProformainvoiceName = oldPath;
+                        break;
+                    case Utility.OthersName:
+                        OthersName = oldPath;
+                        break;
+                    case Utility.ItemPixName:
+                        ;
+                        break;
+                }
+            }
 
             base.Edit();
         }
@@ -220,32 +251,287 @@ namespace PowerusyData
 
         public bool Update(tbl_bidding entity)
         {
-            bool ret = false;
-            ret = Validate(entity);
-            GetDropDown();
-            string op = "";
 
-            if (ret)
+            try
             {
-                using (var db = new powerusyDBCoreEntities())
+                bool ret = false;
+                ret = Validate(entity);
+                if (ret)
                 {
-                    var rs = (from info in db.tbl_bidding where info.id == UsrReq.id select info).FirstOrDefault();
-                    //rs.TermOwnerCode = TextBox6.Text;
+                    using (var db = new powerusyDBCoreEntities())
+                    {
 
-                    db.Entry(rs).State = EntityState.Modified;
-                    db.SaveChanges();
+                        var arg = Convert.ToInt32(EventArgument);
+                        var isEntityValid = db.tbl_bidding.Any(x => x.id == arg);
+
+                        if (!isEntityValid)
+                        {
+                            ValidationErrors.Add(new KeyValuePair<string, string>("NotFound", "Invalid or Nonexistent Bidding..."));
+                            return ValidationErrors.Count == 0;
+                        }
+
+                        Entity.id = arg;
+                        //Get retrieve previously uploaded documents for this bidding
+                        var importationDocuments = db.tbl_importation_document.Where(t => t.bid_id == arg).ToList();
+
+                        var documents = new List<string> { Utility.BillOfLadingName, Utility.PackagingListName, Utility.ProformaInvoiceName, Utility.OthersName };
+
+
+                        //Get document for modified bidding
+                        //Get document path in temp variable
+                        //Update the document path for each document in entityToEdit.tbl_importation_document
+                        //Save new document
+                        //Execute: db.Entry(importation_document instance).State = EntityState.Modified; for each modified document
+                        //Update modified bidding props in entityToEdit
+                        //Execute db.Entry(entityToEdit).State = EntityState.Modified; for modified entity to update
+                        //Call save changes.
+
+                        var oldUploadedFileNames = new List<string>();
+
+                        // Don't use for each loop on this list to avoid the exception:
+                        // "Collection was modified enumeration operation may not execute".
+                        for (var i = 0; i < importationDocuments.Count; i++)
+                        {
+                            var oldPath = importationDocuments[i].documentpath;
+                            oldUploadedFileNames.Add(oldPath);
+                            switch (importationDocuments[i].documentname)
+                            {
+                                case Utility.BillOfLadingName:
+                                    Utility.SaveAttachment(string.Empty, BillofLading, out var billOfLadingFileName);
+                                    if (!string.IsNullOrEmpty(billOfLadingFileName))
+                                    {
+                                        BillofLadingName = billOfLadingFileName;
+                                        importationDocuments[i].documentpath = billOfLadingFileName;
+                                        db.Entry(importationDocuments[i]).State = EntityState.Modified;
+                                    }
+                                    else
+                                    {
+                                        if (BillofLading == null && string.IsNullOrEmpty(BillofLadingName))
+                                        {
+                                            importationDocuments[i].documentpath = string.Empty;
+                                            db.tbl_importation_document.Remove(importationDocuments[i]);
+                                        }
+                                    }
+                                    break;
+                                case Utility.PackagingListName:
+                                    Utility.SaveAttachment(string.Empty, PackagingLists, out var packagingListFileName);
+                                    if (!string.IsNullOrEmpty(packagingListFileName))
+                                    {
+                                        PackagingListsName = packagingListFileName;
+                                        importationDocuments[i].documentpath = packagingListFileName;
+                                        db.Entry(importationDocuments[i]).State = EntityState.Modified;
+                                    }
+                                    else
+                                    {
+                                        if (PackagingLists == null && string.IsNullOrEmpty(PackagingListsName))
+                                        {
+                                            importationDocuments[i].documentpath = string.Empty;
+                                            db.tbl_importation_document.Remove(importationDocuments[i]);
+                                        }
+                                    }
+                                    break;
+                                case Utility.ProformaInvoiceName:
+                                    Utility.SaveAttachment(string.Empty, Proformainvoice, out var invoiceFileName);
+                                    if (!string.IsNullOrEmpty(invoiceFileName))
+                                    {
+                                        ProformainvoiceName = invoiceFileName;
+                                        importationDocuments[i].documentpath = invoiceFileName;
+                                        db.Entry(importationDocuments[i]).State = EntityState.Modified;
+                                    }
+                                    else
+                                    {
+                                        if (Proformainvoice == null && string.IsNullOrEmpty(ProformainvoiceName))
+                                        {
+                                            importationDocuments[i].documentpath = string.Empty;
+                                            db.tbl_importation_document.Remove(importationDocuments[i]);
+                                        }
+                                    }
+                                    break;
+                                case Utility.OthersName:
+                                    Utility.SaveAttachment(string.Empty, Others, out var othersFileName);
+                                    if (!string.IsNullOrEmpty(othersFileName))
+                                    {
+                                        OthersName = othersFileName;
+                                        importationDocuments[i].documentpath = othersFileName;
+                                        db.Entry(importationDocuments[i]).State = EntityState.Modified;
+                                    }
+                                    else
+                                    {
+                                        if (Others == null && string.IsNullOrEmpty(OthersName))
+                                        {
+                                            importationDocuments[i].documentpath = string.Empty;
+                                            db.tbl_importation_document.Remove(importationDocuments[i]);
+                                        }
+                                    }
+                                    break;
+                            }
+
+                        }
+
+                        //Add newly uploaded document to bidding if any.
+                        var newDocs = documents.Where(s => !importationDocuments.Select(d => d.documentname).Contains(s)).ToList();
+                        ProcessNewFilesOnEdit(newDocs, db);
+
+                        Utility.SaveAttachment(string.Empty, ItemPix, out var itemPixFileName);
+                        if (!string.IsNullOrEmpty(itemPixFileName))
+                        {
+                            ItemPixName = itemPixFileName;
+                            Entity.IconPath = itemPixFileName;
+                        }
+                        else
+                        {
+                            if (ItemPix == null && string.IsNullOrEmpty(ItemPixName))
+                            {
+                                Entity.IconPath = string.Empty;
+                            }
+                        }
+
+                        db.Entry(Entity).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                        //Clean up:  Delete previously uploaded files
+                        foreach (var oldUploadedFileName in oldUploadedFileNames)
+                        {
+                            Utility.DeleteFile(oldUploadedFileName, Utility.UploadDirectory);
+                        }
+                        IsValid = true;
+                        string op = "Job order updated successfully.";
+                        Msg = op;
+                    }
                 }
 
+                return ret;
+
             }
-            return ret;
+            catch (Exception exception)
+            {
+                //If any saving fails, delete any uploaded file from upload folder
+
+                var uploadFolder = Utility.UploadDirectory;
+
+                if (!string.IsNullOrEmpty(BillofLadingName))
+                    Utility.DeleteFile(BillofLadingName, uploadFolder);
+
+                if (!string.IsNullOrEmpty(PackagingListsName))
+                    Utility.DeleteFile(PackagingListsName, uploadFolder);
+
+                if (!string.IsNullOrEmpty(OthersName))
+                    Utility.DeleteFile(OthersName, uploadFolder);
+
+                if (!string.IsNullOrEmpty(ItemPixName))
+                    Utility.DeleteFile(ItemPixName, uploadFolder);
+            }
+
+            return false;
+        }
+        private void ProcessNewFilesOnEdit(List<string> newDocs, powerusyDBCoreEntities context)
+        {
+            foreach (var newDocument in newDocs)
+            {
+                switch (newDocument)
+                {
+                    case Utility.BillOfLadingName:
+                        Utility.SaveAttachment(string.Empty, BillofLading, out var billOfLandingFileName);
+                        if (!string.IsNullOrEmpty(billOfLandingFileName))
+                        {
+                            BillofLadingName = billOfLandingFileName;
+
+                            tbl_importation_document at = new tbl_importation_document
+                            {
+                                bid_id = Convert.ToInt32(EventArgument),
+                                dateadded = DateTime.Now,
+                                documentname = Utility.BillOfLadingName,
+                                documentpath = billOfLandingFileName,
+                                statusid = 1
+                            };
+                            //string path = billOfLandingFileName;
+                            //at.statusid = userID;
+                            //db.tbl_importation_document.Add(at);
+                            context.tbl_importation_document.Add(at);
+                        }
+
+                        break;
+                    case Utility.PackagingListName:
+
+                        Utility.SaveAttachment(string.Empty, PackagingLists, out var packagingListFileName);
+                        if (!string.IsNullOrEmpty(packagingListFileName))
+                        {
+                            PackagingListsName = packagingListFileName;
+
+                            tbl_importation_document at = new tbl_importation_document
+                            {
+                                bid_id = Convert.ToInt32(EventArgument),
+                                dateadded = DateTime.Now,
+                                documentname = Utility.PackagingListName,
+                                documentpath = packagingListFileName,
+                                statusid = 1
+                            };
+                            //string path = PackagingListsName;
+                            //at.statusid = userID;
+                            //db.tbl_importation_document.Add(at);
+                            context.tbl_importation_document.Add(at);
+                        }
+
+                        break;
+                    case Utility.ProformaInvoiceName:
+                        Utility.SaveAttachment(string.Empty, Proformainvoice, out var invoiceFileName);
+                        if (!string.IsNullOrEmpty(invoiceFileName))
+                        {
+                            ProformainvoiceName = invoiceFileName;
+
+                            tbl_importation_document at = new tbl_importation_document
+                            {
+                                bid_id = Convert.ToInt32(EventArgument),
+                                dateadded = DateTime.Now,
+                                documentname = Utility.ProformaInvoiceName,
+                                documentpath = invoiceFileName,
+                                statusid = 1
+                            };
+                            //string path = ProformainvoiceName;
+                            //at.statusid = userID;
+                            //db.tbl_importation_document.Add(at);
+                            context.tbl_importation_document.Add(at);
+                        }
+
+                        break;
+                    case Utility.OthersName:
+                        Utility.SaveAttachment(string.Empty, Others, out var othersFileName);
+                        if (!string.IsNullOrEmpty(othersFileName))
+                        {
+                            OthersName = othersFileName;
+
+                            tbl_importation_document at = new tbl_importation_document
+                            {
+                                bid_id = Convert.ToInt32(EventArgument),
+                                dateadded = DateTime.Now,
+                                documentname = Utility.OthersName,
+                                documentpath = othersFileName,
+                                statusid = 1
+                            };
+                            //string path = OthersName;
+                            //at.statusid = userID;
+                            //db.tbl_importation_document.Add(at);
+                            context.tbl_importation_document.Add(at);
+                        }
+
+                        break;
+                }
+            }
         }
 
         public bool Delete(tbl_bidding entity)
         {
             using (var db = new powerusyDBCoreEntities())
             {
+                var fileNames = entity.tbl_importation_document.Select(s => s.documentpath).ToList();
                 db.Entry(entity).State = EntityState.Deleted;
                 db.SaveChanges();
+
+                //Clear corresponding document files for deleted bidding
+                foreach (var fileName in fileNames)
+                {
+                    Utility.DeleteFile(fileName, Utility.UploadDirectory);
+                }
             }
             return true;
         }
@@ -297,14 +583,14 @@ namespace PowerusyData
                   "Please Supply your Consignee."));
                 IsValid = false;
             }
-            if (entity.PortDischarge!=0)
+            if (entity.PortDischarge==0)
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
                   "Please Supply your Port of Discharge."));
                 IsValid = false;
             }
-            if (entity.PortLoading!=0)
+            if (entity.PortLoading==0)
             {
                 ValidationErrors.Add(new
                   KeyValuePair<string, string>("Comment",
@@ -318,93 +604,224 @@ namespace PowerusyData
                   "Please Supply your Good Description."));
                 IsValid = false;
             }
+
+            Utility.ValidateAttachment(BillofLading, "Bill Of Landing", ValidationErrors);
+            Utility.ValidateAttachment(Proformainvoice, "Proforma Invoice", ValidationErrors);
+
             //TODO
             return (ValidationErrors.Count == 0);
         }
 
         public bool Insert(tbl_bidding entity)
         {
-            bool ret = false;
-            ret = Validate(entity);
-            if (ret)
+            try
             {
-                using (var db = new powerusyDBCoreEntities())
+                bool ret = false;
+                ret = Validate(entity);
+                if (ret)
                 {
-                    var UserIDI = db.tbl_users.Where(x => x.username == UserId).FirstOrDefault();
-                    //UserIDI.id = 1;
-                    int userID = UserIDI.id;
-                    //if (!string.IsNullOrEmpty(ItemPixName))
-                    //{
-                    //    tbl_importation_document at = new tbl_importation_document();
-                    //    at.dateadded = DateTime.Now;
-                    //    at.documentname = "Item Pix";
-                    //    string path = ItemPixName;
-                    //    at.documentpath = path;
-                    //    at.statusid = 1;
-                    //    //at.statusid = userID;
-                    //    db.tbl_importation_document.Add(at);
-                    //}
-                    entity.IconPath = ItemPixName;
-                    entity.UserID = userID;
-                    entity.GoodsType = ActionTypeId;
-                    entity.statusid = 1;
-                    entity.Date = DateTime.Now;
-                    db.tbl_bidding.Add(entity);
-                    db.SaveChanges();
-                    
-                    if (!string.IsNullOrEmpty(BillofLadingName))
+                    using (var db = new powerusyDBCoreEntities())
                     {
-                        tbl_importation_document at = new tbl_importation_document();
-                        at.dateadded = DateTime.Now;
-                        at.documentname = "Bill of Lading";
-                        string path = BillofLadingName;
-                        at.documentpath = path;
-                        at.statusid = 1;
-                        at.bid_id = entity.id;
-                        db.tbl_importation_document.Add(at);
+                        var UserIDI = db.tbl_users.FirstOrDefault(x => x.username == UserId);
+                        var importationDocs = new List<tbl_importation_document>();
+                        //UserIDI.id = 1;
+                        int userID = UserIDI.id;
+
+                        ProcessAttachmentOnAdd(entity, importationDocs);
+                        entity.UserID = userID;
+                        entity.GoodsType = ActionTypeId;
+                        entity.statusid = 1;
+                        entity.Date = DateTime.Now;
+
+                        if (importationDocs.Count > 0)
+                        {
+                            entity.tbl_importation_document = importationDocs;
+                        }
+
+                        db.tbl_bidding.Add(entity);
+                        db.SaveChanges();
+                        IsValid = true;
+                        string op = "created job order successful";
+                        Msg = op;
+                        //IsStep3 = true;
                     }
-                    if (!string.IsNullOrEmpty(PackagingListsName))
-                    {
-                        tbl_importation_document at = new tbl_importation_document();
-                        at.dateadded = DateTime.Now;
-                        at.documentname = "Packaging Lists";
-                        string path = PackagingListsName;
-                        at.documentpath = path;
-                        at.statusid = 1;
-                        at.bid_id = entity.id;
-                        db.tbl_importation_document.Add(at);
-                    }
-                    if (!string.IsNullOrEmpty(ProformainvoiceName))
-                    {
-                        tbl_importation_document at = new tbl_importation_document();
-                        at.dateadded = DateTime.Now;
-                        at.documentname = "Proforma invoice";
-                        string path = ProformainvoiceName;
-                        at.documentpath = path;
-                        at.statusid = 1;
-                        at.bid_id = entity.id;
-                        db.tbl_importation_document.Add(at);
-                    }
-                    if (!string.IsNullOrEmpty(OthersName))
-                    {
-                        tbl_importation_document at = new tbl_importation_document();
-                        at.dateadded = DateTime.Now;
-                        at.documentname = "Others Name";
-                        string path = OthersName;
-                        at.documentpath = path;
-                        at.statusid = 1;
-                        at.bid_id = entity.id;
-                        db.tbl_importation_document.Add(at);
-                    }
-                    db.SaveChanges();
-                    IsValid = true;
-                    string op = "created job order successful";
-                    Msg = op;
-                    //IsStep3 = true;
                 }
+
+                return ret;
+
             }
-            return ret;
+            catch (Exception exception)
+            {
+                //If any saving fails, delete any uploaded file from upload folder
+
+                var uploadFolder = Utility.UploadDirectory;
+
+                if (!string.IsNullOrEmpty(BillofLadingName))
+                    Utility.DeleteFile(BillofLadingName, uploadFolder);
+
+                if (!string.IsNullOrEmpty(PackagingListsName))
+                    Utility.DeleteFile(PackagingListsName, uploadFolder);
+
+                if (!string.IsNullOrEmpty(OthersName))
+                    Utility.DeleteFile(OthersName, uploadFolder);
+
+                if (!string.IsNullOrEmpty(ItemPixName))
+                    Utility.DeleteFile(ItemPixName, uploadFolder);
+            }
+
+            return false;
+            //bool ret = false;
+            //ret = Validate(entity);
+            //if (ret)
+            //{
+            //    using (var db = new powerusyDBCoreEntities())
+            //    {
+            //        var UserIDI = db.tbl_users.Where(x => x.username == UserId).FirstOrDefault();
+            //        //UserIDI.id = 1;
+            //        int userID = UserIDI.id;
+
+            //        entity.IconPath = ItemPixName;
+            //        entity.UserID = userID;
+            //        entity.GoodsType = ActionTypeId;
+            //        entity.statusid = 1;
+            //        entity.Date = DateTime.Now;
+            //        db.tbl_bidding.Add(entity);
+            //        db.SaveChanges();
+
+            //        if (!string.IsNullOrEmpty(BillofLadingName))
+            //        {
+            //            tbl_importation_document at = new tbl_importation_document();
+            //            at.dateadded = DateTime.Now;
+            //            at.documentname = "Bill of Lading";
+            //            string path = BillofLadingName;
+            //            at.documentpath = path;
+            //            at.statusid = 1;
+            //            at.bid_id = entity.id;
+            //            db.tbl_importation_document.Add(at);
+            //        }
+            //        if (!string.IsNullOrEmpty(PackagingListsName))
+            //        {
+            //            tbl_importation_document at = new tbl_importation_document();
+            //            at.dateadded = DateTime.Now;
+            //            at.documentname = "Packaging Lists";
+            //            string path = PackagingListsName;
+            //            at.documentpath = path;
+            //            at.statusid = 1;
+            //            at.bid_id = entity.id;
+            //            db.tbl_importation_document.Add(at);
+            //        }
+            //        if (!string.IsNullOrEmpty(ProformainvoiceName))
+            //        {
+            //            tbl_importation_document at = new tbl_importation_document();
+            //            at.dateadded = DateTime.Now;
+            //            at.documentname = "Proforma invoice";
+            //            string path = ProformainvoiceName;
+            //            at.documentpath = path;
+            //            at.statusid = 1;
+            //            at.bid_id = entity.id;
+            //            db.tbl_importation_document.Add(at);
+            //        }
+            //        if (!string.IsNullOrEmpty(OthersName))
+            //        {
+            //            tbl_importation_document at = new tbl_importation_document();
+            //            at.dateadded = DateTime.Now;
+            //            at.documentname = "Others Name";
+            //            string path = OthersName;
+            //            at.documentpath = path;
+            //            at.statusid = 1;
+            //            at.bid_id = entity.id;
+            //            db.tbl_importation_document.Add(at);
+            //        }
+            //        db.SaveChanges();
+            //        IsValid = true;
+            //        string op = "created job order successful";
+            //        Msg = op;
+            //        //IsStep3 = true;
+            //    }
+            //}
+            //return ret;
         }
+        private void ProcessAttachmentOnAdd(tbl_bidding entity, List<tbl_importation_document> importationDocs)
+        {
+            Utility.SaveAttachment(string.Empty, BillofLading, out var billOfLandingFileName);
+            if (!string.IsNullOrEmpty(billOfLandingFileName))
+            {
+                BillofLadingName = billOfLandingFileName;
+
+                tbl_importation_document at = new tbl_importation_document
+                {
+                    dateadded = DateTime.Now,
+                    documentname = Utility.BillOfLadingName,
+                    documentpath = billOfLandingFileName,
+                    statusid = 1
+                };
+                //string path = billOfLandingFileName;
+                //at.statusid = userID;
+                //db.tbl_importation_document.Add(at);
+                importationDocs.Add(at);
+            }
+
+            Utility.SaveAttachment(string.Empty, PackagingLists, out var packagingListFileName);
+            if (!string.IsNullOrEmpty(packagingListFileName))
+            {
+                PackagingListsName = packagingListFileName;
+
+                tbl_importation_document at = new tbl_importation_document
+                {
+                    dateadded = DateTime.Now,
+                    documentname = Utility.PackagingListName,
+                    documentpath = packagingListFileName,
+                    statusid = 1
+                };
+                //string path = PackagingListsName;
+                //at.statusid = userID;
+                //db.tbl_importation_document.Add(at);
+                importationDocs.Add(at);
+            }
+
+            Utility.SaveAttachment(string.Empty, Proformainvoice, out var invoiceFileName);
+            if (!string.IsNullOrEmpty(invoiceFileName))
+            {
+                ProformainvoiceName = invoiceFileName;
+
+                tbl_importation_document at = new tbl_importation_document
+                {
+                    dateadded = DateTime.Now,
+                    documentname = Utility.ProformaInvoiceName,
+                    documentpath = invoiceFileName,
+                    statusid = 1
+                };
+                //string path = ProformainvoiceName;
+                //at.statusid = userID;
+                //db.tbl_importation_document.Add(at);
+                importationDocs.Add(at);
+            }
+
+            Utility.SaveAttachment(string.Empty, Others, out var othersFileName);
+            if (!string.IsNullOrEmpty(othersFileName))
+            {
+                OthersName = othersFileName;
+
+                tbl_importation_document at = new tbl_importation_document
+                {
+                    dateadded = DateTime.Now,
+                    documentname = Utility.OthersName,
+                    documentpath = othersFileName,
+                    statusid = 1
+                };
+                //string path = OthersName;
+                //at.statusid = userID;
+                //db.tbl_importation_document.Add(at);
+                importationDocs.Add(at);
+            }
+
+            Utility.SaveAttachment(string.Empty, ItemPix, out var itemPixFileName);
+            if (!string.IsNullOrEmpty(itemPixFileName))
+            {
+                entity.IconPath = ItemPixName = itemPixFileName;
+            }
+        }
+
         protected void GetDropDown()
         {
             //SelectList ItemE2 = new SelectList();

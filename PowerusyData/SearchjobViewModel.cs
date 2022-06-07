@@ -28,6 +28,7 @@ namespace PowerusyData
             ListPOL = new List<SelectList>();
             ListPOD = new List<SelectList>();
             CountryList = new List<SelectList>();
+            GoodType = new List<SelectList>();
             SearchEntity = new View_tbl_bidding();
             Entity = new tbl_bidding();
             usrs = new tbl_users();
@@ -80,6 +81,7 @@ namespace PowerusyData
         public List<SelectList> ListYear { set; get; }
         public List<SelectList> List { set; get; }
         public List<SelectList> CountryList { set; get; }
+        public List<SelectList> GoodType { get; set; }
         public bool GridView { get; set; }
         public bool ListView { get; set; }
         public bool IsStep3 { get; set; }
@@ -114,6 +116,7 @@ namespace PowerusyData
             ListYear = new List<SelectList>();
             ListPOL = new List<SelectList>();
             ListPOD = new List<SelectList>();
+            GoodType = new List<SelectList>();
             GetDropDown();
             base.Init();
         }
@@ -129,6 +132,10 @@ namespace PowerusyData
                     break;
                 case "gridview":
                     GridView = true;
+                    Get();
+                    break;
+                case "search":
+                    ListView = true;
                     Get();
                     break;
             }
@@ -211,12 +218,22 @@ namespace PowerusyData
             {
                 //using (var db = new powerusyDBCoreEntities())
                 //{
-                //    ret = db.tbl_bidding.Where(x => x.AcctName.Contains(entity.AcctName)).OrderBy(x => x.ReqDate).ToList();
-
+                // ret = ret.Where(x => x.Name!=null && x.Name.Contains(entity.Name)).OrderBy(x => x.Date).ToList();
                 //}
                 ret = ret.FindAll(
-                  p => p.Name.ToLower().
+                  p => p.VesselName.ToLower().
                         StartsWith(entity.Name.ToLower().Trim(),
+                                  StringComparison.CurrentCultureIgnoreCase));
+            }
+            if (!string.IsNullOrEmpty(entity.GoodsType))
+            {
+                //using (var db = new powerusyDBCoreEntities())
+                //{
+                // ret = ret.Where(x => x.Name!=null && x.Name.Contains(entity.Name)).OrderBy(x => x.Date).ToList();
+                //}
+                ret = ret.FindAll(
+                  p => p.GoodsType!=null && p.GoodsType.ToLower().
+                        StartsWith(entity.GoodsType.ToLower().Trim(),
                                   StringComparison.CurrentCultureIgnoreCase));
             }
             return ret;
@@ -284,6 +301,29 @@ namespace PowerusyData
                     int UsrID = Convert.ToInt32(UserId);
                     //var Bookmark = db.tbl_bidding_bookmark.Where(m => m.bookmarked_by_id == UsrID).ToList().Select(x => x.bidding_id);
                     ret = db.View_tbl_bidding.OrderByDescending(x=>x.id).ToList();
+                    var GoodList = ret.Select(x => x.GoodsType).Distinct();
+                    GoodType = new List<SelectList>();
+                    foreach (var item in GoodList)
+                    {
+                        int sTextVal = ret.Where(x => x.GoodsType == item).Count();
+                        GoodType.Add(new SelectList { Text = item +" ( " + sTextVal + " )", Value = item });
+                    }
+                    ListPOL = new List<SelectList>();
+                    var POL = ret.Select(x => x.PortLoading1).Distinct();
+                    foreach (var item in POL)
+                    {
+                        int sTextVal = ret.Where(x => x.PortLoading1 == item).Count();
+                        ListPOL.Add(new SelectList { Text = item + " ( " + sTextVal + " )", Value = item });
+                    }
+
+                    ListPOD = new List<SelectList>();
+                    var POD = ret.Select(x => x.PortDischarge2).Distinct();
+                    foreach (var item in POL)
+                    {
+                        int sTextVal = ret.Where(x => x.PortDischarge2 == item).Count();
+                        ListPOD.Add(new SelectList { Text = item + " ( " + sTextVal + " )", Value = item });
+                    }
+
                     if (pageNumber > 0 && pageSize > 0)
                     {
                         PageList = ret.ToPagedList(pageNumber, pageSize);

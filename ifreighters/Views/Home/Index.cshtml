@@ -199,32 +199,34 @@
                                     <div class="col-lg-4 col-md-3 col-sm-12">
                                         <div class="form-group">
                                             <i class="ti-search"></i>
-                                            <input type="text" class="form-control" placeholder="Job Title or Keywords">
+                                            @*<input type="text" class="form-control" placeholder="Job Title or Keywords">*@
+                                            @Html.TextBoxFor(m => m.SearchEntity.Name, new { @class = "form-control", placeholder = "Job Title or Keywords" })
                                         </div>
                                     </div>
 
                                     <div class="col-lg-3 col-md-3 col-sm-12">
                                         <div class="form-group">
                                             <i class="ti-location-pin"></i>
-                                            <input type="text" class="form-control" placeholder="San Francisco, CA">
+                                            @*<input type="text" class="form-control" placeholder="San Francisco, CA">*@
+                                            @Html.TextBoxFor(m => m.SearchEntity.VesselName, new { @class = "form-control", placeholder = "San Francisco, CA" })
                                         </div>
                                     </div>
 
                                     <div class="col-lg-3 col-md-3 col-sm-12">
                                         <div class="form-group">
                                             <i class="ti-layers"></i>
-                                            <select id="jb-category" class="js-states form-control">
-                                                <option value="">&nbsp;</option>
-                                                <option value="1">Accounting & Finance</option>
-                                                <option value="2">Telecommunications</option>
-                                            </select>
+                                                @Html.DropDownListFor(m => m.SearchEntity.GoodsType, new SelectList(Model.GoodType, "Value", "Text"), new { @class = "form-control" })                   
                                         </div>
                                     </div>
 
                                     <div class="col-lg-2 col-md-3 col-sm-12">
                                         <div class="form-group">
                                             <i class="ti-search"></i>
-                                            <button type="button" class="btn theme-bg-blue full-width">Search</button>
+                                            <button id="btnSearch"
+                                                    class="btn theme-bg-blue full-width"
+                                                    data-pdsa-action="search">
+                                               Search
+                                            </button>
                                         </div>
                                         
                                     </div>

@@ -11,10 +11,7 @@ namespace Powerusy.Controllers
     public class ProductsController : Controller
     {
         // GET: Products
-        public ActionResult Index()
-        {
-            return View();
-        }
+        
         public ActionResult Import()
         {
             return View();

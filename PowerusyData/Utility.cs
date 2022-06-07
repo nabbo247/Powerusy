@@ -15,76 +15,89 @@ using System.Threading.Tasks;
 
 namespace PowerusyData
 {
-    //public class Utility
-    //{
-    //    public string Value { get; set; }
-    //    public string Text { get; set; }
+    public class Utility
+    {
+        public string Value { get; set; }
+        public string Text { get; set; }
 
-    //    public static readonly List<string> AcceptedFileExtension = ConfigurationManager.AppSettings["FileExtensions"].Split(',').ToList();
+        public static readonly List<string> AcceptedFileExtension = ConfigurationManager.AppSettings["FileExtensions"].Split(',').ToList();
 
-    //    public const string ItemPixName = "Item Pix";
-    //    public const string BillOfLadingName = "Bill of Lading";
-    //    public const string PackagingListName = "Packaging Lists";
-    //    public const string ProformaInvoiceName = "Proforma invoice";
-    //    public const string OthersName = "Others";
-    //    public static readonly string UploadPath = HttpContext.Current.Server.MapPath("~/upload");
-
-
-    //    /// <summary>
-    //    /// Deletes old file (if any) and Saves newly Uploaded file. File is only saved when the param <see cref="newFile"/> is not null.
-    //    /// </summary>
-    //    /// <param name="oldFileName">File name of old attachment (if any).</param>
-    //    /// <param name="newFile">Posted File upload</param>
-    //    /// <param name="newFileName">Generated file name for new attachment.</param>
-    //    public static void SaveAttachment(string oldFileName, HttpPostedFileBase newFile, out string newFileName)
-    //    {
-    //        var oldPix = Path.Combine(HttpContext.Current.Server.MapPath("~/upload"), $"{oldFileName}");
-    //        DeleteFile(oldPix);
-
-    //        newFileName = string.Empty;
-    //        if (newFile != null && newFile.ContentLength > 0)
-    //        {
-    //            newFileName = $"{Guid.NewGuid()}{Path.GetExtension(newFile.FileName)}";
-    //            var path = Path.Combine(HttpContext.Current.Server.MapPath("~/upload"), newFileName);
-    //            newFile.SaveAs(path);
-    //        }
+        public const string ItemPixName = "Item Pix";
+        public const string BillOfLadingName = "Bill of Lading";
+        public const string PackagingListName = "Packaging Lists";
+        public const string ProformaInvoiceName = "Proforma invoice";
+        public const string OthersName = "Others";
+        public static readonly string UploadDirectory = "upload";
 
 
-    //    }
+        /// <summary>
+        /// Deletes old file (if any) and Saves newly Uploaded file. File is only saved when the param <see cref="newFile"/> is not null.
+        /// </summary>
+        /// <param name="oldFileName">File name of old attachment (if any).</param>
+        /// <param name="newFile">Posted File upload</param>
+        /// <param name="newFileName">Generated file name for new attachment.</param>
+        public static void SaveAttachment(string oldFileName, HttpPostedFileBase newFile, out string newFileName)
+        {
+            var oldPix = Path.Combine(HttpContext.Current.Server.MapPath($"~/{UploadDirectory}"), $"{oldFileName}");
+            DeleteFile(oldPix, UploadDirectory);
 
-    //    public static void DeleteFile(string path)
-    //    {
-    //        if (string.IsNullOrEmpty(path))
-    //            return;
+            newFileName = string.Empty;
+            if (newFile != null && newFile.ContentLength > 0)
+            {
+                newFileName = $"{Guid.NewGuid()}{Path.GetExtension(newFile.FileName)}";
+                var path = Path.Combine(HttpContext.Current.Server.MapPath($"~/{UploadDirectory}"), newFileName);
+                newFile.SaveAs(path);
+            }
 
-    //        if (File.Exists(path))
-    //        {
-    //            File.Delete(path);
-    //        }
-    //    }
 
-    //    public static void ValidateAttachment(HttpPostedFileBase attachedFile, string propertyName, List<KeyValuePair<string, string>> validationErrors)
-    //    {
-    //        if (attachedFile == null)
-    //        {
-    //            validationErrors.Add(new KeyValuePair<string, string>("NoFileAttached", $"Please Select file to attach for {propertyName.ToUpper()}."));
-    //            return;
-    //        }
+        }
 
-    //        //Check that max file size set is not > 2MB (2 * 1024 * 1024)
-    //        if (attachedFile.ContentLength > 2 * 1024 * 1024)
-    //        {
+        public static string ReadFileAsBase64String(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+            {
+                return string.Empty;
+            }
 
-    //            validationErrors.Add(new KeyValuePair<string, string>("FileTooLarge", $"Selected File must not be larger than 2MB for {propertyName.ToUpper()}."));
-    //        }
+            var readAllBytes = File.ReadAllBytes(path);
+            var fileAsBase64 = Convert.ToBase64String(readAllBytes);
 
-    //        var extension = Path.GetExtension(attachedFile.FileName);
-    //        if (string.IsNullOrEmpty(extension) && !AcceptedFileExtension.Contains(extension))
-    //        {
-    //            validationErrors.Add(new KeyValuePair<string, string>("InvalidFile", $"Selected File is invalid. Only files in any of the format:- {string.Join(",", AcceptedFileExtension).ToUpper()} is accepted."));
-    //        }
-    //    }
-    //}
+            return fileAsBase64;
+        }
+
+        public static void DeleteFile(string fileName, string folderName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+                return;
+            var path = Path.Combine(HttpContext.Current.Server.MapPath($"~/{folderName}"), fileName);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
+
+        public static void ValidateAttachment(HttpPostedFileBase attachedFile, string propertyName, List<KeyValuePair<string, string>> validationErrors)
+        {
+            if (attachedFile == null)
+            {
+                validationErrors.Add(new KeyValuePair<string, string>("NoFileAttached", $"Please Select file to attach for {propertyName.ToUpper()}."));
+                return;
+            }
+
+            //Check that max file size set is not > 2MB (2 * 1024 * 1024)
+            if (attachedFile.ContentLength > 2 * 1024 * 1024)
+            {
+
+                validationErrors.Add(new KeyValuePair<string, string>("FileTooLarge", $"Selected File must not be larger than 2MB for {propertyName.ToUpper()}."));
+            }
+
+            var extension = Path.GetExtension(attachedFile.FileName);
+            if (string.IsNullOrEmpty(extension) && !AcceptedFileExtension.Contains(extension))
+            {
+                validationErrors.Add(new KeyValuePair<string, string>("InvalidFile", $"Selected File is invalid. Only files in any of the format:- {string.Join(",", AcceptedFileExtension).ToUpper()} is accepted."));
+            }
+        }
+    }
     //public class Utility
     //{
     //    public string Value { get; set; }
@@ -92,6 +105,7 @@ namespace PowerusyData
     //}
     public class SelectList
     {
+        public bool IsSelected { get; set; }
         public string Text { get; set; }
         public string Value { get; set; }
     }
@@ -779,6 +793,8 @@ namespace PowerusyData
         public static readonly string FName = "fname";
         public static readonly string Role = "role";
         public static readonly string UserId = "usrID";
+        public static readonly string usrID = "usrID";
+        public static readonly string LogoPath = "LogoPath"; 
         public static readonly string Dashboard = "dashboard";
     }
 }
