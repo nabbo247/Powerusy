@@ -271,6 +271,8 @@
     <Content Include="assets\fonts\themify9f24.ttf" />
     <Content Include="assets\fonts\themify9f24.woff" />
     <Content Include="assets\fonts\themifyd41d.eot" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -500,6 +502,7 @@
     <Content Include="Views\Admin\ManageCustomer.cshtml" />
     <Content Include="Views\Admin\ManageCar.cshtml" />
     <Content Include="Views\Admin\ManagePorts.cshtml" />
+    <Content Include="Views\Customer\Reviews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

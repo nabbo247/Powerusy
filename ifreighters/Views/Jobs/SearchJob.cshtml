@@ -276,24 +276,36 @@
 
                             @if (Model.GridView)
                             {
-                                foreach (var item in Model.UsrLst)
+                                for (int item = 0; item < Model.UsrLst.Count(); item++)
                                 {
+                                    
                                     <!-- Grid Single Item -->
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <div class="job_grid_01 shadow_0">
                                             <div class="jb_grid_01_thumb">
-                                                <a href="employer-detail.html"><img src="~/assets/img/c-1.png" class="img-fluid" alt=""></a>
+                                                <a href="#">
+                                                    @if (!string.IsNullOrEmpty(Model.UsrLst[item].IconPath))
+                                                    {
+                                                        <img src="~/upload/@Model.UsrLst[item].IconPath" height="200" width="200" class="img-fluid" alt="">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/assets/img/team-1.jpg" height="200" width="200" class="img-fluid" alt="">
+                                                    }
+                                                </a>
                                             </div>
                                             <div class="jb_grid_01_caption">
-                                                <h4 class="_jb_title"><a href="job-detail.html">WordPress Web Developer</a></h4>
-                                                <div class="_emp_jb">Bikker Inso Inc.</div>
+                                                <h4 class="_jb_title">
+                                                    <a href="#">@Model.UsrLst[item].VesselName</a>
+                                                </h4>
+                                                <div class="_emp_jb">POL : @Model.UsrLst[item].PortLoading1</div>
                                             </div>
                                             <div class="jb_grid_01_footer">
                                                 <div class="jb_grid_01_footer_flex">
-                                                    <div class="_lot_jb"><i class="ti-location-pin mr-1"></i>Lucknow, UP</div>
+                                                    <div class="_lot_jb"><i class="ti-location-pin mr-1"></i>POD : @Model.UsrLst[item].PortDischarge2</div>
                                                 </div>
                                                 <div class="jb_grid_01_footer_right">
-                                                    <a href="javascript:void(0);" class="_jb_likes"><i class="fa fa-heart mr-1"></i>Save</a>
+                                                    @*<a href="javascript:void(0);" class="_jb_likes"><i class="fa fa-heart mr-1"></i>Save</a>*@
                                                 </div>
                                             </div>
                                         </div>
@@ -310,22 +322,22 @@
                                             @Html.PagedListPager(Model.PageList, page => Url.Action("SearchJob", new { page }))
                                         }
                                         @*<li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
-                                                    <span class="ti-arrow-left"></span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">18</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
-                                                    <span class="ti-arrow-right"></span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
-                                            </li>*@
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span class="ti-arrow-left"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                    <li class="page-item"><a class="page-link" href="#">18</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span class="ti-arrow-right"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>*@
                                     </ul>
                                 </div>
                             </div>

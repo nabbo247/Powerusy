@@ -253,6 +253,18 @@ namespace ifreighters.Controllers
             vm.HandleRequest();
             return View(vm);
         }
+        public ActionResult Reviews(int? page)
+        {
+            BiddingViewModel vm = new BiddingViewModel();
+            //vm.UserId = Session["userid"].ToString();
+            //vm.UserId = "eunicee";
+            //vm.Email = Session["Email"].ToString();
+            //vm.IsDetailAreaVisible = true;
+            //vm.IsSearchAreaVisible = false;
+            //vm.IsListAreaVisible = false;
+            vm.HandleRequest();
+            return View(vm);
+        }
         
     }
 }

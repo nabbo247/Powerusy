@@ -86,10 +86,10 @@ D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\Antlr3.Runtime.pdb
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\System.Diagnostics.DiagnosticSource.xml
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Release\Powerusy.csproj.AssemblyReference.cache
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Release\Powerusy.csproj.CoreCompileInputs.cache
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Release\Powerusy.csproj.CopyComplete
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Release\Powerusy.dll
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Release\Powerusy.pdb
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\Powerusy.XmlSerializers.dll
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Release\Powerusy.XmlSerializers.dll
+D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Release\Powerusy.csprojAssemblyReference.cache

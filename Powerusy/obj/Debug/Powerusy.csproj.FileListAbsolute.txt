@@ -86,8 +86,8 @@ D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\Antlr3.Runtime.pdb
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\System.Diagnostics.DiagnosticSource.xml
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Debug\Powerusy.csproj.AssemblyReference.cache
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Debug\Powerusy.csproj.CoreCompileInputs.cache
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Debug\Powerusy.csproj.CopyComplete
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Debug\Powerusy.dll
 D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Debug\Powerusy.pdb
+D:\Users\nabbo247\source\repos\Powerusy\Powerusy\obj\Debug\Powerusy.csprojAssemblyReference.cache

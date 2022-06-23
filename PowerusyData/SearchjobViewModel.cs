@@ -102,6 +102,7 @@ namespace PowerusyData
         public string ItemPixName { get; set; }
         public string OthersName { get; set; }
         public bool EbizApproval { get; set; }
+        public bool homesearch { get; set; }
         protected override void Init()
         {
             UsrLst = new List<View_tbl_bidding>();
@@ -138,8 +139,11 @@ namespace PowerusyData
                     ListView = true;
                     Get();
                     break;
+                default:
+                    GetDropDown();
+                    break;
             }
-            GetDropDown();
+             
             base.HandleRequest();
         }
 
@@ -306,23 +310,28 @@ namespace PowerusyData
                     foreach (var item in GoodList)
                     {
                         int sTextVal = ret.Where(x => x.GoodsType == item).Count();
-                        GoodType.Add(new SelectList { Text = item +" ( " + sTextVal + " )", Value = item });
+                        GoodType.Add(new SelectList { Text = item + " ( " + sTextVal + " )", Value = item });
                     }
-                    ListPOL = new List<SelectList>();
-                    var POL = ret.Select(x => x.PortLoading1).Distinct();
-                    foreach (var item in POL)
+                    if (!homesearch)
                     {
-                        int sTextVal = ret.Where(x => x.PortLoading1 == item).Count();
-                        ListPOL.Add(new SelectList { Text = item + " ( " + sTextVal + " )", Value = item });
-                    }
+                        
+                        ListPOL = new List<SelectList>();
+                        var POL = ret.Select(x => x.PortLoading1).Distinct();
+                        foreach (var item in POL)
+                        {
+                            int sTextVal = ret.Where(x => x.PortLoading1 == item).Count();
+                            ListPOL.Add(new SelectList { Text = item + " ( " + sTextVal + " )", Value = item });
+                        }
 
-                    ListPOD = new List<SelectList>();
-                    var POD = ret.Select(x => x.PortDischarge2).Distinct();
-                    foreach (var item in POL)
-                    {
-                        int sTextVal = ret.Where(x => x.PortDischarge2 == item).Count();
-                        ListPOD.Add(new SelectList { Text = item + " ( " + sTextVal + " )", Value = item });
+                        ListPOD = new List<SelectList>();
+                        var POD = ret.Select(x => x.PortDischarge2).Distinct();
+                        foreach (var item in POL)
+                        {
+                            int sTextVal = ret.Where(x => x.PortDischarge2 == item).Count();
+                            ListPOD.Add(new SelectList { Text = item + " ( " + sTextVal + " )", Value = item });
+                        }
                     }
+                    
 
                     if (pageNumber > 0 && pageSize > 0)
                     {

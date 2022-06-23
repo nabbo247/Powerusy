@@ -58,6 +58,7 @@ D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\Microsoft.Web.Infrastruc
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\Newtonsoft.Json.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PagedList.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PagedList.Mvc.dll
+D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PowerusyData.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.Helpers.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.Mvc.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.Optimization.dll
@@ -66,10 +67,14 @@ D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.WebPages.Depl
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.WebPages.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.WebPages.Razor.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\WebGrease.dll
+D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\ExcelLibrary.dll
+D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\ClassLibrary1.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\EntityFramework.xml
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\EntityFramework.SqlServer.xml
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PagedList.xml
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PagedList.Mvc.xml
+D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PowerusyData.pdb
+D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PowerusyData.dll.config
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.Helpers.xml
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.Mvc.xml
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\System.Web.Optimization.xml
@@ -84,9 +89,4 @@ D:\Users\nabbo247\source\repos\Powerusy\ifreighters\obj\Debug\ifreighters.csproj
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\obj\Debug\ifreighters.csproj.CopyComplete
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\obj\Debug\ifreighters.dll
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\obj\Debug\ifreighters.pdb
-D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PowerusyData.dll
-D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\ExcelLibrary.dll
-D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\ClassLibrary1.dll
-D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PowerusyData.pdb
-D:\Users\nabbo247\source\repos\Powerusy\ifreighters\bin\PowerusyData.dll.config
 D:\Users\nabbo247\source\repos\Powerusy\ifreighters\obj\Debug\ifreighters.csproj.AssemblyReference.cache

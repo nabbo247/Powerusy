@@ -16,6 +16,7 @@ namespace ifreighters.Controllers
             //vm.UserId = "eunicee";
             //vm.Email = Session["Email"].ToString();
             vm.ListView = true;
+            vm.homesearch = true;
             vm.pageSize = 10;
             vm.pageNumber = 1;
             //vm.IsSearchAreaVisible = false;
@@ -36,6 +37,7 @@ namespace ifreighters.Controllers
             //vm.Mode = "Add";
             //vm.url = ConfigurationManager.AppSettings["url"];
             //vm.UserId = Session["userid"].ToString();
+            vm.homesearch = true;
             vm.HandleRequest();
             if (vm.IsValid)
             {
